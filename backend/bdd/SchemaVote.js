@@ -8,6 +8,6 @@ var voteSchema = mongoose.Schema({
     participants: Array,
 })
 
-var voteModel = mongoose.model('Votes', voteSchema)
+var voteModel = mongoose.model('Votes', voteSchema);
 
 module.exports = voteModel;
