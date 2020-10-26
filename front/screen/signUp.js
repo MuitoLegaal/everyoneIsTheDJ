@@ -17,6 +17,10 @@ function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     
+
+    var handleSignUp = () => {
+
+    }
     
     return (
     <View style={styles.backGroundColor}>
@@ -52,7 +56,8 @@ function SignUp() {
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Confirmation Mot de Passe:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}/>
             <View style={{width: '90%',height: '6.5%', color: '#584dad'}}>
-                <Button title="Continuer" style={styles.button}/>
+                <Button title="Continuer" style={styles.button}
+                   onPress={()=>handleSignUp()}/>
             </View>
         </View>
     </View>
