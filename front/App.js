@@ -40,11 +40,11 @@ const getFonts = () => Font.loadAsync({
     )
   } else {
       return (
-        // <AppLoading
-        //   startAsync={getFonts}
-        //   onFinish={()=> setFontsLoaded(true)}
-        // />
-        <SignIn/>
+        <AppLoading
+          startAsync={getFonts}
+          onFinish={()=> setFontsLoaded(true)}
+        />
+        // <SignIn/>
       )
     } 
   }
