@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
-import Button from 'react-native'
-import Carousel from './screen.carousel'
+import { View, Text, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements'
+import Carousel from './carousel'
 
 
-export default function onboarding() {
+export default function Onboarding() {
   return (
     <View style={styles.container}>
       <Carousel/>
-      <Text>Vous êtes:</Text>
-      <Button title="Hôte" backgroundColor="#E59622" color='#fff'></Button>
-      <Text>Ou</Text>
-      <Button title="Invité" backgroundColor="#584DAD" color='fff'></Button>
-      </View>
+        <Text style={{ color: '#fff' }}>Vous êtes :</Text>
+        <Button title="Hôte" buttonStyle={{backgroundColor: '#E59622'}}></Button>
+        <Text style={{ color: '#fff', textDecorationLine: 'none' }}> Ou </Text>
+        <Button title="Invité" buttonStyle={{backgroundColor: '#584DAD'}}></Button>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#131313',
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign : 'center'
+    textAlign: 'center',
   },
+
 });

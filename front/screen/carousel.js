@@ -1,15 +1,15 @@
 console.disableYellowBox = true;
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+// import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Swiper from 'react-native-swiper'
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
-    backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    // backgroundColor: '#131313',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   slide1: {
     flex: 1,

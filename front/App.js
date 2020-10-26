@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import Carousel from './screen/carousel';
-// import Onboarding from './screen/onboarding';
+import Onboarding from './screen/onboarding';
 
 
 
@@ -21,7 +21,7 @@ export default function App() {
 
   if(fontsLoaded){
     return (
-      <Carousel/>
+      <Onboarding/>
     )
   } else {
       return (
