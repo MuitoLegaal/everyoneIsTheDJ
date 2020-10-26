@@ -1,41 +1,12 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
-// import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Swiper from 'react-native-swiper'
 
  
-// export default class SwiperComponent extends Component {
-//   render() {
-//     return (
-//       <Swiper style={styles.wrapper} showsButtons={true}>
-//         {/* <View style={styles.responsiveBox}> */}
-//           <View style={styles.slide1}>
-//             <Text style={styles.title}>BIENVENUE</Text>
-//           </View>
-//           <View style={styles.slide2}>
-//             <Text style={styles.subtitle}>RECOIS TES INVITES AVEC LE MODE DJ HOTE</Text>
-//             <Text style={styles.text}>Prépare-toi à ambiancer ta soirée et faire vibrer tes invités avec des musiques qu'ils aiment !</Text>
-//           </View>
-//           <View style={styles.slide3}>
-//             <Text style={styles.subtitle}>SUGGERE TA MUSIQUE AVEC LE MODE DJ INVITE</Text>
-//             <Text style={styles.text}>Pour une nouvelle démocratie musicale, propose et vote pour ta musique préférée !</Text>
-//           </View>
-//         {/* </View> */}
-//       </Swiper>
-//     )
-//   }
-// }
+
 
 const styles = StyleSheet.create({
-  wrapper: {
-    // flex: 1,
-    // backgroundColor: '#131313',
-    // //alignItems: 'center',
-    // //justifyContent: 'center',
-    // //textAlign: 'center',
-    // height: '100%',
-    
-  },
+  wrapper: {},
   slide1: {
     flex: 1,
     justifyContent: 'center',
@@ -66,7 +37,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingRight: 30 ,
     paddingLeft: 30,
-    paddingBottom: 40
+    paddingBottom: 30
   },
  text: {
     color: '#fff',
@@ -74,13 +45,7 @@ const styles = StyleSheet.create({
     fontFamily:'Roboto-Regular',
     paddingRight: 30 ,
     paddingLeft: 30,
-    
-
-  // textbold: {
-  //   color: '#fff',
-  //   fontSize: 28,
-  //   fontWeight: 'bold',
-  //   textAlign: 'center'
+    textAlign: 'center'
   },
   
   dot1: {
@@ -105,17 +70,25 @@ export default class SwiperComponent extends Component {
       activeDot={ <View style={styles.dot2} />}>
         
         <View style={styles.slide1}>
-          <Image source={require('../assets/logoMini.png')} />
-          <Text style={styles.title}>BIENVENUE</Text>
+          <Image 
+          source={require('../assets/logoMini.png')}
+          style={{ width: 90, height: 92, marginBottom: 20 }} />
+          <Text style={styles.title}>Bienvenue</Text>
         </View>
         <View style={styles.slide2}>
-        <Image source={require('../assets/logoMini.png')}/>
-          <Text style={styles.subtitle}>RECOIS TES INVITÉS AVEC LE MODE DJ HOTE</Text>
+        <Image 
+          source={require('../assets/logoMini.png')}
+          style={{ width: 90, height: 92, marginBottom: 20 }}
+        />
+          <Text style={styles.subtitle}>reçois tes invités avec le mode DJ hôte</Text>
           <Text style={styles.text}>Prépare-toi à ambiancer ta soirée et faire vibrer tes invités avec des musiques qu'ils aiment !</Text>
         </View>
         <View style={styles.slide3}>
-        <Image source={require('../assets/logoMini.png')} />
-          <Text style={styles.subtitle}>SUGGÈRE TA MUSIQUE AVEC LE MODE DJ INVITÉ</Text>
+        <Image 
+          source={require('../assets/logoMini.png')} 
+          style={{ width: 90, height: 92, marginBottom: 20 }}
+        />
+          <Text style={styles.subtitle}>Suggère ta musique avec le mode dj invité</Text>
           <Text style={styles.text}>Pour une nouvelle démocratie musicale, propose et vote pour ta musique préférée !</Text>
         </View>
       </Swiper>

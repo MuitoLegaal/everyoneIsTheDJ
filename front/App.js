@@ -22,12 +22,8 @@ export default function App() {
 
   if(fontsLoaded){
     return (
-      //<Carousel/>
-      //<HomeInvite/>
-      // <View>
-      //   <Text>Coucou</Text>
-      // </View>
-     <Onboarding/>
+      <HomeInvite/>
+     //<Onboarding/>
     )
   } else {
       return (
