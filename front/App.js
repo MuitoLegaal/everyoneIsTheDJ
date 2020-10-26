@@ -7,6 +7,7 @@ import {AppLoading} from 'expo';
 import Carousel from './screen/carousel';
 import HomeInvite from './screen/homeinvite';
 import Onboarding from './screen/onboarding';
+import SignIn from './screen/SignIn';
 
 
 
@@ -31,10 +32,11 @@ export default function App() {
     )
   } else {
       return (
-        <AppLoading
-          startAsync={getFonts}
-          onFinish={()=> setFontsLoaded(true)}
-        />
+        // <AppLoading
+        //   startAsync={getFonts}
+        //   onFinish={()=> setFontsLoaded(true)}
+        // />
+        <SignIn></SignIn>
       )
     } 
   }
