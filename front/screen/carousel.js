@@ -1,54 +1,80 @@
 console.disableYellowBox = true;
 import React, { Component } from 'react'
-import { AppRegistry, StyleSheet, Text, View } from 'react-native'
- 
+import { Image, AppRegistry, StyleSheet, Text, View, Button } from 'react-native'
+
 import Swiper from 'react-native-swiper'
- 
+
 const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000'
+    backgroundColor: '#131313'
   },
   slide2: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000'
+    backgroundColor: '#131313'
   },
   slide3: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000'
+    backgroundColor: '#131313'
+  },
+  textbold: {
+    color: '#fff',
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   text: {
     color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  dot1: {
+    backgroundColor:'#FF0060',
+    width: 12, height: 12,borderRadius: 6, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,
+  },
+  dot2: {
+    backgroundColor:'#584DAD',
+    width: 12, height: 12,borderRadius: 6, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,
+  },
+  dot3: {
+    backgroundColor:'#E59622',
+    width: 12, height: 12,borderRadius: 6, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,
   }
 })
- 
+
 export default class SwiperComponent extends Component {
   render() {
     return (
-      <Swiper style={styles.wrapper} showsButtons={true}>
+      <Swiper style={styles.wrapper} showsButtons={false} index={0} loop={false}
+      dot={ <View style={{backgroundColor:'#fff', width: 12, height: 12,borderRadius: 6, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
+      activeDot={ <View style={styles.dot2} />}>
+        
         <View style={styles.slide1}>
-          <Text style={styles.text}>BIENVENUE</Text>
+          <Image source={require("./assets/logoMini.png")} />
+          <Text style={styles.textbold}>BIENVENUE</Text>
+         
         </View>
         <View style={styles.slide2}>
-          <Text style={styles.text}>RECOIS TES INVITES AVEC LE MODE DJ HOTE</Text>
+        <Image source={require("./assets/logoMini.png")}/>
+          <Text style={styles.textbold}>RECOIS TES INVITÉS AVEC LE MODE DJ HOTE</Text>
           <Text style={styles.text}>Prépare-toi à ambiancer ta soirée et faire vibrer tes invités avec des musiques qu'ils aiment !</Text>
         </View>
         <View style={styles.slide3}>
-          <Text style={styles.text}>SUGGERE TA MUSIQUE AVEC LE MODE DJ INVITE</Text>
+        <Image source={require("./assets/logoMini.png")} />
+          <Text style={styles.textbold}>SUGGÈRE TA MUSIQUE AVEC LE MODE DJ INVITÉ</Text>
           <Text style={styles.text}>Pour une nouvelle démocratie musicale, propose et vote pour ta musique préférée !</Text>
         </View>
       </Swiper>
+    
     )
   }
 }
- 
+
 AppRegistry.registerComponent('myproject', () => SwiperComponent)
