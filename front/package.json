@@ -9,13 +9,14 @@
   },
   "dependencies": {
     "@expo-google-fonts/staatliches": "^0.1.0",
-<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-native-fontawesome": "^0.2.6",
-=======
     "@react-native-community/masked-view": "^0.1.10",
->>>>>>> navigation2
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-native-fontawesome": "^0.2.6",
+    "@react-native-community/masked-view": "^0.1.10",
     "expo": "^39.0.3",
     "expo-font": "~8.3.0",
     "expo-status-bar": "~1.0.2",
@@ -26,12 +27,16 @@
     "react-native-gesture-handler": "^1.8.0",
     "react-native-reanimated": "^1.13.1",
     "react-native-responsive-screen": "^1.4.1",
-<<<<<<< HEAD
     "react-native-svg": "^12.1.0",
-=======
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "^2.11.0",
->>>>>>> navigation2
+    "react-native-fontawesome": "^7.0.0",
+    "react-native-gesture-handler": "^1.8.0",
+    "react-native-reanimated": "^1.13.1",
+    "react-native-responsive-screen": "^1.4.1",
+    "react-native-svg": "^12.1.0",
+    "react-native-safe-area-context": "^3.1.8",
+    "react-native-screens": "^2.11.0",
     "react-native-swiper": "^1.6.0",
     "react-native-web": "^0.13.18",
     "react-navigation": "^4.4.2",

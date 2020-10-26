@@ -11,6 +11,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import HomeInvite from './screen/homeinvite';
 import Onboarding from './screen/onboarding';
 import SignIn from './screen/SignIn';
+import SignUp from './screen/signUp';
 
 
 const getFonts = () => Font.loadAsync({
@@ -45,7 +46,11 @@ const getFonts = () => Font.loadAsync({
         //   startAsync={getFonts}
         //   onFinish={()=> setFontsLoaded(true)}
         // />
-        <SignIn></SignIn>
+        <AppLoading
+          startAsync={getFonts}
+          onFinish={()=> setFontsLoaded(true)}
+        />
+        // <SignIn/>
       )
     } 
   }
