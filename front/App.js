@@ -4,8 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
-import Carousel from './screen/carousel';
-import Onboarding from './screen/onboarding';
+import WinnerHost from './screens/winnerhost';
+import WinnerGuest from './screens/winnerguest';
+import Onboarding from './screens/onboarding';
 
 
 
@@ -21,7 +22,7 @@ export default function App() {
 
   if(fontsLoaded){
     return (
-      <Onboarding/>
+      <WinnerHost/>
     )
   } else {
       return (
