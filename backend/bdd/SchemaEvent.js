@@ -9,6 +9,6 @@ var eventSchema = mongoose.Schema({
     participants: Array,
 })
 
-var top50Model = mongoose.model('Events', top50Schema)
+var eventModel = mongoose.model('Events', eventSchema)
 
-module.exports = top50Model;
+module.exports = eventModel;

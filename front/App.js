@@ -6,6 +6,8 @@ import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import Carousel from './screen/carousel';
 import HomeInvite from './screen/homeinvite';
+import Onboarding from './screen/onboarding';
+
 
 
 const getFonts = () => Font.loadAsync({
@@ -21,10 +23,11 @@ export default function App() {
   if(fontsLoaded){
     return (
       //<Carousel/>
-      <HomeInvite/>
+      //<HomeInvite/>
       // <View>
       //   <Text>Coucou</Text>
       // </View>
+     <Onboarding/>
     )
   } else {
       return (
