@@ -12,12 +12,22 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 function SignIn() {
 
-    const [nom, setNom] = useState('');
-    const [prenom, setPrenom] = useState('');
+   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     
     
+var handleSignIn = async() => {
+    console.log(email, password)
+    await fetch('http://172.17.1.100:3000/sign-in', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `email=${email}&password=${password}`
+        })
+}
+
+
+
     return (
     <View style={styles.backGroundColor}>
         <View style={styles.inscription}>
@@ -31,17 +41,19 @@ function SignIn() {
         <View style={{flex: 1, alignItems: 'center'}}>
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Email:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
-                onChange={(e)=>setEmai(e.target.value)}
-                value={nom}
+                onChangeText={text => setEmail(text)}
+                value={email}
                 />
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Mot de Passe:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChangeText={text => setPassword(text)}
                 value={password}
                 />
             <Text style={{fontStyle: 'italic', textDecorationLine: 'underline'}}  >Mot de passe oublié?</Text>
             <View style={{width: '90%',height: '6.5%', color: '#584dad'}}>
-                <Button title="Continuer" style={styles.button}/>
+                <Button title="Continuer" style={styles.button}
+                onPress={()=> handleSignIn()}
+                />
             </View>
         </View>
     </View>

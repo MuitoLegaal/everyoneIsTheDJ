@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, View, Text, TextInput, Button } from 'reac
 import Ionicons from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
+
  
 
 
@@ -12,14 +12,18 @@ import { useState } from 'react';
 
 function SignUp() {
 
-    const [nom, setNom] = useState('');
-    const [prenom, setPrenom] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     
 
-    var handleSignUp = () => {
-
+    var handleSignUp = async() => {
+        console.log(username, email, password)
+        await fetch('http://172.17.1.100:3000/sign-up', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `username=${username}&email=${email}&password=${password}`
+        })
     }
     
     return (
@@ -33,31 +37,27 @@ function SignUp() {
             </View>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Nom:</Text>
+            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Username:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
-                onChange={(e)=>setNom(e.target.value)}
-                value={nom}
-                />
-            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Prénom:</Text>
-            <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
-                onChange={(e)=>setEmail(e.target.value)}
-                value={email}
+                onChangeText={text => setUsername(text)}
+                value={username}
                 />
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Email:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
-                onChange={(e)=>setEmai(e.target.value)}
-                value={nom}
+                onChangeText={text => setEmail(text)}
+                value={email}
                 />
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Mot de Passe:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChangeText={text => setPassword(text)}
                 value={password}
                 />
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Confirmation Mot de Passe:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}/>
             <View style={{width: '90%',height: '6.5%', color: '#584dad'}}>
                 <Button title="Continuer" style={styles.button}
-                   onPress={()=>handleSignUp()}/>
+                   onPress={()=>handleSignUp()}
+                />
             </View>
         </View>
     </View>

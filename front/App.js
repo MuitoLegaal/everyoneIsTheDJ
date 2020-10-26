@@ -8,6 +8,7 @@ import Carousel from './screen/carousel';
 import HomeInvite from './screen/homeinvite';
 import Onboarding from './screen/onboarding';
 import SignIn from './screen/SignIn';
+import SignUp from './screen/signUp';
 
 
 
@@ -36,7 +37,7 @@ export default function App() {
         //   startAsync={getFonts}
         //   onFinish={()=> setFontsLoaded(true)}
         // />
-        <SignIn></SignIn>
+        <SignIn/>
       )
     } 
   }
