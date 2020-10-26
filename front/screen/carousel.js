@@ -1,4 +1,3 @@
-console.disableYellowBox = true;
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Dimensions } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -11,17 +10,19 @@ export default class SwiperComponent extends Component {
   render() {
     return (
       <Swiper style={styles.wrapper} showsButtons={true}>
-        <View style={styles.slide1}>
-          <Text style={styles.title}>BIENVENUE</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.subtitle}>RECOIS TES INVITES AVEC LE MODE DJ HOTE</Text>
-          <Text style={styles.text}>Prépare-toi à ambiancer ta soirée et faire vibrer tes invités avec des musiques qu'ils aiment !</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>SUGGERE TA MUSIQUE AVEC LE MODE DJ INVITE</Text>
-          <Text style={styles.text}>Pour une nouvelle démocratie musicale, propose et vote pour ta musique préférée !</Text>
-        </View>
+        {/* <View style={styles.responsiveBox}> */}
+          <View style={styles.slide1}>
+            <Text style={styles.title}>BIENVENUE</Text>
+          </View>
+          <View style={styles.slide2}>
+            <Text style={styles.subtitle}>RECOIS TES INVITES AVEC LE MODE DJ HOTE</Text>
+            <Text style={styles.text}>Prépare-toi à ambiancer ta soirée et faire vibrer tes invités avec des musiques qu'ils aiment !</Text>
+          </View>
+          <View style={styles.slide3}>
+            <Text style={styles.subtitle}>SUGGERE TA MUSIQUE AVEC LE MODE DJ INVITE</Text>
+            <Text style={styles.text}>Pour une nouvelle démocratie musicale, propose et vote pour ta musique préférée !</Text>
+          </View>
+        {/* </View> */}
       </Swiper>
     )
   }
@@ -31,8 +32,11 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //alignItems: 'center',
+    //justifyContent: 'center',
+    //textAlign: 'center',
+    height: '100%',
+    
   },
   slide1: {
     flex: 1,
@@ -52,21 +56,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
+  title: {
+    color: '#fff',
+    fontSize: 40,
+    fontFamily:'Staatliches'
+  },
   subtitle: {
     color: '#fff',
     fontSize: 30,
     fontFamily:'Staatliches',
-    textAlign: 'center'
-  },
-  title: {
-    color: '#fff',
-    fontSize: 30,
-    fontFamily:'Staatliches'
+    textAlign: 'center',
+    paddingRight: 30 ,
+    paddingLeft: 30,
+    paddingBottom: 40
   },
  text: {
     color: '#fff',
-    fontSize: 30,
-    fontFamily:'Roboto-Regular'
+    fontSize: 20,
+    fontFamily:'Roboto-Regular',
+    paddingRight: 30 ,
+    paddingLeft: 30,
+    
 
   }
 })

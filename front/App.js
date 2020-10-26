@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import Carousel from './screen/carousel';
+import HomeInvite from './screen/homeinvite';
 
 
 const getFonts = () => Font.loadAsync({
@@ -19,7 +20,8 @@ export default function App() {
 
   if(fontsLoaded){
     return (
-      <Carousel/>
+      //<Carousel/>
+      <HomeInvite/>
       // <View>
       //   <Text>Coucou</Text>
       // </View>
