@@ -25,13 +25,16 @@ const getFonts = () => Font.loadAsync({
   {headerMode: 'none'}
   );
 
-function App() {
+  const Navigation = createAppContainer(StackNavigator);
+
+ export default function App() {
 
   const [ fontsLoaded, setFontsLoaded ] = useState(false);
 
+
   if(fontsLoaded){
     return (
-     <Onboarding/>
+     <Navigation/>
     )
   } else {
       return (
@@ -43,7 +46,7 @@ function App() {
     } 
   }
 
-  export default Navigation = createAppContainer(StackNavigator);
+
 
   // pour la navigation via StackNavigator, coller ce genre de lien dans les screens
 // function ExempleScreenA(props){
