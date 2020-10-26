@@ -8,11 +8,15 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "~39.0.2",
+    "@expo-google-fonts/staatliches": "^0.1.0",
+    "expo": "^39.0.3",
+    "expo-font": "~8.3.0",
     "expo-status-bar": "~1.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
+    "react-native-responsive-screen": "^1.4.1",
+    "react-native-swiper": "^1.6.0",
     "react-native-web": "~0.13.7"
   },
   "devDependencies": {
