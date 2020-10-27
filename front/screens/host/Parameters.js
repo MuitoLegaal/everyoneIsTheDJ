@@ -13,7 +13,6 @@ import { Header } from 'react-native-elements'
 
 
 
-
 function Parameters(props){
 
   var userData;
