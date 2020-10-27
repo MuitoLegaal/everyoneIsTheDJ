@@ -13,13 +13,13 @@ function DJhoteFirstScreen(props) {
             <View style={styles.wrap}>
                 <View style={styles.header}>
                    <Image 
-                          source={require('../assets/logoMini.png')}
+                          source={require('../../assets/logoMini.png')}
                           style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent:'center', justifyContent:'center', alignItems:'center'}}
                     />
                     
                     <Text style={styles.title}>DJ HOTE</Text>
                 </View>
-                    
+                <View style={styles.main}>
                     <Text style={styles.subtext}>Tu as déjà un compte ?</Text>
                     
                     <Button title="Se connecter" 
@@ -30,7 +30,7 @@ function DJhoteFirstScreen(props) {
                         paddingTop:10,
                         paddingBottom:10,
                         marginBottom: 20,
-                        marginTop: 30
+                        marginTop: 10
               
                       }}
                       onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
@@ -45,9 +45,9 @@ function DJhoteFirstScreen(props) {
                         paddingRight: 90,
                         paddingTop:10,
                         paddingBottom:10,
-                        marginBottom: 20,
+                       
                       }}></Button>
-               
+               </View>   
 
             </View>
         </View>
@@ -78,9 +78,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: "column",
-
-        
+        marginTop: 70   
     },
+    main: {
+      textAlign: 'center',
+      backgroundColor: '#131313',
+      justifyContent: 'center',
+      flexDirection: "column",
+      marginTop: 60,
+      marginBottom: -10  
+  },
+
     title: {
       color: '#fff',
       fontSize: 40,
@@ -101,9 +109,10 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 20,
       fontFamily:'Roboto-Regular',
+      textAlign: 'center',
       paddingRight: 30 ,
       paddingLeft: 30,
-      marginBottom: 30
+      marginBottom: 10
     },
    text: {
       color: '#fff',
