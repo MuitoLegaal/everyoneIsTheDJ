@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-export default function Winner() {
+export default function Winner(props) {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/logoMini.png')} />
@@ -25,7 +25,9 @@ export default function Winner() {
       <Text style={{ color: '#fff' }}>Artiste: Lorem Ipsum</Text>
       <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
 
-      <Button title="Suivant" buttonStyle={{ backgroundColor: '#FF0060' }}></Button>
+      <Button title="Retour à l'accueil" buttonStyle={{ backgroundColor: '#FF0060' }}
+                    onPress={() => props.navigation.navigate('HomeHost')}
+      ></Button>
     </View>
   );
 }
