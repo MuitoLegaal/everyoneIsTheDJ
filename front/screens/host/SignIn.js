@@ -43,7 +43,9 @@ if(errorMessage === true){
     <View style={styles.backGroundColor}>
         <View style={styles.inscription}>
             <View style={{justifyContent: 'center', alignItems: 'flex-start'}}>
-                <FontAwesomeIcon style={{color: 'white'}} icon={faArrowLeft} size={30}/>
+                <FontAwesomeIcon style={{color: 'white'}} icon={faArrowLeft} size={30} 
+                    onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
+                />
             </View>
             <View style={{justifyContent: 'center'}}>
                 <Text style={{color: 'white', fontSize: 30}}>CONNEXION</Text>

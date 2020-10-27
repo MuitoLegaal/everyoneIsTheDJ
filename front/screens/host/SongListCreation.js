@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, } from 'react-native';
+import { Button } from 'react-native-elements';
 
 
 function SongListCreation(props){
@@ -10,6 +11,12 @@ function SongListCreation(props){
         <Button title="Valider la liste" 
               onPress={() => props.navigation.navigate('TimerConfig')}
         ></Button>
+
+        
+              {/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
+              <Button buttonStyle={{paddingTop: 15}} title="<- flèche retour en haut" 
+                    onPress={() => props.navigation.navigate('EventCreation')}
+              ></Button> 
 
       </View>
     );
