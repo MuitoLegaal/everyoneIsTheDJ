@@ -52,9 +52,9 @@ function SignUp(props) {
     
         
     return (
-    <View style={styles.container}>
-        <View style={styles.wrap}>
-            <View style={styles.header} >
+    <ScrollView style={styles.container}>
+        {/* <View style={styles.wrap}> */}
+            {/* <View style={styles.header} > */}
                 <Header
                     statusBarProps={{ barStyle: 'light-content' }}
                     barStyle="light-content" // or directly
@@ -79,22 +79,17 @@ function SignUp(props) {
                         backgroundColor: '#131313',
                         borderBottomWidth: 0,
                         //alignItems: 'flex-start'
-                        }}
-                />
-                {/* <Header
-    placement="left"
-    leftComponent={{ icon: 'menu', color: '#fff' }}
-    centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-    rightComponent={{ icon: 'home', color: '#fff' }}
-    /> */}
-            </View>
+                        }}/>
+                
+        {/* </View> */}
         <View style={styles.main}>
-            <ScrollView>
+            {/* <ScrollView>  */}
+            
             <Input
                     label='Pseudo'
                     placeholder='Gégé'
                     type='text'
-                    containerStyle={{color:'#fff', width: '100%', justifyContent:'center'}}
+                    containerStyle={{color:'#fff', width: '100%', marginTop:'2%'}}
                     inputStyle={{
                             fontFamily:'Roboto-Bold',
                             fontSize: 18,
@@ -116,7 +111,7 @@ function SignUp(props) {
                     label='Email'
                     placeholder='gerard@mail.com'
                     type='text'
-                    containerStyle={{color:'#fff', width: '90%'}}
+                    containerStyle={{color:'#fff', width: '90%', marginTop:'7%'}}
                     inputStyle={{
                             fontFamily:'Roboto-Bold',
                             fontSize: 18,
@@ -138,7 +133,7 @@ function SignUp(props) {
                     placeholder='•••••••••'
                     secureTextEntry={true}
                     type='passeword'
-                    containerStyle={{color:'#fff', width: '90%'}}
+                    containerStyle={{color:'#fff', width: '90%', marginTop:'7%'}}
                     inputStyle={{
                             fontFamily:'Roboto-Bold',
                             fontSize: 18,
@@ -161,7 +156,7 @@ function SignUp(props) {
                     placeholder='•••••••••'
                     type='passeword'
                     secureTextEntry={true}
-                    containerStyle={{color:'#fff', width: '90%'}}
+                    containerStyle={{color:'#fff', width: '90%', marginTop:'7%'}}
                     inputStyle={{
                             fontFamily:'Roboto-Bold',
                             fontSize: 18,
@@ -189,13 +184,13 @@ function SignUp(props) {
                         paddingTop:10,
                         paddingBottom:10,
                         borderRadius: 10,
-                        marginTop:10
+                        marginTop:'20%'
                     }}
                     />
-            </ScrollView>  
+                {/* </ScrollView>   */}
             </View>
-        </View>
-    </View>
+        {/* </View> */}
+    </ScrollView>
   );
 }
 
@@ -203,34 +198,28 @@ function SignUp(props) {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
+       
     },
-    wrap: {
+    main: {
         
-        flexDirection: 'column',
+        //flexDirection: 'column',
         backgroundColor: '#131313',
         justifyContent: 'center',
+        //alignItems:'center',
+        alignContent:'center',
         textAlign: 'center',
-        height: hp('100%'), // 70% of height device screen
-        width: wp('100%')
+        height: '100%',
+        width: '100%'
         
       },
     
     header: {
         backgroundColor: '#131313',
-        marginTop:0,
-        //alignItems: 'baseline'
+        // marginTop:100,
+        //marginBottom:10
         
     },
-    main: {
-        backgroundColor: '#131313',
-        justifyContent: 'center',
-        flexDirection: "column",
-        //marginTop: 160,
-        alignItems: 'center',
-        textAlign: 'left',
-       
-      
-    },
+    
 
 
 
