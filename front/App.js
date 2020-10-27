@@ -27,11 +27,11 @@ import VoteHost from './screens/host/VoteHost';
 import Winner from './screens/host/winnerhost';
 
 //import screens Guest
-import enregistrement from './screens/guest/enregistrement';
-import homeinvite from './screens/guest/homeinvite';
-import nouveauvote from './screens/guest/nouveauvote';
-import validationvote from './screens/guest/validationvote';
-import winnerguest from './screens/guest/winnerguest';
+import Enregistrement from './screens/guest/enregistrement';
+import Homeinvite from './screens/guest/homeinvite';
+import Nouveauvote from './screens/guest/nouveauvote';
+import Validationvote from './screens/guest/validationvote';
+import Winnerguest from './screens/guest/winnerguest';
 
 
 const getFonts = () => Font.loadAsync({
@@ -42,11 +42,11 @@ const getFonts = () => Font.loadAsync({
 
   var StackNavigator = createStackNavigator({
     Onboarding:  Onboarding,  
-    enregistrement: enregistrement,
-    homeinvite: homeinvite,
-    nouveauvote: nouveauvote,
-    validationvote: validationvote,
-    winnerguest: winnerguest,
+    Enregistrement: Enregistrement,
+    Homeinvite: Homeinvite,
+    Nouveauvote: Nouveauvote,
+    Validationvote: Validationvote,
+    Winnerguest: Winnerguest,
     DJhoteFirstScreen: DJhoteFirstScreen,
     EventCreation: EventCreation,
     Historic: Historic,
@@ -73,20 +73,17 @@ const getFonts = () => Font.loadAsync({
 
   if(fontsLoaded){
     return (
-      //<HomeInvite/>
-     //<Onboarding/>
+   
      <Navigation/>
-     //<DJhoteFirstScreen/>
+
     )
   } else {
       return (
+       
         <AppLoading
           startAsync={getFonts}
           onFinish={()=> setFontsLoaded(true)}
-        />
-
-
-        
+        />        
       )
     } 
   }
