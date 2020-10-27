@@ -54,6 +54,7 @@ const getFonts = () => Font.loadAsync({
       //<HomeInvite/>
      //<Onboarding/>
      <Navigation/>
+     //<DJhoteFirstScreen/>
     )
   } else {
       return (
@@ -61,11 +62,12 @@ const getFonts = () => Font.loadAsync({
         //   startAsync={getFonts}
         //   onFinish={()=> setFontsLoaded(true)}
         // />
-        <AppLoading
-          startAsync={getFonts}
-          onFinish={()=> setFontsLoaded(true)}
-        />
-        // <SignIn/>
+        // <AppLoading
+        //   startAsync={getFonts}
+        //   onFinish={()=> setFontsLoaded(true)}
+        // />
+        <SignUp/>
+        
       )
     } 
   }
