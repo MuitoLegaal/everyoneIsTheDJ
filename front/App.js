@@ -8,10 +8,11 @@ import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 // import Carousel from './screen/carousel';
+import SignIn from './screen/SignIn'; // attention c'est ./screen avec un "s"
+import SignUp from './screen/signUp'; // attention c'est ./screen avec un "s"
 import HomeInvite from './screens/homeinvite';
 import Onboarding from './screens/onboarding';
-import SignIn from './screen/SignIn';
-import SignUp from './screen/signUp';
+import DJhoteFirstScreen from './screens/DJhoteFirstScreen';
 
 
 const getFonts = () => Font.loadAsync({
@@ -22,6 +23,7 @@ const getFonts = () => Font.loadAsync({
 
   var StackNavigator = createStackNavigator({
     Onboarding:  Onboarding,  
+    DJhoteFirstScreen: DJhoteFirstScreen,
     // ExempleB:  ExempleScreenB,
   },
   {headerMode: 'none'}
