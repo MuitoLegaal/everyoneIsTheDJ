@@ -32,10 +32,10 @@ export default function Onboarding(props) {
           paddingRight: 120,
           paddingTop:10,
           paddingBottom:10,
-          marginBottom: 20,
-       
-          
-        }}></Button>
+          marginBottom: 20,         
+        }}
+        onPress={() => props.navigation.navigate('enregistrement')}
+        ></Button>
     </View>
   );
 }
