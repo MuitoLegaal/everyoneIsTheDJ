@@ -13,7 +13,7 @@ function homeinvite() {
             <View style={styles.header}>
                <View>
                 <Image 
-                        source={require('../assets/logoMini.png')}
+                        // source={require(".../assets/logo2.png")}
                         style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30}}
                     />
                 </View>
@@ -30,9 +30,11 @@ function homeinvite() {
             </View>
             <View style={styles.wrap}>
                 <Image 
-                    source={require('../assets/picto-fete2.png')}
+                    source={require('../../assets/picto-fete2.png')}
                     style={{ width: 150, height: 150 }}
                 />
+                <Button title="Retour"></Button>
+                <Button title="Suivant"></Button>
             </View>
         </View>
 
