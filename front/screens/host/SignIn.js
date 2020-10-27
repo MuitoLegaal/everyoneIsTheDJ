@@ -10,6 +10,7 @@ function SignIn() {
    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState(false)
     
     
 var handleSignIn = async() => {
@@ -19,7 +20,19 @@ var handleSignIn = async() => {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `email=${email}&password=${password}`
         })
+
+    var response = await rawResponse.json();
     
+    if(response.result === false){
+        setErrorMessage(true)
+    }
+
+    
+}
+
+var logInDenied;
+if(errorMessage === true){
+    logInDenied = <Text style={{color: 'white'}} >Email et/ou Mot de Passe Incorrect(es)</Text>
 }
 
 
@@ -35,6 +48,7 @@ var handleSignIn = async() => {
             </View>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
+            {logInDenied}
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Email:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
                 onChangeText={text => setEmail(text)}
