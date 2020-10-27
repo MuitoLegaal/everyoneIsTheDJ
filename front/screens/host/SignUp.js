@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import { ImageBackground, StyleSheet, View, Text, TextInput, Dimensions } from 'react-native';
+import React, {useState, useRef} from 'react';
+import { ImageBackground, StyleSheet, View, Text, TextInput, Dimensions, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { Badge, Button, Header, Icon } from 'react-native-elements'
+import { Badge, Button, Header, Icon, Input} from 'react-native-elements'
 import { text } from '@fortawesome/fontawesome-svg-core';
 
 
@@ -15,6 +15,7 @@ function SignUp(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     const [signUp, setSignUp] = useState(false);
+
     
 
     var handleSignUp = async() => {
@@ -44,78 +45,155 @@ function SignUp(props) {
         emailMessage = <Text style={{color: 'white'}}>Cet email a déja été utilisé</Text>
     }
 
+
+    
+    
+
     
         
     return (
-    <View style={styles.wrap}>
-            <Header
-                containerStyle={{
-                    backgroundColor: '#131313',
-                    borderBottomWidth: 0
-                }}
-                placement="center"
-                leftComponent={
-                     <Icon 
-                     name='arrow-left' 
-                     type='font-awesome' 
-                     color= '#fff'
-                     size='30'
-                    />
-                    }
-                centerComponent={{ text: 'INSCRIPTION', style: { 
-                    color: '#fff',
-                    fontSize: 40,
-                    fontFamily:'Staatliches',
-                    textAlign: 'center',
-                    
-                } }}
-               
-            />
-        {/* <View style={styles.header}>
-            <View style={{justifyContent: 'center', alignItems: 'flex-start'}}>
-                <FontAwesomeIcon style={{color: 'white'}} icon={faArrowLeft} size={30}/>
+    <View style={styles.container}>
+        <View style={styles.wrap}>
+            <View style={styles.header} >
+                <Header
+                    statusBarProps={{ barStyle: 'light-content' }}
+                    barStyle="light-content" // or directly
+                    leftComponent={
+                        <Icon 
+                            name='arrow-left' 
+                            type='font-awesome' 
+                            color= '#fff'
+                            size='40'
+                        />}
+                    centerComponent={{ 
+                        text: 'inscription', 
+                        style: { color: '#fff',
+                        fontSize: 40,
+                        fontFamily:'Staatliches',
+                        textAlign: 'center',
+                        //alignItems: 'baseline'
+                        }}}
+                    containerStyle={{
+                        backgroundColor: '#3D6DCC',
+                        justifyContent: 'space-around',
+                        backgroundColor: '#131313',
+                        borderBottomWidth: 0,
+                        //alignItems: 'flex-start'
+                        }}
+                />
+                {/* <Header
+    placement="left"
+    leftComponent={{ icon: 'menu', color: '#fff' }}
+    centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+    rightComponent={{ icon: 'home', color: '#fff' }}
+    /> */}
             </View>
-            <View style={{justifyContent: 'center'}}>
-                <Text style={{color: 'white', fontSize: 30}}>INSCRIPTION</Text>
-            </View>
-        </View> */}
-       
         <View style={styles.main}>
-            <Text style={styles.label}>Username:</Text>
-            <TextInput 
-                style={styles.input}
-                onChangeText={text => setUsername(text)}
-                value={username}
+            <ScrollView>
+            <Input
+                    label='Pseudo'
+                    placeholder='Gégé'
+                    type='text'
+                    containerStyle={{color:'#fff', width: '100%', justifyContent:'center'}}
+                    inputStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 18,
+                            color: '#fff',
+                            paddingLeft: '5%',
+                            borderBottomColor:'#000981'
+                    }}
+                    labelStyle={{
+                        fontFamily:'Roboto-Bold',
+                        fontSize: 20,
+                        color: '#584DAD',
+                        paddingLeft: '5%',
+                    }}
+                    onChangeText={text => setUsername(text)}
+                    value={username}
                 />
-            <Text style={styles.label}>Email:</Text>{emailMessage}
-            <TextInput 
-                style={styles.input}
-                onChangeText={text => setEmail(text)}
-                value={email}
+
+                <Input
+                    label='Email'
+                    placeholder='gerard@mail.com'
+                    type='text'
+                    containerStyle={{color:'#fff', width: '90%'}}
+                    inputStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 18,
+                            color: '#fff',
+                            paddingLeft: '5%',
+                            borderBottomColor:'#000981'
+                    }}
+                    labelStyle={{
+                        fontFamily:'Roboto-Bold',
+                        fontSize: 20,
+                        color: '#584DAD',
+                        paddingLeft: '5%',
+                    }}
+                    onChangeText={text => setEmail(text)}
+                    value={email}
                 />
-            <Text style={styles.label}>Mot de Passe:</Text>
-            <TextInput 
-                style={styles.input}
-                onChangeText={text => setPassword(text)}
-                value={password}
+                <Input
+                    label='Mot de Passe:'
+                    placeholder='•••••••••'
+                    secureTextEntry={true}
+                    type='passeword'
+                    containerStyle={{color:'#fff', width: '90%'}}
+                    inputStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 18,
+                            color: '#fff',
+                            paddingLeft: '5%',
+                            borderBottomColor:'#000981'
+                    }}
+                    labelStyle={{
+                        fontFamily:'Roboto-Bold',
+                        fontSize: 20,
+                        color: '#584DAD',
+                        paddingLeft: '5%',
+                    }}
+                    onChangeText={text => setPassword(text)}
+                    value={password}
                 />
-            <Text style={styles.label}>Confirmation Mot de Passe:</Text>
-            <TextInput style={styles.input}/>
-            
-            
-            <Button 
-                title="Continuer" 
-                onPress={()=>handleSignUp()}
-                buttonStyle={{
-                    backgroundColor: '#584DAD',
-                    paddingLeft: 90,
-                    paddingRight: 90,
-                    paddingTop:10,
-                    paddingBottom:10,
-                    borderRadius: 10
-                }}
+
+                <Input
+                    label='Confirmation Mot de Passe:'
+                    placeholder='•••••••••'
+                    type='passeword'
+                    secureTextEntry={true}
+                    containerStyle={{color:'#fff', width: '90%'}}
+                    inputStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 18,
+                            color: '#fff',
+                            paddingLeft: '5%',
+                        
+                    }}
+                    labelStyle={{
+                        fontFamily:'Roboto-Bold',
+                        fontSize: 20,
+                        color: '#584DAD',
+                        paddingLeft: '5%',
+                    }}
+                    onChangeText={text => setPassword(text)}
+                    value={password}
                 />
-           
+                
+                <Button 
+                    title="Continuer" 
+                    onPress={()=>handleSignUp()}
+                    buttonStyle={{
+                        backgroundColor: '#584DAD',
+                        paddingLeft: 90,
+                        paddingRight: 90,
+                        paddingTop:10,
+                        paddingBottom:10,
+                        borderRadius: 10,
+                        marginTop:10
+                    }}
+                    />
+            </ScrollView>  
+            </View>
         </View>
     </View>
   );
@@ -123,56 +201,36 @@ function SignUp(props) {
 
 
 var styles = StyleSheet.create({
-    
-    wrap: {
+    container: {
         flex: 1,
+    },
+    wrap: {
+        
         flexDirection: 'column',
         backgroundColor: '#131313',
         justifyContent: 'center',
         textAlign: 'center',
         height: hp('100%'), // 70% of height device screen
-        width: wp('100%')   // 80% of width device screen 
+        width: wp('100%')
+        
       },
     
     header: {
         backgroundColor: '#131313',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        flexDirection: "row",
-       
+        marginTop:0,
+        //alignItems: 'baseline'
+        
     },
     main: {
         backgroundColor: '#131313',
         justifyContent: 'center',
         flexDirection: "column",
-        marginTop: 60,
+        //marginTop: 160,
         alignItems: 'center',
         textAlign: 'left',
+       
       
     },
-    input: {
-        backgroundColor: 'white', 
-        width: '90%', 
-        borderRadius: 10, 
-        marginBottom: "10%", 
-        height: '8%',
-        textAlign: 'left',
-        paddingLeft: '5%',
-        fontFamily:'Roboto-Regular',
-        fontSize: 16,
-        color: '#000981'
-        
-    },
-    label: {
-        color: 'white', 
-        marginBottom: '2%',
-        // flex: 'start'
-        
-
-        // pour les inputs : balise input - 
-       
-        
-    }
 
 
 
