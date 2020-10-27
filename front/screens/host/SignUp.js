@@ -1,11 +1,12 @@
 import React, {useState, useRef} from 'react';
 import { ImageBackground, StyleSheet, View, Text, TextInput, Dimensions, ScrollView } from 'react-native';
-//import Ionicons from '@expo/vector-icons';
-//import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-//import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-//import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import Ionicons from '@expo/vector-icons';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Badge, Button, Header, Icon, Input} from 'react-native-elements'
-//import { text } from '@fortawesome/fontawesome-svg-core';
+import { text } from '@fortawesome/fontawesome-svg-core';
+import { AsyncStorage } from 'react-native';
 
 
  
@@ -29,6 +30,13 @@ function SignUp(props) {
         })
         var response = await rawResponse.json();
         console.log(response);
+
+
+    // _______________________________________LOCAL STORAGE NOT FINISHED (pour les parametres)_________________________________
+        AsyncStorage.setItem("user", JSON.stringify(response))
+    // ________________________________________________________________________________________________________________________
+
+
         if (response.result === false){
             setSignUp(true)
         } else {
