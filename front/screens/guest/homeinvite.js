@@ -5,7 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function homeinvite() {
+function homeinvite({navigation}) {
   
 
     return (
@@ -34,9 +34,9 @@ function homeinvite() {
                     source={require('../../assets/picto-fete2.png')}
                     style={{ width: 150, height: 150 }}
                 />
-                <Button title="Retour" onPress={() => navigation.navigate('enregistrement') }></Button>
-                <Button title="Suivant" onPress={() => navigation.navigate('nouveauvote') }></Button>
-                <Button title="Winner" onPress={() => navigation.navigate('winnerguest') }></Button>
+                <Button title="Retour" onPress={() => navigation.navigate('Enregistrement') }></Button>
+                <Button title="Suivant" onPress={() => navigation.navigate('Nouveauvote') }></Button>
+                <Button title="Winner" onPress={() => navigation.navigate('Winnerguest') }></Button>
             </View>
         </View>
 
