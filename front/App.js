@@ -32,6 +32,7 @@ import Homeinvite from './screens/guest/homeinvite';
 import Nouveauvote from './screens/guest/nouveauvote';
 import Validationvote from './screens/guest/validationvote';
 import Winnerguest from './screens/guest/winnerguest';
+import nouveauvote from './screens/guest/nouveauvote';
 
 
 const getFonts = () => Font.loadAsync({
@@ -73,9 +74,11 @@ const getFonts = () => Font.loadAsync({
 
   if(fontsLoaded){
     return (
-   
+      //<HomeInvite/>
+     //<Onboarding/>
      <Navigation/>
-
+     //<DJhoteFirstScreen/>
+     //<SignUp/>
     )
   } else {
       return (
