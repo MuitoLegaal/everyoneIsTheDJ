@@ -34,7 +34,7 @@ function DJhoteFirstScreen(props) {
                         borderRadius: 10
               
                       }}
-                      onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
+                      onPress={() => props.navigation.navigate('SignIn')}
                       ></Button>
 
                       <Text style={{ color: '#fff', textDecorationLine: 'none', marginBottom: 20, textAlign: 'center' }}> Ou </Text>
@@ -48,7 +48,9 @@ function DJhoteFirstScreen(props) {
                         paddingBottom:10,
                         borderRadius: 10
                        
-                      }}></Button>
+                      }}
+                      onPress={() => props.navigation.navigate('SignUp')}
+                      ></Button>
                </View>   
 
             </View>

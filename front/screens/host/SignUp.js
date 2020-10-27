@@ -9,7 +9,7 @@ import { text } from '@fortawesome/fontawesome-svg-core';
 
 
  
-function SignUp() {
+function SignUp(props) {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -30,6 +30,8 @@ function SignUp() {
         console.log(response);
         if (response.result === false){
             setSignUp(true)
+        } else {
+            props.navigation.navigate('HomeHost')
         }
         
     };
@@ -163,7 +165,11 @@ var styles = StyleSheet.create({
     },
     label: {
         color: 'white', 
-        marginBottom: '2%'
+        marginBottom: '2%',
+        // flex: 'start'
+        
+
+        // pour les inputs : balise input - 
        
         
     }

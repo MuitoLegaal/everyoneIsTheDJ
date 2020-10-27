@@ -40,10 +40,10 @@ router.post('/sign-in', async function(req, res, next) {
 
   if(hotes === null){
     console.log('no')
-    res.json({result: false})
+    res.json({result: false, user: hotes})
   }else{
     console.log('yes')
-    res.json({result: true})
+    res.json({result: true, user: hotes})
   }
 
   
