@@ -13,7 +13,7 @@ function DJhoteFirstScreen(props) {
             <View style={styles.wrap}>
                 <View style={styles.header}>
                    <Image 
-                          source={require('../assets/logoMini.png')}
+                          source={require('../../assets/logoMini.png')}
                           style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent:'center', justifyContent:'center', alignItems:'center'}}
                     />
                     
