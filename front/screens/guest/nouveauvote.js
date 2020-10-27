@@ -1,20 +1,37 @@
 import React, { useState } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, ListItem } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function nouveauvote() {
+function nouveauvote({ navigation }) {
 
 
   return (
     <View style={styles.container}>
       <Text>Nouveau Vote</Text>
-      <Button onPress={() => navigation.navigate('nouveauvote')} title="Retour"></Button>
+      <Text>Bienvenue dans l'évènement:</Text>
+      <Text>Anniv de Bob</Text>
+      <Image
+        source={require('../../assets/picto-fete2.png')}
+        style={{ width: 150, height: 150 }}
+      />
+      <Text>Vote en cours, il te reste:</Text>
+
+      <Text>Votez pour le prochain titre:</Text>
+
+      <ListItem >
+        <ListItem.Content>
+          <ListItem.Title>Artiste</ListItem.Title>
+          <ListItem.Title>Titre</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+
+      <Button onPress={() => navigation.navigate('Homeinvite')} title="Retour"></Button>
       <Button title="Validation Vote"
-        onPress={() => navigation.navigate('validationvote')}
+        onPress={() => navigation.navigate('Validationvote')}
         buttonStyle={{
           backgroundColor: '#584DAD',
           paddingLeft: 120,

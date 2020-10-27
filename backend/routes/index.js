@@ -26,10 +26,6 @@ router.post('/sign-up', async function(req, res, next) {
     console.log('not welcome')
     res.json({result: false, hote: hoteSaved})
   }
-  
-  
-  
-  
 
   
 })
@@ -44,6 +40,20 @@ router.post('/sign-in', async function(req, res, next) {
   }else{
     console.log('yes')
     res.json({result: true, user: hotes})
+  }
+
+  
+})
+
+
+router.post('ajout-titre', async function(req, res, next) {
+
+  if(hotes === null){
+    console.log('no')
+    res.json({result: false})
+  }else{
+    console.log('yes')
+    res.json({result: true})
   }
 
   

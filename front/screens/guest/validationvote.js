@@ -6,14 +6,14 @@ import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function validationvote() {
+function validationvote({navigation}) {
 
 
   return (
     <View style={styles.container}>
       <Text>Validation Vote</Text>
       <Button title="Home"
-        onPress={() => navigation.navigate('homeinvite')}
+        onPress={() => navigation.navigate('Homeinvite')}
         buttonStyle={{
           backgroundColor: '#584DAD',
           paddingLeft: 120,

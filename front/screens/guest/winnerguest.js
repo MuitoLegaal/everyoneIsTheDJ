@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-export default function winnerguest () {
+export default function winnerguest ({navigation}) {
   return (
     <View style={styles.container}>
        <Image source={require('../../assets/logoMini.png')} />
@@ -24,7 +24,7 @@ export default function winnerguest () {
         <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
         
 
-        <Button title="Suivant" buttonStyle={{backgroundColor: '#FF0060'}}></Button>
+        <Button title="Suivant"  onPress={() => navigation.navigate('Homeinvite')} buttonStyle={{backgroundColor: '#FF0060'}}></Button>
     </View>
   );
 }
