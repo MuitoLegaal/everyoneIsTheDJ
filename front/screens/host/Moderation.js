@@ -8,7 +8,7 @@ function Moderation(props){
         <Text>Moderation par l'hôte</Text>
 
         <Button title="Valider la liste" 
-              onPress={() => props.navigation.navigate('TimerConfig')}
+              onPress={() => props.navigation.navigate('TimerConfigSEC')}
         ></Button>
 
       </View>

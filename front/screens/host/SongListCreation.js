@@ -9,7 +9,7 @@ function SongListCreation(props){
         <Text>Création de la liste de chanson par l'hôte</Text>
 
         <Button title="Valider la liste" 
-              onPress={() => props.navigation.navigate('TimerConfig')}
+              onPress={() => props.navigation.navigate('TimerConfigFIRST')}
         ></Button>
 
         
