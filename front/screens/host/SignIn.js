@@ -14,7 +14,7 @@ function SignIn(props) {
     
     
 var handleSignIn = async() => {
-    console.log(email, password)
+    
     var rawResponse = await fetch('http://172.17.1.100:3000/sign-in', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -43,7 +43,9 @@ if(errorMessage === true){
     <View style={styles.backGroundColor}>
         <View style={styles.inscription}>
             <View style={{justifyContent: 'center', alignItems: 'flex-start'}}>
-                <FontAwesomeIcon style={{color: 'white'}} icon={faArrowLeft} size={30}/>
+                <FontAwesomeIcon style={{color: 'white'}} icon={faArrowLeft} size={30} 
+                    onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
+                />
             </View>
             <View style={{justifyContent: 'center'}}>
                 <Text style={{color: 'white', fontSize: 30}}>CONNEXION</Text>

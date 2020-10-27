@@ -22,9 +22,11 @@ import Parameters from './screens/host/Parameters';
 import ShareEvent from './screens/host/ShareEvent';
 import SignIn from './screens/host/SignIn';
 import SignUp from './screens/host/SignUp';
-import TimerConfig from './screens/host/TimerConfig';
+import TimerConfigFIRST from './screens/host/TimerConfigFIRST';
+import TimerConfigSEC from './screens/host/TimerConfigSEC';
 import VoteHost from './screens/host/VoteHost';
 import Winner from './screens/host/winnerhost';
+import SongListCreation from './screens/host/SongListCreation';
 
 //import screens Guest
 import Enregistrement from './screens/guest/enregistrement';
@@ -57,9 +59,11 @@ const getFonts = () => Font.loadAsync({
     ShareEvent: ShareEvent,
     SignIn: SignIn,
     SignUp: SignUp,
-    TimerConfig: TimerConfig,
+    TimerConfigFIRST: TimerConfigFIRST,
+    TimerConfigSEC: TimerConfigSEC,
     VoteHost: VoteHost,
     WinnerHost: Winner,
+    SongListCreation: SongListCreation,
   },
   {headerMode: 'none'}
   );
@@ -84,7 +88,6 @@ const getFonts = () => Font.loadAsync({
           startAsync={getFonts}
           onFinish={()=> setFontsLoaded(true)}
         />  
-        // <Homeinvite/>
              
       )
     } 

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Badge, Button, Header, Icon, Input} from 'react-native-elements'
 import { text } from '@fortawesome/fontawesome-svg-core';
+import { AsyncStorage } from 'react-native';
 
 
  
@@ -29,6 +30,13 @@ function SignUp(props) {
         })
         var response = await rawResponse.json();
         console.log(response);
+
+
+    // _______________________________________LOCAL STORAGE NOT FINISHED (pour les parametres)_________________________________
+        AsyncStorage.setItem("user", JSON.stringify(response))
+    // ________________________________________________________________________________________________________________________
+
+
         if (response.result === false){
             setSignUp(true)
         } else {
@@ -53,148 +61,159 @@ function SignUp(props) {
         
     return (
     <View style={styles.container}>
-        <View style={styles.wrap}>
-            <View style={styles.header} >
                 <Header
-                    statusBarProps={{ barStyle: 'light-content' }}
-                    barStyle="light-content" // or directly
-                    leftComponent={
-                        <Icon 
-                            name='arrow-left' 
-                            type='font-awesome' 
-                            color= '#fff'
-                            size='40'
-                        />}
-                    centerComponent={{ 
-                        text: 'inscription', 
-                        style: { color: '#fff',
-                        fontSize: 40,
-                        fontFamily:'Staatliches',
-                        textAlign: 'center',
-                        //alignItems: 'baseline'
-                        }}}
-                    containerStyle={{
-                        backgroundColor: '#3D6DCC',
-                        justifyContent: 'space-around',
-                        backgroundColor: '#131313',
-                        borderBottomWidth: 0,
-                        //alignItems: 'flex-start'
+                    // statusBarProps={{ barStyle: 'light-content' }}
+                    // barStyle="light-content" // or directly
+                    // leftComponent={
+                    //     <Icon 
+                    //         name='arrow-left' 
+                    //         type='font-awesome' 
+                    //         color= '#fff'
+                    //         size='40'
+                    //     />}
+                    // centerComponent={{ 
+                    //     text: 'inscription', 
+                    //     style: { color: '#fff',
+                    //     // fontSize: 40,
+                    //     // fontFamily:'Staatliches',
+                    //     // textAlign: 'center',
+                    //     //alignItems: 'baseline'
+                    //     }}}
+                    // containerStyle={{
+                    //     // backgroundColor: '#3D6DCC',
+                    //     // justifyContent: 'space-around',
+                    //     // backgroundColor: '#131313',
+                    //     // borderBottomWidth: 0,
+                    //     //alignItems: 'flex-start'
+                    //     }}
+                >
+                   
+
+                </Header>
+                
+        {/* </View> */}
+        {/* <View style={styles.main}> */}
+            <ScrollView style={styles.main}> 
+                <Input
+                        label='Pseudo'
+                        placeholder='Gégé'
+                        type='text'
+                        containerStyle={{
+                                color:'#fff', 
+                                width: '100%', 
+                                //marginTop:'2%'
+                            }}
+                        inputStyle={{
+                                fontFamily:'Roboto-Bold',
+                                fontSize: 18,
+                                color: '#fff',
+                                //paddingLeft: '5%',
+                                borderBottomColor:'#000981'
                         }}
-                />
-                {/* <Header
-    placement="left"
-    leftComponent={{ icon: 'menu', color: '#fff' }}
-    centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-    rightComponent={{ icon: 'home', color: '#fff' }}
-    /> */}
-            </View>
-        <View style={styles.main}>
-            <ScrollView>
-            <Input
-                    label='Pseudo'
-                    placeholder='Gégé'
-                    type='text'
-                    containerStyle={{color:'#fff', width: '100%', justifyContent:'center'}}
-                    inputStyle={{
+                        labelStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 20,
+                            color: '#584DAD',
+                            //paddingLeft: '5%',
+                        }}
+                        onChangeText={text => setUsername(text)}
+                        value={username}
+                    />
+                    <Input
+                        label='Email'
+                        placeholder='gerard@mail.com'
+                        type='text'
+                        containerStyle={{
+                            color:'#fff', 
+                            width: '90%', 
+                            //marginTop:'7%'
+                        }}
+                        inputStyle={{
                             fontFamily:'Roboto-Bold',
                             fontSize: 18,
                             color: '#fff',
-                            paddingLeft: '5%',
+                            //paddingLeft: '5%',
+                            //borderBottomColor:'#000981'
+                        }}
+                        labelStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 20,
+                            color: '#584DAD',
+                            //paddingLeft: '5%',
+                        }}
+                        onChangeText={text => setEmail(text)}
+                        value={email}
+                        />
+                    <Input
+                        label='Mot de Passe:'
+                        placeholder='•••••••••'
+                        secureTextEntry={true}
+                        type='passeword'
+                        containerStyle={{
+                            color:'#fff', 
+                            width: '90%', 
+                            //marginTop:'7%'
+                        }}
+                        inputStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 18,
+                            color: '#fff',
+                            //paddingLeft: '5%',
                             borderBottomColor:'#000981'
-                    }}
-                    labelStyle={{
-                        fontFamily:'Roboto-Bold',
-                        fontSize: 20,
-                        color: '#584DAD',
-                        paddingLeft: '5%',
-                    }}
-                    onChangeText={text => setUsername(text)}
-                    value={username}
-                />
+                        }}
+                        labelStyle={{
+                            fontFamily:'Roboto-Bold',
+                            fontSize: 20,
+                            color: '#584DAD',
+                            //paddingLeft: '5%',
+                        }}
+                        onChangeText={text => setPassword(text)}
+                        value={password}
+                        />
 
-                <Input
-                    label='Email'
-                    placeholder='gerard@mail.com'
-                    type='text'
-                    containerStyle={{color:'#fff', width: '90%'}}
-                    inputStyle={{
-                            fontFamily:'Roboto-Bold',
-                            fontSize: 18,
-                            color: '#fff',
-                            paddingLeft: '5%',
-                            borderBottomColor:'#000981'
+                    <Input
+                        label='Confirmation Mot de Passe:'
+                        placeholder='•••••••••'
+                        type='passeword'
+                        secureTextEntry={true}
+                        containerStyle={{color:'#fff', 
+                        width: '90%', 
+                        //marginTop:'7%'
                     }}
-                    labelStyle={{
+                    inputStyle={{
                         fontFamily:'Roboto-Bold',
-                        fontSize: 20,
-                        color: '#584DAD',
-                        paddingLeft: '5%',
-                    }}
-                    onChangeText={text => setEmail(text)}
-                    value={email}
-                />
-                <Input
-                    label='Mot de Passe:'
-                    placeholder='•••••••••'
-                    secureTextEntry={true}
-                    type='passeword'
-                    containerStyle={{color:'#fff', width: '90%'}}
-                    inputStyle={{
-                            fontFamily:'Roboto-Bold',
-                            fontSize: 18,
-                            color: '#fff',
-                            paddingLeft: '5%',
-                            borderBottomColor:'#000981'
-                    }}
-                    labelStyle={{
-                        fontFamily:'Roboto-Bold',
-                        fontSize: 20,
-                        color: '#584DAD',
-                        paddingLeft: '5%',
-                    }}
-                    onChangeText={text => setPassword(text)}
-                    value={password}
-                />
-
-                <Input
-                    label='Confirmation Mot de Passe:'
-                    placeholder='•••••••••'
-                    type='passeword'
-                    secureTextEntry={true}
-                    containerStyle={{color:'#fff', width: '90%'}}
-                    inputStyle={{
-                            fontFamily:'Roboto-Bold',
-                            fontSize: 18,
-                            color: '#fff',
-                            paddingLeft: '5%',
+                        fontSize: 18,
+                        color: '#fff',
+                        // paddingLeft: '5%',
                         
                     }}
                     labelStyle={{
                         fontFamily:'Roboto-Bold',
                         fontSize: 20,
                         color: '#584DAD',
-                        paddingLeft: '5%',
+                        //paddingLeft: '5%',
                     }}
                     onChangeText={text => setPassword(text)}
                     value={password}
-                />
-                
-                <Button 
-                    title="Continuer" 
-                    onPress={()=>handleSignUp()}
-                    buttonStyle={{
-                        backgroundColor: '#584DAD',
-                        paddingLeft: 90,
-                        paddingRight: 90,
-                        paddingTop:10,
-                        paddingBottom:10,
-                        borderRadius: 10,
-                        marginTop:10
-                    }}
                     />
+                    
+                    <Button 
+                        title="Continuer" 
+                        onPress={()=>handleSignUp()}
+                        buttonStyle={{
+                            backgroundColor: '#584DAD',
+                            paddingLeft: 90,
+                            paddingRight: 90,
+                            paddingTop:10,
+                            paddingBottom:10,
+                            borderRadius: 10,
+                            marginTop:'20%'
+                        }}
+                        
+                        /> 
             </ScrollView>  
-            </View>
-        </View>
+        {/* </View> */}
+       
     </View>
   );
 }
@@ -202,35 +221,26 @@ function SignUp(props) {
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        // backgroundColor: '#131313',
+       
     },
-    wrap: {
-        
-        flexDirection: 'column',
+    main: {
         backgroundColor: '#131313',
-        justifyContent: 'center',
+        alignContent:'center',
         textAlign: 'center',
-        height: hp('100%'), // 70% of height device screen
-        width: wp('100%')
+        height: '100%',
+        width: '100%'
         
       },
     
     header: {
-        backgroundColor: '#131313',
-        marginTop:0,
-        //alignItems: 'baseline'
+        //backgroundColor: '#131313',
+        // marginTop:100,
+        //marginBottom:10
         
     },
-    main: {
-        backgroundColor: '#131313',
-        justifyContent: 'center',
-        flexDirection: "column",
-        //marginTop: 160,
-        alignItems: 'center',
-        textAlign: 'left',
-       
-      
-    },
+    
 
 
 

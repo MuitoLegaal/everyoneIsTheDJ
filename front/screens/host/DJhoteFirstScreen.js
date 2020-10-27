@@ -10,6 +10,13 @@ function DJhoteFirstScreen(props) {
 
     return (
         <View style={styles.wrapper}>
+
+{/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
+<Button buttonStyle={{paddingTop: 15}} title="<- flèche retour" 
+                onPress={() => props.navigation.navigate('Onboarding')}
+          ></Button> 
+
+
             <View style={styles.wrap}>
                 <View style={styles.header}>
                    <Image 
@@ -51,6 +58,8 @@ function DJhoteFirstScreen(props) {
                       }}
                       onPress={() => props.navigation.navigate('SignUp')}
                       ></Button>
+
+
                </View>   
 
             </View>
@@ -63,9 +72,12 @@ function DJhoteFirstScreen(props) {
 const styles = StyleSheet.create({
     container: {
       flex:1,
+      
     },
     
-    wrapper: {},
+    wrapper: {
+      backgroundColor: '#131313',
+    },
    
     wrap: {
         flexDirection: 'column',
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        height: hp('100%'), // 70% of height device screen
+        height: hp('110%'), // 70% of height device screen
         width: wp('100%')   // 80% of width device screen 
       },
 
@@ -82,7 +94,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: "column",
-        marginTop: 70   
+        //marginTop: 70   
     },
     main: {
       textAlign: 'center',
@@ -90,7 +102,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       flexDirection: "column",
       marginTop: 60,
-      marginBottom: -10  
+      //marginBottom: -10  
   },
 
     title: {
@@ -126,11 +138,7 @@ const styles = StyleSheet.create({
       paddingLeft: 30,
       textAlign: 'center'
     },
-    // border: {
-    //     color: '#fff',
-    //     width: ('100%'),
-    //     height: 2,
-    // }
+
   });
 
 export default DJhoteFirstScreen;
