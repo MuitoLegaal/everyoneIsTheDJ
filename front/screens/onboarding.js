@@ -18,6 +18,7 @@ export default function Onboarding({navigation}) {
           paddingTop: 10,
           paddingBottom: 10,
           marginBottom: 20,
+          borderRadius: 10
         }}
         onPress={() => navigation.navigate('DJhoteFirstScreen')}
       ></Button>
@@ -29,9 +30,10 @@ export default function Onboarding({navigation}) {
           backgroundColor: '#584DAD',
           paddingLeft: 120,
           paddingRight: 120,
-          paddingTop: 10,
-          paddingBottom: 10,
-          marginBottom: 20,
+          paddingTop:10,
+          paddingBottom:10,
+          marginBottom: 20,  
+          borderRadius: 10       
         }}
         onPress={() => navigation.navigate('Enregistrement') }
       ></Button>

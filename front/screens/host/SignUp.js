@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
-import { ImageBackground, StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, TextInput, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { Badge } from 'react-native-elements'
+import { Badge, Button, Header, Icon } from 'react-native-elements'
+import { text } from '@fortawesome/fontawesome-svg-core';
+
 
  
-
-
-
-
-
-function SignUp() {
+function SignUp(props) {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -32,6 +30,8 @@ function SignUp() {
         console.log(response);
         if (response.result === false){
             setSignUp(true)
+        } else {
+            props.navigation.navigate('HomeHost')
         }
         
     };
@@ -41,44 +41,81 @@ function SignUp() {
 
     if(signUp === true){
 
-        emailMessage = <Text style={{color: 'white'}} >Ce email a déja été utilisé</Text>
+        emailMessage = <Text style={{color: 'white'}}>Cet email a déja été utilisé</Text>
     }
 
     
         
     return (
-        <View style={styles.backGroundColor}>
-        <View style={styles.inscription}>
+    <View style={styles.wrap}>
+            <Header
+                containerStyle={{
+                    backgroundColor: '#131313',
+                    borderBottomWidth: 0
+                }}
+                placement="center"
+                leftComponent={
+                     <Icon 
+                     name='arrow-left' 
+                     type='font-awesome' 
+                     color= '#fff'
+                     size='30'
+                    />
+                    }
+                centerComponent={{ text: 'INSCRIPTION', style: { 
+                    color: '#fff',
+                    fontSize: 40,
+                    fontFamily:'Staatliches',
+                    textAlign: 'center',
+                    
+                } }}
+               
+            />
+        {/* <View style={styles.header}>
             <View style={{justifyContent: 'center', alignItems: 'flex-start'}}>
                 <FontAwesomeIcon style={{color: 'white'}} icon={faArrowLeft} size={30}/>
             </View>
             <View style={{justifyContent: 'center'}}>
                 <Text style={{color: 'white', fontSize: 30}}>INSCRIPTION</Text>
             </View>
-        </View>
-        <View style={{flex: 1, alignItems: 'center'}}>
-            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Username:</Text>
-            <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
+        </View> */}
+       
+        <View style={styles.main}>
+            <Text style={styles.label}>Username:</Text>
+            <TextInput 
+                style={styles.input}
                 onChangeText={text => setUsername(text)}
                 value={username}
                 />
-            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Email:</Text>{emailMessage}
-            <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
+            <Text style={styles.label}>Email:</Text>{emailMessage}
+            <TextInput 
+                style={styles.input}
                 onChangeText={text => setEmail(text)}
                 value={email}
                 />
-            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Mot de Passe:</Text>
-            <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
+            <Text style={styles.label}>Mot de Passe:</Text>
+            <TextInput 
+                style={styles.input}
                 onChangeText={text => setPassword(text)}
                 value={password}
                 />
-            <Text style={{color: 'white', alignSelf: 'flex-start'}}>Confirmation Mot de Passe:</Text>
-            <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}/>
-            <View style={{width: '90%',height: '6.5%', color: '#584dad'}}>
-                <Button title="Continuer" style={styles.button}
+            <Text style={styles.label}>Confirmation Mot de Passe:</Text>
+            <TextInput style={styles.input}/>
+            
+            
+            <Button 
+                title="Continuer" 
                 onPress={()=>handleSignUp()}
+                buttonStyle={{
+                    backgroundColor: '#584DAD',
+                    paddingLeft: 90,
+                    paddingRight: 90,
+                    paddingTop:10,
+                    paddingBottom:10,
+                    borderRadius: 10
+                }}
                 />
-            </View>
+           
         </View>
     </View>
   );
@@ -86,23 +123,59 @@ function SignUp() {
 
 
 var styles = StyleSheet.create({
-    all: {
-        fontFamily: ''
-    },
-    backGroundColor: {
+    
+    wrap: {
+        flex: 1,
+        flexDirection: 'column',
         backgroundColor: '#131313',
-        flex: 1
+        justifyContent: 'center',
+        textAlign: 'center',
+        height: hp('100%'), // 70% of height device screen
+        width: wp('100%')   // 80% of width device screen 
+      },
+    
+    header: {
+        backgroundColor: '#131313',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: "row",
+       
     },
-    inscription: {
-        flex: 0.1,
-        alignSelf: 'center',
-        marginTop: '10%',
-        flexDirection: 'row',
-        marginBottom: '30%'
+    main: {
+        backgroundColor: '#131313',
+        justifyContent: 'center',
+        flexDirection: "column",
+        marginTop: 60,
+        alignItems: 'center',
+        textAlign: 'left',
+      
     },
-    button: {
-        borderRadius: 10
+    input: {
+        backgroundColor: 'white', 
+        width: '90%', 
+        borderRadius: 10, 
+        marginBottom: "10%", 
+        height: '8%',
+        textAlign: 'left',
+        paddingLeft: '5%',
+        fontFamily:'Roboto-Regular',
+        fontSize: 16,
+        color: '#000981'
+        
+    },
+    label: {
+        color: 'white', 
+        marginBottom: '2%',
+        // flex: 'start'
+        
+
+        // pour les inputs : balise input - 
+       
+        
     }
+
+
+
 })
 
 

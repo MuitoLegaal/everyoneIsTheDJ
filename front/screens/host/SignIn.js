@@ -5,20 +5,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 
-function SignIn() {
+function SignIn(props) {
 
    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState(false)
     
     
 var handleSignIn = async() => {
     console.log(email, password)
-    await fetch('http://172.17.1.100:3000/sign-in', {
+    var rawResponse = await fetch('http://172.17.1.100:3000/sign-in', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `email=${email}&password=${password}`
         })
+
+    var response = await rawResponse.json();
+    
+    if(response.result === false){
+        setErrorMessage(true)
+    } else {
+        props.navigation.navigate('HomeHost')
+    }
+
+    
+}
+
+var logInDenied;
+if(errorMessage === true){
+    logInDenied = <Text style={{color: 'white'}} >Email et/ou Mot de Passe Incorrect(es)</Text>
 }
 
 
@@ -34,6 +50,7 @@ var handleSignIn = async() => {
             </View>
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
+            {logInDenied}
             <Text style={{color: 'white', alignSelf: 'flex-start'}}>Email:</Text>
             <TextInput style={{backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%'}}
                 onChangeText={text => setEmail(text)}
