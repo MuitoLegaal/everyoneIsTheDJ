@@ -11,7 +11,7 @@ import { Badge } from 'react-native-elements'
 
 
 
-function SignUp() {
+function SignUp(props) {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -32,6 +32,8 @@ function SignUp() {
         console.log(response);
         if (response.result === false){
             setSignUp(true)
+        } else {
+            props.navigation.navigate('HomeHost')
         }
         
     };
