@@ -30,7 +30,8 @@ function DJhoteFirstScreen(props) {
                         paddingTop:10,
                         paddingBottom:10,
                         marginBottom: 20,
-                        marginTop: 10
+                        marginTop: 10,
+                        borderRadius: 10
               
                       }}
                       onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
@@ -45,6 +46,7 @@ function DJhoteFirstScreen(props) {
                         paddingRight: 90,
                         paddingTop:10,
                         paddingBottom:10,
+                        borderRadius: 10
                        
                       }}></Button>
                </View>   

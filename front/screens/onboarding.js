@@ -19,6 +19,7 @@ export default function Onboarding(props) {
           paddingTop:10,
           paddingBottom:10,
           marginBottom: 20,
+          borderRadius: 10
         }}
         onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
         ></Button>
@@ -32,7 +33,8 @@ export default function Onboarding(props) {
           paddingRight: 120,
           paddingTop:10,
           paddingBottom:10,
-          marginBottom: 20,         
+          marginBottom: 20,  
+          borderRadius: 10       
         }}
         onPress={() => props.navigation.navigate('enregistrement')}
         ></Button>

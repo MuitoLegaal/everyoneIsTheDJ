@@ -40,20 +40,21 @@ const getFonts = () => Font.loadAsync({
     return (
       //<HomeInvite/>
      //<Onboarding/>
-     <Navigation/>
+     //<Navigation/>
      //<DJhoteFirstScreen/>
+     <SignUp/>
     )
   } else {
       return (
+        <AppLoading
+          startAsync={getFonts}
+          onFinish={()=> setFontsLoaded(true)}
+        />
         // <AppLoading
         //   startAsync={getFonts}
         //   onFinish={()=> setFontsLoaded(true)}
         // />
-        // <AppLoading
-        //   startAsync={getFonts}
-        //   onFinish={()=> setFontsLoaded(true)}
-        // />
-        <SignUp/>
+       
         
       )
     } 
