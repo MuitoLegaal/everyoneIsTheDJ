@@ -41,6 +41,7 @@ const getFonts = () => Font.loadAsync({
       //<HomeInvite/>
      //<Onboarding/>
      <Navigation/>
+     //<DJhoteFirstScreen/>
     )
   } else {
       return (
