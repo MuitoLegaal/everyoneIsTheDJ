@@ -9,9 +9,9 @@ function enregistrement({navigation}) {
   return (
     <View style={styles.container}>
       <Text>Enregistrement</Text>
-      <Button onPress={() => navigation.navigate('onboarding') } title="Retour"></Button>
+      <Button onPress={() => navigation.navigate('Onboarding') } title="Retour"></Button>
       <Button title="Home"
-        onPress={() => navigation.navigate('homeinvite') }
+        onPress={() => navigation.navigate('Homeinvite') }
         buttonStyle={{
           backgroundColor: '#584DAD',
           paddingLeft: 120,
