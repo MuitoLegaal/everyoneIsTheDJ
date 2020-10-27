@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 import Swiper from 'react-native-swiper'
 
- 
-
 
 const styles = StyleSheet.create({
   wrapper: {},
