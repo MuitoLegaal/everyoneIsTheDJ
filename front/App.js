@@ -6,11 +6,7 @@ import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-
-// import Carousel from './screen/carousel';
-import HomeInvite from './screen/homeinvite';
-import Onboarding from './screen/onboarding';
-import SignIn from './screen/SignIn';
+import Onboarding from './screens/onboarding';
 
 
 const getFonts = () => Font.loadAsync({
@@ -20,8 +16,8 @@ const getFonts = () => Font.loadAsync({
   })
 
   var StackNavigator = createStackNavigator({
-    Onboarding:  Onboarding,  
-    // ExempleB:  ExempleScreenB,
+    Onboarding: Onboarding,  
+    // ExempleB: ExempleScreenB,
   },
   {headerMode: 'none'}
   );
