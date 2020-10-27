@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements'
 import Carousel from './carousel'
 
 
-export default function Onboarding(props) {
+export default function Onboarding({navigation}) {
   return (
     <View style={styles.container}>
         <Carousel/>
@@ -20,7 +20,7 @@ export default function Onboarding(props) {
           paddingBottom:10,
           marginBottom: 20,
         }}
-        onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
+        onPress={() => navigation.navigate('DJhoteFirstScreen')}
         ></Button>
 
         <Text style={{ color: '#fff', textDecorationLine: 'none', marginBottom: 20 }}> Ou </Text>
@@ -34,7 +34,7 @@ export default function Onboarding(props) {
           paddingBottom:10,
           marginBottom: 20,         
         }}
-        onPress={() => props.navigation.navigate('enregistrement')}
+        onPress={() => navigation.navigate('enregistrement')}
         ></Button>
     </View>
   );
