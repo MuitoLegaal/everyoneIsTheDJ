@@ -5,7 +5,7 @@ import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function homeinvite() {
+function DJhoteFirstScreen(props) {
   
 
     return (
@@ -18,21 +18,20 @@ function homeinvite() {
                     />
                 </View>
                 
-                <Icon
-                    name="power-off"
-                    size={30}
-                    color="#fff"
-                    style={{position:'relative', left:10}}
-                    />
                     
             
                 
             </View>
             <View style={styles.wrap}>
-                <Image 
-                    source={require('../assets/picto-fete2.png')}
-                    style={{ width: 150, height: 150 }}
-                />
+
+            <View style={{justifyContent: 'center'}}>
+                <Text style={{color: 'white', fontSize: 30}}>DJ HOTE</Text>
+                <Text style={{color: 'white', fontSize: 30}}>Tu as déjà un compte ?</Text>
+                <Text style={{color: 'white', fontSize: 30}}>Se connecter</Text>
+                <Text style={{color: 'white', fontSize: 30}}>ou</Text>
+                <Text style={{color: 'white', fontSize: 30}}>S'inscrire</Text>
+            </View>
+
             </View>
         </View>
 
@@ -91,4 +90,4 @@ const styles = StyleSheet.create({
     // }
   });
 
-export default homeinvite;
+export default DJhoteFirstScreen;

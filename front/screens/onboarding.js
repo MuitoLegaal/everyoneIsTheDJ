@@ -4,14 +4,38 @@ import { Button } from 'react-native-elements'
 import Carousel from './carousel'
 
 
-export default function Onboarding() {
+export default function Onboarding(props) {
   return (
     <View style={styles.container}>
-      <Carousel/>
-        <Text style={{ color: '#fff' }}>Vous êtes :</Text>
-        <Button title="Hôte" buttonStyle={{backgroundColor: '#E59622'}}></Button>
-        <Text style={{ color: '#fff', textDecorationLine: 'none' }}> Ou </Text>
-        <Button title="Invité" buttonStyle={{backgroundColor: '#584DAD'}}></Button>
+        <Carousel/>
+        <Text style={styles.text}>Vous êtes :</Text>
+        
+        
+        <Button title="Hôte" 
+        buttonStyle={{
+          backgroundColor: '#E59622',
+          paddingLeft: 120,
+          paddingRight: 120,
+          paddingTop:10,
+          paddingBottom:10,
+          marginBottom: 20,
+        }}
+        onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
+        ></Button>
+
+        <Text style={{ color: '#fff', textDecorationLine: 'none', marginBottom: 20 }}> Ou </Text>
+
+        <Button title="Invité" 
+        buttonStyle={{
+          backgroundColor: '#584DAD',
+          paddingLeft: 120,
+          paddingRight: 120,
+          paddingTop:10,
+          paddingBottom:10,
+          marginBottom: 20,
+       
+          
+        }}></Button>
     </View>
   );
 }
@@ -24,5 +48,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
   },
+   text: {
+      color: '#fff',
+      fontSize: 20,
+      fontFamily:'Roboto-Regular',
+      marginBottom: 20
+  }
 
 });

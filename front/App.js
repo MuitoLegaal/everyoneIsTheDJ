@@ -6,7 +6,13 @@ import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+
+// import Carousel from './screen/carousel';
+import SignIn from './screens/SignIn'; // attention c'est ./screen avec un "s"
+import SignUp from './screens/signUp'; // attention c'est ./screen avec un "s"
+import HomeInvite from './screens/homeinvite';
 import Onboarding from './screens/onboarding';
+import DJhoteFirstScreen from './screens/DJhoteFirstScreen';
 
 
 const getFonts = () => Font.loadAsync({
@@ -16,8 +22,9 @@ const getFonts = () => Font.loadAsync({
   })
 
   var StackNavigator = createStackNavigator({
-    Onboarding: Onboarding,  
-    // ExempleB: ExempleScreenB,
+    Onboarding:  Onboarding,  
+    DJhoteFirstScreen: DJhoteFirstScreen,
+    // ExempleB:  ExempleScreenB,
   },
   {headerMode: 'none'}
   );
@@ -31,14 +38,21 @@ const getFonts = () => Font.loadAsync({
 
   if(fontsLoaded){
     return (
+      //<HomeInvite/>
+     //<Onboarding/>
      <Navigation/>
     )
   } else {
       return (
+        // <AppLoading
+        //   startAsync={getFonts}
+        //   onFinish={()=> setFontsLoaded(true)}
+        // />
         <AppLoading
           startAsync={getFonts}
           onFinish={()=> setFontsLoaded(true)}
         />
+        // <SignIn/>
       )
     } 
   }
