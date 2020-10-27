@@ -9,28 +9,41 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/sign-up', async function(req, res, next) {
-  var newHote = new HoteModel({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  })
+  var hotes = await HoteModel.findOne({email: req.body.email});
 
-  var hoteSaved = await newHote.save();
+  if(hotes === null){
 
-  console.log(req.body.password)
-  res.json(hoteSaved, {result: true})
+    var newHote = new HoteModel({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    })
+  
+    var hoteSaved = await newHote.save();
+    console.log('welcome')
+    res.json({result: true, hote: hoteSaved})
+  }else{
+    console.log('not welcome')
+    res.json({result: false, hote: hoteSaved})
+  }
+  
+  
+  
+  
+
+  
 })
 
 
 router.post('/sign-in', async function(req, res, next) {
   var hotes = await HoteModel.findOne({email: req.body.email, password: req.body.password});
 
-  if(hotes != null){
-    console.log('yes')
-    res.json({result: true})
-  }else{
+  if(hotes === null){
     console.log('no')
     res.json({result: false})
+  }else{
+    console.log('yes')
+    res.json({result: true})
   }
 
   
