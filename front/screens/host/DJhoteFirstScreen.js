@@ -10,6 +10,13 @@ function DJhoteFirstScreen(props) {
 
     return (
         <View style={styles.wrapper}>
+
+{/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
+<Button buttonStyle={{paddingTop: 15}} title="<- flèche retour" 
+                onPress={() => props.navigation.navigate('Onboarding')}
+          ></Button> 
+
+
             <View style={styles.wrap}>
                 <View style={styles.header}>
                    <Image 
@@ -51,6 +58,8 @@ function DJhoteFirstScreen(props) {
                       }}
                       onPress={() => props.navigation.navigate('SignUp')}
                       ></Button>
+
+
                </View>   
 
             </View>

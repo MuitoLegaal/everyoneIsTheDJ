@@ -3,6 +3,7 @@ import { View, Text, Image } from 'react-native';
 import { Header } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'react-native-elements';
 
 
 function HomeHost(){
@@ -24,7 +25,15 @@ var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white
           <Text style={{color: 'white'}} >Aucun evenement en cours maintenat!</Text>
         </View>
       </View>
-    );
-  }
+
+
+
+)
+}
+
+
+{/* onPress={() => props.navigation.navigate('WinnerHost')}
+onPress={() => props.navigation.navigate('Moderation')}
+onPress={() => props.navigation.navigate('EventCreation')} */}
 
   export default HomeHost;

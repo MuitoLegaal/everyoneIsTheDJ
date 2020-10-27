@@ -11,7 +11,9 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Header } from 'react-native-elements'
 
 
-function Parameters(){
+
+
+function Parameters(props){
 
   var userData;
 
@@ -26,7 +28,7 @@ function Parameters(){
   })
   // ___________________________________________________________________________________________________
 
-  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} />;
+  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('HomeHost')} />;
   var headerCenter = <Text style={{color: 'white'}} >Paramètres</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />;
 
@@ -80,7 +82,9 @@ function Parameters(){
             </View>
           </View>
 
-          <View style={{flex: 1, backgroundColor: '#584dad', marginBottom: 60, width: '90%', borderRadius: 10, height: 50}} >
+          <View style={{flex: 1, backgroundColor: '#584dad', marginBottom: 60, width: '90%', borderRadius: 10, height: 50}} 
+            onPress={() => props.navigation.navigate('MentionsLegales')}
+          >
             <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
               <Text style={{color: '#000981'}}>Politique d'utilisation</Text>
             </View>
