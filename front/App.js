@@ -7,12 +7,22 @@ import {AppLoading} from 'expo';
 import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-// import Carousel from './screen/carousel';
-import SignIn from './screens/host/SignIn'; // attention c'est ./screen avec un "s"
-import SignUp from './screens/host/SignUp'; // attention c'est ./screen avec un "s"
-import HomeInvite from './screens/guest/homeinvite';
+
+// import Onboarding
 import Onboarding from './screens/onboarding';
+
+// import screens Host
+import SignIn from './screens/host/SignIn';
+import SignUp from './screens/host/SignUp';
+import HomeInvite from './screens/guest/homeinvite';
+
+//import screens Guest
 import DJhoteFirstScreen from './screens/host/DJhoteFirstScreen';
+import enregistrement from './screens/guest/enregistrement';
+import homeinvite from './screens/guest/homeinvite';
+import nouveauvote from './screens/guest/nouveauvote';
+import validationvote from './screens/guest/validationvote';
+import winnerguest from './screens/guest/winnerguest';
 
 
 const getFonts = () => Font.loadAsync({
@@ -24,7 +34,11 @@ const getFonts = () => Font.loadAsync({
   var StackNavigator = createStackNavigator({
     Onboarding:  Onboarding,  
     DJhoteFirstScreen: DJhoteFirstScreen,
-    // ExempleB:  ExempleScreenB,
+    enregistrement: enregistrement,
+    homeinvite: homeinvite,
+    nouveauvote: nouveauvote,
+    validationvote: validationvote,
+    winnerguest: winnerguest
   },
   {headerMode: 'none'}
   );

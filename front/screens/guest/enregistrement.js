@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image } from 'react-native';
+import { Button } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Header } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import homeinvite from './homeinvite';
 
 
-function enregistrement() {
-
+function enregistrement({navigation}) {
 
   return (
     <View style={styles.container}>
       <Text>Enregistrement</Text>
-      <Button title="Retour"></Button>
+      <Button onPress={() => navigation.navigate('onboarding') } title="Retour"></Button>
       <Button title="Home"
-        onPress={() => props.navigation.navigate('homeinvite') }
+        onPress={() => navigation.navigate('homeinvite') }
         buttonStyle={{
           backgroundColor: '#584DAD',
           paddingLeft: 120,

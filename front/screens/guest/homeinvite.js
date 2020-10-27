@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {  AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text , Image} from 'react-native';
+import { Button } from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -12,6 +12,7 @@ function homeinvite() {
         <View style={styles.container}>
             <View style={styles.header}>
                <View>
+                 <Text style={{color:"#fff"}} >Home Invité</Text>
                 <Image 
                         // source={require(".../assets/logo2.png")}
                         style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30}}
@@ -33,8 +34,9 @@ function homeinvite() {
                     source={require('../../assets/picto-fete2.png')}
                     style={{ width: 150, height: 150 }}
                 />
-                <Button title="Retour"></Button>
-                <Button title="Suivant"></Button>
+                <Button title="Retour" onPress={() => navigation.navigate('enregistrement') }></Button>
+                <Button title="Suivant" onPress={() => navigation.navigate('nouveauvote') }></Button>
+                <Button title="Winner" onPress={() => navigation.navigate('winnerguest') }></Button>
             </View>
         </View>
 
