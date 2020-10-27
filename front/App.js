@@ -85,11 +85,11 @@ const getFonts = () => Font.loadAsync({
   } else {
       return (
        
-        // <AppLoading
-        //   startAsync={getFonts}
-        //   onFinish={()=> setFontsLoaded(true)}
-        // />  
-        <Nouveauvote/>      
+        <AppLoading
+          startAsync={getFonts}
+          onFinish={()=> setFontsLoaded(true)}
+        />  
+
       )
     } 
   }
