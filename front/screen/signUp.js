@@ -3,11 +3,6 @@ import { ImageBackground, StyleSheet, View, Text, TextInput, Button } from 'reac
 import Ionicons from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
- 
-
-
-
 
 
 function SignUp() {

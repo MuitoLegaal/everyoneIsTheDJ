@@ -8,8 +8,8 @@ import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 // import Carousel from './screen/carousel';
-import HomeInvite from './screen/homeinvite';
-import Onboarding from './screen/onboarding';
+import HomeInvite from './screens/homeinvite';
+import Onboarding from './screens/onboarding';
 import SignIn from './screen/SignIn';
 import SignUp from './screen/signUp';
 

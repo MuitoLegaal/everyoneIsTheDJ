@@ -6,10 +6,6 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
  
 
-
-
-
-
 function SignIn() {
 
     const [nom, setNom] = useState('');
