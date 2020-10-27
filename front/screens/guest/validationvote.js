@@ -13,7 +13,7 @@ function validationvote({navigation}) {
     <View style={styles.container}>
       <Text>Validation Vote</Text>
       <Button title="Home"
-        onPress={() => navigation.navigate('Homeinvite')}
+        onPress={() => navigation.navigate('Nouveauvote')}
         buttonStyle={{
           backgroundColor: '#584DAD',
           paddingLeft: 120,

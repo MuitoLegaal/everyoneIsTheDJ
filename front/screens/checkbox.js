@@ -16,21 +16,8 @@ export default function checkbox() {
 
   else if (checked == true && nbcheck == false) {
     return (
-      <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setChecked(true), setNbcheck(true)} />
-    )
-  }
-
-  else if (checked == false && nbcheck == true) {
-    return (
       <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setChecked(false)} />
     )
   }
-
-  else if (checked == true && nbcheck == true) {
-    return (
-      <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setChecked(false)} />
-    )
-  }
-
 }
 

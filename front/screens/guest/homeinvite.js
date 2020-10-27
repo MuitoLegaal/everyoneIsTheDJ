@@ -5,7 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function homeinvite({navigation}) {
+function homeinvite() {
   
 
     return (
