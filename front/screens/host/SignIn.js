@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 
-function SignIn() {
+function SignIn(props) {
 
    
     const [email, setEmail] = useState('');
@@ -25,6 +25,8 @@ var handleSignIn = async() => {
     
     if(response.result === false){
         setErrorMessage(true)
+    } else {
+        props.navigation.navigate('HomeHost')
     }
 
     
