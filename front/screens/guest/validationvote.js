@@ -1,38 +1,25 @@
 import React, {useState} from 'react';
-import {  AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text , Image} from 'react-native';
+import {  AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text , Image, Button} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-function DJhoteFirstScreen(props) {
+function validationvote() {
   
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-               <View>
-                <Image 
-                        source={require('../assets/logoMini.png')}
-                        style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30}}
-                    />
-                </View>
-                
-                    
-            
-                
-            </View>
-            <View style={styles.wrap}>
-
-            <View style={{justifyContent: 'center'}}>
-                <Text style={{color: 'white', fontSize: 30}}>DJ HOTE</Text>
-                <Text style={{color: 'white', fontSize: 30}}>Tu as déjà un compte ?</Text>
-                <Text style={{color: 'white', fontSize: 30}}>Se connecter</Text>
-                <Text style={{color: 'white', fontSize: 30}}>ou</Text>
-                <Text style={{color: 'white', fontSize: 30}}>S'inscrire</Text>
-            </View>
-
-            </View>
+           <Text>Validation Vote</Text>
+           <Button title="Home" 
+        buttonStyle={{
+          backgroundColor: '#584DAD',
+          paddingLeft: 120,
+          paddingRight: 120,
+          paddingTop:10,
+          paddingBottom:10,
+          marginBottom: 20,         
+        }}></Button>
         </View>
 
 
@@ -90,4 +77,4 @@ const styles = StyleSheet.create({
     // }
   });
 
-export default DJhoteFirstScreen;
+export default validationvote;

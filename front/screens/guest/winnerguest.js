@@ -4,10 +4,10 @@ import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
-export default function Winner() {
+export default function winnerguest () {
   return (
     <View style={styles.container}>
-       <Image source={require('../assets/logoMini.png')} />
+       <Image source={require('../../assets/logoMini.png')} />
        <Text style={{ color: '#fff' }}>Et le gagnant est ...</Text>
        <Icon name="trophy" size={200} color="#E59622"/>
         

@@ -8,11 +8,11 @@ import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
 // import Carousel from './screen/carousel';
-import SignIn from './screens/SignIn'; // attention c'est ./screen avec un "s"
-import SignUp from './screens/SignUp'; // attention c'est ./screen avec un "s"
-import HomeInvite from './screens/homeinvite';
+import SignIn from './screens/host/SignIn'; // attention c'est ./screen avec un "s"
+import SignUp from './screens/host/SignUp'; // attention c'est ./screen avec un "s"
+import HomeInvite from './screens/guest/homeinvite';
 import Onboarding from './screens/onboarding';
-import DJhoteFirstScreen from './screens/DJhoteFirstScreen';
+import DJhoteFirstScreen from './screens/host/DJhoteFirstScreen';
 
 
 const getFonts = () => Font.loadAsync({
