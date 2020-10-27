@@ -27,7 +27,6 @@ import VoteHost from './screens/host/VoteHost';
 import Winner from './screens/host/winnerhost';
 
 //import screens Guest
-import DJhoteFirstScreen from './screens/host/DJhoteFirstScreen';
 import Enregistrement from './screens/guest/enregistrement';
 import Homeinvite from './screens/guest/homeinvite';
 import Nouveauvote from './screens/guest/nouveauvote';
@@ -76,7 +75,7 @@ const getFonts = () => Font.loadAsync({
     return (
    
      <Navigation/>
-   
+
     )
   } else {
       return (
