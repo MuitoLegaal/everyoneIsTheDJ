@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Badge, Button, Header, Icon, Input} from 'react-native-elements'
 import { text } from '@fortawesome/fontawesome-svg-core';
+import { AsyncStorage } from 'react-native';
 
 
  
@@ -29,6 +30,13 @@ function SignUp(props) {
         })
         var response = await rawResponse.json();
         console.log(response);
+
+
+    // _______________________________________LOCAL STORAGE NOT FINISHED (pour les parametres)_________________________________
+        AsyncStorage.setItem("user", JSON.stringify(response))
+    // ________________________________________________________________________________________________________________________
+
+
         if (response.result === false){
             setSignUp(true)
         } else {
