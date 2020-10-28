@@ -15,33 +15,33 @@ function enregistrement({ navigation }) {
   const [errorMessage, setErrorMessage] = useState(false);
 
 
-  // var handleEnregistrement = async () => {
+  var handleEnregistrement = async () => {
 
 
-  //   var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}`
-  //   })
+    var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
+    })
 
-  //   var response = await rawResponse.json();
+    var response = await rawResponse.json();
 
-  //   if (response.result === true) {
-  //     // A verifier si le token uuid fonctionne bien comme le uid2
-  //     var token = uuid(32)
-  //     // await AsyncStorage.setItem("token", JSON.stringify(token))
-  //     navigation.navigate('Nouveauvote')
+    if (response.result === true) {
+      // A verifier si le token uuid fonctionne bien comme le uid2
+      var token = uuid(32)
+      // await AsyncStorage.setItem("token", JSON.stringify(token))
+      navigation.navigate('Nouveauvote')
   
-  //   } else {
-  //     setErrorMessage(true)
-  //   }
-  // } 
+    } else {
+      setErrorMessage(true)
+    }
+  } 
 
 
-  // var logInDenied;
-  // if (errorMessage === true) {
-  //   logInDenied = <Text style={{ color: 'white' }} >Email et/ou Mot de Passe Incorrect(es)</Text>
-  // }
+  var logInDenied;
+  if (errorMessage === true) {
+    logInDenied = <Text style={{ color: 'white' }} >Email et/ou Mot de Passe Incorrect(es)</Text>
+  }
 
 
   return (
@@ -58,18 +58,18 @@ function enregistrement({ navigation }) {
         {logInDenied}
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          // onChangeText={text => setPseudo(text)}
-          value={pseudoFromFront}
+          onChangeText={text => setPseudo(text)}
+          value={pseudo}
         />
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>ID de l'évènement:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          // onChangeText={text => setEventId(text)}
-          value={eventIdFromFront}
+          onChangeText={text => setEventId(text)}
+          value={eventId}
         />
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          // onChangeText={text => setEventPassword(text)}
-          value={eventPasswordFromFront}
+          onChangeText={text => setEventPassword(text)}
+          value={eventPassword}
         />
       </View>
 
