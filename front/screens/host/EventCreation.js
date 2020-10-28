@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -6,9 +6,8 @@ import { Button } from 'react-native-elements';
 function EventCreation(props) {
 
       const [errorMessage, setErrorMessage] = useState(false);
-      const [eventId, setEventId] = useState('');
+      const [eventName, setEventName] = useState('');
       const [eventPassword, setEventPassword] = useState('');
-      
 
       var handleEventCreation = async () => {
 
@@ -46,25 +45,25 @@ function EventCreation(props) {
                         {logInDenied}
                         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Nom de l'évènement:</Text>
                         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                              // onChangeText={text => setEventId(text)}
-                              value={email}
+                              onChangeText={text => setEventName(text)}
+                              value={eventName}
                         />
                         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement</Text>
                         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>(2 caractères minimum) :</Text>
                         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                              // onChangeText={text => setEventPassword(text)}
-                              value={password}
+                              onChangeText={text => setEventPassword(text)}
+                              value={eventPassword}
                         />
 
                         <Button title="Créer l'évènement"
                               onPress={() => props.navigation.navigate('SongListCreation')}
-                              // onPress={() => handleEventCreation()}
+                        // onPress={() => handleEventCreation()}
                         ></Button>
 
                         {/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
                         <Button buttonStyle={{ paddingTop: 15 }} title="<- flèche retour en haut"
                               onPress={() => props.navigation.navigate('HomeHost')}
-                              
+
                         ></Button>
 
                   </View>

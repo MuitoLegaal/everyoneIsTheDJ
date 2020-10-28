@@ -29,7 +29,7 @@ function enregistrement({ navigation }) {
     if (response.result === true) {
       // A verifier si le token uuid fonctionne bien comme le uid2
       var token = uuid(32)
-      // await AsyncStorage.setItem("token", JSON.stringify(token))
+      await AsyncStorage.setItem("token", JSON.stringify(token))
       navigation.navigate('Nouveauvote')
   
     } else {
