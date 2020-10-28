@@ -6,7 +6,9 @@ var eventSchema = mongoose.Schema({
     nameEvent: String,
     date: Date,
     isOpen: Boolean,
-    participants: Array,
+    // participants: Array, //A SUPPRIMER INUTILE ?
+    id: Number,
+    password: String
 })
 
 var eventModel = mongoose.model('Events', eventSchema)
