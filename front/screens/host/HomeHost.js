@@ -9,6 +9,7 @@ import Divider from 'react-native-divider';
 
 
 
+
 function HomeHost(){
 
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{height: 50, width: 50}} />
