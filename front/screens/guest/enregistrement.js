@@ -116,8 +116,8 @@ function enregistrement({ navigation }) {
                                     value={eventId}
                         />
                         <Input
-                            label="ID de l'évènement"
-                                    placeholder='#144667'
+                            label="Mot de passe de l'évènement"
+                                    placeholder="Gerard La teuuuuffff de l'espace"
                                     type='text'
                                     containerStyle={{
                                             color:'#fff', 
@@ -144,13 +144,13 @@ function enregistrement({ navigation }) {
                             onPress={() => navigation.navigate('Nouveauvote')}
                             buttonStyle={{
                               backgroundColor: '#584DAD',
-                              paddingLeft: 120,
-                              paddingRight: 120,
-                              paddingTop: 10,
-                              paddingBottom: 10,
+                              // paddingLeft: 120,
+                              // paddingRight: 120,
+                              // paddingTop: 10,
+                              // paddingBottom: 10,
                               marginBottom: 20,
                             }}></Button>
-                        <Button onPress={() => navigation.navigate('Onboarding')} title="Retour"></Button>
+                      
 
                 </KeyboardAwareScrollView>
 
@@ -177,41 +177,21 @@ const styles = StyleSheet.create({
       height: hp('110%'), // 70% of height device screen
       width: wp('100%')   // 80% of width device screen 
     },
-
-  header: {
+  main: {
     backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: "row",
-
-
+    alignContent:'center',
+    textAlign: 'center',
+    height: '100%',
+    width: '100%',
+    marginTop:'10%'
+    
   },
   title: {
     color: '#fff',
     fontSize: 40,
     fontFamily: 'Staatliches'
   },
-  subtitle: {
-    color: '#fff',
-    fontSize: 30,
-    fontFamily: 'Staatliches',
-    textAlign: 'center',
-    paddingRight: 30,
-    paddingLeft: 30,
-    paddingBottom: 40
-  },
 
-  text: {
-    color: '#fff',
-    fontSize: 20,
-    fontFamily: 'Roboto-Regular',
-    paddingRight: 30,
-    paddingLeft: 30,
-  },
-  backGroundColor: {
-    backgroundColor: '#131313',
-    flex: 1
-},
 });
 
 export default enregistrement;
