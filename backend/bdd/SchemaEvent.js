@@ -7,6 +7,8 @@ var eventSchema = mongoose.Schema({
     date: Date,
     isOpen: Boolean,
     participants: Array,
+    id: Number,
+    password: String
 })
 
 var eventModel = mongoose.model('Events', eventSchema)
