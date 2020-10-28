@@ -6,9 +6,11 @@ import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
 import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-function nouveauvote({ navigation }) {
+function nouveauvote( props ) {
 
   const [checked, setChecked] = useState(false);
   const [checkBox, setCheckBox] = useState([]);
@@ -36,18 +38,34 @@ function nouveauvote({ navigation }) {
   //     <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setChecked(false)} />
   //   )
   // }
-
-
+  var headerRight = <Icon
+    name="power-off"
+    size={30}
+    color="#fff"
+    style={{ position: 'relative', left: 10 }}
+    onPress={() => props.navigation.navigate('DJhoteFirstScreen')}
+    />;
+{/* <FontAwesomeIcon icon={power-off} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('DJhoteFirstScreen')} />; */}
+  var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatliches', textAlign: 'center', alignItems: 'baseline'}}></Text>;
+ 
+  
   return (
     <View style={styles.container}>
+        <View style={styles.wrap}>
+          <Header
+                  containerStyle={{backgroundColor: '#131313', borderBottomWidth: 0}}
+                  rightComponent={headerRight}
+                  centerComponent={headerCenter}
+                  
+          />
+      
+          <Image 
+                  source={require('../../assets/logoMini.png')}
+                  style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent:'center', justifyContent:'center', alignItems:'center'}}
+            />
       <Text style={styles.text}>Bienvenue dans l'évènement:</Text>
       <Text style={styles.title}>Anniv' de Bob</Text>
-      <Icon
-        name="power-off"
-        size={30}
-        color="#fff"
-        style={{ position: 'relative', left: 10 }}
-      />
+     
       <Image
         source={require('../../assets/picto-fete2.png')}
         style={{ width: 150, height: 150 }}
@@ -84,39 +102,38 @@ function nouveauvote({ navigation }) {
         ))
       }
 
-      <Button onPress={() => navigation.navigate('Homeinvite')} title="Retour"></Button>
+      {/* <Button onPress={() => navigation.navigate('Homeinvite')} title="Retour"></Button> */}
       <Button title="Valider mon vote"
         onPress={() => navigation.navigate('Validationvote')}
         buttonStyle={{
           backgroundColor: '#FF0060',
-          paddingLeft: 120,
-          paddingRight: 120,
-          paddingTop: 10,
-          paddingBottom: 10,
-          marginBottom: 20,
+          // paddingLeft: 120,
+          // paddingRight: 120,
+          // paddingTop: 10,
+          // paddingBottom: 10,
+          // marginBottom: 20,
         }}></Button>
     </View>
-
+</View>
 
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
+    
   },
+ 
   wrap: {
-    flexDirection: 'column',
-    backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    height: hp('100%'), // 70% of height device screen
-    width: wp('100%')   // 80% of width device screen 
-  },
+    display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#131313',
+      alignItems: 'center',
+      height: hp('110%'), // 70% of height device screen
+      width: wp('100%')   // 80% of width device screen 
+    },
+  
   header: {
     backgroundColor: '#131313',
     alignItems: 'center',
@@ -154,11 +171,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
 
   }
-  // border: {
-  //     color: '#fff',
-  //     width: ('100%'),
-  //     height: 2,
-  // }
+  
 });
 
 export default nouveauvote;
