@@ -7,12 +7,13 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 
+import Burger from '../burger'
 
-
-function HomeHost(){
+function HomeHost(props){
 
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{height: 50, width: 50}} />
-var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />
+var headerRight = <Burger navigation={props.navigation} /> 
+// var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />
 
 
 
