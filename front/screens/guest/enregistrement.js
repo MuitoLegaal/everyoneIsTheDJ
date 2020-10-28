@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, TextInput } from 'react-native';
-import { Button, Header } from 'react-native-elements';
+import { Button, Header, Input } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 import uuid from 'react-uuid'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 function enregistrement({ navigation }) {
 
@@ -21,7 +22,7 @@ function enregistrement({ navigation }) {
     var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}`
+      body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
     })
 
     var response = await rawResponse.json();
@@ -87,7 +88,7 @@ function enregistrement({ navigation }) {
                                 
                                     }}
                                     onChangeText={text => setPseudo(text)}
-                                    value={pseudoFromFront}
+                                    value={pseudo}
                         />
                         <Input
                             label="ID de l'évènement"
@@ -112,7 +113,7 @@ function enregistrement({ navigation }) {
                                 
                                     }}
                                     onChangeText={text => setEventId(text)}
-                                    value={eventIdFromFront}
+                                    value={eventId}
                         />
                         <Input
                             label="ID de l'évènement"
@@ -137,7 +138,7 @@ function enregistrement({ navigation }) {
                                 
                                     }}
                                     onChangeText={text => setEventPassword(text)}
-                                    value={eventPasswordFromFront}
+                                    value={eventPassword}
                         />
                         <Button title="Rejoindre la soirée"
                             onPress={() => navigation.navigate('Nouveauvote')}

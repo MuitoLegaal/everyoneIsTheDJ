@@ -3,30 +3,30 @@ import { View, Text, } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
-const [errorMessage, setErrorMessage] = useState(false);
-const [eventId, setEventId] = useState('');
-const [eventPassword, setEventPassword] = useState('');
-
-
 function EventCreation(props) {
 
-      // var handleEventCreation = async () => {
+      const [errorMessage, setErrorMessage] = useState(false);
+      const [eventId, setEventId] = useState('');
+      const [eventPassword, setEventPassword] = useState('');
+      
 
-      //       var rawResponse = await fetch('http://172.17.1.100:3000/eventcreation', {
-      //             method: 'POST',
-      //             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      //             body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}`
-      //       })
+      var handleEventCreation = async () => {
 
-      //       var response = await rawResponse.json();
+            var rawResponse = await fetch('http://172.17.1.100:3000/eventcreation', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}`
+            })
 
-      //       if (response.result === true) {
-      //             navigation.navigate('SongListCreation')
+            var response = await rawResponse.json();
 
-      //       } else {
-      //             setErrorMessage(true)
-      //       }
-      // }
+            if (response.result === true) {
+                  navigation.navigate('SongListCreation')
+
+            } else {
+                  setErrorMessage(true)
+            }
+      }
 
 
 
