@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../bdd/connexion');
+<<<<<<< HEAD
+=======
+var uid2 = require('uid2')
+>>>>>>> 963f01f2a6d73e38752a4bb118c9b04e34bc206f
 var SHA256 = require('crypto-js/sha256')
 var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
@@ -29,8 +33,11 @@ router.post('/sign-up', async function (req, res, next) {
     console.log('not welcome')
     res.json({ result: false, hote: hoteSaved })
   }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 963f01f2a6d73e38752a4bb118c9b04e34bc206f
 })
 
 
@@ -58,6 +65,12 @@ router.post('ajout-titre', async function (req, res, next) {
 router.post('enregistrement', async function (req, res, next) {
 
   var error = []
+<<<<<<< HEAD
+=======
+  var result = false
+  var eventExist = null
+
+>>>>>>> 963f01f2a6d73e38752a4bb118c9b04e34bc206f
 
   if (req.body.pseudoFromFront == ''
     || req.body.eventIdFromFront == ''
@@ -85,6 +98,42 @@ router.post('enregistrement', async function (req, res, next) {
     } else {
       error.push('ID incorrect')
     }
+<<<<<<< HEAD
+=======
+  }
+
+  res.json({ result, eventExist, error })
+})
+
+router.post('eventcreation', async function (req, res, next) {
+
+  var error = []
+  var result = false
+  var saveEvent = null
+
+  if (req.body.nameFromFront == ''
+    || req.body.eventPasswordFromFront == '') {
+    error.push('champs vides')
+  }
+
+  if (req.body.eventPasswordFromFront.length < 3){
+    error.push('mot de passe trop court')
+  }
+
+  if (error.length == 0) {
+
+    var newEvent = new eventModel({
+      nameEvent: req.body.eventNameFromFront,
+      password: req.body.password,
+      //id: uid2(4)
+    })
+    
+    saveEvent = await newEvent.save()
+    
+    if(saveUser){
+      result = true
+    }  
+>>>>>>> 963f01f2a6d73e38752a4bb118c9b04e34bc206f
   }
 
   res.json({ result, eventExist, error })
