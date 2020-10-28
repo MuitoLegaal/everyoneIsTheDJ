@@ -40,6 +40,8 @@ router.post('/sign-up', async function (req, res, next) {
     console.log('not welcome')
     res.json({ result: false, hote: hoteSaved })
   }
+
+
 })
 
 
@@ -66,8 +68,8 @@ router.post('/ajout-titre', async function (req, res, next) {
 
 router.post('/enregistrement', async function (req, res, next) {
 
-  var error = [],
-  var result = false,
+  var error = []
+  var result = false
   var eventExist = null
 
 
@@ -97,6 +99,7 @@ router.post('/enregistrement', async function (req, res, next) {
     } else {
       error.push('ID incorrect')
     }
+
   }
 
   res.json({ result, eventExist, error })

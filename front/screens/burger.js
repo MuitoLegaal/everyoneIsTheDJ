@@ -1,44 +1,46 @@
+
 import React from 'react';
  
-
-// penser à faire: npm install --save react-native-material-menu
-
 import { View, Text } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
  
-class App extends React.PureComponent {
-  _menu = null;
+// class Burger extends React.PureComponent {
+  export default function Burger(props) {
+
+    // console.log(props.navigation)
+
+    _menu = null;
+   
+    setMenuRef = ref => {
+      this._menu = ref;
+    };
+   
+    hideMenu = () => {
+      this._menu.hide();
+    };
+   
+    showMenu = () => {
+      this._menu.show();
+    };
+   
+      return (
+  
+          <Menu style={{backgroundColor: '#131313', borderWidth: 2, borderColor: "#808080"}}
+            ref={this.setMenuRef}
+  
+            button={<Icon name="bars" size={50} color="#fff" onPress={this.showMenu}/>}
+          >
+            <MenuItem onPress={this.hideMenu, () => props.navigation.navigate('HomeHost')}><Icon name="home" size={25} color="#fff" /><Text style={{color: '#fff', fontSize: 20, marginTop: 30}} >  ACCUEIL</Text></MenuItem>
+            <MenuItem onPress={this.hideMenu, () => props.navigation.navigate('Historic')}><Icon name="history" size={25} color="#fff" /><Text style={{color: '#fff', fontSize: 20}} >  HISTORIQUE</Text></MenuItem>
+            <MenuItem onPress={this.hideMenu, () => props.navigation.navigate('Parameters')}><Icon name="cog" size={25} color="#fff" /><Text style={{color: '#fff', fontSize: 20}}  >  PARAMETRES</Text></MenuItem>
+            <MenuItem onPress={this.hideMenu, () => props.navigation.navigate('Onboarding')}><Icon name="power-off" size={25} color="#fff" /><Text style={{color: '#fff', fontSize: 20}} >  DECONNEXION</Text></MenuItem>
+          </Menu>
+  
+      );
+    }
+  
+
  
-  setMenuRef = ref => {
-    this._menu = ref;
-  };
- 
-  hideMenu = () => {
-    this._menu.hide();
-  };
- 
-  showMenu = () => {
-    this._menu.show();
-  };
- 
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-start', paddingTop: 40, paddingRight: 30}}>
-        <Menu
-          ref={this.setMenuRef}
-          button={<Text onPress={this.showMenu}>MENU "BURGER"</Text>}
-        >
-          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
-          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
-          <MenuItem onPress={this.hideMenu} disabled>
-            Menu item 3
-          </MenuItem>
-          <MenuDivider />
-          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
-        </Menu>
-      </View>
-    );
-  }
-}
- 
-export default App;
+// mettre    <Burger navigation={props.navigation} />     sur les pages concernées par le burger 
