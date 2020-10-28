@@ -4,11 +4,6 @@ import { Button, Header } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-<<<<<<< HEAD
-
-
-function enregistrement({ navigation }) {
-=======
 import AsyncStorage from '@react-native-community/async-storage';
 import uuid from 'react-uuid'
 
@@ -20,38 +15,34 @@ function enregistrement({ navigation }) {
   const [errorMessage, setErrorMessage] = useState(false);
 
 
-  // var handleEnregistrement = async () => {
+  var handleEnregistrement = async () => {
 
 
-  //   var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}`
-  //   })
+    var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}`
+    })
 
-  //   var response = await rawResponse.json();
+    var response = await rawResponse.json();
 
-  //   if (response.result === true) {
-  //     // A verifier si le token uuid fonctionne bien comme le uid2
-  //     var token = uuid(32)
-  //     // await AsyncStorage.setItem("token", JSON.stringify(token))
-  //     navigation.navigate('Nouveauvote')
+    if (response.result === true) {
+      // A verifier si le token uuid fonctionne bien comme le uid2
+      var token = uuid(32)
+      // await AsyncStorage.setItem("token", JSON.stringify(token))
+      navigation.navigate('Nouveauvote')
   
-  //   } else {
-  //     setErrorMessage(true)
-  //   }
-  // } 
->>>>>>> b9ba42ff296379286998ac66373e9e143be34b57
+    } else {
+      setErrorMessage(true)
+    }
+  } 
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(false)
 
-<<<<<<< HEAD
   var logInDenied;
   if (errorMessage === true) {
     logInDenied = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>
   }
+  
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Onboarding')} />;
 
   return (
@@ -72,7 +63,7 @@ function enregistrement({ navigation }) {
                     <Text style={styles.title}>DJ invité</Text>
              
                 
-                {/* <KeyboardAwareScrollView style={styles.main}>
+                <KeyboardAwareScrollView style={styles.main}>
                     <Input
                             label='Pseudo'
                                     placeholder='Gégé'
@@ -95,78 +86,74 @@ function enregistrement({ navigation }) {
                                         color: '#584DAD',
                                 
                                     }}
-                                    onChangeText={text => setEmail(text)}
-                                    value={email}
+                                    onChangeText={text => setPseudo(text)}
+                                    value={pseudoFromFront}
                         />
+                        <Input
+                            label="ID de l'évènement"
+                                    placeholder='#144667'
+                                    type='text'
+                                    containerStyle={{
+                                            color:'#fff', 
+                                            width: '100%', 
+                                            marginTop:'3%'
+                                        }}
+                                    inputStyle={{
+                                            fontFamily:'Roboto-Bold',
+                                            fontSize: 18,
+                                            color: '#fff',
 
-                </KeyboardAwareScrollView> */}
-  
-              <View style={{ flex: 1, alignItems: 'center' }}>
-                {logInDenied}
-                <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
-                <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                  onChangeText={text => setEmail(text)}
-                  value={email}
-                />
-                <Text style={{ color: 'white', alignSelf: 'flex-start' }}>ID de l'évènement:</Text>
-                <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                  onChangeText={text => setPassword(text)}
-                  value={password}
-                />
-                <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement:</Text>
-                <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                  onChangeText={text => setPassword(text)}
-                  value={password}
-                />
-              </View>
-=======
-  // var logInDenied;
-  // if (errorMessage === true) {
-  //   logInDenied = <Text style={{ color: 'white' }} >Email et/ou Mot de Passe Incorrect(es)</Text>
-  // }
+                                            borderBottomColor:'#000981'
+                                    }}
+                                    labelStyle={{
+                                        fontFamily:'Roboto-Bold',
+                                        fontSize: 20,
+                                        color: '#584DAD',
+                                
+                                    }}
+                                    onChangeText={text => setEventId(text)}
+                                    value={eventIdFromFront}
+                        />
+                        <Input
+                            label="ID de l'évènement"
+                                    placeholder='#144667'
+                                    type='text'
+                                    containerStyle={{
+                                            color:'#fff', 
+                                            width: '100%', 
+                                            marginTop:'3%'
+                                        }}
+                                    inputStyle={{
+                                            fontFamily:'Roboto-Bold',
+                                            fontSize: 18,
+                                            color: '#fff',
 
+                                            borderBottomColor:'#000981'
+                                    }}
+                                    labelStyle={{
+                                        fontFamily:'Roboto-Bold',
+                                        fontSize: 20,
+                                        color: '#584DAD',
+                                
+                                    }}
+                                    onChangeText={text => setEventPassword(text)}
+                                    value={eventPasswordFromFront}
+                        />
+                        <Button title="Rejoindre la soirée"
+                            onPress={() => navigation.navigate('Nouveauvote')}
+                            buttonStyle={{
+                              backgroundColor: '#584DAD',
+                              paddingLeft: 120,
+                              paddingRight: 120,
+                              paddingTop: 10,
+                              paddingBottom: 10,
+                              marginBottom: 20,
+                            }}></Button>
+                        <Button onPress={() => navigation.navigate('Onboarding')} title="Retour"></Button>
 
-  return (
-    <View style={styles.backGroundColor}>
-      <View style={styles.inscription}>
-        <View style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-          <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30} />
-        </View>
-        <View style={{ justifyContent: 'center' }}>
-          <Text style={{ color: 'white', fontSize: 30 }}>DJ INVITÉ</Text>
-        </View>
-      </View>
-      <View style={{ flex: 1, alignItems: 'center' }}>
-        {logInDenied}
-        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
-        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          // onChangeText={text => setPseudo(text)}
-          value={pseudoFromFront}
-        />
-        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>ID de l'évènement:</Text>
-        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          // onChangeText={text => setEventId(text)}
-          value={eventIdFromFront}
-        />
-        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement:</Text>
-        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          // onChangeText={text => setEventPassword(text)}
-          value={eventPasswordFromFront}
-        />
-      </View>
->>>>>>> b9ba42ff296379286998ac66373e9e143be34b57
+                </KeyboardAwareScrollView>
 
-      <Button onPress={() => navigation.navigate('Onboarding')} title="Retour"></Button>
-      <Button title="Rejoindre la soirée"
-        onPress={() => navigation.navigate('Nouveauvote')}
-        buttonStyle={{
-          backgroundColor: '#584DAD',
-          paddingLeft: 120,
-          paddingRight: 120,
-          paddingTop: 10,
-          paddingBottom: 10,
-          marginBottom: 20,
-        }}></Button>
+      
     </View>
   </View>
 

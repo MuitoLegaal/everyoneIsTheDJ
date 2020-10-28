@@ -56,8 +56,8 @@ router.post('ajout-titre', async function (req, res, next) {
 
 router.post('enregistrement', async function (req, res, next) {
 
-  var error = [],
-  var result = false,
+  var error = []
+  var result = false
   var eventExist = null
 
 
@@ -112,7 +112,7 @@ router.post('eventcreation', async function (req, res, next) {
     var newEvent = new eventModel({
       nameEvent: req.body.eventNameFromFront,
       password: req.body.password,
-      id: uid2(4)
+      //id: uid2(4)
     })
     
     saveEvent = await newEvent.save()
