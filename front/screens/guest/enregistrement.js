@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Header } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -14,21 +14,58 @@ function enregistrement({ navigation }) {
 
   var logInDenied;
   if (errorMessage === true) {
-    logInDenied = <Text style={{ color: 'white' }} >Email et/ou Mot de Passe Incorrect(es)</Text>
+    logInDenied = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>
   }
-
+  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Onboarding')} />;
 
   return (
-    <View style={styles.backGroundColor}>
-      <View style={styles.inscription}>
-        <View style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-          <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft}  size={30} />
-        </View>
-        <View style={{ justifyContent: 'center' }}>
-          <Text style={{ color: 'white', fontSize: 30 }}>DJ INVITÉ</Text>
-        </View>
-      </View>
-      <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={styles.container}>
+
+          <View style={styles.wrap}>
+                  <Header
+                          containerStyle={{backgroundColor: '#131313', borderBottomWidth: 0}}
+                          leftComponent={headerLeft}
+                          
+                  />
+              
+                   <Image 
+                          source={require('../../assets/logoMini.png')}
+                          style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent:'center', justifyContent:'center', alignItems:'center'}}
+                    />
+                    
+                    <Text style={styles.title}>DJ invité</Text>
+             
+                
+                {/* <KeyboardAwareScrollView style={styles.main}>
+                    <Input
+                            label='Pseudo'
+                                    placeholder='Gégé'
+                                    type='text'
+                                    containerStyle={{
+                                            color:'#fff', 
+                                            width: '100%', 
+                                            marginTop:'3%'
+                                        }}
+                                    inputStyle={{
+                                            fontFamily:'Roboto-Bold',
+                                            fontSize: 18,
+                                            color: '#fff',
+
+                                            borderBottomColor:'#000981'
+                                    }}
+                                    labelStyle={{
+                                        fontFamily:'Roboto-Bold',
+                                        fontSize: 20,
+                                        color: '#584DAD',
+                                
+                                    }}
+                                    onChangeText={text => setEmail(text)}
+                                    value={email}
+                        />
+
+                </KeyboardAwareScrollView> */}
+  
+      {/* <View style={{ flex: 1, alignItems: 'center' }}>
         {logInDenied}
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
@@ -45,7 +82,7 @@ function enregistrement({ navigation }) {
           onChangeText={text => setPassword(text)}
           value={password}
         />
-      </View>
+      </View> */}
 
       <Button onPress={() => navigation.navigate('Onboarding')} title="Retour"></Button>
       <Button title="Rejoindre la soirée"
@@ -59,24 +96,26 @@ function enregistrement({ navigation }) {
           marginBottom: 20,
         }}></Button>
     </View>
+  </View>
 
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-
-
-  },
-  wrap: {
-    flexDirection: 'column',
+    flex:1,
     backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    height: hp('100%'), // 70% of height device screen
-    width: wp('100%')   // 80% of width device screen 
+    
   },
+ 
+  wrap: {
+    display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#131313',
+      alignItems: 'center',
+      height: hp('110%'), // 70% of height device screen
+      width: wp('100%')   // 80% of width device screen 
+    },
+
   header: {
     backgroundColor: '#131313',
     alignItems: 'center',
