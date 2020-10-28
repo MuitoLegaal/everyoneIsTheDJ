@@ -27,9 +27,9 @@ function nouveauvote({ navigation }) {
 
   // if (checked == false) {
   //   setCheckBox(
-  //     <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setChecked(true)} />
   //   )
-  // }
+  // }  //     <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setChecked(true)} />
+
 
   // else if (checked == true) {
   //   setCheckBox(

@@ -65,24 +65,24 @@ function enregistrement({ navigation }) {
 
                 </KeyboardAwareScrollView> */}
   
-      {/* <View style={{ flex: 1, alignItems: 'center' }}>
-        {logInDenied}
-        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
-        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          onChangeText={text => setEmail(text)}
-          value={email}
-        />
-        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>ID de l'évènement:</Text>
-        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          onChangeText={text => setPassword(text)}
-          value={password}
-        />
-        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement:</Text>
-        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-          onChangeText={text => setPassword(text)}
-          value={password}
-        />
-      </View> */}
+                <View style={{ flex: 1, alignItems: 'center' }}>
+                  {logInDenied}
+                  <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
+                  <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
+                    onChangeText={text => setEmail(text)}
+                    value={email}
+                  />
+                  <Text style={{ color: 'white', alignSelf: 'flex-start' }}>ID de l'évènement:</Text>
+                  <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
+                    onChangeText={text => setPassword(text)}
+                    value={password}
+                  />
+                  <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement:</Text>
+                  <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
+                    onChangeText={text => setPassword(text)}
+                    value={password}
+                  />
+                </View>
 
       <Button onPress={() => navigation.navigate('Onboarding')} title="Retour"></Button>
       <Button title="Rejoindre la soirée"

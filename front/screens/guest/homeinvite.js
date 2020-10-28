@@ -7,6 +7,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 function homeinvite() {
   
+  var handleDeconnexion = async () => {
+      await AsyncStorage.removeItem("token")
+      navigation.navigate('Enregistrement')
+  } 
 
     return (
         <View style={styles.container}>
@@ -24,6 +28,7 @@ function homeinvite() {
                     size={30}
                     color="#fff"
                     style={{position:'relative', left:10}}
+                    onPress={() => handleDeconnexion() }
                     />
                     
             
