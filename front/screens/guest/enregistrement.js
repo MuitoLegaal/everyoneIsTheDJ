@@ -12,12 +12,13 @@ function enregistrement({ navigation }) {
   const [pseudo, setPseudo] = useState('');
   const [eventPassword, setEventPassword] = useState('');
   const [eventId, setEventId] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
 
 
   var handleEnregistrement = async () => {
 
 
-    var rawResponse = await fetch('http://172.17.1.100:3000/sign-in', {
+    var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}`
@@ -26,7 +27,8 @@ function enregistrement({ navigation }) {
     var response = await rawResponse.json();
 
     if (response.result === true) {
-      var token = uuid()
+      // A verifier si le token uuid fonctionne bien comme le uid2
+      var token = uuid(32)
       await AsyncStorage.setItem("token", JSON.stringify(token))
       navigation.navigate('Nouveauvote')
   
@@ -57,17 +59,17 @@ function enregistrement({ navigation }) {
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Pseudo:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
           onChangeText={text => setPseudo(text)}
-          value={email}
+          value={pseudoFromFront}
         />
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>ID de l'évènement:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
           onChangeText={text => setEventId(text)}
-          value={password}
+          value={eventIdFromFront}
         />
         <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement:</Text>
         <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
           onChangeText={text => setEventPassword(text)}
-          value={password}
+          value={eventPasswordFromFront}
         />
       </View>
 
