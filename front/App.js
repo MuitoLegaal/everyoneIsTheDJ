@@ -27,6 +27,7 @@ import TimerConfigSEC from './screens/host/TimerConfigSEC';
 import VoteHost from './screens/host/VoteHost';
 import Winner from './screens/host/winnerhost';
 import SongListCreation from './screens/host/SongListCreation';
+import Burger from './screens/burger';
 
 //import screens Guest
 import Enregistrement from './screens/guest/enregistrement';
@@ -64,6 +65,7 @@ const getFonts = () => Font.loadAsync({
     VoteHost: VoteHost,
     WinnerHost: Winner,
     SongListCreation: SongListCreation,
+    Burger: Burger,
   },
   {headerMode: 'none'}
   );
@@ -89,7 +91,7 @@ const getFonts = () => Font.loadAsync({
           onFinish={()=> setFontsLoaded(true)}
         />  
 
-        
+
              
       )
     } 

@@ -7,6 +7,16 @@ var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 
+/* Web Socket */
+
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
@@ -30,6 +40,8 @@ router.post('/sign-up', async function (req, res, next) {
     console.log('not welcome')
     res.json({ result: false, hote: hoteSaved })
   }
+
+
 })
 
 
@@ -48,13 +60,13 @@ router.post('/sign-in', async function (req, res, next) {
 })
 
 
-router.post('ajout-titre', async function (req, res, next) {
+router.post('/ajout-titre', async function (req, res, next) {
 
 
 }
 )
 
-router.post('enregistrement', async function (req, res, next) {
+router.post('/enregistrement', async function (req, res, next) {
 
   var error = []
   var result = false
@@ -64,7 +76,7 @@ router.post('enregistrement', async function (req, res, next) {
   if (req.body.pseudoFromFront == ''
     || req.body.eventIdFromFront == ''
     || req.body.eventPasswordFromFront == '') {
-    error.push('champs vides')
+    error.push('/champs vides')
   }
 
   if (error.length == 0) {
@@ -87,16 +99,19 @@ router.post('enregistrement', async function (req, res, next) {
     } else {
       error.push('ID incorrect')
     }
+
   }
 
   res.json({ result, eventExist, error })
 })
 
-router.post('eventcreation', async function (req, res, next) {
+router.post('/eventcreation', async function (req, res, next) {
 
   var error = []
   var result = false
   var saveEvent = null
+  var date = new Date() // a verifier le format
+  var isOpen = true // devient false à la création d'un nouvel event
 
   if (req.body.nameFromFront == ''
     || req.body.eventPasswordFromFront == '') {
@@ -110,19 +125,55 @@ router.post('eventcreation', async function (req, res, next) {
   if (error.length == 0) {
 
     var newEvent = new eventModel({
+
+      user: {type: mongoose.Schema.Types.ObjectId, ref: 'Hotes'},
       nameEvent: req.body.eventNameFromFront,
+      date: date,
+      isOpen: true,
+      id: uid2(4),
       password: req.body.password,
-      //id: uid2(4)
     })
     
-    saveEvent = await newEvent.save()
+    var saveEvent = await newEvent.save()
+
+    saveEvent = await newEvent.update(
+      {'id': {"$ne": saveEvent._id}, 'nameEvent': req.body.eventNameFromFront }, {isOpen: false}
+    )
+
+    var eventIsOpen = await eventModel.findOne({
+      isOpen: true,
+    })
+
+    var eventIsClosed = await eventModel.findOne({
+      isOpen: false,
+    })
     
-    if(saveUser){
+    if(saveEvent){
       result = true
     }  
   }
 
-  res.json({ result, eventExist, error })
+  res.json({ result, eventIsOpen, eventIsClosed, error })
 })
+
+
+
+
+router.post('/tourdevotecreation', async function (req, res, next) {
+
+  var newTourdevote = new tourdevoteModel({
+    event: {type: mongoose.Schema.Types.ObjectId, ref: 'Events'},
+    date: Date,
+    // duration: Number,
+    // participants: guest tokens,
+    playlist: playlistSchema,
+  })
+
+  saveTourdevote = await newTourdevote.save()
+
+res.json({ result, eventExist, error})
+
+}
+)
 
 module.exports = router;
