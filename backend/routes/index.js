@@ -30,8 +30,6 @@ router.post('/sign-up', async function (req, res, next) {
     console.log('not welcome')
     res.json({ result: false, hote: hoteSaved })
   }
-
-
 })
 
 
