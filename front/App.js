@@ -65,7 +65,7 @@ const getFonts = () => Font.loadAsync({
     VoteHost: VoteHost,
     WinnerHost: Winner,
     SongListCreation: SongListCreation,
-    Burger: Burger,
+    //Burger: Burger,
   },
   {headerMode: 'none'}
   );
