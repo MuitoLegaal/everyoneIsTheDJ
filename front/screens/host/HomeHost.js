@@ -19,7 +19,7 @@ var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white
 
 return (
   <View style={styles.container}>
-    <View style={styles.header}>
+    <View>
             <Header
               centerComponent={headerCenter}
               rightComponent={headerRight}
@@ -29,20 +29,20 @@ return (
 
         <ScrollView style={styles.wrap}>
           
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', height: 200, borderTopWidth:1, borderTopColor: "#fff"}} >
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', height: 200, borderTopWidth:1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth:1}} >
             
-            <Text style={{color: 'white'}} >Aucun évènement en cours maintenant!</Text>
+            <Text style={styles.text} >Aucun évènement en cours maintenant!</Text>
           
           </View>
           <View>
 
-            <Text style={{color: 'white'}} >Mes Evenements</Text>
+            <Text style={styles.subtitle} >Mes Evenements</Text>
            
 
-            <View style={{flex: 0.2, flexDirection: 'row', justifyContent: 'space-around', borderColor: 'white', borderWidth: 4, width: 300, padding: 20, borderRadius: 10, margin: 15, alignItems: 'center', borderColor: '#584DAD'}} >
+            <View style={styles.box} >
 
               <View>
-                <Image source={require('../../assets/picto-fete2.png')} style={{height: 50, width: 50}} />
+                <Image source={require('../../assets/picto-fete2.png')} style={{height: 150, width: 170}} />
               </View>
 
               <View>
@@ -53,10 +53,10 @@ return (
             </View>
 
             
-            <View style={{flex: 0.2,  flexDirection: 'row', justifyContent: 'space-around', borderColor: 'white', borderWidth: 4, width: 300, padding: 20, borderRadius: 10, margin: 15, alignItems: 'center', borderColor: '#584DAD'}} >
+            <View style={styles.box} >
 
               <View>
-                <Image source={require('../../assets/picto-fete2.png')} style={{height: 50, width: 50}} />
+                <Image source={require('../../assets/picto-fete2.png')} style={{height: 150, width: 170}} />
               </View>
 
               <View>
@@ -67,6 +67,7 @@ return (
           </View>
         <Button 
               title=" Nouvelle soirée" 
+              onPress={() => props.navigation.navigate('EventCreation')}
               //onPress={()=>handleSignUp()}
               buttonStyle={{
                     backgroundColor: '#584DAD',
@@ -105,17 +106,39 @@ const styles = StyleSheet.create({
       backgroundColor: '#131313',
 
     },
-    header: {
-      //marginBottom: '5%',
-      //marginTop: '10%',
-     
-      // justifyContent: 'center',
-      // borderBottomWidth: 0,
-      // borderBottomColor: '#ffff',
-      // backgroundColor: '#131313',
+    title: {
+      color: '#fff',
+      fontSize: 40,
+      fontFamily:'Staatliches'
+    },
 
+    subtitle: {
+      color: '#fff',
+      fontSize: 30,
+      fontFamily:'Staatliches',
+      textAlign: 'left',
+      marginTop: '2%'
       
-  },
+    },
+   text: {
+      color: '#fff',
+      fontSize: 20,
+      fontFamily:'Roboto-Regular',
+      paddingRight: 30 ,
+      paddingLeft: 30,
+      textAlign: 'center',
+      
+    },
+    box: {
+      flexDirection: 'row', 
+      justifyContent: 'space-around', 
+      borderWidth: 4, 
+      padding: 10, 
+      borderRadius: 10, 
+      margin: '2%', 
+      alignItems: 'center', 
+      borderColor: '#584DAD'
+    }
   
 });
 
