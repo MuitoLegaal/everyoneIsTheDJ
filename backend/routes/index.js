@@ -9,7 +9,11 @@ var eventModel = require('../bdd/SchemaEvent')
 
 // /* Web Socket */
 
+<<<<<<< HEAD
 // var io = require('socket.io')(server);
+=======
+//var io = require('socket.io')(server);
+>>>>>>> 7787215cc773957b854f88f40c64b0d341a787c0
 
 // io.on('connection', function(socket){
 //   console.log('a user connected');
