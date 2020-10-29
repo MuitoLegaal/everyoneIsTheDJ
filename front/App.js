@@ -35,6 +35,7 @@ import Homeinvite from './screens/guest/homeinvite';
 import Nouveauvote from './screens/guest/nouveauvote';
 import Validationvote from './screens/guest/validationvote';
 import Winnerguest from './screens/guest/winnerguest';
+import AjoutTitres from './screens/guest/AjoutTitres'
 
 
 const getFonts = () => Font.loadAsync({
@@ -65,7 +66,7 @@ const getFonts = () => Font.loadAsync({
     VoteHost: VoteHost,
     WinnerHost: Winner,
     SongListCreation: SongListCreation,
-    Burger: Burger,
+    //Burger: Burger,
   },
   {headerMode: 'none'}
   );
@@ -86,13 +87,13 @@ const getFonts = () => Font.loadAsync({
   } else {
       return (
        
-        <AppLoading
-          startAsync={getFonts}
-          onFinish={()=> setFontsLoaded(true)}
-        />  
+        // <AppLoading
+        //   startAsync={getFonts}
+        //   onFinish={()=> setFontsLoaded(true)}
+        // />  
 
 
-             
+           <AjoutTitres/>  
       )
     } 
   }

@@ -12,12 +12,54 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 
-function nouveauvote( props ) {
 
- const [vote, setVote] = useState(false);
- const [isSelected, setSelection] = useState(false);
+function TitresProposes (props) {
 
- 
+
+  const [vote, setVote] = useState(false);
+
+  var chosenSong;
+
+  if(vote === true){
+    chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
+  }else{
+    chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
+  }
+
+
+  return (
+
+    <View style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
+
+
+      <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
+        <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
+      </View>
+
+      <View style={{justifyContent: 'flex-start'}} >
+        <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
+        <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
+      </View>
+
+      <View style={{flex: 1, alignItems: 'flex-end'}}>
+        {chosenSong}
+      </View>
+                    
+
+    </View>
+  )
+}
+
+
+
+
+
+
+
+
+
+function nouveauvote() {
+
 
   const list = [
     {
@@ -48,12 +90,10 @@ function nouveauvote( props ) {
   ]
 
 
-  var chosenSong;
+  var titresList = [];
 
-  if(vote === true){
-    chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => [i](false)} />
-  }else{
-    chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => [i](true)} />
+  for(let i=0; i<list.length; i++){
+    titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
   }
 
 
@@ -117,33 +157,8 @@ function nouveauvote( props ) {
               <Text style={{color: 'white', fontSize: 20}} >Votez pour le prochain titre:</Text>
             </View>
 
-            {
-              list.map((l, i) => (
-                
-                  <View key={i} style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
-
-
-                     <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
-                        <Text style={{ textAlign: 'center', color: 'white' }}>{i + 1}.</Text>
-                     </View>
-
-                     <View style={{justifyContent: 'flex-start'}} >
-                        <Text style={{color: 'white'}}>Artiste: {l.artist}</Text>
-                        <Text style={{color: 'white'}}>Titre: {l.title}</Text>
-                     </View>
-
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                      <CheckBox/>
-                    </View>
-                    
-
-                  </View>
-
-                  
-
-              ))
-            }
-
+            
+            {titresList}
             
 
           </View>

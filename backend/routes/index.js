@@ -9,9 +9,10 @@ var eventModel = require('../bdd/SchemaEvent');
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
 
 
-/* Web Socket */
+// /* Web Socket */
 
-// var io = require('socket.io')(server);
+
+//var io = require('socket.io')(server);
 
 // io.on('connection', function(socket){
 //   console.log('a user connected');
