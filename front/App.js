@@ -91,7 +91,7 @@ const getFonts = () => Font.loadAsync({
           onFinish={()=> setFontsLoaded(true)}
         />  
 
-        
+
              
       )
     } 

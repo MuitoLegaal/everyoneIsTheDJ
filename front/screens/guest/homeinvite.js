@@ -29,10 +29,7 @@ function homeinvite() {
                     color="#fff"
                     style={{position:'relative', left:10}}
                     onPress={() => handleDeconnexion() }
-                    />
-                    
-            
-                
+                    /> 
             </View>
             <View style={styles.wrap}>
                 <Image 
