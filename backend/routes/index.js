@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../bdd/connexion');
-var uid2 = require('uid2')
-var SHA256 = require('crypto-js/sha256')
-var encBase64 = require('crypto-js/enc-base64')
-var HoteModel = require('../bdd/SchemaHote');
-var eventModel = require('../bdd/SchemaEvent')
+var uid2 = require('uid2');
+var SHA256 = require('crypto-js/sha256');
+var encBase64 = require('crypto-js/enc-base64');
+var hoteModel = require('../bdd/SchemaHote');
+var eventModel = require('../bdd/SchemaEvent');
+var tourdevoteModel = require('../bdd/SchemaTourdevote')
+
 
 /* Web Socket */
 
@@ -23,11 +25,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/sign-up', async function (req, res, next) {
-  var hotes = await HoteModel.findOne({ email: req.body.email });
+
+  var hotes = await hoteModel.findOne({ email: req.body.email });
 
   if (hotes === null) {
 
-    var newHote = new HoteModel({
+    var newHote = new hoteModel({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
@@ -38,7 +41,7 @@ router.post('/sign-up', async function (req, res, next) {
     res.json({ result: true, hote: hoteSaved })
   } else {
     console.log('not welcome')
-    res.json({ result: false, hote: hoteSaved })
+    res.json({ result: false, hote: hotes })
   }
 
 
@@ -46,7 +49,7 @@ router.post('/sign-up', async function (req, res, next) {
 
 
 router.post('/sign-in', async function (req, res, next) {
-  var hotes = await HoteModel.findOne({ email: req.body.email, password: req.body.password });
+  var hotes = await hoteModel.findOne({ email: req.body.email, password: req.body.password });
 
   if (hotes === null) {
     console.log('no')
@@ -55,7 +58,6 @@ router.post('/sign-in', async function (req, res, next) {
     console.log('yes')
     res.json({ result: true, user: hotes })
   }
-
 
 })
 
@@ -110,35 +112,33 @@ router.post('/eventcreation', async function (req, res, next) {
   var error = []
   var result = false
   var saveEvent = null
-  var date = new Date() // a verifier le format
-  var isOpen = true // devient false à la création d'un nouvel event
 
-  if (req.body.nameFromFront == ''
+  if (req.body.eventNameFromFront == ''
     || req.body.eventPasswordFromFront == '') {
     error.push('champs vides')
   }
 
-  if (req.body.eventPasswordFromFront.length < 3){
+  if (req.body.eventPasswordFromFront.length < 3) {
     error.push('mot de passe trop court')
   }
 
   if (error.length == 0) {
 
     var newEvent = new eventModel({
-
-      user: {type: mongoose.Schema.Types.ObjectId, ref: 'Hotes'},
+      user: req.body.idUserFromFront,
       nameEvent: req.body.eventNameFromFront,
-      date: date,
+      date: new Date(),
       isOpen: true,
-      id: uid2(4),
-      password: req.body.password,
+      eventId: uid2(4),
+      password: req.body.eventPasswordFromFront,
     })
-    
+
     var saveEvent = await newEvent.save()
 
-    saveEvent = await newEvent.update(
-      {'id': {"$ne": saveEvent._id}, 'nameEvent': req.body.eventNameFromFront }, {isOpen: false}
-    )
+    //  RENDRE IS OPEN FALSE LES AUTRES EVENTS A LA CREATION D UN NOUVEL EVENT
+    // saveEvent = await newEvent.update(
+    //   {'id': {"$ne": saveEvent._id}, 'nameEvent': req.body.eventNameFromFront }, {isOpen: false}
+    // )
 
     var eventIsOpen = await eventModel.findOne({
       isOpen: true,
@@ -147,31 +147,81 @@ router.post('/eventcreation', async function (req, res, next) {
     var eventIsClosed = await eventModel.findOne({
       isOpen: false,
     })
-    
-    if(saveEvent){
-      result = true
-    }  
-  }
 
+    if (saveEvent) {
+      result = true
+    }
+  }
   res.json({ result, eventIsOpen, eventIsClosed, error })
 })
 
 
 
 
+
 router.post('/tourdevotecreation', async function (req, res, next) {
 
+  var result = false
+  
+
+  var isEventOpen = await eventModel.findOne(
+    { isOpen: true, user: req.body.idUserFromFront }
+  )
+
+  console.log("event", isEventOpen);
+
   var newTourdevote = new tourdevoteModel({
-    event: {type: mongoose.Schema.Types.ObjectId, ref: 'Events'},
-    date: Date,
-    // duration: Number,
-    // participants: guest tokens,
-    playlist: playlistSchema,
+    event: isEventOpen._id,
+    date: new Date(),
+    isOpen: true,
+    participants: []
   })
 
-  saveTourdevote = await newTourdevote.save()
+ var saveTourdevote = await newTourdevote.save();
 
-res.json({ result, eventExist, error})
+  console.log("tourdevote", saveTourdevote);
+
+  if (saveTourdevote!=null) {
+    console.log('result')
+    res.json({result: true})
+  }
+
+  else{
+  res.json({ result: false })
+  }
+
+}
+)
+
+
+
+
+
+router.post('/vote', async function (req, res, next) {
+
+  var isTourdevoteOpen = await tourdevoteModel.findOneAndUpdate(
+    { isOpen: true },
+    { $push: { participants: req.body.tokenFromFront } }
+  )
+
+  // var isTourdevoteOpen = await tourdevoteModel.findOne(
+  //     {isOpen: true}, function (err, doc){
+
+  //       doc.playlist.titre = req.body.titreFromFront;
+  //       doc.save();
+
+  //     }
+  // );
+
+
+  console.log(isTourdevoteOpen);
+
+  // var vote = await isTourdevoteOpen.updateOne({
+  //   _id: isTourdevoteOpen._id
+  // }, {
+  //   playlist.titre: req.body.titleFromFront
+  // }
+  // )
 
 }
 )

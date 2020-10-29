@@ -14,7 +14,7 @@ function EventCreation(props) {
             var rawResponse = await fetch('http://172.17.1.100:3000/eventcreation', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}`
+                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${idUser}`
             })
 
             var response = await rawResponse.json();
