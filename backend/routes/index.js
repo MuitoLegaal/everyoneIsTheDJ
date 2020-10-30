@@ -1,12 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../bdd/connexion');
+<<<<<<< HEAD
+var uid2 = require('uid2');
+var SHA256 = require('crypto-js/sha256');
+var encBase64 = require('crypto-js/enc-base64');
+var hoteModel = require('../bdd/SchemaHote');
+var eventModel = require('../bdd/SchemaEvent');
+var tourdevoteModel = require('../bdd/SchemaTourdevote');
+const { find } = require('../bdd/SchemaHote');
+=======
 var uid2 = require('uid2')
 var SHA256 = require('crypto-js/sha256')
 var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
+>>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
 
 
 // /* Web Socket */
@@ -128,6 +138,12 @@ router.post('/eventcreation', async function (req, res, next) {
 
   if (error.length == 0) {
 
+
+    await eventModel.update(
+      {user: req.body.idUserFromFront},
+      {isOpen: false}
+      );
+
     var newEvent = new eventModel({
 
       user: {type: mongoose.Schema.Types.ObjectId, ref: 'Hotes'},
@@ -140,10 +156,13 @@ router.post('/eventcreation', async function (req, res, next) {
     
     var saveEvent = await newEvent.save()
 
+<<<<<<< HEAD
+=======
     saveEvent = await newEvent.update(
       {'id': {"$ne": saveEvent._id}, 'nameEvent': req.body.eventNameFromFront }, {isOpen: false}
     )
 
+>>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
     var eventIsOpen = await eventModel.findOne({
       isOpen: true,
     })
@@ -166,14 +185,16 @@ router.post('/eventcreation', async function (req, res, next) {
 
 router.post('/tourdevotecreation', async function (req, res, next) {
 
-  var result = false
-  
-
   var isEventOpen = await eventModel.findOne(
     { isOpen: true, user: req.body.idUserFromFront }
   )
 
   console.log("event", isEventOpen);
+
+  await tourdevoteModel.update(
+    {event: isEventOpen._id},
+    {isOpen: false}
+    );
 
   var newTourdevote = new tourdevoteModel({
     event: isEventOpen._id,
@@ -182,32 +203,54 @@ router.post('/tourdevotecreation', async function (req, res, next) {
     participants: []
   })
 
- var saveTourdevote = await newTourdevote.save();
+  var saveTourdevote = await newTourdevote.save();
+  
 
   console.log("tourdevote", saveTourdevote);
 
-  if (saveTourdevote!=null) {
+  if (saveTourdevote != null) {
     console.log('result')
-    res.json({result: true})
+    res.json({ result: true })
   }
 
-  else{
-  res.json({ result: false })
+  else {
+    res.json({ result: false })
   }
 
 }
 )
 
 
-
-
-
 router.post('/vote', async function (req, res, next) {
 
+
+  var isEventOpen = await eventModel.findOne(
+    { isOpen: true, user: req.body.idUserFromFront }
+  )
+
+  console.log(isEventOpen._id);
+
+
+  var hasAlreadyVote = await tourdevoteModel.findOne(
+    {participants: req.body.tokenFromFront});
+
+  if (hasAlreadyVote == null) {
+    
   var isTourdevoteOpen = await tourdevoteModel.findOneAndUpdate(
-    { isOpen: true },
+    { isOpen: true, event: isEventOpen._id},
     { $push: { participants: req.body.tokenFromFront } }
   )
+  }
+
+
+  if (isTourdevoteOpen != null) {
+    console.log('result')
+    res.json({ result: true })
+  }
+
+  else {
+    res.json({ result: false })
+  }
 
   // var isTourdevoteOpen = await tourdevoteModel.findOne(
   //     {isOpen: true}, function (err, doc){
@@ -217,9 +260,6 @@ router.post('/vote', async function (req, res, next) {
 
   //     }
   // );
-
-
-  console.log(isTourdevoteOpen);
 
   // var vote = await isTourdevoteOpen.updateOne({
   //   _id: isTourdevoteOpen._id

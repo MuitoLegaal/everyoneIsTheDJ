@@ -42,7 +42,7 @@ const getFonts = () => Font.loadAsync({
           startAsync={getFonts}
           onFinish={()=> setFontsLoaded(true)}
         />  
-
+     
       )
     } 
   };
