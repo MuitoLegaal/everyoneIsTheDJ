@@ -9,7 +9,7 @@ import Divider from 'react-native-divider';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-//import Burger from '../burger'
+
 
 function HomeHost(props){
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
@@ -72,6 +72,7 @@ return (
               buttonStyle={{
                     backgroundColor: '#584DAD',
                     borderRadius: 10,
+                    marginTop:'2%'
                     }}
                     icon={<FontAwesomeIcon
                         icon={faPlus}
@@ -117,7 +118,8 @@ const styles = StyleSheet.create({
       fontSize: 30,
       fontFamily:'Staatliches',
       textAlign: 'left',
-      marginTop: '2%'
+      marginTop: '2%',
+      marginLeft:'2%'
       
     },
    text: {
