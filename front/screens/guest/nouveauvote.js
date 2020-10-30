@@ -136,7 +136,7 @@ function nouveauvote() {
             <CountDown
               size={30}
               until={60}
-              onFinish={() => navigation.navigate('Winnerguest')}
+              onFinish={() => props.navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
               timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}

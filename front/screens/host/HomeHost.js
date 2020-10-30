@@ -6,36 +6,43 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-// import Burger from '../burger.js'
+
 
 function HomeHost(props){
-
-var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{height: 50, width: 50}} />
-var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#131313'}}>  
-        <Header
-          centerComponent={headerCenter}
-          rightComponent={headerRight}
-          containerStyle={{backgroundColor: "#131313", padding: 10, flex: 0.2}}
-        />
-
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} >
-          <Text style={{color: 'white'}} >Aucun evenement en cours maintenat!</Text>
-        </View>
+var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
+var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />
 
 
-        <ScrollView style={{flex: 1, borderTopColor: 'white', flexDirection: 'column'}}>
 
-            <Text style={{color: 'white'}} >Mes Evenements</Text>
+return (
+  <View style={styles.container}>
+    <View>
+            <Header
+              centerComponent={headerCenter}
+              rightComponent={headerRight}
+              containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
+            />
+    </View>
+
+        <ScrollView style={styles.wrap}>
+          
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', height: 200, borderTopWidth:1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth:1}} >
             
+            <Text style={styles.text} >Aucun évènement en cours maintenant!</Text>
+          
+          </View>
+          <View>
 
-            <View style={{flex: 0.2, flexDirection: 'row', justifyContent: 'space-around', borderColor: 'white', borderWidth: 4, width: 300, padding: 20, borderRadius: 10, margin: 15, alignItems: 'center', borderColor: '#584DAD'}} >
+            <Text style={styles.subtitle} >Mes Evenements</Text>
+           
+
+            <View style={styles.box} >
 
               <View>
-                <Image source={require('../../assets/picto-fete2.png')} style={{height: 50, width: 50}} />
+                <Image source={require('../../assets/picto-fete2.png')} style={{height: 150, width: 170}} />
               </View>
 
               <View>
@@ -46,26 +53,24 @@ var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white
             </View>
 
             
-            <View style={{flex: 0.2,  flexDirection: 'row', justifyContent: 'space-around', borderColor: 'white', borderWidth: 4, width: 300, padding: 20, borderRadius: 10, margin: 15, alignItems: 'center', borderColor: '#584DAD'}} >
+            <View style={styles.box} >
 
               <View>
-                <Image source={require('../../assets/picto-fete2.png')} style={{height: 50, width: 50}} />
+                <Image source={require('../../assets/picto-fete2.png')} style={{height: 150, width: 170}} />
               </View>
 
               <View>
                 <Text style={{color: 'white'}}>Anniv Claude</Text>
                 <Text style={{color: 'white'}}>Date: 11/10/2020</Text>
               </View>
-
             </View>
-       
+          </View>
         <Button 
               title=" Nouvelle soirée" 
               onPress={() => props.navigation.navigate('EventCreation')}
               //onPress={()=>handleSignUp()}
               buttonStyle={{
                     backgroundColor: '#584DAD',
-                    marginTop: '3%',
                     borderRadius: 10,
                     }}
                     icon={<FontAwesomeIcon
@@ -77,8 +82,8 @@ var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white
           /> 
         </ScrollView>
 
-      
-</View>
+
+      </View>
 
 
 
@@ -113,7 +118,7 @@ const styles = StyleSheet.create({
       fontFamily:'Staatliches',
       textAlign: 'left',
       marginTop: '2%',
-      paddingLeft:'2%'
+      marginLeft:'2%'
       
     },
    text: {
