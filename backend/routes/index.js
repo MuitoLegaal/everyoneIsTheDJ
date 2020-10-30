@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../bdd/connexion');
+<<<<<<< HEAD
 var uid2 = require('uid2');
 var SHA256 = require('crypto-js/sha256');
 var encBase64 = require('crypto-js/enc-base64');
@@ -8,6 +9,14 @@ var hoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent');
 var tourdevoteModel = require('../bdd/SchemaTourdevote');
 const { find } = require('../bdd/SchemaHote');
+=======
+var uid2 = require('uid2')
+var SHA256 = require('crypto-js/sha256')
+var encBase64 = require('crypto-js/enc-base64')
+var HoteModel = require('../bdd/SchemaHote');
+var eventModel = require('../bdd/SchemaEvent')
+var tourdevoteModel = require('../bdd/SchemaTourdevote')
+>>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
 
 
 // /* Web Socket */
@@ -18,6 +27,7 @@ const { find } = require('../bdd/SchemaHote');
 // io.on('connection', function(socket){
 //   console.log('a user connected');
 // });
+
 
 
 
@@ -32,7 +42,7 @@ router.post('/sign-up', async function (req, res, next) {
 
   if (hotes === null) {
 
-    var newHote = new hoteModel({
+    var newHote = new HoteModel({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
@@ -51,7 +61,7 @@ router.post('/sign-up', async function (req, res, next) {
 
 
 router.post('/sign-in', async function (req, res, next) {
-  var hotes = await hoteModel.findOne({ email: req.body.email, password: req.body.password });
+  var hotes = await HoteModel.findOne({ email: req.body.email, password: req.body.password });
 
   if (hotes === null) {
     console.log('no')
@@ -114,13 +124,15 @@ router.post('/eventcreation', async function (req, res, next) {
   var error = []
   var result = false
   var saveEvent = null
+  var date = new Date() // a verifier le format
+  var isOpen = true // devient false à la création d'un nouvel event
 
-  if (req.body.eventNameFromFront == ''
+  if (req.body.nameFromFront == ''
     || req.body.eventPasswordFromFront == '') {
     error.push('champs vides')
   }
 
-  if (req.body.eventPasswordFromFront.length < 3) {
+  if (req.body.eventPasswordFromFront.length < 3){
     error.push('mot de passe trop court')
   }
 
@@ -133,16 +145,24 @@ router.post('/eventcreation', async function (req, res, next) {
       );
 
     var newEvent = new eventModel({
-      user: req.body.idUserFromFront,
-      nameEvent: req.body.eventNameFromFront,
-      date: new Date(),
-      isOpen: true,
-      eventId: uid2(4),
-      password: req.body.eventPasswordFromFront,
-    })
 
+      user: {type: mongoose.Schema.Types.ObjectId, ref: 'Hotes'},
+      nameEvent: req.body.eventNameFromFront,
+      date: date,
+      isOpen: true,
+      id: uid2(4),
+      password: req.body.password,
+    })
+    
     var saveEvent = await newEvent.save()
 
+<<<<<<< HEAD
+=======
+    saveEvent = await newEvent.update(
+      {'id': {"$ne": saveEvent._id}, 'nameEvent': req.body.eventNameFromFront }, {isOpen: false}
+    )
+
+>>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
     var eventIsOpen = await eventModel.findOne({
       isOpen: true,
     })
@@ -150,11 +170,12 @@ router.post('/eventcreation', async function (req, res, next) {
     var eventIsClosed = await eventModel.findOne({
       isOpen: false,
     })
-
-    if (saveEvent) {
+    
+    if(saveEvent){
       result = true
-    }
+    }  
   }
+
   res.json({ result, eventIsOpen, eventIsClosed, error })
 })
 

@@ -19,7 +19,8 @@ function enregistrement({ navigation }) {
   var handleEnregistrement = async () => {
 
 // --------------------------------- VOS IP ICI -----------------------------------------
-    var rawResponse = await fetch('http://172.17.1.100:3000/enregistrement', {
+// Flo IP : 192.168.0.17
+    var rawResponse = await fetch('http://192.168.0.17:3000/enregistrement', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`

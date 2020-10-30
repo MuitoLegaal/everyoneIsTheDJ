@@ -32,6 +32,21 @@ export default function Onboarding({navigation}) {
         }}
         onPress={() => navigation.navigate('Enregistrement') }
       ></Button>
+
+
+<Text style={{color: "#fff", textAlign: 'center'}}>bouton à supprimer avant présentation de l'app</Text>
+<Button title="Page où je travaille"
+        buttonStyle={{
+          backgroundColor: '#04FF00',
+          borderRadius: 10       
+        }}
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        // ------ mettez le screen sur lequel vous voulez travailler rapidement ci-dessous. Exemple navigation.navigate('HomeHost')} -------
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        onPress={() => navigation.navigate('Onboarding') }
+      ></Button>
+
+
     </View>
   );
 }
