@@ -130,6 +130,18 @@ function SongListCreation(props){
                                 <Text style={{fontFamily:'Roboto-Bold',fontSize: 16, color: '#fff', marginBottom:'2%'}}> %TitresBdd% </Text>
                             </View>
                             <Button 
+                            title= ''
+                            buttonStyle={{
+                                backgroundColor: '#584DAD',
+                                borderRadius: 10,
+                                width: 40,
+                                color: 'white'
+                            
+                            }}
+                            onPress={()=> handleAjouterTitre()}
+                            
+                            />
+                            <Button 
                             title= '+'
                             buttonStyle={{
                                 backgroundColor: '#584DAD',

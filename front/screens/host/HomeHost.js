@@ -72,6 +72,7 @@ return (
               buttonStyle={{
                     backgroundColor: '#584DAD',
                     borderRadius: 10,
+                    marginTop:'2%'
                     }}
                     icon={<FontAwesomeIcon
                         icon={faPlus}
