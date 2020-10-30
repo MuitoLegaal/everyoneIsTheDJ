@@ -6,14 +6,18 @@ var SHA256 = require('crypto-js/sha256')
 var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
+var tourdevoteModel = require('../bdd/SchemaTourdevote')
+
 
 // /* Web Socket */
 
-// var io = require('socket.io')(server);
+
+//var io = require('socket.io')(server);
 
 // io.on('connection', function(socket){
 //   console.log('a user connected');
 // });
+
 
 
 
@@ -23,7 +27,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/sign-up', async function (req, res, next) {
-  var hotes = await HoteModel.findOne({ email: req.body.email });
+
+  var hotes = await hoteModel.findOne({ email: req.body.email });
 
   if (hotes === null) {
 
@@ -38,7 +43,7 @@ router.post('/sign-up', async function (req, res, next) {
     res.json({ result: true, hote: hoteSaved })
   } else {
     console.log('not welcome')
-    res.json({ result: false, hote: hoteSaved })
+    res.json({ result: false, hote: hotes })
   }
 
 
@@ -55,7 +60,6 @@ router.post('/sign-in', async function (req, res, next) {
     console.log('yes')
     res.json({ result: true, user: hotes })
   }
-
 
 })
 
@@ -159,19 +163,70 @@ router.post('/eventcreation', async function (req, res, next) {
 
 
 
+
 router.post('/tourdevotecreation', async function (req, res, next) {
 
+  var result = false
+  
+
+  var isEventOpen = await eventModel.findOne(
+    { isOpen: true, user: req.body.idUserFromFront }
+  )
+
+  console.log("event", isEventOpen);
+
   var newTourdevote = new tourdevoteModel({
-    event: {type: mongoose.Schema.Types.ObjectId, ref: 'Events'},
-    date: Date,
-    // duration: Number,
-    // participants: guest tokens,
-    playlist: playlistSchema,
+    event: isEventOpen._id,
+    date: new Date(),
+    isOpen: true,
+    participants: []
   })
 
-  saveTourdevote = await newTourdevote.save()
+ var saveTourdevote = await newTourdevote.save();
 
-res.json({ result, eventExist, error})
+  console.log("tourdevote", saveTourdevote);
+
+  if (saveTourdevote!=null) {
+    console.log('result')
+    res.json({result: true})
+  }
+
+  else{
+  res.json({ result: false })
+  }
+
+}
+)
+
+
+
+
+
+router.post('/vote', async function (req, res, next) {
+
+  var isTourdevoteOpen = await tourdevoteModel.findOneAndUpdate(
+    { isOpen: true },
+    { $push: { participants: req.body.tokenFromFront } }
+  )
+
+  // var isTourdevoteOpen = await tourdevoteModel.findOne(
+  //     {isOpen: true}, function (err, doc){
+
+  //       doc.playlist.titre = req.body.titreFromFront;
+  //       doc.save();
+
+  //     }
+  // );
+
+
+  console.log(isTourdevoteOpen);
+
+  // var vote = await isTourdevoteOpen.updateOne({
+  //   _id: isTourdevoteOpen._id
+  // }, {
+  //   playlist.titre: req.body.titleFromFront
+  // }
+  // )
 
 }
 )
