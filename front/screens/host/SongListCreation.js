@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { Button, Header, Input } from 'react-native-elements';
+import { Button, Header, Input, Badge } from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars, faServer, faTrash} from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +16,7 @@ function SongListCreation(props){
 
       const [titreProposeHote, setTitreProposeHote] = useState()
       const [titreListHote, setTitreListHote] = useState([]);
+      
 
       var handleAjouterTitre = () => {
           console.log(titreProposeHote)
@@ -23,15 +24,26 @@ function SongListCreation(props){
           setTitreProposeHote('')
       }
 
-      var listHote = titreListHote.map((titre, i)=>{
-          return(
-              // <View style={styles.song}>
-              <View style={{flexDirection:'row', alignItems:'flex-end'}}>
-                  <Text style={styles.songtextAjout}>{titre}</Text>
-                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
-              </View>
-          )
-      })
+      var artistUndefined;
+      if(titreProposeHote === '' ){
+        artistUndefined = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Le champ est vide"></Badge>
+      } else {
+            var listHote = titreListHote.map((titre, i)=>{
+                return(
+                    // <View style={styles.song}>
+                    <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', }}>
+                        <Text style={styles.songtextAjout}>{titre}</Text>
+                        <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
+                    </View>
+                )
+            }) }
+// GESTION DES ERREUR A REVOIR
+    
+      // var titreAleatoire = 
+      // return (
+      //    <Text style={styles.songtext}>Shakira - Waka waka</Text>
+      // )
+     
 
     return (
       <View style={styles.container}>
@@ -56,24 +68,14 @@ function SongListCreation(props){
                       <Text style={styles.subtitle} >NOM DE LEVENT(Anniv de Maurice)</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       <View style={{flex:1, flexDirection: 'column'}}>
-                            {/* <View style={{flexDirection:'row', alignItems:'flex-end'}}>
+                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                  {/* {titreAleatoire}  à la place de  ....*/}
                                   <Text style={styles.songtext}>Shakira - Waka waka</Text>
                                   <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end'}}>
-                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
-                                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
-                            </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end'}}>
-                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
-                                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
-                            </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end'}}>
-                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
-                                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
-                            </View> */}
+                           
 
-                            <View style={{flexDirection:'column', justifyContent:'center'}}>
+                            <View style={{flexDirection:'column'}}>
                                   {listHote}
                             </View>
                       </View>
@@ -82,7 +84,8 @@ function SongListCreation(props){
                   </View>
                   
                   <View>
-                        <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between'}}>
+                    {artistUndefined}
+                        <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', marginTop:'5%'}}>
                             <Input
                                 label='Artiste - Titre :'
                                 placeholder='Lady Gaga - Poker Face'
@@ -117,7 +120,9 @@ function SongListCreation(props){
                                 backgroundColor: '#584DAD',
                                 borderRadius: 10,
                                 width: 40,
-                                color: 'white'
+                                height: 40,
+                                color: 'white',
+                                marginRight:'2%'
                             
                             }}
                             onPress={()=> handleAjouterTitre()}
@@ -125,19 +130,29 @@ function SongListCreation(props){
                             />
                         </View>
                         <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between'}}>
-                              <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1}}>
+                              <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1, marginTop:'5%'}}>
                                 <Text style={{fontFamily:'Roboto-Bold', fontSize: 18, color: '#584DAD', marginLeft:'3%'}}>Artiste - Titre aléatoire : </Text>
                                 <Text style={{fontFamily:'Roboto-Bold',fontSize: 16, color: '#fff', marginBottom:'2%'}}> %TitresBdd% </Text>
-                            </View>
+                              </View>
                             <Button 
                             title= ''
+
                             buttonStyle={{
                                 backgroundColor: '#584DAD',
                                 borderRadius: 10,
                                 width: 40,
-                                color: 'white'
+                                height: 40,
+                                color: 'white',
+                                
+                                
                             
                             }}
+                            icon={<FontAwesomeIcon
+                              icon={faServer}
+                              size={15}
+                              color="white"
+                            />
+                            }
                             onPress={()=> handleAjouterTitre()}
                             
                             />
@@ -147,7 +162,9 @@ function SongListCreation(props){
                                 backgroundColor: '#584DAD',
                                 borderRadius: 10,
                                 width: 40,
-                                color: 'white'
+                                height: 40,
+                                color: 'white',
+                                marginRight:'2%'
                             
                             }}
                             onPress={()=> handleAjouterTitre()}
@@ -271,13 +288,7 @@ function SongListCreation(props){
           marginBottom: '6%'
         },
 
-        song: {
-          flexDirection: 'row', 
-          alignItems: 'flex-end',
-          justifyContent: 'space-around',
-
-
-        }
+        
       
     });
 
