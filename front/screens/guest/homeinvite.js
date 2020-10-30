@@ -90,14 +90,6 @@ const styles = StyleSheet.create({
       paddingRight: 30 ,
       paddingLeft: 30,
     },
-<<<<<<< HEAD
-    // border: {
-    //     color: '#fff',
-    //     width: ('100%'),
-    //     height: 2,
-    // }
-=======
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
   });
 
 export default homeinvite;

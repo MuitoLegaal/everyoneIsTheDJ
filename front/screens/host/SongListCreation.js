@@ -1,28 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import { View, Text, } from 'react-native';
-import { Button } from 'react-native-elements';
-
-
-function SongListCreation(props){
-    return (
-      <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>  
-        <Text>Création de la liste de chanson par l'hôte</Text>
-
-        <Button title="Valider la liste" 
-              onPress={() => props.navigation.navigate('TimerConfigFIRST')}
-        ></Button>
-
-        
-              {/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
-              <Button buttonStyle={{paddingTop: 15}} title="<- flèche retour en haut" 
-                    onPress={() => props.navigation.navigate('EventCreation')}
-              ></Button> 
-
-      </View>
-    );
-  }
-=======
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, Header } from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -138,6 +114,5 @@ function SongListCreation(props){
         }
       
     });
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
 
   export default SongListCreation;

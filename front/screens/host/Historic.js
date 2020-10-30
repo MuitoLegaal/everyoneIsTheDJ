@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect } from 'react';
 import { View, Text, AsyncStorage, ScrollView, Image } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -65,26 +64,6 @@ function Historic(props){
 
         </ScrollView>
       
-=======
-import React from 'react';
-import { View, Text, } from 'react-native';
-import { Button } from 'react-native-elements';
-
-
-function Historic(props){
-    return (
-      
-      <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>  
-        <Text>Historique de l'hôte</Text>
-
-
-              {/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
-              <Button buttonStyle={{paddingTop: 15}} title="<- flèche retour en haut" 
-                    onPress={() => props.navigation.navigate('HomeHost')}
-              ></Button> 
-
-      </View>
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
     );
   }
 

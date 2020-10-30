@@ -12,14 +12,6 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 
-<<<<<<< HEAD
-function nouveauvote( props ) {
-
- const [vote, setVote] = useState(false);
- const [isSelected, setSelection] = useState(false);
-
- 
-=======
 
 function TitresProposes (props) {
 
@@ -68,7 +60,6 @@ function TitresProposes (props) {
 
 function nouveauvote() {
 
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
 
   const list = [
     {
@@ -99,19 +90,10 @@ function nouveauvote() {
   ]
 
 
-<<<<<<< HEAD
-  var chosenSong;
-
-  if(vote === true){
-    chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => [i](false)} />
-  }else{
-    chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => [i](true)} />
-=======
   var titresList = [];
 
   for(let i=0; i<list.length; i++){
     titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
   }
 
 
@@ -175,38 +157,8 @@ function nouveauvote() {
               <Text style={{color: 'white', fontSize: 20}} >Votez pour le prochain titre:</Text>
             </View>
 
-<<<<<<< HEAD
-            {
-              list.map((l, i) => (
-                
-                  <View key={i} style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
-
-
-                     <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
-                        <Text style={{ textAlign: 'center', color: 'white' }}>{i + 1}.</Text>
-                     </View>
-
-                     <View style={{justifyContent: 'flex-start'}} >
-                        <Text style={{color: 'white'}}>Artiste: {l.artist}</Text>
-                        <Text style={{color: 'white'}}>Titre: {l.title}</Text>
-                     </View>
-
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                      <CheckBox/>
-                    </View>
-                    
-
-                  </View>
-
-                  
-
-              ))
-            }
-
-=======
             
             {titresList}
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
             
 
           </View>

@@ -16,11 +16,7 @@ function SignIn(props) {
     
     
 var handleSignIn = async() => {
-<<<<<<< HEAD
-    
-=======
 // --------------------------------- VOS IP ICI -----------------------------------------    
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
     var rawResponse = await fetch('http://172.17.1.100:3000/sign-in', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -113,14 +109,10 @@ var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatl
             <Text style={{ textDecorationLine: 'underline', color: '#584DAD', fontFamily:'Roboto-Bold', marginBottom:'10%', textAlign:'center'}}>Mot de passe oublié?</Text>
             <Button 
                         title="Continuer" 
-<<<<<<< HEAD
-                        onPress={()=> handleSignIn()}
-=======
                         onPress={()=> 
                             props.navigation.navigate('HomeHost')
                             // handleSignIn()
                         }
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
                         buttonStyle={{
                             backgroundColor: '#584DAD',
                             borderRadius: 10,

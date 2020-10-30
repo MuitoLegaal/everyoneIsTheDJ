@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import { View, Text, } from 'react-native';
-import { Button } from 'react-native-elements';
-=======
 import { View, Text, StyleSheet, TextInput, Image} from 'react-native';
 import { Button, Header, Input, Badge } from 'react-native-elements';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -10,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { or } from 'react-native-reanimated';
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
 
 
 function EventCreation(props) {
@@ -24,11 +19,7 @@ function EventCreation(props) {
             var rawResponse = await fetch('http://172.17.1.100:3000/eventcreation', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-<<<<<<< HEAD
-                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}`
-=======
                   body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${idUser}`
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
             })
 
             var response = await rawResponse.json();
@@ -41,51 +32,6 @@ function EventCreation(props) {
             }
       }
 
-<<<<<<< HEAD
-
-
-      return (
-
-            <View style={styles.backGroundColor}>
-                  <Text>Création d'évènement par l'hôte</Text>
-                  <View style={styles.inscription}>
-                        <View style={{ justifyContent: 'center', alignItems: 'flex-start' }}>
-                              <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30} />
-                        </View>
-                        <View style={{ justifyContent: 'center' }}>
-                              <Text style={{ color: 'white', fontSize: 30 }}>DJ INVITÉ</Text>
-                        </View>
-                  </View>
-                  <View style={{ flex: 1, alignItems: 'center' }}>
-                        {logInDenied}
-                        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Nom de l'évènement:</Text>
-                        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                              onChangeText={text => setEventName(text)}
-                              value={eventName}
-                        />
-                        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>Mot de passe de l'évènement</Text>
-                        <Text style={{ color: 'white', alignSelf: 'flex-start' }}>(2 caractères minimum) :</Text>
-                        <TextInput style={{ backgroundColor: 'white', width: '90%', borderRadius: 10, marginBottom: "10%", height: '6.5%' }}
-                              onChangeText={text => setEventPassword(text)}
-                              value={eventPassword}
-                        />
-
-                        <Button title="Créer l'évènement"
-                              onPress={() => props.navigation.navigate('SongListCreation')}
-                        // onPress={() => handleEventCreation()}
-                        ></Button>
-
-                        {/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
-                        <Button buttonStyle={{ paddingTop: 15 }} title="<- flèche retour en haut"
-                              onPress={() => props.navigation.navigate('HomeHost')}
-
-                        ></Button>
-
-                  </View>
-            </View>
-      );
-}
-=======
       console.log('eventName',eventName)
       var nameForget;
       if(eventName === "" || eventPassword === ""){
@@ -238,6 +184,5 @@ const styles = StyleSheet.create({
         }
       
     });
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
 
 export default EventCreation;

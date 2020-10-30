@@ -30,11 +30,7 @@ function Parameters(props){
 
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('HomeHost')} />;
   var headerCenter = <Text style={{color: 'white'}} >Paramètres</Text>;
-<<<<<<< HEAD
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-=======
-  var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />;
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
 
 
 
