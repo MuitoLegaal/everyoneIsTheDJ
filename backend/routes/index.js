@@ -16,7 +16,11 @@ var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
+<<<<<<< HEAD
+var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
+=======
 >>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
+>>>>>>> 19b9757acdf793ff5a13dbdd98f8b08e787a314b
 
 
 // /* Web Socket */
@@ -200,7 +204,8 @@ router.post('/tourdevotecreation', async function (req, res, next) {
     event: isEventOpen._id,
     date: new Date(),
     isOpen: true,
-    participants: []
+    participants: [],
+     
   })
 
   var saveTourdevote = await newTourdevote.save();
@@ -210,7 +215,11 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
   if (saveTourdevote != null) {
     console.log('result')
+<<<<<<< HEAD
+    res.json({result: true, idTourdeVote: saveTourdevote._id})
+=======
     res.json({ result: true })
+>>>>>>> 19b9757acdf793ff5a13dbdd98f8b08e787a314b
   }
 
   else {
@@ -270,5 +279,43 @@ router.post('/vote', async function (req, res, next) {
 
 }
 )
+
+// router.post('/sign-up', async function (req, res, next) {
+
+//   var hotes = await hoteModel.findOne({ email: req.body.email });
+
+//   if (hotes === null) {
+
+//     var newHote = new hoteModel({
+//       username: req.body.username,
+//       email: req.body.email,
+//       password: req.body.password
+//     })
+
+//     var hoteSaved = await newHote.save();
+//     console.log('welcome')
+//     res.json({ result: true, hote: hoteSaved })
+//   } else {
+//     console.log('not welcome')
+//     res.json({ result: false, hote: hotes })
+//   }
+
+
+// })
+
+
+router.post('/proposition-des-titres', async function (req, res, next) {
+
+  var newPlaylist = new playlistModel({
+    titre: req.body.titreFromFront,
+    vote: [],
+  })
+  
+  var playlistSaved = await newPlaylist.save();
+
+
+  res.json({playlist: playlistSaved})
+});
+
 
 module.exports = router;
