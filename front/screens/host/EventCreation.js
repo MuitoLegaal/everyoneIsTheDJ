@@ -13,6 +13,7 @@ function EventCreation(props) {
       const [errorMessage, setErrorMessage] = useState(false);
       const [eventName, setEventName] = useState('');
       const [eventPassword, setEventPassword] = useState('');
+      
 
       var handleEventCreation = async () => {
 

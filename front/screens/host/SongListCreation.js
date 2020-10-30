@@ -20,7 +20,7 @@ function SongListCreation(props){
       var handleAjouterTitre = () => {
           console.log(titreProposeHote)
           setTitreListHote([...titreListHote, titreProposeHote])
-          //setTitreProposeHote('')
+          setTitreProposeHote('')
       }
 
       var listHote = titreListHote.map((titre, i)=>{
@@ -56,37 +56,33 @@ function SongListCreation(props){
                       <Text style={styles.subtitle} >NOM DE LEVENT(Anniv de Maurice)</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       <View style={{flex:1, flexDirection: 'column'}}>
+                            {/* <View style={{flexDirection:'row', alignItems:'flex-end'}}>
+                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
+                                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View>
                             <View style={{flexDirection:'row', alignItems:'flex-end'}}>
                                   <Text style={styles.songtext}>Shakira - Waka waka</Text>
                                   <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end'}}>
+                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
+                                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end'}}>
+                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
+                                  <FontAwesomeIcon icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View> */}
+
                             <View style={{flexDirection:'column', justifyContent:'center'}}>
                                   {listHote}
                             </View>
                       </View>
-                    <Button 
-                      title=" Rafraîchir la liste" 
-                      //onPress={() => props.navigation.navigate('EventCreation')}
-                      //onPress={() => props.navigation.navigate('TimerConfigFIRST')}
-                      buttonStyle={{
-                            backgroundColor: '#E59622',
-                            marginTop: '10%',
-                            marginBottom: '10%',
-                            borderRadius: 10,
-                            }}
-                      icon={<FontAwesomeIcon
-                              icon={faServer}
-                              size={15}
-                              color="white"
-                            />
-                              }
-                            
-                    /> 
+
+                    
                   </View>
                   
                   <View>
-
-                        <View style={{alignItems: 'center', flexDirection: 'row'}}>
+                        <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between'}}>
                             <Input
                                 label='Artiste - Titre :'
                                 placeholder='Lady Gaga - Poker Face'
@@ -100,7 +96,7 @@ function SongListCreation(props){
                                 }}
                                 inputStyle={{
                                     fontFamily:'Roboto-Bold',
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     color: '#fff',
                                 
                                 }}
@@ -128,6 +124,55 @@ function SongListCreation(props){
                             
                             />
                         </View>
+                        <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between'}}>
+                              <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1}}>
+                                <Text style={{fontFamily:'Roboto-Bold', fontSize: 18, color: '#584DAD', marginLeft:'3%'}}>Artiste - Titre aléatoire : </Text>
+                                <Text style={{fontFamily:'Roboto-Bold',fontSize: 16, color: '#fff', marginBottom:'2%'}}> %TitresBdd% </Text>
+                            </View>
+                            <Button 
+                            title= ''
+                            buttonStyle={{
+                                backgroundColor: '#584DAD',
+                                borderRadius: 10,
+                                width: 40,
+                                color: 'white'
+                            
+                            }}
+                            onPress={()=> handleAjouterTitre()}
+                            
+                            />
+                            <Button 
+                            title= '+'
+                            buttonStyle={{
+                                backgroundColor: '#584DAD',
+                                borderRadius: 10,
+                                width: 40,
+                                color: 'white'
+                            
+                            }}
+                            onPress={()=> handleAjouterTitre()}
+                            
+                            />
+                        </View>
+
+                    {/* <Button 
+                      title=" Rafraîchir la liste" 
+                      //onPress={() => props.navigation.navigate('EventCreation')}
+                      //onPress={() => props.navigation.navigate('TimerConfigFIRST')}
+                      buttonStyle={{
+                            backgroundColor: '#E59622',
+                            marginTop: '10%',
+                            marginBottom: '10%',
+                            borderRadius: 10,
+                            }}
+                      icon={<FontAwesomeIcon
+                              icon={faServer}
+                              size={15}
+                              color="white"
+                            />
+                              }
+                            
+                    />  */}
 
                   </View>
                 
@@ -193,7 +238,8 @@ function SongListCreation(props){
           paddingRight: 30 ,
           paddingLeft: 30,
           textAlign: 'center',
-          marginTop: '6%'
+          marginTop: '6%',
+          
         },
         songtext: {
           color: '#E59622',
@@ -221,7 +267,8 @@ function SongListCreation(props){
           paddingRight: 30 ,
           paddingLeft: 30,
           textAlign: 'left',
-          marginTop: '10%'
+          marginTop: '10%',
+          marginBottom: '6%'
         },
 
         song: {
