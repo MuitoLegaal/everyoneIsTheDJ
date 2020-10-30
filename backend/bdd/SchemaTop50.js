@@ -8,7 +8,7 @@ var top124Schema = mongoose.Schema({
     style: String,
 })
 
-var top124Model = mongoose.model('top124', top124Schema)
+var top124Model = mongoose.model('TOP124maxime', top124Schema)
 
 
 module.exports = top124Model;

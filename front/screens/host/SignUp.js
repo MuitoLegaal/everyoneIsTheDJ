@@ -25,7 +25,11 @@ function SignUp(props) {
     var handleSignUp = async() => {
         
         console.log('hey')
+<<<<<<< HEAD
 
+=======
+// --------------------------------- VOS IP ICI -----------------------------------------
+>>>>>>> c97a49de0195da073c0160384b3b01c95057f538
         var rawResponse = await fetch('http://172.17.1.100:3000/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},

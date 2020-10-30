@@ -12,12 +12,63 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 
+<<<<<<< HEAD
 function nouveauvote( props ) {
 
  const [vote, setVote] = useState(false);
  const [isSelected, setSelection] = useState(false);
 
  
+=======
+
+function TitresProposes (props) {
+
+
+  const [vote, setVote] = useState(false);
+
+  var chosenSong;
+
+  if(vote === true){
+    chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
+  }else{
+    chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
+  }
+
+
+  return (
+
+    <View style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
+
+
+      <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
+        <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
+      </View>
+
+      <View style={{justifyContent: 'flex-start'}} >
+        <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
+        <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
+      </View>
+
+      <View style={{flex: 1, alignItems: 'flex-end'}}>
+        {chosenSong}
+      </View>
+                    
+
+    </View>
+  )
+}
+
+
+
+
+
+
+
+
+
+function nouveauvote() {
+
+>>>>>>> c97a49de0195da073c0160384b3b01c95057f538
 
   const list = [
     {
@@ -48,12 +99,19 @@ function nouveauvote( props ) {
   ]
 
 
+<<<<<<< HEAD
   var chosenSong;
 
   if(vote === true){
     chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => [i](false)} />
   }else{
     chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => [i](true)} />
+=======
+  var titresList = [];
+
+  for(let i=0; i<list.length; i++){
+    titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
+>>>>>>> c97a49de0195da073c0160384b3b01c95057f538
   }
 
 
@@ -117,6 +175,7 @@ function nouveauvote( props ) {
               <Text style={{color: 'white', fontSize: 20}} >Votez pour le prochain titre:</Text>
             </View>
 
+<<<<<<< HEAD
             {
               list.map((l, i) => (
                 
@@ -144,6 +203,10 @@ function nouveauvote( props ) {
               ))
             }
 
+=======
+            
+            {titresList}
+>>>>>>> c97a49de0195da073c0160384b3b01c95057f538
             
 
           </View>
