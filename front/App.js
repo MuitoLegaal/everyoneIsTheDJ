@@ -81,22 +81,21 @@ const getFonts = () => Font.loadAsync({
   if(fontsLoaded){
     return (
 
+
      <Navigation/>
   
     )
   } else {
       return (
        
-        // <AppLoading
-        //   startAsync={getFonts}
-        //   onFinish={()=> setFontsLoaded(true)}
-        // />  
+        <AppLoading
+          startAsync={getFonts}
+          onFinish={()=> setFontsLoaded(true)}
+        />  
 
-
-           <AjoutTitres/>  
       )
     } 
-  }
+  };
 
 
 

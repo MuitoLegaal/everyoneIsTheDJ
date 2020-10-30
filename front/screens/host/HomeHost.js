@@ -71,6 +71,7 @@ return (
               //onPress={()=>handleSignUp()}
               buttonStyle={{
                     backgroundColor: '#584DAD',
+                    marginTop: '3%',
                     borderRadius: 10,
                     }}
                     icon={<FontAwesomeIcon
@@ -117,7 +118,8 @@ const styles = StyleSheet.create({
       fontSize: 30,
       fontFamily:'Staatliches',
       textAlign: 'left',
-      marginTop: '2%'
+      marginTop: '2%',
+      paddingLeft:'2%'
       
     },
    text: {

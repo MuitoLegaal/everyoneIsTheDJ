@@ -16,8 +16,9 @@ function SignIn(props) {
     
     
 var handleSignIn = async() => {
-// --------------------------------- VOS IP ICI -----------------------------------------    
-    var rawResponse = await fetch('http://172.17.1.100:3000/sign-in', {
+// --------------------------------- VOS IP ICI ----------------------------------------- 
+// Flo IP 192.168.0.17   
+    var rawResponse = await fetch('http://192.168.0.17:3000/sign-in', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `email=${email}&password=${password}`
