@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import Carousel from './carousel'
 
+
 export default function Onboarding({navigation}) {
   
   return (
@@ -44,7 +45,7 @@ export default function Onboarding({navigation}) {
         // ---------------------------------------------------------------------------------------------------------------------------------
         // ------ mettez le screen sur lequel vous voulez travailler rapidement ci-dessous. Exemple navigation.navigate('HomeHost')} -------
         // ---------------------------------------------------------------------------------------------------------------------------------
-        onPress={() => navigation.navigate('WinnerHost') }
+        onPress={() => navigation.navigate('Enregistrement') }
       ></Button>
 
 

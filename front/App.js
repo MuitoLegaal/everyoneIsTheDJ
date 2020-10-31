@@ -12,6 +12,8 @@ import EventName from './reducers/EventNameReducer'
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
+
+
 const getFonts = () => Font.loadAsync({
     'Staatliches': require('./assets/fonts/Staatliches/Staatliches-Regular.ttf'),
     'Roboto-Regular': require('./assets/fonts/Roboto/Roboto-Regular.ttf'),
@@ -56,6 +58,8 @@ function App() {
           /> 
 
         </Provider> 
+
+
 
      
       )
