@@ -1,15 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../bdd/connexion');
-var uid2 = require('uid2');
-var SHA256 = require('crypto-js/sha256');
-var encBase64 = require('crypto-js/enc-base64');
-var hoteModel = require('../bdd/SchemaHote');
-var eventModel = require('../bdd/SchemaEvent');
-var tourdevoteModel = require('../bdd/SchemaTourdevote');
-// const { find } = require('../bdd/SchemaHote');
-
-var uid2 = require('uid2')
 var SHA256 = require('crypto-js/sha256')
 var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
@@ -18,18 +9,13 @@ var tourdevoteModel = require('../bdd/SchemaTourdevote')
 var top124Model = require('../bdd/SchemaTop50');
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 
-
-
 // /* Web Socket */
-
 
 //var io = require('socket.io')(server);
 
 // io.on('connection', function(socket){
 //   console.log('a user connected');
 // });
-
-
 
 
 /* GET home page. */
@@ -43,8 +29,8 @@ router.get('/findTOP', async function(req,res,next){
   res.json({TOP})
   
   console.log(TOP)
-  })
-  
+})
+
 
 
 
@@ -100,12 +86,13 @@ router.post('/enregistrement', async function (req, res, next) {
   if (req.body.pseudoFromFront == ''
     || req.body.eventIdFromFront == ''
     || req.body.eventPasswordFromFront == '') {
-    error.push('/champs vides')
+    error.push('champs vides')
   }
 
   if (error.length == 0) {
     const eventExist = await eventModel.findOne({
-      id: req.body.eventIdFromFront,
+      eventId: req.body.eventIdFromFront,
+      isOpen: true
     })
 
     if (eventExist) {
@@ -117,11 +104,9 @@ router.post('/enregistrement', async function (req, res, next) {
 
       } else {
         result = false
-        error.push('mot de passe incorrect')
+        error.push('ID / mot de passe incorrect')
       }
 
-    } else {
-      error.push('ID incorrect')
     }
 
   }
@@ -152,26 +137,25 @@ router.post('/eventcreation', async function (req, res, next) {
       { user: req.body.idUserFromFront, isOpen: true }
     );
 
-  console.log("userID", userId);
+    console.log("userID", userId);
 
-    if (userId != null) {
+    if (userId) {
 
-      console.log("IFuserID", userId);
+      console.log("userId.user", userId.user);
 
-      await tourdevoteModel.updateMany(
-        { user: userId._id },
+      await eventModel.updateMany(
+        { user: userId.user },
         { isOpen: false }
       );
-
     }
 
     var newEvent = new eventModel({
 
-      user: userId._id,
+      user: req.body.idUserFromFront,
       nameEvent: req.body.eventNameFromFront,
       date: date,
       isOpen: true,
-      id: 1234,
+      eventId: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
       password: req.body.eventPasswordFromFront,
     })
 
@@ -186,6 +170,7 @@ router.post('/eventcreation', async function (req, res, next) {
     })
 
     if (saveEvent) {
+      await playlistModel.updateMany({ $set: {votes: [] }});
       result = true
     }
   }
@@ -204,6 +189,7 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
   console.log("event", isEventOpen);
 
+
   await tourdevoteModel.updateMany(
     { event: isEventOpen._id },
     { isOpen: false }
@@ -219,11 +205,14 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
   var saveTourdevote = await newTourdevote.save();
 
+  // var reset = await playlistModel.updateMany({ $set: {votes: [] }});
 
-  console.log("tourdevote", saveTourdevote);
 
-  if (saveTourdevote != null) {
+  if (saveTourdevote) {
+
     console.log('result')
+    await playlistModel.updateMany({ $set: {votes: [] }});
+
     res.json({ result: true, idTourdeVote: saveTourdevote._id })
   }
 
@@ -235,79 +224,7 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 )
 
 
-//route post initialisation de la playlist//
-
-
-
-router.post('/vote', async function (req, res, next) {
-
-  var vote = req.body.titleFromFront
-
-
-  var isEventOpen = await eventModel.findOne(
-    { isOpen: true, user: req.body.idUserFromFront }
-  )
-
-  console.log(isEventOpen._id);
-
-
-  var hasAlreadyVote = await tourdevoteModel.findOne(
-    { participants: req.body.tokenFromFront });
-
-  if (hasAlreadyVote == null) {
-
-    var isTourdevoteOpen = await tourdevoteModel.findOneAndUpdate(
-      { isOpen: true, event: isEventOpen._id },
-      { $push: { participants: req.body.tokenFromFront } }
-    )
-
-    for (let i = 0; i < vote.length; i++) {
-      await playlistModel.findOneAndUpdate(
-        {/*id: req.body.titleFromFront*/ },
-        { $push: { votes: req.body.titreFromFront[i] } }
-      )
-    }
-
-  }
-
-
-  if (vote > 0) {
-    console.log('result')
-    res.json({ result: true })
-  }
-
-  else {
-    res.json({ result: false })
-  }
-
-}
-)
-
-// router.post('/sign-up', async function (req, res, next) {
-
-//   var hotes = await hoteModel.findOne({ email: req.body.email });
-
-//   if (hotes === null) {
-
-//     var newHote = new hoteModel({
-//       username: req.body.username,
-//       email: req.body.email,
-//       password: req.body.password
-//     })
-
-//     var hoteSaved = await newHote.save();
-//     console.log('welcome')
-//     res.json({ result: true, hote: hoteSaved })
-//   } else {
-//     console.log('not welcome')
-//     res.json({ result: false, hote: hotes })
-//   }
-
-
-// })
-
-
-router.post('/proposition-des-titres', async function (req, res, next) {
+router.post('/ajoutertitre', async function (req, res, next) {
 
   var newPlaylist = new playlistModel({
     titre: req.body.titreFromFront,
@@ -320,6 +237,83 @@ router.post('/proposition-des-titres', async function (req, res, next) {
   res.json({ playlist: playlistSaved })
 });
 
+router.post('/supprimertitre', async function (req, res, next) {
+
+  var playlistSaved = await playlistModel.findByIdAndDelete(req.body.titreIdFromFront)
+
+  res.json({ playlist: playlistSaved })
+
+})
+
+router.post('/voteguest', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+
+  var hasAlreadyVote = await playlistModel.findOne(
+    { votes: req.body.tokenFromFront }
+  )
+
+  console.log('hasAlreadyVote', hasAlreadyVote);
+
+  if (hasAlreadyVote == null) {
+
+    var vote = await playlistModel.findOneAndUpdate(
+      { titre: req.body.titreFromFront },
+      { $push: { votes: req.body.tokenFromFront } }
+    )
+
+    console.log('vote', vote)
+  }
+
+
+
+  if (hasAlreadyVote) {
+    console.log('result')
+    res.json({ result: false, hasAlreadyVote })
+  }
+
+  else {
+    res.json({ result: true })
+  }
+
+}
+)
+
+router.post('/votehost', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+
+  var hasAlreadyVote = await playlistModel.findOne(
+    { votes: req.body.userIdFromFront }
+  )
+
+  console.log('hasAlreadyVote', hasAlreadyVote);
+
+  if (hasAlreadyVote == null) {
+
+    var vote = await playlistModel.findOneAndUpdate(
+      { titre: req.body.titreFromFront },
+      { $push: { votes: req.body.userIdFromFront } }
+    )
+
+    console.log('vote', vote)
+  }
+
+
+
+  if (hasAlreadyVote) {
+    console.log('result')
+    res.json({ result: false, hasAlreadyVote })
+  }
+
+  else {
+    res.json({ result: true })
+  }
+
+}
+)
 
 module.exports = router;
 

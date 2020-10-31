@@ -9,6 +9,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
+
+
 const getFonts = () => Font.loadAsync({
     'Staatliches': require('./assets/fonts/Staatliches/Staatliches-Regular.ttf'),
     'Roboto-Regular': require('./assets/fonts/Roboto/Roboto-Regular.ttf'),
@@ -42,6 +44,8 @@ const getFonts = () => Font.loadAsync({
           startAsync={getFonts}
           onFinish={()=> setFontsLoaded(true)}
         />  
+
+
 
      
       )
