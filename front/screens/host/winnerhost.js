@@ -2,11 +2,25 @@ import React, { Component } from 'react'
 import { Image, View, Text, StyleSheet, Link } from 'react-native'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { Header } from 'react-native-elements'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 
 export default function Winner(props) {
+
+  var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
+
   return (
     <View style={styles.container}>
+
+<Header
+    containerStyle={{backgroundColor: '#131313'}}
+    // leftComponent={headerLeft}
+    // centerComponent={headerCenter}
+    rightComponent={headerRight}
+    
+  /> 
       <Image source={require('../../assets/logoMini.png')} />
       <Text style={{ color: '#fff' }}>Et le gagnant est ...</Text>
       <Icon name="trophy" size={200} color="#E59622" />
