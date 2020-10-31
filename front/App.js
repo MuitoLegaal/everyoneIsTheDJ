@@ -8,6 +8,9 @@ import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import EventName from './reducers/EventNameReducer'
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 
 const getFonts = () => Font.loadAsync({
     'Staatliches': require('./assets/fonts/Staatliches/Staatliches-Regular.ttf'),
@@ -19,7 +22,10 @@ const getFonts = () => Font.loadAsync({
   import MyStack from './screens/StackNav';
   import AppDrawer from './screens/Drawer';
 
- export default function App() {
+
+const store = createStore(combineReducers({EventName}))
+
+function App() {
 
   const [ fontsLoaded, setFontsLoaded ] = useState(false);
 
@@ -27,28 +33,36 @@ const getFonts = () => Font.loadAsync({
   if(fontsLoaded){
     return (
 
-      <NavigationContainer>
+      <Provider store={store}>
 
-          <AppDrawer/>
+        <NavigationContainer>
 
-      </NavigationContainer>
+            <AppDrawer/>
+
+        </NavigationContainer>
+
+      </Provider>
 
 
     )
   } else {
       return (
+
+        <Provider store={store}>
        
-        <AppLoading
-          startAsync={getFonts}
-          onFinish={()=> setFontsLoaded(true)}
-        />  
+          <AppLoading
+            startAsync={getFonts}
+            onFinish={()=> setFontsLoaded(true)}
+          /> 
+
+        </Provider> 
 
      
       )
     } 
   };
 
-
+export default App;
 
   // pour la navigation via StackNavigator, coller ce genre de lien dans les screens
 // function ExempleScreenA(props){

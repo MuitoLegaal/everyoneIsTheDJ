@@ -7,6 +7,7 @@ import { faBars, faRedo, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { connect } from 'react-redux'
 
 
 function SongListCreation(props){
@@ -76,7 +77,7 @@ function SongListCreation(props){
            
                 {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
                       <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-                      <Text style={styles.subtitle} >NOM DE LEVENT(Anniv de Maurice)</Text>
+                      <Text style={styles.subtitle} >NOM DE LEVENT: {props.nameToDisplay}</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       {artistUndefined}
                       <View style={{flex:1, flexDirection: 'column'}}>
@@ -225,6 +226,18 @@ function SongListCreation(props){
 
     );
   }
+
+function mapStateToProps(state){
+  return{
+    nameToDisplay: state.EventName
+  }
+}
+
+
+
+
+
+
   const styles = StyleSheet.create({
       container: {
         flex:1,
@@ -301,4 +314,7 @@ function SongListCreation(props){
       
     });
 
-  export default SongListCreation;
+  export default connect(
+    mapStateToProps,
+    null
+  )(SongListCreation)
