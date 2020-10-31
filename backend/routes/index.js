@@ -7,7 +7,7 @@ var encBase64 = require('crypto-js/enc-base64');
 var hoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent');
 var tourdevoteModel = require('../bdd/SchemaTourdevote');
-// const { find } = require('../bdd/SchemaHote');
+const { find } = require('../bdd/SchemaHote');
 
 var uid2 = require('uid2')
 var SHA256 = require('crypto-js/sha256')
@@ -90,6 +90,7 @@ router.post('/enregistrement', async function (req, res, next) {
   if (error.length == 0) {
     const eventExist = await eventModel.findOne({
       id: req.body.eventIdFromFront,
+      isOpen: true
     })
 
     if (eventExist) {
@@ -101,11 +102,9 @@ router.post('/enregistrement', async function (req, res, next) {
 
       } else {
         result = false
-        error.push('mot de passe incorrect')
+        error.push('ID / mot de passe incorrect')
       }
 
-    } else {
-      error.push('ID incorrect')
     }
 
   }
@@ -136,22 +135,21 @@ router.post('/eventcreation', async function (req, res, next) {
       { user: req.body.idUserFromFront, isOpen: true }
     );
 
-  console.log("userID", userId);
+    console.log("userID", userId);
 
-    if (userId != null) {
+    if (userId) {
 
-      console.log("IFuserID", userId);
+      console.log("userId.user", userId.user);
 
-      await tourdevoteModel.updateMany(
-        { user: userId._id },
+      await eventModel.updateMany(
+        { user: userId.user },
         { isOpen: false }
       );
-
     }
 
     var newEvent = new eventModel({
 
-      user: userId._id,
+      user: req.body.idUserFromFront,
       nameEvent: req.body.eventNameFromFront,
       date: date,
       isOpen: true,
