@@ -8,27 +8,35 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 
 function AjoutTitres () {
+
+
+    const [titrePropose, setTitrePropose] = useState()
+    const [titreList, setTitreList] = useState([]);
     
     var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{height: 60, width: 60}} />
     
     
 
 var handleValider = () => {
-    console.log(titresList)
+    console.log(titreList)
+
     
 }
 
-
-
-
-
-const [titrePropose, setTitrePropose] = useState()
-const [titreList, setTitreList] = useState([]);
-
-var handleAjouter = () => {
+var handleAjouter = async() => {
     console.log(titrePropose)
 
     setTitreList([...titreList, titrePropose])
+
+    var rawResponse = await fetch('http://192.168.43.229:3000/proposition-des-titres', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `titreFromFront=${titrePropose}`
+        })
+
+    var response = await rawResponse.json();
+   
+
 }
 
 var list = titreList.map((titre, i)=>{
@@ -57,11 +65,7 @@ var list = titreList.map((titre, i)=>{
                     {list}
                 </View>
 
-            </ScrollView>
-
-            <View style={{flex: 1, margin: 15, alignSelf:'flex-end'}}>
-
-                    <View style={{alignItems: 'center', flexDirection: 'row'}}>
+                <View style={{flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'center'}}>
                         <Input
                             label='Artiste - Titre :'
                             placeholder='Lady Gaga - Poker Face'
@@ -103,9 +107,7 @@ var list = titreList.map((titre, i)=>{
                         />
                     </View>
 
-                </View>
-
-            
+            </ScrollView>
 
 
             <View style={{margin: 30}}>

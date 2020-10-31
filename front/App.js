@@ -42,7 +42,19 @@ const getFonts = () => Font.loadAsync({
           startAsync={getFonts}
           onFinish={()=> setFontsLoaded(true)}
         />  
-    
+
+     
       )
     } 
-  }
+  };
+
+
+
+  // pour la navigation via StackNavigator, coller ce genre de lien dans les screens
+// function ExempleScreenA(props){
+//   return (
+//     <View> <Button title="Go to page B"
+//      onPress={() => props.navigation.navigate('ScreenB')} />
+//     </View>
+//   );
+// }
