@@ -59,8 +59,8 @@ return (
               </View>
 
               <View>
-                <Text style={{color: 'white'}}>Anniv Claude</Text>
-                <Text style={{color: 'white'}}>Date: 11/10/2020</Text>
+                <Text style={styles.text}>Anniv Claude</Text>
+                <Text style={styles.text}>Date: 11/10/2020</Text>
               </View>
 
             </View>
@@ -73,10 +73,12 @@ return (
               </View>
 
               <View>
-                <Text style={{color: 'white'}}>Anniv Claude</Text>
-                <Text style={{color: 'white'}}>Date: 11/10/2020</Text>
+                <Text style={styles.text}>Anniv Claude</Text>
+                <Text style={styles.text}>Date: 11/10/2020</Text>
               </View>
+
             </View>
+
           </View>
         <Button 
               title=" Nouvelle soirée" 
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row', 
       justifyContent: 'space-around', 
       borderWidth: 4, 
-      padding: 10, 
+      padding: '8%',
       borderRadius: 10, 
       margin: '2%', 
       alignItems: 'center', 

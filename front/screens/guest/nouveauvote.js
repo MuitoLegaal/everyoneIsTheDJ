@@ -167,7 +167,15 @@ function nouveauvote() {
           
             <Button 
               title= '  Valider mon vote'
-              backgroundColor= '#FF0060'
+              buttonStyle={{
+                backgroundColor: '#FF0060',
+                borderRadius: 10,
+                color: 'white',
+                marginTop:'5%',
+                marginBottom:'5%',
+                fontSize: 18
+              }}
+              
               icon={
                 <FontAwesomeIcon icon={faCheck} size={15} style={{color: "white"}} />
               }
