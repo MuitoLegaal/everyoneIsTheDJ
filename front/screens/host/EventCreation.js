@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image} from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
 import { Button, Header, Input, Badge } from 'react-native-elements';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -13,177 +13,183 @@ function EventCreation(props) {
       const [errorMessage, setErrorMessage] = useState(false);
       const [eventName, setEventName] = useState('');
       const [eventPassword, setEventPassword] = useState('');
-      
+
+      const [userid, setUserid] = useState("5f9d495698cf291330135458"); /*A REMPLACER PAR UN LOCAL STORAGE DE USER ID*/
 
       var handleEventCreation = async () => {
 
-            var rawResponse = await fetch('http://172.17.1.100:3000/eventcreation', {
+            var rawResponse = await fetch('http://192.168.0.40:3000/eventcreation', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${idUser}`
+                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${userid}`
             })
 
             var response = await rawResponse.json();
 
+            console.log(response);
+
             if (response.result === true) {
-                  navigation.navigate('SongListCreation')
+
+                  props.navigation.navigate('SongListCreation')
 
             } else {
                   setErrorMessage(true)
             }
       }
 
-      console.log('eventName',eventName)
+      console.log('eventName', eventName)
       var nameForget;
-      if(eventName === "" || eventPassword === ""){
+      if (eventName === "" || eventPassword === "") {
             // setErrorMessage(true)
-            nameForget = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060', marginTop:'10%'}} value="Les deux champs sont obligatoires :) "></Badge>
+            nameForget = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060', marginTop: '10%' }} value="Les deux champs sont obligatoires :) "></Badge>
       }
 
 
       var headerCenter = <Text style={styles.title}>DJ Hôte</Text>
-      var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>
-      var headerLeft = <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30}  onPress={() => props.navigation.navigate('HomeHost')}/>
+      var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{ color: "white" }} onPress={() => props.navigation.openDrawer()} />
+      var headerLeft = <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30} onPress={() => props.navigation.navigate('HomeHost')} />
 
 
       return (
-<View style={styles.container}>
-      <View>
-                  <Header
-                  leftComponent={headerLeft}
-                  centerComponent={headerCenter}
-                  rightComponent={headerRight}
-                  containerStyle={{backgroundColor: "#131313", 
-                  //height: '20%', 
-                  alignItems: 'flex-start', 
-                  borderBottomWidth:0,  
-                  marginBottom:'5%'
-                 
-                  }}
-                  />
-      </View>
+            <View style={styles.container}>
+                  <View>
+                        <Header
+                              leftComponent={headerLeft}
+                              centerComponent={headerCenter}
+                              rightComponent={headerRight}
+                              containerStyle={{
+                                    backgroundColor: "#131313",
+                                    //height: '20%', 
+                                    alignItems: 'flex-start',
+                                    borderBottomWidth: 0,
+                                    marginBottom: '5%'
 
-        <View style={styles.wrap}>
+                              }}
+                        />
+                  </View>
 
-            <View>       
-                        {nameForget}
-                        
-                        <Input
-                                label="Nom de l'évènement"
-                                placeholder='Anniv de Maurice'
-                                type='text'
-                                containerStyle={{
-                                        color:'#fff', 
-                                        width: '100%', 
-                                        marginTop:'10%'
+                  <View style={styles.wrap}>
+
+                        <View>
+                              {nameForget}
+
+                              <Input
+                                    label="Nom de l'évènement"
+                                    placeholder='Anniv de Maurice'
+                                    type='text'
+                                    containerStyle={{
+                                          color: '#fff',
+                                          width: '100%',
+                                          marginTop: '10%'
                                     }}
-                                inputStyle={{
-                                        fontFamily:'Roboto-Bold',
-                                        fontSize: 18,
-                                        color: '#fff',
+                                    inputStyle={{
+                                          fontFamily: 'Roboto-Bold',
+                                          fontSize: 18,
+                                          color: '#fff',
 
-                                        borderBottomColor:'#000981'
-                                }}
-                                labelStyle={{
-                                    fontFamily:'Roboto-Bold',
-                                    fontSize: 20,
-                                    color: '#584DAD',
-                            
-                                }}
-                                onChangeText={text => setEventName(text)}
-                                value={eventName}
-                    />
-                   
-                    <Input
-                                label="Mot de passe de l'évènement"
-                                placeholder='MomoLeFou'
-                                type='text'
-                                containerStyle={{
-                                        color:'#fff', 
-                                        width: '100%', 
-                                        marginTop:'10%'
+                                          borderBottomColor: '#000981'
                                     }}
-                                inputStyle={{
-                                        fontFamily:'Roboto-Bold',
-                                        fontSize: 18,
-                                        color: '#fff',
-                                          borderBottomColor:'#000981'
-                                }}
-                                labelStyle={{
-                                    fontFamily:'Roboto-Bold',
-                                    fontSize: 20,
-                                    color: '#584DAD',
-                            
-                                }}
-                                onChangeText={text => setEventPassword(text)}
-                                value={eventPassword}
-                    />
+                                    labelStyle={{
+                                          fontFamily: 'Roboto-Bold',
+                                          fontSize: 20,
+                                          color: '#584DAD',
 
-                        <Button title="Créer l'évènement"
-                              onPress={() => props.navigation.navigate('SongListCreation')}
-                              buttonStyle={{
-                                    backgroundColor: '#584DAD',
-                                    borderRadius: 10,
-                                    marginTop: '10%'
                                     }}
-                        ></Button>     
+                                    onChangeText={text => setEventName(text)}
+                                    value={eventName}
+                              />
+
+                              <Input
+                                    label="Mot de passe de l'évènement"
+                                    placeholder='MomoLeFou'
+                                    type='text'
+                                    containerStyle={{
+                                          color: '#fff',
+                                          width: '100%',
+                                          marginTop: '10%'
+                                    }}
+                                    inputStyle={{
+                                          fontFamily: 'Roboto-Bold',
+                                          fontSize: 18,
+                                          color: '#fff',
+                                          borderBottomColor: '#000981'
+                                    }}
+                                    labelStyle={{
+                                          fontFamily: 'Roboto-Bold',
+                                          fontSize: 20,
+                                          color: '#584DAD',
+
+                                    }}
+                                    onChangeText={text => setEventPassword(text)}
+                                    value={eventPassword}
+                              />
+
+                              <Button title="Créer l'évènement"
+                                    onPress={() => props.navigation.navigate('SongListCreation')}
+                                    // onPress={() => handleEventCreation()} NE PAS RETIRER
+                                    buttonStyle={{
+                                          backgroundColor: '#584DAD',
+                                          borderRadius: 10,
+                                          marginTop: '10%'
+                                    }}
+                              ></Button>
+                        </View>
                   </View>
             </View>
-      </View>
       );
 }
 const styles = StyleSheet.create({
       container: {
-        flex:1,
-        backgroundColor: '#131313',
-        
+            flex: 1,
+            backgroundColor: '#131313',
+
       },
       wrap: {
-          flexDirection: 'column',
-          //alignItems: 'center',
-          //justifyContent: 'center',
-          textAlign: 'center',
-          height: hp('100%'), // 70% of height device screen
-          width: wp('100%'),  // 80% of width device screen 
-          backgroundColor: '#131313',
-          borderTopWidth:1,
-          borderTopColor:"#fff"
-    
-        },
-        title: {
-          color: '#fff',
-          fontSize: 40,
-          fontFamily:'Staatliches'
-        },
-    
-        subtitle: {
-          color: '#fff',
-          fontSize: 30,
-          fontFamily:'Staatliches',
-          textAlign: 'left',
-          marginTop: '2%'
-          
-        },
-       text: {
-          color: '#fff',
-          fontSize: 20,
-          fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
-          textAlign: 'center',
-          
-        },
-        box: {
-          flexDirection: 'row', 
-          justifyContent: 'space-around', 
-          borderWidth: 4, 
-          padding: 10, 
-          borderRadius: 10, 
-          margin: '2%', 
-          alignItems: 'center', 
-          borderColor: '#584DAD'
-        }
-      
-    });
+            flexDirection: 'column',
+            //alignItems: 'center',
+            //justifyContent: 'center',
+            textAlign: 'center',
+            height: hp('100%'), // 70% of height device screen
+            width: wp('100%'),  // 80% of width device screen 
+            backgroundColor: '#131313',
+            borderTopWidth: 1,
+            borderTopColor: "#fff"
+
+      },
+      title: {
+            color: '#fff',
+            fontSize: 40,
+            fontFamily: 'Staatliches'
+      },
+
+      subtitle: {
+            color: '#fff',
+            fontSize: 30,
+            fontFamily: 'Staatliches',
+            textAlign: 'left',
+            marginTop: '2%'
+
+      },
+      text: {
+            color: '#fff',
+            fontSize: 20,
+            fontFamily: 'Roboto-Regular',
+            paddingRight: 30,
+            paddingLeft: 30,
+            textAlign: 'center',
+
+      },
+      box: {
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            borderWidth: 4,
+            padding: 10,
+            borderRadius: 10,
+            margin: '2%',
+            alignItems: 'center',
+            borderColor: '#584DAD'
+      }
+
+});
 
 export default EventCreation;

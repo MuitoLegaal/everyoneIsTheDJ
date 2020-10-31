@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, TextInput } from 'react-native';
-import { Button, Header, Input } from 'react-native-elements';
+import { Button, Header, Input, Badge } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import AsyncStorage from '@react-native-community/async-storage';
-import uuid from 'react-uuid'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import uuid from 'react-uuid';
 
 function enregistrement({ navigation }) {
 
@@ -15,12 +15,14 @@ function enregistrement({ navigation }) {
   const [eventId, setEventId] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
 
+  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')} />;
 
   var handleEnregistrement = async () => {
 
-// --------------------------------- VOS IP ICI -----------------------------------------
-// Flo IP : 192.168.0.17
-    var rawResponse = await fetch('http://192.168.0.17:3000/enregistrement', {
+    // --------------------------------- VOS IP ICI -----------------------------------------
+    // Flo IP : 192.168.0.17
+    // Vlad : 192.168.0.40
+    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
@@ -29,136 +31,143 @@ function enregistrement({ navigation }) {
     var response = await rawResponse.json();
 
     if (response.result === true) {
-      // A verifier si le token uuid fonctionne bien comme le uid2
-      var token = uuid(32)
-      console.log(token);
-      await AsyncStorage.setItem("token", JSON.stringify(token))
-      navigation.navigate('Nouveauvote')
-  
+
+      var token = uuid();
+      await AsyncStorage.setItem("token", JSON.stringify(token));
+      navigation.navigate('Nouveauvote');
+      console.log('Login Success')
+
     } else {
       setErrorMessage(true)
+      console.log('Login Failed')
     }
-  } 
 
+}
 
-  var logInDenied;
+var logInDenied
+
   if (errorMessage === true) {
-    logInDenied = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>
+  logInDenied = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="ID et/ou Mot de Passe Incorrect(es)"></Badge>
   }
-  
-  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Onboarding')} />;
+
+  // If Champs Vide error frontend
+
 
   return (
     <View style={styles.container}>
 
-          <View style={styles.wrap}>
-                  <Header
-                          containerStyle={{backgroundColor: '#131313', borderBottomWidth: 0}}
-                          leftComponent={headerLeft}
-                          
-                  />
-              
-                   <Image 
-                          source={require('../../assets/logoMini.png')}
-                          style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent:'center', justifyContent:'center', alignItems:'center'}}
-                    />
-                    
-                    <Text style={styles.title}>DJ invité</Text>
-             
-                
-                <KeyboardAwareScrollView style={styles.main}>
-                    <Input
-                            label='Pseudo'
-                                    placeholder='Gégé'
-                                    type='text'
-                                    containerStyle={{
-                                            color:'#fff', 
-                                            width: '100%', 
-                                            marginTop:'3%'
-                                        }}
-                                    inputStyle={{
-                                            fontFamily:'Roboto-Bold',
-                                            fontSize: 18,
-                                            color: '#fff',
+      <View style={styles.wrap}>
+        <Header
+          containerStyle={{ backgroundColor: '#131313', borderBottomWidth: 0 }}
+          leftComponent={headerLeft}
 
-                                            borderBottomColor:'#000981'
-                                    }}
-                                    labelStyle={{
-                                        fontFamily:'Roboto-Bold',
-                                        fontSize: 20,
-                                        color: '#584DAD',
-                                
-                                    }}
-                                    onChangeText={text => setPseudo(text)}
-                                    value={pseudo}
-                        />
-                        <Input
-                            label="ID de l'évènement"
-                                    placeholder='#144667'
-                                    type='text'
-                                    containerStyle={{
-                                            color:'#fff', 
-                                            width: '100%', 
-                                            marginTop:'3%'
-                                        }}
-                                    inputStyle={{
-                                            fontFamily:'Roboto-Bold',
-                                            fontSize: 18,
-                                            color: '#fff',
+        />
 
-                                            borderBottomColor:'#000981'
-                                    }}
-                                    labelStyle={{
-                                        fontFamily:'Roboto-Bold',
-                                        fontSize: 20,
-                                        color: '#584DAD',
-                                
-                                    }}
-                                    onChangeText={text => setEventId(text)}
-                                    value={eventId}
-                        />
-                        <Input
-                            label="Mot de passe de l'évènement"
-                                    placeholder="Gerard La teuuuuffff de l'espace"
-                                    type='text'
-                                    containerStyle={{
-                                            color:'#fff', 
-                                            width: '100%', 
-                                            marginTop:'3%'
-                                        }}
-                                    inputStyle={{
-                                            fontFamily:'Roboto-Bold',
-                                            fontSize: 18,
-                                            color: '#fff',
+        <Image
+          source={require('../../assets/logoMini.png')}
+          style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}
+        />
 
-                                            borderBottomColor:'#000981'
-                                    }}
-                                    labelStyle={{
-                                        fontFamily:'Roboto-Bold',
-                                        fontSize: 20,
-                                        color: '#584DAD',
-                                
-                                    }}
-                                    onChangeText={text => setEventPassword(text)}
-                                    value={eventPassword}
-                        />
-                        <Button title="Rejoindre la soirée"
-                            onPress={() => navigation.navigate('Nouveauvote')}
-                            buttonStyle={{
-                              backgroundColor: '#584DAD',
-                              // paddingLeft: 120,
-                              // paddingRight: 120,
-                              // paddingTop: 10,
-                              // paddingBottom: 10,
-                              marginBottom: 20,
-                            }}></Button>
-                      
+        <Text style={styles.title}>DJ invité</Text>
 
-                </KeyboardAwareScrollView>
 
-      
+        <KeyboardAwareScrollView style={styles.main}>
+          <Input
+            label='Pseudo'
+            placeholder='Gégé'
+            type='text'
+            containerStyle={{
+              color: '#fff',
+              width: '100%',
+              marginTop: '3%'
+            }}
+            inputStyle={{
+              fontFamily: 'Roboto-Bold',
+              fontSize: 18,
+              color: '#fff',
+
+              borderBottomColor: '#000981'
+            }}
+            labelStyle={{
+              fontFamily: 'Roboto-Bold',
+              fontSize: 20,
+              color: '#584DAD',
+
+            }}
+            onChangeText={text => setPseudo(text)}
+            value={pseudo}
+          />
+          <Input
+            label="ID de l'évènement"
+            placeholder='#144667'
+            type='text'
+            containerStyle={{
+              color: '#fff',
+              width: '100%',
+              marginTop: '3%'
+            }}
+            inputStyle={{
+              fontFamily: 'Roboto-Bold',
+              fontSize: 18,
+              color: '#fff',
+
+              borderBottomColor: '#000981'
+            }}
+            labelStyle={{
+              fontFamily: 'Roboto-Bold',
+              fontSize: 20,
+              color: '#584DAD',
+
+            }}
+            onChangeText={text => setEventId(text)}
+            value={eventId}
+          />
+          <Input
+            label="Mot de passe de l'évènement"
+            placeholder="Gerard La teuuuuffff de l'espace"
+            type='text'
+            containerStyle={{
+              color: '#fff',
+              width: '100%',
+              marginTop: '3%'
+            }}
+            inputStyle={{
+              fontFamily: 'Roboto-Bold',
+              fontSize: 18,
+              color: '#fff',
+
+              borderBottomColor: '#000981'
+            }}
+            labelStyle={{
+              fontFamily: 'Roboto-Bold',
+              fontSize: 20,
+              color: '#584DAD',
+
+            }}
+            onChangeText={text => setEventPassword(text)}
+            value={eventPassword}
+          />
+          <Text>{logInDenied}</Text>
+
+          <Button title="Rejoindre la soirée"
+            onPress={() => navigation.navigate('Nouveauvote')}
+            // onPress={() => handleEnregistrement()} NE PAS RETIRER
+            buttonStyle={{
+              backgroundColor: '#584DAD',
+              // paddingLeft: 120,
+              // paddingRight: 120,
+              // paddingTop: 10,
+              // paddingBottom: 10,
+              marginBottom: 20,
+            }}></Button>
+
+
+
+        </KeyboardAwareScrollView>
+
+
+      </View>
     </View>
-  </View>
 
   );
 }
@@ -166,27 +175,27 @@ function enregistrement({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: '#131313',
-    
+
   },
- 
+
   wrap: {
     display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: '#131313',
-      alignItems: 'center',
-      height: hp('110%'), // 70% of height device screen
-      width: wp('100%')   // 80% of width device screen 
-    },
+    flexDirection: 'column',
+    backgroundColor: '#131313',
+    alignItems: 'center',
+    height: hp('110%'), // 70% of height device screen
+    width: wp('100%')   // 80% of width device screen 
+  },
   main: {
     backgroundColor: '#131313',
-    alignContent:'center',
+    alignContent: 'center',
     textAlign: 'center',
     height: '100%',
     width: '100%',
-    marginTop:'10%'
-    
+    marginTop: '10%'
+
   },
   title: {
     color: '#fff',
