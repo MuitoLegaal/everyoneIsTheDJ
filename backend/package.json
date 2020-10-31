@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@types/uid2": "0.0.0",
     "cookie-parser": "~1.4.4",
     "crypto-js": "^4.0.0",
     "debug": "~2.6.9",
@@ -14,10 +15,7 @@
     "http-errors": "~1.6.3",
     "mongoose": "^5.10.10",
     "morgan": "~1.9.1",
-<<<<<<< HEAD
-=======
     "socket.io": "^2.3.0",
->>>>>>> c97a49de0195da073c0160384b3b01c95057f538
     "uid2": "0.0.3"
   }
 }
