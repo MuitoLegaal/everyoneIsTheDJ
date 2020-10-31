@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('../bdd/connexion');
-<<<<<<< HEAD
 var uid2 = require('uid2');
 var SHA256 = require('crypto-js/sha256');
 var encBase64 = require('crypto-js/enc-base64');
@@ -9,18 +8,14 @@ var hoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent');
 var tourdevoteModel = require('../bdd/SchemaTourdevote');
 const { find } = require('../bdd/SchemaHote');
-=======
 var uid2 = require('uid2')
 var SHA256 = require('crypto-js/sha256')
 var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
-<<<<<<< HEAD
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
-=======
->>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
->>>>>>> 19b9757acdf793ff5a13dbdd98f8b08e787a314b
+
 
 
 // /* Web Socket */
@@ -160,13 +155,6 @@ router.post('/eventcreation', async function (req, res, next) {
     
     var saveEvent = await newEvent.save()
 
-<<<<<<< HEAD
-=======
-    saveEvent = await newEvent.update(
-      {'id': {"$ne": saveEvent._id}, 'nameEvent': req.body.eventNameFromFront }, {isOpen: false}
-    )
-
->>>>>>> 603f535f37e0405d1b660741200a19e236cd0f89
     var eventIsOpen = await eventModel.findOne({
       isOpen: true,
     })
@@ -215,11 +203,7 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
   if (saveTourdevote != null) {
     console.log('result')
-<<<<<<< HEAD
     res.json({result: true, idTourdeVote: saveTourdevote._id})
-=======
-    res.json({ result: true })
->>>>>>> 19b9757acdf793ff5a13dbdd98f8b08e787a314b
   }
 
   else {
