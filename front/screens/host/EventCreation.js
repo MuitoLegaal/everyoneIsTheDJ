@@ -42,7 +42,7 @@ function EventCreation(props) {
 
 
       var headerCenter = <Text style={styles.title}>DJ Hôte</Text>
-      var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />
+      var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>
       var headerLeft = <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30}  onPress={() => props.navigation.navigate('HomeHost')}/>
 
 

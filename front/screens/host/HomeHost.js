@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 function HomeHost(props){
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
-var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} />
+// var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}}  onPress={() => props.navigation.openDrawer()}/>
 
 
 
@@ -22,9 +22,22 @@ return (
     <View>
             <Header
               centerComponent={headerCenter}
-              rightComponent={headerRight}
+              // rightComponent={headerRight}
               containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
             />
+
+{/* burger menu un peu non académique fait par maxime. je n'arrive pas à mettre le onPress différemment. il y a un conflit quand je le mets autrement. onPress du burger marchait bien avec la mise en formede HomeHost qui existait jeudi, j'ai fait des tests encore samedi. Sur screen Historic et Parameters il continue de bien fonctionner */}
+            <Button 
+              buttonStyle={{
+                backgroundColor: 'transparent',
+                justifyContent: 'flex-end', 
+                alignItems: 'flex-start',
+              }}
+                icon={
+                  <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}}  onPress={() => props.navigation.openDrawer()}/>
+                }
+            /> 
+
     </View>
 
         <ScrollView style={styles.wrap}>

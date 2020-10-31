@@ -15,6 +15,7 @@ var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
+var top124Model = require('../bdd/SchemaTop50');
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 
 
@@ -32,6 +33,20 @@ var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 
 
 /* GET home page. */
+
+// -------------------- route du TOP124 --------------------------------------------------------
+router.post('/findTOP', async function(req,res,next){
+
+  var TOP = await top124Model.find();
+  
+  res.json({TOP})
+  
+  console.log(TOP)
+  })
+  
+
+
+
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -171,7 +186,6 @@ router.post('/eventcreation', async function (req, res, next) {
       result = true
     }
   }
-
   res.json({ result, eventIsOpen, eventIsClosed, error })
 })
 
@@ -305,3 +319,4 @@ router.post('/proposition-des-titres', async function (req, res, next) {
 
 
 module.exports = router;
+
