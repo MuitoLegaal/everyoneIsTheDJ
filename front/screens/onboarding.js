@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import Carousel from './carousel'
+// import socketIOClient from "socket.io-client";
+
+// var socket = socketIOClient("http://192.168.0.40:3000");
 
 
 export default function Onboarding({navigation}) {
@@ -45,7 +48,8 @@ export default function Onboarding({navigation}) {
         // ---------------------------------------------------------------------------------------------------------------------------------
         // ------ mettez le screen sur lequel vous voulez travailler rapidement ci-dessous. Exemple navigation.navigate('HomeHost')} -------
         // ---------------------------------------------------------------------------------------------------------------------------------
-        onPress={() => navigation.navigate('Enregistrement') }
+        onPress={() => navigation.navigate('SongListCreation') }
+        // onPress={()=> socket.emit("sendMessage", "Hello John !") }
       ></Button>
 
 

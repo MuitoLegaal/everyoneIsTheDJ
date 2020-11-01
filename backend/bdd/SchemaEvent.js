@@ -6,7 +6,6 @@ var eventSchema = mongoose.Schema({
     nameEvent: String,
     date: Date,
     isOpen: Boolean,
-    // participants: Array, //A SUPPRIMER INUTILE ?
     eventId: String,
     password: String
 })

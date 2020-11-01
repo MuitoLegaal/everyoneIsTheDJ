@@ -6,36 +6,62 @@ var encBase64 = require('crypto-js/enc-base64')
 var HoteModel = require('../bdd/SchemaHote');
 var eventModel = require('../bdd/SchemaEvent')
 var tourdevoteModel = require('../bdd/SchemaTourdevote')
-var top124Model = require('../bdd/SchemaTop50');
+var topModel = require('../bdd/SchemaTop');
 var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
+var server = require('../bin/www')
 
-// /* Web Socket */
 
-//var io = require('socket.io')(server);
+//ROUTE TIMER
 
-// io.on('connection', function(socket){
-//   console.log('a user connected');
-// });
+router.post('/timer', async function (req, res, next) {
+
+  // res.json({result: true})
+
+  // console.log(result)
+
+}
+);
 
 
 /* GET home page. */
 
-// -------------------- route du TOP124 --------------------------------------------------------
-router.post('/findTOP', async function (req, res, next) {
-
-  var TOP = await top124Model.find();
-
-  res.json({ TOP })
-
-  console.log(TOP)
-})
-
-
-
 
 router.get('/', function (req, res, next) {
+
   res.render('index', { title: 'Express' });
 });
+
+
+// -------------------- route du TOP --------------------------------------------------------
+router.get('/findTOP', async function(req,res,next){
+
+  var TOP = await topModel.find();
+
+  var TitresAleatoires = []
+
+  var randomNumber = Math.floor(Math.random() * 117);
+  var title1 = TOP[randomNumber].chanson
+  var title2 = TOP[randomNumber + 1].chanson
+  var title3 = TOP[randomNumber + 2].chanson
+  var title4 = TOP[randomNumber + 3].chanson
+  var title5 = TOP[randomNumber + 4].chanson
+
+  randomTitles = {title1, title2, title3, title4, title5}
+
+  res.json({randomTitles})
+
+  console.log(randomTitles)
+  
+})
+
+// router.post('/findTOP', async function(req,res,next){
+// var newTITRE = new topModel ({
+//   chanson: 'test de chanson 3'
+// })
+//   var TOP = await newTITRE.save();
+//   res.json({TOP})
+// })
+
 
 router.post('/sign-up', async function (req, res, next) {
 
@@ -112,6 +138,8 @@ router.post('/enregistrement', async function (req, res, next) {
 
   res.json({ result, eventExist, error })
 })
+
+
 
 router.post('/eventcreation', async function (req, res, next) {
 
@@ -220,7 +248,7 @@ router.post('/tourdevotecreation', async function (req, res, next) {
   }
 
 }
-)
+);
 
 
 router.post('/ajoutertitre', async function (req, res, next) {

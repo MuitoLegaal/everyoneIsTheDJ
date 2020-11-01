@@ -21,7 +21,7 @@ export default function AppDrawer() {
 
       <Drawer.Navigator initialRouteName="Home"
       drawerPosition= "right"
-      edgeWidth= {50}
+      edgeWidth= {0}
       drawerStyle={{
         backgroundColor: 'black',
         paddingTop: 30,

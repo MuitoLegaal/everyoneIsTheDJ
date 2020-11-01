@@ -20,6 +20,30 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
+
+var countdown = 1000;
+setInterval(function () {
+  countdown--;
+  io.sockets.emit('timer', { countdown: countdown });
+}, 1000);
+
+console.log(countdown);
+
+io.on('connection', function (socket) {
+
+  socket.on('sendMessage', function (message) {
+
+    socket.on('reset', function (data) {
+      countdown = 1000;
+      io.sockets.emit('timer', { countdown: countdown });
+    });
+
+    console.log(countdown);
+  });
+
+});
+
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Button, Header, Input, Badge } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -18,15 +18,30 @@ function SongListCreation(props) {
 
   const [titreProposeHote, setTitreProposeHote] = useState()
   const [titreListHote, setTitreListHote] = useState([]);
+  const [TOPlist, setTOPlist] = useState([])
 
   let artistUndefined;
   let listHote;
 
+  useEffect(() => {
+    const findTOP = async() => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
+      })
+      var TOP = await TOPdata.json();
+      setTOPlist(TOP) 
+    }
+
+    findTOP()   
+     
+    console.log('TOPlist passé par un set ici ->', TOPlist)
+  },[])
+  
 
   var handleAjouterTitre = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.0.20:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -35,7 +50,6 @@ function SongListCreation(props) {
     var response = await rawResponse.json();
 
     console.log(response);
-  
 
     //FRONT//
     console.log('titreProposeHote++++++++++++++++', titreProposeHote)
@@ -119,7 +133,26 @@ function SongListCreation(props) {
                                   <Text style={styles.songtext}>Shakira - Waka waka</Text>
                                   <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                           
+                            {/* <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                  <Text style={styles.songtext}>{TOPlist.randomTitles.title1}</Text>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                  <Text style={styles.songtext}>{TOPlist.randomTitles.title2}</Text>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                  <Text style={styles.songtext}>{TOPlist.randomTitles.title3}</Text>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                  <Text style={styles.songtext}>{TOPlist.randomTitles.title4}</Text>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                  <Text style={styles.songtext}>{TOPlist.randomTitles.title5}</Text>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
+                            </View> */}
 
                             <View style={{flexDirection:'column'}}>
                                   {listHote}
