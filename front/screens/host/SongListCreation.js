@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 
 
 function SongListCreation(props) {
+
   var headerCenter = <Text style={styles.title}>DJ Hôte</Text>
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{ color: "white" }} onPress={() => props.navigation.openDrawer()} />
   var headerLeft = <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30} onPress={() => props.navigation.navigate('EventCreation')} />
@@ -20,6 +21,7 @@ function SongListCreation(props) {
 
   let artistUndefined;
   let listHote;
+
 
   var handleAjouterTitre = async () => {
 
@@ -52,11 +54,13 @@ function SongListCreation(props) {
       );
       setTitreProposeHote('')
     }
+    
     else {
       console.log("titre proposé ========= ", titreProposeHote)
       artistUndefined = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>
     }
   }
+
 
  var handleSupprimerTitre = async () => {
 
