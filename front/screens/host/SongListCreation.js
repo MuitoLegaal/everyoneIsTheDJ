@@ -21,7 +21,7 @@ function SongListCreation(props) {
   let artistUndefined;
   let listHote;
 
-  var handleAjouterTitre = () => {
+  var handleAjouterTitre = async () => {
 
     //APPEL AU BACKEND//
     var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
