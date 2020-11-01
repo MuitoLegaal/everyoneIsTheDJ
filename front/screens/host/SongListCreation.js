@@ -7,7 +7,6 @@ import { faBars, faServer, faRedo, faTrash } from '@fortawesome/free-solid-svg-i
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { connect } from 'react-redux'
 
 
 function SongListCreation(props) {
@@ -24,7 +23,7 @@ function SongListCreation(props) {
   var handleAjouterTitre = () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.20:3000/findTOP', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -62,7 +61,7 @@ function SongListCreation(props) {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
-    var rawResponse = await fetch('http://192.168.0.20:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreIdFromFront=${idTest}`
@@ -106,7 +105,7 @@ function SongListCreation(props) {
            
                 {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
                       <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-                      <Text style={styles.subtitle} >NOM DE LEVENT: {props.nameToDisplay}</Text>
+                      <Text style={styles.subtitle} >NOM DE LEVENT(Anniv de Maurice)</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       {artistUndefined}
                       <View style={{flex:1, flexDirection: 'column'}}>
@@ -335,112 +334,100 @@ function SongListCreation(props) {
                         onPress={() => props.navigation.navigate('EventCreation')}
                   ></Button>  */}
 
-            </KeyboardAwareScrollView>
-            
-              <Button 
-                    title="Valider la liste" 
-                    //onPress={() => props.navigation.navigate('EventCreation')}
-                    onPress={() => props.navigation.navigate('TimerConfigFIRST')}
-                    buttonStyle={{
-                          backgroundColor: '#584DAD',
-                          marginTop: '3%',
-                          borderRadius: 10,
-                          }}
-                          
-                  /> 
-      </View>
+      </KeyboardAwareScrollView>
 
-    );
-  }
+      <Button
+        title="Valider la liste"
+        //onPress={() => props.navigation.navigate('EventCreation')}
+        onPress={() => props.navigation.navigate('TimerConfigFIRST')}
+        buttonStyle={{
+          backgroundColor: '#584DAD',
+          marginTop: '3%',
+          borderRadius: 10,
+        }}
 
-function mapStateToProps(state){
-  return{
-    nameToDisplay: state.EventName
-  }
+      />
+    </View >
+  
+
+  );
+
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#131313',
+  },
+
+  wrap: {
+    flexDirection: 'column',
+    textAlign: 'center',
+    height: hp('100%'), // 70% of height device screen
+    width: wp('100%'),  // 80% of width device screen 
+    backgroundColor: '#131313',
+    borderTopWidth: 1,
+    borderTopColor: "#fff",
+
+  },
+
+  title: {
+    color: '#fff',
+    fontSize: 40,
+    fontFamily: 'Staatliches'
+  },
+
+  subtitle: {
+    color: '#584DAD',
+    fontSize: 40,
+    fontFamily: 'Staatliches',
+    textAlign: 'center',
+    marginTop: '6%',
+
+  },
+
+  text: {
+    color: '#fff',
+    fontSize: 20,
+    fontFamily: 'Roboto-Regular',
+    paddingRight: 30,
+    paddingLeft: 30,
+    textAlign: 'center',
+    marginTop: '6%',
+
+  },
+  songtext: {
+    color: '#E59622',
+    fontSize: 20,
+    fontFamily: 'Roboto-Regular',
+    paddingRight: 30,
+    paddingLeft: 30,
+    textAlign: 'left',
+    marginTop: '6%'
+  },
+  songtextAjout: {
+    color: '#584DAD',
+    fontSize: 20,
+    fontFamily: 'Roboto-Regular',
+    paddingRight: 30,
+    paddingLeft: 30,
+    textAlign: 'left',
+    marginTop: '6%',
+
+  },
+  bodytext: {
+    color: '#fff',
+    fontSize: 18,
+    fontFamily: 'Roboto-Regular',
+    paddingRight: 30,
+    paddingLeft: 30,
+    textAlign: 'left',
+    marginTop: '10%',
+    marginBottom: '6%'
+  },
 
 
 
+});
 
-
-  const styles = StyleSheet.create({
-      container: {
-        flex:1,
-        backgroundColor: '#131313',
-      },
-
-      wrap: {
-          flexDirection: 'column',
-          textAlign: 'center',
-          height: hp('100%'), // 70% of height device screen
-          width: wp('100%'),  // 80% of width device screen 
-          backgroundColor: '#131313',
-          borderTopWidth:1,
-          borderTopColor:"#fff",
-         
-        },
-
-        title: {
-          color: '#fff',
-          fontSize: 40,
-          fontFamily:'Staatliches'
-        },
-    
-        subtitle: {
-          color: '#584DAD',
-          fontSize: 40,
-          fontFamily:'Staatliches',
-          textAlign: 'center',
-          marginTop: '6%',
-          
-        },
-
-       text: {
-          color: '#fff',
-          fontSize: 20,
-          fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
-          textAlign: 'center',
-          marginTop: '6%',
-          
-        },
-        songtext: {
-          color: '#E59622',
-          fontSize: 20,
-          fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
-          textAlign: 'left',
-          marginTop: '6%'
-        },
-        songtextAjout:{
-          color: '#584DAD',
-          fontSize: 20,
-          fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
-          textAlign: 'left',
-          marginTop: '6%',
-         
-        },
-        bodytext: {
-          color: '#fff',
-          fontSize: 18,
-          fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
-          textAlign: 'left',
-          marginTop: '10%',
-          marginBottom: '6%'
-        },
-
-        
-      
-    });
-
-  export default connect(
-    mapStateToProps,
-    null
-  )(SongListCreation)
+export default SongListCreation;
