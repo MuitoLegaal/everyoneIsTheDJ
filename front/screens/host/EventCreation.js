@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { or } from 'react-native-reanimated';
+import { connect } from 'react-redux';
 
 
 function EventCreation(props) {
@@ -97,7 +98,8 @@ function EventCreation(props) {
                                     }}
                                     onChangeText={text => setEventName(text)}
                                     value={eventName}
-                              />
+                                
+                               />
 
                               <Input
                                     label="Mot de passe de l'évènement"
@@ -124,20 +126,37 @@ function EventCreation(props) {
                                     value={eventPassword}
                               />
 
-                              <Button title="Créer l'évènement"
-                                    onPress={() => props.navigation.navigate('SongListCreation')}
-                                    // onPress={() => handleEventCreation()} NE PAS RETIRER
-                                    buttonStyle={{
-                                          backgroundColor: '#584DAD',
-                                          borderRadius: 10,
-                                          marginTop: '10%'
+                        <Button title="Créer l'évènement"
+                              onPress={() => {props.onSettingEventName(eventName), props.navigation.navigate('SongListCreation')}}
+                              // onPress={() => handleEventCreation()} NE PAS RETIRER
+                              buttonStyle={{
+                                    backgroundColor: '#584DAD',
+                                    borderRadius: 10,
+                                    marginTop: '10%'
                                     }}
-                              ></Button>
+                              
+                        ></Button>     
                         </View>
                   </View>
             </View>
       );
 }
+
+
+function mapDispatchToProps(dispatch){
+      return {
+            onSettingEventName: function(eventName){
+                  dispatch( {type: 'setting', eventName: eventName } )
+            }
+      }
+}
+
+
+
+
+
+
+
 const styles = StyleSheet.create({
       container: {
             flex: 1,
@@ -192,4 +211,7 @@ const styles = StyleSheet.create({
 
 });
 
-export default EventCreation;
+export default connect(
+      null,
+      mapDispatchToProps
+)(EventCreation)
