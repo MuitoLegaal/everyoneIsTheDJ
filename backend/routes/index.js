@@ -21,7 +21,7 @@ var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 /* GET home page. */
 
 // -------------------- route du TOP124 --------------------------------------------------------
-router.get('/findTOP', async function(req,res,next){
+router.post('/findTOP', async function(req,res,next){
 
   var TOP = await top124Model.find();
   

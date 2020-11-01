@@ -23,7 +23,7 @@ function SongListCreation(props) {
   var handleAjouterTitre = () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.0.20:3000/findTOP', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -61,7 +61,7 @@ function SongListCreation(props) {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
-    var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.0.20:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreIdFromFront=${idTest}`
