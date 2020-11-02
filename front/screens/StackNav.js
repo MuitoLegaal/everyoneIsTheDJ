@@ -30,6 +30,8 @@ import TimerConfigSEC from './host/TimerConfigSEC';
 import VoteHost from './host/VoteHost';
 import Winner from './host/winnerhost';
 import SongListCreation from './host/SongListCreation';
+import Countdown from './countdown';
+
 
 //import screens Guest
 import Enregistrement from './guest/enregistrement';
@@ -70,6 +72,7 @@ function MyStack() {
       <Stack.Screen name="TimerConfigSEC" component={TimerConfigSEC} />
       <Stack.Screen name="VoteHost" component={VoteHost} />
       <Stack.Screen name="WinnerHost" component={Winner} />
+      <Stack.Screen name="Countdown" component={Countdown} />
       <Stack.Screen name="SongListCreation" component={SongListCreation} />
 
     </Stack.Navigator>
