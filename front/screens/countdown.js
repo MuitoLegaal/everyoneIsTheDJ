@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 import CountDown from 'react-native-countdown-component';
-
+import Moment from 'react-moment';
 
 export default function Countdown({navigation}) {
   
@@ -18,17 +18,18 @@ useEffect(() => {
 
   findTIMER()   
    
-  // console.log('Comptes à rebours FRONT ici ->', TIMER)
+  console.log('Comptes à rebours FRONT ici ->', TIMER)
 },[])
+
 
     return (
       
-    <View style={{ flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>
 
       {TIMER!=0 && (
             <CountDown    
               size={30}
-              until={3}
+              until={5}
               onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
@@ -37,7 +38,8 @@ useEffect(() => {
               timeToShow={['H', 'M', 'S']}
               timeLabels={{h: null, m: null, s: null }}
               showSeparator
-            />)}
+            />      
+      )}
 
     </View>
 

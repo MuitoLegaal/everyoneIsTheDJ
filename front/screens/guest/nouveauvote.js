@@ -36,7 +36,7 @@ function TitresProposes (props) {
       </View>
 
       <View style={{justifyContent: 'flex-start'}} >
-        <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
+        <Text style={{color: 'white'}}>Artiste: {props.artist}</Text>
         <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
       </View>
 
@@ -134,14 +134,14 @@ function nouveauvote(props) {
 
             <CountDown
               size={30}
-              until={60}
+              until={6000}
               onFinish={() => props.navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
               timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
               separatorStyle={{ color: '#FF0060' }}
-              timeToShow={['M', 'S']}
-              timeLabels={{ m: null, s: null }}
+              timeToShow={['H', 'M', 'S']}
+              timeLabels={{h: null, m: null, s: null }}
               showSeparator
             />
 
