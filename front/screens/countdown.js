@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { AppRegistry, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 import CountDown from 'react-native-countdown-component';
-import Moment from 'react-moment';
+
 
 export default function Countdown({navigation}) {
   

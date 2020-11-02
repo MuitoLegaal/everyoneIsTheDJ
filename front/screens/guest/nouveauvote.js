@@ -57,7 +57,7 @@ function TitresProposes (props) {
 
 
 
-function nouveauvote() {
+function nouveauvote(props) {
 
 
   const list = [
