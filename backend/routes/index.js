@@ -138,7 +138,7 @@ router.post('/enregistrement', async function (req, res, next) {
   res.json({ result, eventExist, error })
 })
 
-
+//---------------------Création d'évent--------------------------
 
 router.post('/eventcreation', async function (req, res, next) {
 
@@ -204,7 +204,7 @@ router.post('/eventcreation', async function (req, res, next) {
 })
 
 
-
+//--------------------Route création tour de vote-------------------------------------
 
 
 router.post('/tourdevotecreation', async function (req, res, next) {

@@ -54,13 +54,13 @@ function ShareEvent(props){
                 // onPress={() => fetchCopiedText()}
                 // onChangeText={value => this.setState({textInputText: value})}
                 >
-                  <Text style={styles.subtitle}>Ce soir, Everyone is the DJ.</Text>
+                  <Text style={styles.subtitle}>Ce soir, avec Everyone is the DJ.</Text>
                   <Text style={styles.subtext}>Télècharge l’application pour voter :</Text> 
-                  <Text style={styles.text} selectable>https://apps.apple.com/app/apple-store/id982107779</Text>
+                  <Text style={styles.text}>https://apps.apple.com/app/apple-store/id982107779</Text>
                   <Text style={styles.subtext}>Nom de l'évènement : </Text>
-                  <Text style={styles.text} selectable>%anniv maurice </Text>
+                  <Text style={styles.text}>%anniv maurice </Text>
                   <Text style={styles.subtext}>Mot de passe de l'évènement : </Text>
-                  <Text style={styles.text} selectable>%momolefeu </Text>
+                  <Text style={styles.text}> %momolefeu </Text>
                 </View>
         
                 
@@ -73,7 +73,7 @@ function ShareEvent(props){
                                 paddingHorizontal:'30%'
                             
                             }}
-                            //onPress={() => copyToClipboard()}
+                            onPress={() => Clipboard.setString(`Ce soir, avec Everyone is the DJ.  \n Télècharge l’application pour voter : \n https://apps.apple.com/app/apple-store/id982107779 \n Nom de l'évènement : \n $.... \n Mot de passe de l'évènement : \n $....` )}
                 >
                 </Button>
 
