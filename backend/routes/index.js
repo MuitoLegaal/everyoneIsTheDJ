@@ -11,17 +11,6 @@ var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 var server = require('../bin/www')
 
 
-//ROUTE TIMER
-
-router.post('/timer', async function (req, res, next) {
-
-  // res.json({result: true})
-
-  // console.log(result)
-
-}
-);
-
 
 
 // -------------------- route initiale --------------------------------------------------------
@@ -247,13 +236,55 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
 // ---------------- route pour afficher le compte à rebours ------------------------------------
 
-router.post('/initTimer', async function (req, res, next) {
+router.post('/initTimer5', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+  var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+    {_id: req.body.tourdevoteIdFromFront},
+    { echeance: Date.now()+300000 }
+  )
+
+  console.log(tourdevoteMAJ);
+
+   
+  if (tourdevoteMAJ) {
+    res.json({result: true}) 
+  }
+
+  else {
+    res.json({result: false})
+  }
+
+});
+
+router.post('/initTimer10', async function (req, res, next) {
 
   mongoose.set('useFindAndModify', false);
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
     {_id: req.body.tourdevoteIdFromFront},
     { echeance: Date.now()+600000 }
+  )
+
+   
+  if (tourdevoteMAJ) {
+    res.json({result: true}) 
+  }
+
+  else {
+    res.json({result: false})
+  }
+
+});
+
+router.post('/initTimer20', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+  var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+    {_id: req.body.tourdevoteIdFromFront},
+    { echeance: Date.now()+1200000 }
   )
 
    

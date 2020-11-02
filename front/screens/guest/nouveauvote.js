@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 function TitresProposes (props) {
 
-
   const [vote, setVote] = useState(false);
 
   var chosenSong;
@@ -48,13 +47,6 @@ function TitresProposes (props) {
     </View>
   )
 }
-
-
-
-
-
-
-
 
 
 function nouveauvote() {
@@ -102,6 +94,25 @@ function nouveauvote() {
   var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{color: "white"}} onPress={() => navigation.navigate('Homeinvite')} />
 
 
+  //COUNTDOWN 
+  const [TIMER, setTIMER] = useState(0)
+
+  useEffect(() => {
+    const findTIMER = async() => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      })
+      var timer = await TIMERdata.json();
+      setTIMER(timer.rebours) 
+    }
+  
+    findTIMER()   
+     
+    console.log('Comptes à rebours FRONT ici ->', TIMER)
+  
+  },[TIMER])
+
+
   return (
     <View style={styles.container}>
       <Header
@@ -134,7 +145,7 @@ function nouveauvote() {
 
             <CountDown
               size={30}
-              until={60}
+              until={TIMER}
               onFinish={() => props.navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
