@@ -8,6 +8,8 @@ import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Countdown from '../countdown';
+
 
 
 
@@ -19,7 +21,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
 return (
   <View style={styles.container}>
-    <View>
+    <View style={{height: 140}}>
             <Header
               centerComponent={headerCenter}
               // rightComponent={headerRight}
@@ -42,10 +44,39 @@ return (
 
         <ScrollView style={styles.wrap}>
           
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', height: 200, borderTopWidth:1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth:1}} >
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', height: 350, borderTopWidth:1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth:1}} >
             
-            <Text style={styles.text} >Aucun évènement en cours maintenant!</Text>
-          
+            {/* option 1  */}
+            {/* <Text style={styles.text} >Aucun évènement en cours maintenant!</Text> */}
+
+            {/* option 2  */}
+                <Text style={styles.title}>Évènement :</Text>
+                <Text style={styles.subtext}>%anniv de bob%</Text>
+                <Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>
+                <Countdown/>
+
+            {/* option 3 */}
+                {/* <Text style={styles.title}>Évènement :</Text>
+                <Text style={styles.subtext}>%anniv de bob%</Text>
+                <Text style={styles.subtext}>Vote terminé : </Text>
+                <Button 
+              title="Découvrir le titre gagnant" 
+              onPress={() => props.navigation.navigate('EventCreation')}
+              //onPress={()=>handleSignUp()}
+              buttonStyle={{
+                    backgroundColor: '#FF0060',
+                    borderRadius: 10,
+                    marginTop:'25%'
+                    }}
+             titleStyle={{
+             
+              fontFamily: 'Roboto-Bold',
+              fontSize: 20
+             }}
+                    
+          />  */}
+
+                
           </View>
           <View>
 
@@ -54,27 +85,49 @@ return (
 
             <View style={styles.box} >
 
-              <View>
+              <View style={{textAlign: 'center', alignItems: 'center'}}>
                 <Image source={require('../../assets/picto-fete2.png')} style={{height: 150, width: 170}} />
               </View>
 
               <View>
-                <Text style={styles.text}>Anniv Claude</Text>
-                <Text style={styles.text}>Date: 11/10/2020</Text>
+                <Text style={styles.subtext}>%Anniv Claude % </Text>
+                <Text style={styles.text}>Date: %11/10/2020%</Text>
+                <Text style={styles.text}>Statut: %en cours%</Text>
               </View>
+              
+              {/* Option 3 if fin de timer */}
+              {/* <Button 
+              title=" + Nouveau vote" 
+              onPress={() => props.navigation.navigate('Moderation')}
+              //onPress={()=>handleSignUp()}
+              buttonStyle={{
+                    backgroundColor: '#fff',
+                    color: '#584DAD',
+                    borderColor: '#584DAD',
+                    borderWidth: 3,
+                    borderRadius: 10,
+                    marginTop:'5%'
+                    }}
+              titleStyle={{
+                color: '#584DAD',
+                fontFamily: 'Roboto-Bold'
+              }}
+              />  */}
+
 
             </View>
 
             
             <View style={styles.box} >
 
-              <View>
+              <View style={{textAlign: 'center', alignItems: 'center'}}>
                 <Image source={require('../../assets/picto-fete2.png')} style={{height: 150, width: 170}} />
               </View>
 
               <View>
-                <Text style={styles.text}>Anniv Claude</Text>
-                <Text style={styles.text}>Date: 11/10/2020</Text>
+                <Text style={styles.subtext}>%Anniv Claude % </Text>
+                <Text style={styles.text}>Date: %11/10/2020%</Text>
+                <Text style={styles.text}>Statut: %en cours%</Text>
               </View>
 
             </View>
@@ -114,8 +167,6 @@ const styles = StyleSheet.create({
   },
   wrap: {
       flexDirection: 'column',
-      //alignItems: 'center',
-      //justifyContent: 'center',
       textAlign: 'center',
       height: hp('100%'), // 70% of height device screen
       width: wp('100%'),  // 80% of width device screen 
@@ -125,7 +176,8 @@ const styles = StyleSheet.create({
     title: {
       color: '#fff',
       fontSize: 40,
-      fontFamily:'Staatliches'
+      fontFamily:'Staatliches',
+      marginTop: '2%'
     },
 
     subtitle: {
@@ -137,25 +189,45 @@ const styles = StyleSheet.create({
       marginLeft:'2%'
       
     },
-   text: {
+    subtext: {
       color: '#fff',
-      fontSize: 20,
-      fontFamily:'Roboto-Regular',
-      paddingRight: 30 ,
-      paddingLeft: 30,
+      fontSize: 30,
+      fontFamily:'Staatliches',
       textAlign: 'center',
+      marginTop: '5%',
+      marginLeft:'2%'
       
     },
-    box: {
-      flexDirection: 'row', 
-      justifyContent: 'space-around', 
-      borderWidth: 4, 
-      padding: '8%',
-      borderRadius: 10, 
-      margin: '2%', 
-      alignItems: 'center', 
-      borderColor: '#584DAD'
-    }
+    libelle:{
+      color: '#584DAD',
+        fontSize: 20,
+        fontFamily:'Roboto-Regular',
+        paddingRight: 30 ,
+        paddingLeft: 30,
+        textAlign: 'center',
+        marginTop:'6%'
+    },
+    text: {
+        color: '#fff',
+        fontSize: 20,
+        fontFamily:'Roboto-Regular',
+        textAlign: 'center',
+        marginTop: '5%',
+      
+        
+      },
+      box: {
+        flexDirection: 'column', 
+        // justifyContent: 'center',
+        borderWidth: 4, 
+        padding: '8%',
+        borderRadius: 10, 
+        margin: '2%', 
+        alignItems: 'stretch', 
+        borderColor: '#584DAD',
+        textAlign: 'center'
+        
+      }
   
 });
 

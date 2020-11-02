@@ -24,7 +24,7 @@ useEffect(() => {
 
     return (
       
-    <View style={{ flex: 1, backgroundColor:'#131313', justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
 
       {TIMER!=0 && (
             <CountDown    

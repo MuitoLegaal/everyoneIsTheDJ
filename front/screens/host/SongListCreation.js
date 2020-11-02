@@ -54,7 +54,7 @@ function SongListCreation(props) {
     //FRONT//
     console.log('titreProposeHote++++++++++++++++', titreProposeHote)
     setTitreListHote([...titreListHote, titreProposeHote])
-    if (titreProposeHote != undefined) {
+    if (titreProposeHote != null) {
       console.log("titreProposeHoteTTTTTTTTTTTT", titreProposeHote)
       listHote = titreListHote.map((titre, i) => {
         return (
@@ -68,7 +68,6 @@ function SongListCreation(props) {
       );
       setTitreProposeHote('')
     }
-    
     else {
       console.log("titre proposé ========= ", titreProposeHote)
       artistUndefined = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>
