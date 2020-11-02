@@ -21,7 +21,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
 return (
   <View style={styles.container}>
-    <View>
+    <View style={{height: 140}}>
             <Header
               centerComponent={headerCenter}
               // rightComponent={headerRight}
@@ -167,8 +167,6 @@ const styles = StyleSheet.create({
   },
   wrap: {
       flexDirection: 'column',
-      //alignItems: 'center',
-      //justifyContent: 'center',
       textAlign: 'center',
       height: hp('100%'), // 70% of height device screen
       width: wp('100%'),  // 80% of width device screen 

@@ -28,7 +28,7 @@ useEffect(() => {
       {TIMER!=0 && (
             <CountDown    
               size={30}
-              until={3}
+              until={TIMER}
               onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
