@@ -23,12 +23,12 @@ useEffect(() => {
 
     return (
       
-    <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
 
       {TIMER!=0 && (
             <CountDown    
               size={30}
-              until={TIMER}
+              until={3}
               onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
