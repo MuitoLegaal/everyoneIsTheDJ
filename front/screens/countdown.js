@@ -10,7 +10,7 @@ const [TIMER, setTIMER] = useState(0)
 useEffect(() => {
   const findTIMER = async() => {
     // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-    const TIMERdata = await fetch('http://172.17.1.106:3000/afficheTimer', {
+    const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
     })
     var TIMER = await TIMERdata.json();
     setTIMER(TIMER.rebours) 
@@ -18,12 +18,13 @@ useEffect(() => {
 
   findTIMER()   
    
-  // console.log('Comptes à rebours FRONT ici ->', TIMER)
+  console.log('Comptes à rebours FRONT ici ->', TIMER.rebours)
+
 },[])
 
     return (
       
-    <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor:'#131313', justifyContent: 'center', alignItems: 'center'}}>
 
       {TIMER!=0 && (
             <CountDown    
