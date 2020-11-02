@@ -127,42 +127,42 @@ function SongListCreation(props) {
                       <Text style={styles.subtitle} >NOM DE LEVENT: {props.nameToDisplay}</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       {artistUndefined}
-                      <View style={{flex:1, flexDirection: 'column'}}>
-                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
-                                  {/* {titreAleatoire}  à la place de  ....*/}
-                                  <Text style={styles.songtext}>Shakira - Waka waka</Text>
-                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
-                            </View>
 
                         {TOPlist!=0 && (   
-                          <View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                          
+                          <View style={{flex:1, flexDirection: 'column'}}>
+                                {/* <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                                      {titreAleatoire}
+                                      <Text style={styles.songtext}>Shakira - Waka waka</Text>
+                                      <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
+                                </View> */}
+                            <View style={styles.titre}>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title1}</Text>
-                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                            <View style={styles.titre}>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title2}</Text>
-                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                            <View style={styles.titre}>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title3}</Text>
-                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                            <View style={styles.titre}>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title4}</Text>
-                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+                            <View style={styles.titre}>
+                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title5}</Text>
-                                  <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                          </View>
+                          {/* </View> */}
+                        </View>
                         )}
 
-                            <View style={{flexDirection:'column'}}>
+                            {/* <View style={{flexDirection:'column'}}>
                                   {listHote}
-                            </View>
-                      </View>
+                            </View> */}
 
                     
                   </View>
@@ -260,7 +260,7 @@ function SongListCreation(props) {
                         </View>
           </View>
 
-        <View>
+        {/* <View>
           {artistUndefined}
           <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', marginTop: '5%' }}>
             <Input
@@ -348,7 +348,7 @@ function SongListCreation(props) {
               onPress={() => handleAjouterTitre()}
 
             />
-          </View>
+          </View> */}
 
           {/* <Button 
                       title=" Rafraîchir la liste" 
@@ -369,7 +369,7 @@ function SongListCreation(props) {
                             
                     />  */}
 
-        </View>
+        {/* </View> */}
 
 
         {/* ------------FLECHE DE RETOUR DEFINIE ICI EN DESSOUS (supprimer tout le bouton) ------------- */}
@@ -442,27 +442,27 @@ function mapStateToProps(state){
           color: '#fff',
           fontSize: 20,
           fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
+          paddingRight: '10%' ,
+          paddingLeft: '5%',
           textAlign: 'center',
           marginTop: '6%',
           
         },
         songtext: {
           color: '#E59622',
-          fontSize: 20,
+          fontSize: 18,
           fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
+          marginLeft: '5%',
+          paddingRight: '5%' ,
           textAlign: 'left',
           marginTop: '6%'
         },
         songtextAjout:{
           color: '#584DAD',
-          fontSize: 20,
+          fontSize: 18,
           fontFamily:'Roboto-Regular',
-          paddingRight: 30 ,
-          paddingLeft: 30,
+          paddingRight: '10%' ,
+          paddingLeft: '5%',
           textAlign: 'left',
           marginTop: '6%',
          
@@ -477,6 +477,12 @@ function mapStateToProps(state){
           marginTop: '10%',
           marginBottom: '6%'
         },
+        titre: {
+          flexDirection:'row', 
+          alignItems:'flex-end', 
+          justifyContent: 'flex-start', 
+          marginBottom:'5%'
+        }
 
         
       
