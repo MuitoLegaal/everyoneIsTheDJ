@@ -7,6 +7,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import AsyncStorage from '@react-native-community/async-storage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import uuid from 'react-uuid';
+import {connect} from 'react-redux';
 
 function enregistrement({ navigation }) {
 
@@ -15,14 +16,17 @@ function enregistrement({ navigation }) {
   const [eventId, setEventId] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
 
+
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')} />;
 
-  var handleEnregistrement = async () => {
+
+
+  var handleEnregistrement = async (props) => {
 
     // --------------------------------- VOS IP ICI -----------------------------------------
     // Flo IP : 192.168.0.17
     // Vlad : 192.168.0.40
-    var rawResponse = await fetch('http://172.17.1.32:3000/enregistrement', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
@@ -30,24 +34,30 @@ function enregistrement({ navigation }) {
 
     var response = await rawResponse.json();
 
+    console.log("response", response)
+
     if (response.result === true) {
 
       var token = uuid();
-      await AsyncStorage.setItem("token", JSON.stringify(token));
+      var hostID = response.eventExist.user
+      var userDATA = { token: token, hostID: hostID }
+      await AsyncStorage.setItem("user", JSON.stringify(userDATA));
       navigation.navigate('Nouveauvote');
-      console.log('Login Success')
+      console.log('Login Success');
+      props.addHostId(hostID);
+      props.addToken(token);
 
     } else {
       setErrorMessage(true)
       console.log('Login Failed')
     }
 
-}
+  }
 
-var logInDenied
+  var logInDenied
 
   if (errorMessage === true) {
-  logInDenied = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="ID et/ou Mot de Passe Incorrect(es)"></Badge>
+    logInDenied = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="ID et/ou Mot de Passe Incorrect(es)"></Badge>
   }
 
   // If Champs Vide error frontend
@@ -150,8 +160,8 @@ var logInDenied
           <Text>{logInDenied}</Text>
 
           <Button title="Rejoindre la soirée"
-            onPress={() => navigation.navigate('Nouveauvote')}
-            // onPress={() => handleEnregistrement()} NE PAS RETIRER
+            // onPress={() => navigation.navigate('Nouveauvote')}
+            onPress={() => handleEnregistrement()}
             buttonStyle={{
               backgroundColor: '#584DAD',
               // paddingLeft: 120,
@@ -160,7 +170,6 @@ var logInDenied
               // paddingBottom: 10,
               marginBottom: 20,
             }}></Button>
-
 
 
         </KeyboardAwareScrollView>
@@ -205,4 +214,17 @@ const styles = StyleSheet.create({
 
 });
 
-export default enregistrement;
+function mapDispatchToProps(dispatch) {
+  return {
+    addToken: function (token) { 
+      dispatch( {type: 'addToken', token: token} )
+    },
+    addId: function (hostId) { 
+      dispatch( {type: 'addId', hostId: hostId} )
+    },
+  }
+}
+
+
+
+export default connect (null, mapDispatchToProps)(enregistrement);
