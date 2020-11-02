@@ -22,28 +22,6 @@ router.post('/timer', async function (req, res, next) {
 }
 );
 
-// ---------------- route pour afficher le compte à rebours ------------------------------------
-router.get('/afficheTimer', async function (req, res, next) {
-
-// IL RESTE A PARAMETRER LA RECUPERATION DE LA DATE D'ECHEANCE DU TIMER FORMAT UTC
-// var queltourdevote = await tourdevoteModel.findOne();
-// var echeance = queltourdevote.date
-
-// 1604340000 Is equivalent to 11/02/2020 @ 6:00pm (UTC)
-// echeance doit être exprimé en SECONDES
-var echeance = 1604340000
-
-var maintenantMS = Date.now()
-var maintenantDIV = maintenantMS / 1000
-var maintenant = Math.trunc(maintenantDIV)
-
-var rebours = echeance - maintenant
-
-res.json({rebours}) 
-
-// console.log ('Comptes à rebours BACK ici ->', rebours)
-}
-);
 
 
 // -------------------- route initiale --------------------------------------------------------
@@ -235,9 +213,6 @@ router.post('/tourdevotecreation', async function (req, res, next) {
     { isOpen: true, user: req.body.idUserFromFront }
   )
 
-  console.log("event", isEventOpen);
-
-
   await tourdevoteModel.updateMany(
     { event: isEventOpen._id },
     { isOpen: false }
@@ -247,18 +222,17 @@ router.post('/tourdevotecreation', async function (req, res, next) {
     event: isEventOpen._id,
     date: new Date(),
     isOpen: true,
+    echeance: Date.now()+99999999999999, //ECHEANCE A L'INITIALISATION AVANT LE LANCEMENT DU VOTE
     participants: [],
 
   })
 
   var saveTourdevote = await newTourdevote.save();
 
-  // var reset = await playlistModel.updateMany({ $set: {votes: [] }});
-
 
   if (saveTourdevote) {
 
-    console.log('result')
+    console.log('result', saveTourdevote)
     await playlistModel.updateMany({ $set: {votes: [] }});
 
     res.json({ result: true, idTourdeVote: saveTourdevote._id })
@@ -270,6 +244,65 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
 }
 );
+
+// ---------------- route pour afficher le compte à rebours ------------------------------------
+
+router.post('/initTimer', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+  var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+    {_id: req.body.tourdevoteIdFromFront},
+    { echeance: Date.now()+600000 }
+  )
+
+   
+  if (tourdevoteMAJ) {
+    res.json({result: true}) 
+  }
+
+  else {
+    res.json({result: false})
+  }
+
+});
+
+
+
+router.post('/afficheTimer', async function (req, res, next) {
+
+  var tourdevote = await tourdevoteModel.findOne(
+    {_id: req.body.tourdevoteIdFromFront}
+  )
+  
+    // IL RESTE A PARAMETRER LA RECUPERATION DE LA DATE D'ECHEANCE DU TIMER FORMAT UTC
+ 
+  var echeanceMS = tourdevote.echeance
+
+  var maintenantMS = Date.now()
+  
+  var rebours = echeanceMS - maintenantMS
+
+  var reboursSEC = rebours/1000
+  var reboursFinal = Math.trunc(reboursSEC)
+
+  console.log(reboursFinal)
+
+  
+  if (tourdevote) {
+    res.json({result: true, tourdevote, reboursFinal}) 
+  }
+
+  else {
+    res.json({result: false})
+  }
+
+
+  
+  // console.log ('Comptes à rebours BACK ici ->', rebours)
+  }
+  );
+
 
 
 router.post('/ajoutertitre', async function (req, res, next) {
@@ -292,6 +325,8 @@ router.post('/supprimertitre', async function (req, res, next) {
   res.json({ playlist: playlistSaved })
 
 })
+
+
 
 router.post('/voteguest', async function (req, res, next) {
 
