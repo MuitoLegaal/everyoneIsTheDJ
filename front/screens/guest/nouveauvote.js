@@ -141,7 +141,7 @@ function nouveauvote({navigation}) {
           </View>
 
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.title}>Anniv' de Bob</Text>
+            <Text style={styles.title}> %Anniv' de Bob% </Text>
             <Image source={require('../../assets/picto-fete2.png')} style={{height: 80, width: 80, margin: 25}} />
           </View>
 
