@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 
 export default function Countdown({navigation}) {
   
-const [TIMER, setTIMER] = useState(0)
+const [TIMER, setTIMER] = useState(0);
 
 useEffect(() => {
   const findTIMER = async() => {
@@ -26,7 +26,7 @@ useEffect(() => {
       
     <View style={{ flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
 
-      {TIMER!=0 && (
+      {TIMER>0 && (
             <CountDown    
               size={30}
               until={TIMER}

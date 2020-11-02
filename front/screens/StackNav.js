@@ -35,7 +35,6 @@ import Countdown from './countdown';
 
 //import screens Guest
 import Enregistrement from './guest/enregistrement';
-import Homeinvite from './guest/homeinvite';
 import Nouveauvote from './guest/nouveauvote';
 import Validationvote from './guest/validationvote';
 import Winnerguest from './guest/winnerguest';
@@ -54,7 +53,6 @@ function MyStack() {
       {/* <Stack.Screen name="Drawer" component={AppDrawer} /> */}
       <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="Enregistrement" component={Enregistrement} />
-      <Stack.Screen name="Homeinvite" component={Homeinvite} />
       <Stack.Screen name="Nouveauvote" component={Nouveauvote} />
       <Stack.Screen name="Validationvote" component={Validationvote} />
       <Stack.Screen name="Winnerguest" component={Winnerguest} />

@@ -328,8 +328,6 @@ router.post('/afficheTimer', async function (req, res, next) {
     res.json({result: false})
   }
 
-
-  
   // console.log ('Comptes à rebours BACK ici ->', rebours)
   }
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, ScrollView } from 'react-native';
 import { Button, ListItem, CheckBox } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -49,7 +49,7 @@ function TitresProposes (props) {
 }
 
 
-function nouveauvote() {
+function nouveauvote({navigation}) {
 
 
   const list = [
@@ -96,14 +96,24 @@ function nouveauvote() {
 
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
+  var tourdevoteId = "5f9fe5ec403798a3f0938879"
 
   useEffect(() => {
+
     const findTIMER = async() => {
+
+
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `tourdevoteIdFromFront=${tourdevoteId}`
       })
+
+
       var timer = await TIMERdata.json();
-      setTIMER(timer.rebours) 
+      setTIMER(timer.reboursFinal) 
+      console.log("rebours", timer)
     }
   
     findTIMER()   
@@ -141,12 +151,14 @@ function nouveauvote() {
           
           <View style={{flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10}} >
 
-            <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
+          {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
+          <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
+          
 
-            <CountDown
+            {TIMER>0 && (<CountDown
               size={30}
               until={TIMER}
-              onFinish={() => props.navigation.navigate('Winnerguest')}
+              onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
               timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -154,7 +166,7 @@ function nouveauvote() {
               timeToShow={['M', 'S']}
               timeLabels={{ m: null, s: null }}
               showSeparator
-            />
+            />)}
 
           </View>
 
