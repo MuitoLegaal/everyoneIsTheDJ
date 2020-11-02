@@ -68,11 +68,3 @@ function App() {
 
 export default App;
 
-  // pour la navigation via StackNavigator, coller ce genre de lien dans les screens
-// function ExempleScreenA(props){
-//   return (
-//     <View> <Button title="Go to page B"
-//      onPress={() => props.navigation.navigate('ScreenB')} />
-//     </View>
-//   );
-// }
