@@ -26,7 +26,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async() => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
+      const TOPdata = await fetch('http://172.17.1.106:3000/findTOP', {
       })
       var TOP = await TOPdata.json();
       setTOPlist(TOP) 
@@ -80,7 +80,7 @@ function SongListCreation(props) {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
-    var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
+    var rawResponse = await fetch('http://172.17.1.106:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreIdFromFront=${idTest}`
@@ -133,7 +133,10 @@ function SongListCreation(props) {
                                   <Text style={styles.songtext}>Shakira - Waka waka</Text>
                                   <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
-                            {/* <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
+
+                        {TOPlist!=0 && (   
+                          <View>
+                            <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title1}</Text>
                                   <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
                             </View>
@@ -152,7 +155,9 @@ function SongListCreation(props) {
                             <View style={{flexDirection:'row', alignItems:'flex-end', justifyContent:'space-between', marginRight:'2%', marginBottom:'5%'}}>
                                   <Text style={styles.songtext}>{TOPlist.randomTitles.title5}</Text>
                                   <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff"}} />
-                            </View> */}
+                            </View>
+                          </View>
+                        )}
 
                             <View style={{flexDirection:'column'}}>
                                   {listHote}

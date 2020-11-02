@@ -22,10 +22,31 @@ router.post('/timer', async function (req, res, next) {
 }
 );
 
+// ---------------- route pour afficher le compte à rebours ------------------------------------
+router.get('/afficheTimer', async function (req, res, next) {
 
-/* GET home page. */
+// IL RESTE A PARAMETRER LA RECUPERATION DE LA DATE D'ECHEANCE DU TIMER FORMAT UTC
+// var queltourdevote = await tourdevoteModel.findOne();
+// var echeance = queltourdevote.date
+
+// 1604340000 Is equivalent to 11/02/2020 @ 6:00pm (UTC)
+// echeance doit être exprimé en SECONDES
+var echeance = 1604340000
+
+var maintenantMS = Date.now()
+var maintenantDIV = maintenantMS / 1000
+var maintenant = Math.trunc(maintenantDIV)
+
+var rebours = echeance - maintenant
+
+res.json({rebours}) 
+
+// console.log ('Comptes à rebours BACK ici ->', rebours)
+}
+);
 
 
+// -------------------- route initiale --------------------------------------------------------
 router.get('/', function (req, res, next) {
 
   res.render('index', { title: 'Express' });
