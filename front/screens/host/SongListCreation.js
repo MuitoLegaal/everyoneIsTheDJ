@@ -127,7 +127,7 @@ function SongListCreation(props) {
            
                 {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
                       <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-                      <Text style={styles.subtitle} >NOM DE LEVENT {props.nameToDisplay}</Text>
+                      <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       
                       {errorArtist}
@@ -280,11 +280,6 @@ function SongListCreation(props) {
       </View>
       );}
 
-      function mapStateToProps(state){
-        return{
-          nameToDisplay: state.EventName
-        }
-      }
 
 
   const styles = StyleSheet.create({
@@ -369,7 +364,12 @@ function SongListCreation(props) {
     });
 
 
-  export default connect(
+    function mapStateToProps(state){
+      return{
+        nameToDisplay: state.EventName
+      }
+    }
+    export default connect(
     mapStateToProps,
     null
   )(SongListCreation);
