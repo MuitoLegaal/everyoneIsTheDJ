@@ -70,7 +70,9 @@ router.post('/findTOP', async function(req,res,next){
   })
   var title5SAVED = await title5FORMATTING.save();
   
-  res.json({randomTitles, testID})
+  res.json({randomTitles})
+
+  console.log(randomTitles)
 })
 
 
