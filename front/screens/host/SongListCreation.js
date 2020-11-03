@@ -30,7 +30,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${userId}`
@@ -49,7 +49,7 @@ function SongListCreation(props) {
   var handleAjouterTitre = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://172.17.1.32:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -76,7 +76,7 @@ function SongListCreation(props) {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
-    var rawResponse = await fetch('http://172.17.1.32:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreIdFromFront=${idTest}`
@@ -93,7 +93,7 @@ function SongListCreation(props) {
   var listHote = titreListHote.map((titre, i) => {
         return (
           <View style={styles.titre}>
-          <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} key={} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
+          <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
           <Text style={styles.songtext}>{titre}</Text>
           </View>
         )
