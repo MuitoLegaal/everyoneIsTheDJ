@@ -10,47 +10,47 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 
-function TitresProposes (props) {
+function TitresProposes(props) {
 
   const [vote, setVote] = useState(false);
 
   var chosenSong;
 
-  if(vote === true){
+  if (vote === true) {
     chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
-  }else{
+  } else {
     chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
   }
 
 
   return (
 
-    <View style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
+    <View style={{ color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20 }}>
 
 
-      <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
+      <View style={{ marginRight: 10, justifyContent: 'flex-start' }} >
         <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
       </View>
 
-      <View style={{justifyContent: 'flex-start'}} >
-        <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
-        <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
+      <View style={{ justifyContent: 'flex-start' }} >
+        <Text style={{ color: 'white' }}>Artiste: {props.artiste}</Text>
+        <Text style={{ color: 'white' }}>Titre: {props.titre}</Text>
       </View>
 
-      <View style={{flex: 1, alignItems: 'flex-end'}}>
+      <View style={{ flex: 1, alignItems: 'flex-end' }}>
         {chosenSong}
       </View>
-                    
+
 
     </View>
   )
 }
 
 
-function nouveauvote({navigation}, props) {
+function nouveauvote(props) {
 
 
   const list = [
@@ -78,50 +78,92 @@ function nouveauvote({navigation}, props) {
       artist: 'Chris Jackson',
       title: 'Vice Chairman'
     },
-    
+
   ]
 
 
   var titresList = [];
 
-  for(let i=0; i<list.length; i++){
+  for (let i = 0; i < list.length; i++) {
     titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
   }
 
 
 
-  var logo = <Image source={require('../../assets/logoMini.png')} style={{height: 50, width: 50}} />
-  var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{color: "white"}} />
-  var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{color: "white"}} onPress={() => navigation.navigate('Homeinvite')} />
+  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
+  var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
+  var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Homeinvite')} />
 
 
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
-  var tourdevoteId = "5f9fe5ec403798a3f0938879"
 
   useEffect(() => {
 
-    const findTIMER = async() => {
+    const findTIMER = async () => {
 
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `tourdevoteIdFromFront=${tourdevoteId}`
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idUserFromFront=${props.hostId}`
       })
 
 
       var timer = await TIMERdata.json();
-      setTIMER(timer.reboursFinal) 
+      setTIMER(timer.reboursFinal)
       console.log("rebours", timer)
     }
-  
-    findTIMER()   
-     
+
+    findTIMER()
+
     console.log('Comptes à rebours FRONT ici ->', TIMER)
-  
-  },[TIMER])
+    console.log('hostIdState', props.hostId)
+    console.log('TokenState', props.token)
+
+  }, [TIMER])
+
+
+  var handleRefreshTIMER = async () => {
+
+    var rawResponse = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `idUserFront=${props.hostId}`
+    })
+
+    var timer = await rawResponse.json();
+
+    setTIMER(timer.reboursFinal)
+    console.log("rebours", timer)
+
+    findTIMER()
+  }
+
+
+
+
+  var handleVoteGuest = async () => {
+
+    // --------------------------------- VOS IP ICI -----------------------------------------
+    // Flo IP : 192.168.0.17
+    // Vlad : 192.168.0.40
+    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `titleFromFront=${title}&idUserFront=${props.hostId}`
+    })
+
+    var response = await rawResponse.json();
+
+    console.log("response", response)
+
+    if (response === true) {
+      props.navigation.navigate('validation vote')
+    }
+
+  }
 
 
   return (
@@ -130,107 +172,127 @@ function nouveauvote({navigation}, props) {
         leftComponent={retour}
         centerComponent={logo}
         rightComponent={logout}
-        containerStyle={{backgroundColor: '#131313', padding: 20, flex: 0.1}}
+        containerStyle={{ backgroundColor: '#131313', padding: 20, flex: 0.1 }}
       />
 
 
-      <ScrollView style={{flex: 1}} contentContainerStyle={{alignItems: 'center', justifyContent: 'center'}}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
 
 
-          <View style={{flex: 1, justifyContent: 'flex-start', marginTop: 10}}>
-            <Text style={styles.text}>Bienvenue dans l'évènement:</Text>
-          </View>
+        <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
+          <Text style={styles.text}>Bienvenue dans l'évènement:</Text>
+        </View>
 
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.title}> %Anniv' de Bob% </Text>
-            <Image source={require('../../assets/picto-fete2.png')} style={{height: 80, width: 80, margin: 25}} />
-          </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={styles.title}> %Anniv' de Bob% </Text>
+          <Image source={require('../../assets/picto-fete2.png')} style={{ height: 80, width: 80, margin: 25 }} />
+        </View>
 
 
-          
 
-          
-          <View style={{flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10}} >
+
+
+        <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
 
           {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
-          <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
-          
+          <Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>
 
-            {TIMER>0 && (<CountDown
-              size={30}
-              until={TIMER}
-              onFinish={() => navigation.navigate('Winnerguest')}
-              digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
-              digitTxtStyle={{ color: '#FF0060' }}
-              timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-              separatorStyle={{ color: '#FF0060' }}
-              timeToShow={['M', 'S']}
-              timeLabels={{ m: null, s: null }}
-              showSeparator
-            />)}
 
+          {TIMER > 0 && (<CountDown
+            size={30}
+            until={TIMER}
+            onFinish={() => navigation.navigate('Winnerguest')}
+            digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
+            digitTxtStyle={{ color: '#FF0060' }}
+            timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+            separatorStyle={{ color: '#FF0060' }}
+            timeToShow={['M', 'S']}
+            timeLabels={{ m: null, s: null }}
+            showSeparator
+          />)}
+
+        </View>
+
+
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+
+
+          <View style={{ flex: 1, margin: 30 }} >
+            <Text style={{ color: 'white', fontSize: 20 }} >Votez pour le prochain titre:</Text>
           </View>
 
 
-
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} >
-
-
-            <View style={{flex: 1, margin: 30}} >
-              <Text style={{color: 'white', fontSize: 20}} >Votez pour le prochain titre:</Text>
-            </View>
-
-            
-            {titresList}
-            
-
-          </View>
+          {titresList}
 
 
-          
-            <Button 
-              title= '  Valider mon vote'
-              buttonStyle={{
-                backgroundColor: '#FF0060',
-                borderRadius: 10,
-                color: 'white',
-                marginTop:'5%',
-                marginBottom:'5%',
-                fontSize: 18
-              }}
-              
-              icon={
-                <FontAwesomeIcon icon={faCheck} size={15} style={{color: "white"}} />
-              }
-              
-              
-            />
-               
+        </View>
+
+
+
+        <Button
+          title='  Valider mon vote'
+          buttonStyle={{
+            backgroundColor: '#FF0060',
+            borderRadius: 10,
+            color: 'white',
+            marginTop: '5%',
+            marginBottom: '5%',
+            fontSize: 18
+          }}
+
+          icon={
+            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+          }
+
+          onPress={() => handleVoteGuest()}
+
+
+        />
+
+        <Button
+          title='  REFRESH'
+          buttonStyle={{
+            backgroundColor: '#FF0060',
+            borderRadius: 10,
+            color: 'white',
+            marginTop: '5%',
+            marginBottom: '5%',
+            fontSize: 18
+          }}
+
+          icon={
+            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+          }
+
+          onPress={() => handleRefreshTIMER()}
+
+
+        />
+
 
       </ScrollView>
     </View>
-
-// onPress={() => navigation.navigate('Validationvote')}
 
 
   );
 }
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: '#131313',
-    
+
   },
- 
+
   wrap: {
     display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: '#131313',
-      alignItems: 'center',
-      height: hp('110%'), // 70% of height device screen
-      width: wp('100%')   // 80% of width device screen 
-    },
-  
+    flexDirection: 'column',
+    backgroundColor: '#131313',
+    alignItems: 'center',
+    height: hp('110%'), // 70% of height device screen
+    width: wp('100%')   // 80% of width device screen 
+  },
+
   header: {
     backgroundColor: '#131313',
     alignItems: 'center',
@@ -268,16 +330,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
 
   }
-  
+
 });
 
 
-function mapStateToProps(state){
-  return {token:state.token, hostId: state.hostId}
+function mapStateToProps(state) {
+  return { token: state.token, hostId: state.hostId }
 }
 
 
 export default connect(
   mapStateToProps,
   null
-  )(nouveauvote);
+)(nouveauvote);

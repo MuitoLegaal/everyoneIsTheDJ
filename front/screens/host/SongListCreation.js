@@ -67,14 +67,14 @@ function SongListCreation(props) {
   }
 
 
-  var handleSupprimerTitre = async () => {
+  var handleSupprimerTitre = async (titre) => {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
     var rawResponse = await fetch('http://172.17.1.32:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreIdFromFront=${idTest}`
+      body: `titreFromFront=${titre}`
     })
 
     var response = await rawResponse.json();
@@ -88,7 +88,7 @@ function SongListCreation(props) {
   var listHote = titreListHote.map((titre, i) => {
         return (
           <View style={styles.titre}>
-          <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} key={} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
+          <FontAwesomeIcon onPress={()=> handleSupprimerTitre(titre)} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
           <Text style={styles.songtext}>{titre}</Text>
           </View>
         )
@@ -119,7 +119,7 @@ function SongListCreation(props) {
            
                 {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
                       <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-                      <Text style={styles.subtitle} >NOM DE LEVENT {props.nameToDisplay}</Text>
+                      <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       
                       {errorArtist}
@@ -272,11 +272,6 @@ function SongListCreation(props) {
       </View>
       );}
 
-      function mapStateToProps(state){
-        return{
-          nameToDisplay: state.EventName
-        }
-      }
 
 
   const styles = StyleSheet.create({
@@ -359,6 +354,13 @@ function SongListCreation(props) {
         }
 
     });
+
+    
+    function mapStateToProps(state){
+      return{
+        nameToDisplay: state.EventName
+      }
+    }
 
 
   export default connect(

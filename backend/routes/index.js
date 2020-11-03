@@ -305,11 +305,13 @@ router.post('/initTimer20', async function (req, res, next) {
 
 router.post('/afficheTimer', async function (req, res, next) {
 
-  var tourdevote = await tourdevoteModel.findOne(
-    {_id: req.body.tourdevoteIdFromFront}
+  var isEventOpen = await eventModel.findOne(
+    { isOpen: true, user: req.body.idUserFromFront }
   )
-  
-    // IL RESTE A PARAMETRER LA RECUPERATION DE LA DATE D'ECHEANCE DU TIMER FORMAT UTC
+
+  var isTourdevoteOpen = await tourdevoteModel.findOne(
+    { isOpen: true, event: isEventOpen._id }
+  )
  
   var echeanceMS = tourdevote.echeance
 
@@ -323,8 +325,8 @@ router.post('/afficheTimer', async function (req, res, next) {
   console.log(reboursFinal)
 
   
-  if (tourdevote) {
-    res.json({result: true, tourdevote, reboursFinal}) 
+  if (isTourdevoteOpen) {
+    res.json({result: true, isTourdevoteOpen, reboursFinal}) 
   }
 
   else {
@@ -374,7 +376,7 @@ router.post('/voteguest', async function (req, res, next) {
   if (hasAlreadyVote == null) {
 
     var vote = await playlistModel.findOneAndUpdate(
-      { titre: req.body.titreFromFront },
+      { titre: req.body.titreFromFront, user: req.body.idUserFromFront },
       { $push: { votes: req.body.tokenFromFront } }
     )
 
