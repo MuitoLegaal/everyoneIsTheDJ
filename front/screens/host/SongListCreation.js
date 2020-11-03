@@ -142,27 +142,6 @@ function SongListCreation(props) {
           {TOPlist != 0 && (
 
             <View style={{ flex: 1, flexDirection: 'column' }}>
-              <View style={styles.titre}>
-                <FontAwesomeIcon onPress={() => handleSupprimerTitre()} icon={faTrash} size={20} style={{ color: "#fff", marginLeft: '2%' }} />
-                <Text style={styles.songtext}>{TOPlist.randomTitles.title1}</Text>
-              </View>
-              <View style={styles.titre}>
-                <FontAwesomeIcon onPress={() => handleSupprimerTitre()} icon={faTrash} size={20} style={{ color: "#fff", marginLeft: '2%' }} />
-                <Text style={styles.songtext}>{TOPlist.randomTitles.title2}</Text>
-              </View>
-              <View style={styles.titre}>
-                <FontAwesomeIcon onPress={() => handleSupprimerTitre()} icon={faTrash} size={20} style={{ color: "#fff", marginLeft: '2%' }} />
-                <Text style={styles.songtext}>{TOPlist.randomTitles.title3}</Text>
-              </View>
-              <View style={styles.titre}>
-                <FontAwesomeIcon onPress={() => handleSupprimerTitre()} icon={faTrash} size={20} style={{ color: "#fff", marginLeft: '2%' }} />
-                <Text style={styles.songtext}>{TOPlist.randomTitles.title4}</Text>
-              </View>
-              <View style={styles.titre}>
-                <FontAwesomeIcon onPress={() => handleSupprimerTitre()} icon={faTrash} size={20} style={{ color: "#fff", marginLeft: '2%' }} />
-                <Text style={styles.songtext}>{TOPlist.randomTitles.title5}</Text>
-              </View>
-
               {listHote}
             </View>
           )}

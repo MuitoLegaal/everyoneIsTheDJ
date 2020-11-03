@@ -26,7 +26,6 @@ import ShareEvent from './host/ShareEvent';
 import SignIn from './host/SignIn';
 import SignUp from './host/SignUp';
 import TimerConfigFIRST from './host/TimerConfigFIRST';
-import TimerConfigSEC from './host/TimerConfigSEC';
 import VoteHost from './host/VoteHost';
 import Winner from './host/winnerhost';
 import SongListCreation from './host/SongListCreation';
@@ -67,7 +66,6 @@ function MyStack() {
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="TimerConfigFIRST" component={TimerConfigFIRST} />
-      <Stack.Screen name="TimerConfigSEC" component={TimerConfigSEC} />
       <Stack.Screen name="VoteHost" component={VoteHost} />
       <Stack.Screen name="WinnerHost" component={Winner} />
       <Stack.Screen name="Countdown" component={Countdown} />
