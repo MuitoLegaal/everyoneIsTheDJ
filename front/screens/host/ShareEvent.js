@@ -16,8 +16,7 @@ function ShareEvent(props){
 
   const [copiedText, setCopiedText] = useState('')
 
-  // utilisation de clipboard pour copier un bloc de text  mais comment ? actuellement les id et mdp sont individuellement copiable
-
+  // utilisation de clipboard pour copier un bloc de text 
     
     
   //console.log(props);
