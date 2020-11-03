@@ -50,12 +50,7 @@ export default function Onboarding({navigation}) {
         // ---------------------------------------------------------------------------------------------------------------------------------
         // ------ mettez le screen sur lequel vous voulez travailler rapidement ci-dessous. Exemple navigation.navigate('HomeHost')} -------
         // ---------------------------------------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
-        onPress={() => navigation.navigate('Moderation') }
-=======
-        onPress={() => navigation.navigate('WinnerHost') }
-        //onPress={() => navigation.navigate('SongListCreation') }
->>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
+        onPress={() => navigation.navigate('SongListCreation') }
         // onPress={()=> socket.emit("sendMessage", "Hello John !") }
       ></Button>
 

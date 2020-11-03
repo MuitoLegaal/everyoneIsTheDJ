@@ -22,9 +22,6 @@ function Moderation(props) {
   const [error, setError] = useState()
 
 
-
-
-  
   var handleSupprimerTitre = async (element) => {
 
     setTitreInputList(TitreInputList.filter((e)=>(e !== element)))

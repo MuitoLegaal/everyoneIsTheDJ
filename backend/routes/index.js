@@ -32,7 +32,7 @@ router.post('/findTOP', async function(req,res,next){
   var title4 = TOP[randomNumber + 3].chanson
   var title5 = TOP[randomNumber + 4].chanson
 
-  randomTitles = {title1, title2, title3, title4, title5}
+  var randomTitles = [title1, title2, title3, title4, title5]
 
   // ---------------------- 5 titres suggérés en BDD playlist sans passer par le front ---------------
   var title1FORMATTING = new playlistModel ({
