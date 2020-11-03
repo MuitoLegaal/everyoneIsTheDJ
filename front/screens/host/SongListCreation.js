@@ -22,10 +22,8 @@ function SongListCreation(props) {
   const [userId, setuserId] = useState('userId_TEST_00000')
   const [errorArtist, setErrorArtist] = useState();
 
-  var listHote
+  var listHote;
 
-
-  let artistUndefined;
 
   useEffect(() => {
     const findTOP = async () => {
