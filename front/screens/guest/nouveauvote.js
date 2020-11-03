@@ -87,26 +87,26 @@ function nouveauvote(props) {
 
 
 
-  // var handleVoteGuest = async () => {
+  var handleVoteGuest = async () => {
 
-  //   // --------------------------------- VOS IP ICI -----------------------------------------
-  //   // Flo IP : 192.168.0.17
-  //   // Vlad : 192.168.0.40
-  //   var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: `titleFromFront=${title}&idUserFront=${props.hostId}`
-  //   })
+    // --------------------------------- VOS IP ICI -----------------------------------------
+    // Flo IP : 192.168.0.17
+    // Vlad : 192.168.0.40
+    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `titleFromFront=${title}&idUserFront=${props.hostId}`
+    })
 
-  //   var response = await rawResponse.json();
+    var response = await rawResponse.json();
 
-  //   console.log("response", response)
+    console.log("response", response)
 
-  //   if (response === true) {
-  //     props.navigation.navigate('validation vote')
-  //   }
+    if (response === true) {
+      props.navigation.navigate('Validationvote')
+    }
 
-  // }
+  }
 
 
 

@@ -24,13 +24,10 @@ function SongListCreation(props) {
 
   var listHote
 
-
-  let artistUndefined;
-
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.0.40:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${userId}`
@@ -49,7 +46,7 @@ function SongListCreation(props) {
   var handleAjouterTitre = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://172.17.1.32:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -63,23 +60,20 @@ function SongListCreation(props) {
       console.log("titre proposé ========= ", titreProposeHote)
       
     if(titreProposeHote === undefined){
-        setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
+      setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
     } else {
        setErrorArtist()
        setTitreListHote([...titreListHote, titreProposeHote])
-       
     }
   }
 
 
   var handleSupprimerTitre = async (titre) => {
 
-    var idTest = "5f9d9e1aa3eb5025a0a807ed"
-
-    var rawResponse = await fetch('http://172.17.1.32:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreFromFront=${titre}`
+      body: `titreFromFront=${titre}&userIdFromFront=${hostId}`
     })
 
     var response = await rawResponse.json();

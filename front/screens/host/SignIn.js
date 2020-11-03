@@ -5,6 +5,8 @@ import Ionicons from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AsyncStorage from '@react-native-community/async-storage';
+import {connect} from 'react-redux';
 
 
 function SignIn(props) {
@@ -30,6 +32,11 @@ var handleSignIn = async() => {
     if(response.result === false){
         setErrorMessage(true)
     } else {
+        var hostId = response.hote._id
+        console.log('hostID', hostId)
+        await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
+        console.log('SignUp Success')
+        props.addId(hostId);
         props.navigation.navigate('HomeHost')
     }
 
@@ -147,4 +154,12 @@ var styles = StyleSheet.create({
 })
 
 
-export default SignIn;
+function mapDispatchToProps(dispatch) {
+    return {
+      addId: function (hostId) { 
+        dispatch( {type: 'addId', hostId: hostId} )
+      }
+    }
+  }
+  
+export default connect (null, mapDispatchToProps)(SignIn);

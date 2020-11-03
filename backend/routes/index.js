@@ -88,14 +88,15 @@ router.post('/sign-up', async function (req, res, next) {
     })
 
     var hoteSaved = await newHote.save();
-    console.log('welcome')
-    res.json({ result: true, hote: hoteSaved })
-  } else {
-    console.log('not welcome')
-    res.json({ result: false, hote: hotes })
+  
+    if (hoteSaved === null) {
+      console.log('no')
+      res.json({ result: false })
+    } else {
+      console.log('yes')
+      res.json({ result: true, hote: hoteSaved })
+    }
   }
-
-
 })
 
 
@@ -104,10 +105,10 @@ router.post('/sign-in', async function (req, res, next) {
 
   if (hotes === null) {
     console.log('no')
-    res.json({ result: false, user: hotes })
+    res.json({ result: false})
   } else {
     console.log('yes')
-    res.json({ result: true, user: hotes })
+    res.json({ result: true, hote: hotes })
   }
 
 })
