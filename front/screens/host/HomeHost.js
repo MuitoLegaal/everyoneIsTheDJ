@@ -21,7 +21,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
 return (
   <View style={styles.container}>
-    <View>
+    <View style={{height:150}}>
             <Header
               centerComponent={headerCenter}
               // rightComponent={headerRight}
@@ -50,13 +50,13 @@ return (
             {/* <Text style={styles.text} >Aucun évènement en cours maintenant!</Text> */}
 
             {/* option 2  */}
-                <Text style={styles.title}>Évènement :</Text>
-                <Text style={styles.subtext}>%anniv de bob%</Text>
+                {/* <Text style={styles.title}>Évènement :</Text>
+                <Text style={styles.subtext}> props.nameEvent </Text>
                 <Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>
-                <Countdown/>
+                <Countdown/> */}
 
             {/* option 3 */}
-                {/* <Text style={styles.title}>Évènement :</Text>
+                <Text style={styles.title}>Évènement :</Text>
                 <Text style={styles.subtext}>%anniv de bob%</Text>
                 <Text style={styles.subtext}>Vote terminé : </Text>
                 <Button 
@@ -74,13 +74,13 @@ return (
               fontSize: 20
              }}
                     
-          />  */}
+          /> 
 
                 
           </View>
           <View>
 
-            <Text style={styles.subtitle} >Mes Evenements</Text>
+            <Text style={styles.subtitle} >Mes évènements</Text>
            
 
             <View style={styles.box} >
@@ -136,6 +136,7 @@ return (
         <Button 
               title=" Nouvelle soirée" 
               onPress={() => props.navigation.navigate('EventCreation')}
+              //onPress={() => props.navigation.navigate('Countdown')}
               //onPress={()=>handleSignUp()}
               buttonStyle={{
                     backgroundColor: '#584DAD',

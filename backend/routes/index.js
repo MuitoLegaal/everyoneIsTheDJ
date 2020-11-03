@@ -11,17 +11,6 @@ var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 var server = require('../bin/www')
 
 
-//ROUTE TIMER
-
-router.post('/timer', async function (req, res, next) {
-
-  // res.json({result: true})
-
-  // console.log(result)
-
-}
-);
-
 
 
 // -------------------- route initiale --------------------------------------------------------
@@ -31,12 +20,10 @@ router.get('/', function (req, res, next) {
 });
 
 
-// -------------------- route du TOP --------------------------------------------------------
-router.get('/findTOP', async function(req,res,next){
+// -------------------------------------- route appelant le TOP -------------------------------------
+router.post('/findTOP', async function(req,res,next){
 
   var TOP = await topModel.find();
-
-  var TitresAleatoires = []
 
   var randomNumber = Math.floor(Math.random() * 117);
   var title1 = TOP[randomNumber].chanson
@@ -47,19 +34,45 @@ router.get('/findTOP', async function(req,res,next){
 
   randomTitles = {title1, title2, title3, title4, title5}
 
-  res.json({randomTitles})
+  // ---------------------- 5 titres suggérés en BDD playlist sans passer par le front ---------------
+  var title1FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title1,
+    votes: [],
+  })
+  var title1SAVED = await title1FORMATTING.save();
 
-  console.log(randomTitles)
+  var title2FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title2,
+    votes: [],
+  })
+  var title2SAVED = await title2FORMATTING.save();
+
+  var title3FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title3,
+    votes: [],
+  })
+  var title3SAVED = await title3FORMATTING.save();
+
+  var title4FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title4,
+    votes: [],
+  })
+  var title4SAVED = await title4FORMATTING.save();
+
+  var title5FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title5,
+    votes: [],
+  })
+  var title5SAVED = await title5FORMATTING.save();
   
+  res.json({randomTitles, testID})
 })
 
-// router.post('/findTOP', async function(req,res,next){
-// var newTITRE = new topModel ({
-//   chanson: 'test de chanson 3'
-// })
-//   var TOP = await newTITRE.save();
-//   res.json({TOP})
-// })
 
 
 router.post('/sign-up', async function (req, res, next) {
@@ -138,7 +151,7 @@ router.post('/enregistrement', async function (req, res, next) {
   res.json({ result, eventExist, error })
 })
 
-
+//---------------------Création d'évent--------------------------
 
 router.post('/eventcreation', async function (req, res, next) {
 
@@ -204,7 +217,7 @@ router.post('/eventcreation', async function (req, res, next) {
 })
 
 
-
+//--------------------Route création tour de vote-------------------------------------
 
 
 router.post('/tourdevotecreation', async function (req, res, next) {
@@ -247,13 +260,55 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
 // ---------------- route pour afficher le compte à rebours ------------------------------------
 
-router.post('/initTimer', async function (req, res, next) {
+router.post('/initTimer5', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+  var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+    {_id: req.body.tourdevoteIdFromFront},
+    { echeance: Date.now()+300000 }
+  )
+
+  console.log(tourdevoteMAJ);
+
+   
+  if (tourdevoteMAJ) {
+    res.json({result: true}) 
+  }
+
+  else {
+    res.json({result: false})
+  }
+
+});
+
+router.post('/initTimer10', async function (req, res, next) {
 
   mongoose.set('useFindAndModify', false);
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
     {_id: req.body.tourdevoteIdFromFront},
     { echeance: Date.now()+600000 }
+  )
+
+   
+  if (tourdevoteMAJ) {
+    res.json({result: true}) 
+  }
+
+  else {
+    res.json({result: false})
+  }
+
+});
+
+router.post('/initTimer20', async function (req, res, next) {
+
+  mongoose.set('useFindAndModify', false);
+
+  var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+    {_id: req.body.tourdevoteIdFromFront},
+    { echeance: Date.now()+1200000 }
   )
 
    
@@ -297,8 +352,6 @@ router.post('/afficheTimer', async function (req, res, next) {
     res.json({result: false})
   }
 
-
-  
   // console.log ('Comptes à rebours BACK ici ->', rebours)
   }
   );
@@ -399,4 +452,3 @@ router.post('/votehost', async function (req, res, next) {
 )
 
 module.exports = router;
-

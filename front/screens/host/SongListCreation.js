@@ -16,9 +16,10 @@ function SongListCreation(props) {
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{ color: "white" }} onPress={() => props.navigation.openDrawer()} />
   var headerLeft = <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30} onPress={() => props.navigation.navigate('EventCreation')} />
 
-  const [titreProposeHote, setTitreProposeHote] = useState()
+  const [titreProposeHote, setTitreProposeHote] = useState();
   const [titreListHote, setTitreListHote] = useState([]);
-  const [TOPlist, setTOPlist] = useState([])
+  const [TOPlist, setTOPlist] = useState([]);
+  const [userId, setuserId] = useState('userId_TEST_00000')
 
   let artistUndefined;
   let listHote;
@@ -26,7 +27,10 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async() => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://172.17.1.106:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `userIdFromFront=${userId}`
       })
       var TOP = await TOPdata.json();
       setTOPlist(TOP) 
@@ -35,6 +39,7 @@ function SongListCreation(props) {
     findTOP()   
      
     console.log('TOPlist passé par un set ici ->', TOPlist)
+
   },[])
   
 
@@ -92,9 +97,6 @@ function SongListCreation(props) {
 
 
 
-
-
-
   // GESTION DES ERREUR A REVOIR
 
   // var titreAleatoire = 
@@ -123,7 +125,7 @@ function SongListCreation(props) {
            
                 {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
                       <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-                      <Text style={styles.subtitle} >NOM DE LEVENT: {props.nameToDisplay}</Text>
+                      <Text style={styles.subtitle} >NOM DE LEVENT {props.nameToDisplay}</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       {artistUndefined}
 
@@ -213,7 +215,7 @@ function SongListCreation(props) {
                         </View>
 
 
-                        <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'5%'}}>
+                        {/* <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'5%'}}>
                               <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1, marginTop:'5%'}}>
                                 <Text style={{fontFamily:'Roboto-Bold', fontSize: 18, color: '#584DAD', marginLeft:'3%', marginBottom:'5%'}}>Artiste - Titre aléatoire : </Text>
                                 <Text style={{fontFamily:'Roboto-Bold',fontSize: 16, color: '#fff', marginBottom:'2%'}}> %TitresBdd% </Text>
@@ -251,12 +253,12 @@ function SongListCreation(props) {
                             }}
                             //onPress={()=> handleAjouterTitre()}
                             />
-                        </View>
+                        </View> */}
 
-
+{/* 
                         <View style={{ flexDirection: 'column' }}>
                           {listHote}
-                        </View>
+                        </View> */}
           </View>
 
         {/* <View>
@@ -480,7 +482,8 @@ function mapStateToProps(state){
           flexDirection:'row', 
           alignItems:'flex-end', 
           justifyContent: 'flex-start', 
-          marginBottom:'5%'
+          marginBottom:'5%',
+          marginRight: '2%'
         }
 
         

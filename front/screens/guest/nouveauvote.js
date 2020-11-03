@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, ScrollView } from 'react-native';
 import { Button, ListItem, CheckBox } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 
 function TitresProposes (props) {
-
 
   const [vote, setVote] = useState(false);
 
@@ -36,7 +35,7 @@ function TitresProposes (props) {
       </View>
 
       <View style={{justifyContent: 'flex-start'}} >
-        <Text style={{color: 'white'}}>Artiste: {props.artist}</Text>
+        <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
         <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
       </View>
 
@@ -50,14 +49,7 @@ function TitresProposes (props) {
 }
 
 
-
-
-
-
-
-
-
-function nouveauvote(props) {
+function nouveauvote({navigation}) {
 
 
   const list = [
@@ -102,6 +94,35 @@ function nouveauvote(props) {
   var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{color: "white"}} onPress={() => navigation.navigate('Homeinvite')} />
 
 
+  //COUNTDOWN 
+  const [TIMER, setTIMER] = useState(0)
+  var tourdevoteId = "5f9fe5ec403798a3f0938879"
+
+  useEffect(() => {
+
+    const findTIMER = async() => {
+
+
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `tourdevoteIdFromFront=${tourdevoteId}`
+      })
+
+
+      var timer = await TIMERdata.json();
+      setTIMER(timer.reboursFinal) 
+      console.log("rebours", timer)
+    }
+  
+    findTIMER()   
+     
+    console.log('Comptes à rebours FRONT ici ->', TIMER)
+  
+  },[TIMER])
+
+
   return (
     <View style={styles.container}>
       <Header
@@ -120,7 +141,7 @@ function nouveauvote(props) {
           </View>
 
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.title}>Anniv' de Bob</Text>
+            <Text style={styles.title}> %Anniv' de Bob% </Text>
             <Image source={require('../../assets/picto-fete2.png')} style={{height: 80, width: 80, margin: 25}} />
           </View>
 
@@ -130,20 +151,22 @@ function nouveauvote(props) {
           
           <View style={{flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10}} >
 
-            <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
+          {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
+          <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
+          
 
-            <CountDown
+            {TIMER>0 && (<CountDown
               size={30}
-              until={6000}
-              onFinish={() => props.navigation.navigate('Winnerguest')}
+              until={TIMER}
+              onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
               timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
               separatorStyle={{ color: '#FF0060' }}
-              timeToShow={['H', 'M', 'S']}
-              timeLabels={{h: null, m: null, s: null }}
+              timeToShow={['M', 'S']}
+              timeLabels={{ m: null, s: null }}
               showSeparator
-            />
+            />)}
 
           </View>
 

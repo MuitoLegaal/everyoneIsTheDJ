@@ -5,12 +5,12 @@ import Moment from 'react-moment';
 
 export default function Countdown({navigation}) {
   
-const [TIMER, setTIMER] = useState(0)
+const [TIMER, setTIMER] = useState(0);
 
 useEffect(() => {
   const findTIMER = async() => {
     // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-    const TIMERdata = await fetch('http://172.17.1.106:3000/afficheTimer', {
+    const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
     })
     var TIMER = await TIMERdata.json();
     setTIMER(TIMER.rebours) 
@@ -18,7 +18,8 @@ useEffect(() => {
 
   findTIMER()   
    
-  console.log('Comptes à rebours FRONT ici ->', TIMER)
+  console.log('Comptes à rebours FRONT ici ->', TIMER.rebours)
+
 },[])
 
 
@@ -26,10 +27,10 @@ useEffect(() => {
       
     <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>
 
-      {TIMER!=0 && (
+      {TIMER>0 && (
             <CountDown    
               size={30}
-              until={5}
+              until={TIMER}
               onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
