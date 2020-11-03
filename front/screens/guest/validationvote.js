@@ -1,53 +1,213 @@
-import React, { useState } from 'react';
-import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image } from 'react-native';
-import { Button } from 'react-native-elements';
+import React, { useState, useEffect } from 'react';
+import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, ScrollView } from 'react-native';
+import { Button, ListItem, CheckBox } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Header } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { connect } from 'react-redux';
 
 
-function validationvote({navigation}) {
+function validationvote(props) {
+
+// liste example titres
+const list = ['Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman']
+
+
+  var titresList = [];
+
+  for (let i = 0; i < list.length; i++) {
+    titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
+  }
+
+
+
+  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
+  var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
+
+  
+  
+  useEffect(() => {
+
+    const findTIMER = async () => {
+
+
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idUserFromFront=${props.hostId}`
+      })
+
+
+      var timer = await TIMERdata.json();
+      setTIMER(timer.reboursFinal)
+      console.log("rebours", timer)
+    }
+
+    if(timer) {
+      navigation.navigate("nouveauvote")
+    }
+
+    console.log('Comptes à rebours FRONT ici ->', TIMER)
+    console.log('hostIdState', props.hostId)
+    console.log('TokenState', props.token)
+
+  }, [])
+
+
+  var handleRefreshTIMER = async () => {
+
+    var rawResponse = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `idUserFromFront=${props.hostId}`
+    })
+
+    var timer = await rawResponse.json();
+
+    setTIMER(timer.reboursFinal)
+    console.log("rebours", timer)
+
+    findTIMER()
+  }
+
+
+
+
+  var handleVoteGuest = async () => {
+
+    // --------------------------------- VOS IP ICI -----------------------------------------
+    // Flo IP : 192.168.0.17
+    // Vlad : 192.168.0.40
+    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `titleFromFront=${title}&idUserFront=${props.hostId}`
+    })
+
+    var response = await rawResponse.json();
+
+    console.log("response", response)
+
+    if (response === true) {
+      props.navigation.navigate('validation vote')
+    }
+
+  }
+
+
+
+// BOUCLE QUE AFFICHE LES TITRES A VOTER
 
 
   return (
     <View style={styles.container}>
-      <Text>Validation Vote</Text>
-      <Button title="Home"
-        onPress={() => navigation.navigate('Nouveauvote')}
-        buttonStyle={{
-          backgroundColor: '#584DAD',
-          paddingLeft: 120,
-          paddingRight: 120,
-          paddingTop: 10,
-          paddingBottom: 10,
-          marginBottom: 20,
-        }}></Button>
+      <Header
+        leftComponent={retour}
+        centerComponent={logo}
+        rightComponent={logout}
+        containerStyle={{ backgroundColor: '#131313', padding: 20, flex: 0.1 }}
+      />
+
+
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+
+
+        <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
+          <Text style={styles.text}>Bienvenue dans l'évènement:</Text>
+        </View>
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={styles.title}> %Anniv' de Bob% </Text>
+          <Image source={require('../../assets/picto-fete2.png')} style={{ height: 80, width: 80, margin: 25 }} />
+        </View>
+
+
+
+
+
+        <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
+
+          <Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>
+  
+
+        </View>
+
+
+        <Button
+          title='  Valider mon vote'
+          buttonStyle={{
+            backgroundColor: '#FF0060',
+            borderRadius: 10,
+            color: 'white',
+            marginTop: '5%',
+            marginBottom: '5%',
+            fontSize: 18
+          }}
+
+          icon={
+            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+          }
+
+          onPress={() => handleVoteGuest()}
+
+
+        />
+
+        <Button
+          title='  REFRESH'
+          buttonStyle={{
+            backgroundColor: '#FF0060',
+            borderRadius: 10,
+            color: 'white',
+            marginTop: '5%',
+            marginBottom: '5%',
+            fontSize: 18
+          }}
+
+          icon={
+            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+          }
+
+          onPress={() => handleRefreshTIMER()}
+
+
+        />
+
+
+      </ScrollView>
     </View>
 
 
   );
 }
+
+// STYLE ------------------------------------------------------------------------
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    backgroundColor: '#131313',
 
   },
+
   wrap: {
+    display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#131313',
     alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    height: hp('100%'), // 70% of height device screen
+    height: hp('110%'), // 70% of height device screen
     width: wp('100%')   // 80% of width device screen 
   },
+
   header: {
     backgroundColor: '#131313',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: "row",
-
 
   },
   title: {
@@ -66,17 +226,32 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#fff',
-    fontSize: 20,
+    flex: 1,
+    color: 'white',
+    fontSize: 15,
     fontFamily: 'Roboto-Regular',
     paddingRight: 30,
     paddingLeft: 30,
   },
-  // border: {
-  //     color: '#fff',
-  //     width: ('100%'),
-  //     height: 2,
-  // }
+
+  ListItem: {
+    backgroundColor: '#131313',
+    color: '#fff',
+    justifyContent: 'flex-start',
+
+  }
+
 });
 
-export default validationvote;
+
+
+// REDUX
+
+function mapStateToProps(state) {
+  return { token: state.token, hostId: state.hostId }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(validationvote);

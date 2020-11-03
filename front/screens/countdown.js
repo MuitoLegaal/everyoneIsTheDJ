@@ -22,9 +22,10 @@ useEffect(() => {
 
 },[])
 
+
     return (
       
-    <View style={{ flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>
 
       {TIMER>0 && (
             <CountDown    
@@ -38,7 +39,8 @@ useEffect(() => {
               timeToShow={['H', 'M', 'S']}
               timeLabels={{h: null, m: null, s: null }}
               showSeparator
-            />)}
+            />      
+      )}
 
     </View>
 

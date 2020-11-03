@@ -6,6 +6,7 @@ import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
 import { MaterialIcons } from '@expo/vector-icons';
+import RadioGroup, { Radio } from "react-native-radio-input";
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -13,90 +14,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 
 
-function TitresProposes(props) {
 
-  const [vote, setVote] = useState(false);
-
-  var chosenSong;
-
-  if (vote === true) {
-    chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
-  } else {
-    chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
-  }
-
-
-  return (
-
-    <View style={{ color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20 }}>
-
-
-      <View style={{ marginRight: 10, justifyContent: 'flex-start' }} >
-        <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
-      </View>
-
-      <View style={{ justifyContent: 'flex-start' }} >
-        <Text style={{ color: 'white' }}>Artiste: {props.artiste}</Text>
-        <Text style={{ color: 'white' }}>Titre: {props.titre}</Text>
-      </View>
-
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        {chosenSong}
-      </View>
-
-
-    </View>
-  )
-}
 
 
 function nouveauvote(props) {
 
+  // liste example titres
+  const list = ['Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman']
 
-  const list = [
-    {
-      artist: 'Amy Farhfa',
-      title: 'Vice President'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-
-  ]
-
-
-  var titresList = [];
-
-  for (let i = 0; i < list.length; i++) {
-    titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
+  // function que recupere le valeur du titre selectioné
+  var getChecked = (value) => {
+    console.log(value)
   }
 
 
-
+  //HEADER
   var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
   var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
   var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Homeinvite')} />
 
 
+
+
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
+
+
 
   useEffect(() => {
 
@@ -122,7 +65,7 @@ function nouveauvote(props) {
     console.log('hostIdState', props.hostId)
     console.log('TokenState', props.token)
 
-  }, [TIMER])
+  }, [])
 
 
   var handleRefreshTIMER = async () => {
@@ -130,7 +73,7 @@ function nouveauvote(props) {
     var rawResponse = await fetch('http://192.168.0.40:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `idUserFront=${props.hostId}`
+      body: `idUserFromFront=${props.hostId}`
     })
 
     var timer = await rawResponse.json();
@@ -144,25 +87,35 @@ function nouveauvote(props) {
 
 
 
-  var handleVoteGuest = async () => {
+  // var handleVoteGuest = async () => {
 
-    // --------------------------------- VOS IP ICI -----------------------------------------
-    // Flo IP : 192.168.0.17
-    // Vlad : 192.168.0.40
-    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titleFromFront=${title}&idUserFront=${props.hostId}`
-    })
+  //   // --------------------------------- VOS IP ICI -----------------------------------------
+  //   // Flo IP : 192.168.0.17
+  //   // Vlad : 192.168.0.40
+  //   var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: `titleFromFront=${title}&idUserFront=${props.hostId}`
+  //   })
 
-    var response = await rawResponse.json();
+  //   var response = await rawResponse.json();
 
-    console.log("response", response)
+  //   console.log("response", response)
 
-    if (response === true) {
-      props.navigation.navigate('validation vote')
-    }
+  //   if (response === true) {
+  //     props.navigation.navigate('validation vote')
+  //   }
 
+  // }
+
+
+
+  // BOUCLE QUE AFFICHE LES TITRES A VOTER
+
+  var voteList = []
+
+  for (let i = 0; i < list.length; i++) {
+    voteList.push(<Radio iconName={"lens"} label={list[i]} value={i} />)
   }
 
 
@@ -174,7 +127,6 @@ function nouveauvote(props) {
         rightComponent={logout}
         containerStyle={{ backgroundColor: '#131313', padding: 20, flex: 0.1 }}
       />
-
 
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
 
@@ -223,7 +175,10 @@ function nouveauvote(props) {
           </View>
 
 
-          {titresList}
+
+          <RadioGroup getChecked={this.getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', width: 300, margin: 20 }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white' }} >
+            {voteList}
+          </RadioGroup>
 
 
         </View>
@@ -244,8 +199,6 @@ function nouveauvote(props) {
           icon={
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
-
-          onPress={() => handleVoteGuest()}
 
 
         />
@@ -273,10 +226,11 @@ function nouveauvote(props) {
 
       </ScrollView>
     </View>
-
-
   );
 }
+
+// STYLE ------------------------------------------------------------------------
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -333,11 +287,15 @@ const styles = StyleSheet.create({
 
 });
 
+// STYLE ------------------------------------------------------------------------
+
+
+
+// REDUX
 
 function mapStateToProps(state) {
   return { token: state.token, hostId: state.hostId }
 }
-
 
 export default connect(
   mapStateToProps,
