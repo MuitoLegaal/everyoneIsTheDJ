@@ -15,14 +15,12 @@ function EventCreation(props) {
       const [eventName, setEventName] = useState('');
       const [eventPassword, setEventPassword] = useState('');
 
-      const [userid, setUserid] = useState("5f9d495698cf291330135458"); /*A REMPLACER PAR UN LOCAL STORAGE DE USER ID*/
-
       var handleEventCreation = async () => {
 
             var rawResponse = await fetch('http://192.168.0.40:3000/eventcreation', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${userid}`
+                  body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${props.hostId}`
             })
 
             var response = await rawResponse.json();
@@ -98,8 +96,8 @@ function EventCreation(props) {
                                     }}
                                     onChangeText={text => setEventName(text)}
                                     value={eventName}
-                                
-                               />
+
+                              />
 
                               <Input
                                     label="Mot de passe de l'évènement"
@@ -126,35 +124,21 @@ function EventCreation(props) {
                                     value={eventPassword}
                               />
 
-                        <Button title="Créer l'évènement"
-                              onPress={() => {props.onSettingEventName(eventName), props.navigation.navigate('SongListCreation')}}
-                              // onPress={() => handleEventCreation()} NE PAS RETIRER
-                              buttonStyle={{
-                                    backgroundColor: '#584DAD',
-                                    borderRadius: 10,
-                                    marginTop: '10%'
+                              <Button title="Créer l'évènement"
+                                    onPress={() => { props.onSettingEventName(eventName), props.navigation.navigate('SongListCreation') }}
+                                    // onPress={() => handleEventCreation()} NE PAS RETIRER
+                                    buttonStyle={{
+                                          backgroundColor: '#584DAD',
+                                          borderRadius: 10,
+                                          marginTop: '10%'
                                     }}
-                              
-                        ></Button>     
+
+                              ></Button>
                         </View>
                   </View>
             </View>
       );
 }
-
-
-function mapDispatchToProps(dispatch){
-      return {
-            onSettingEventName: function(eventName){
-                  dispatch( {type: 'setting', eventName: eventName } )
-            }
-      }
-}
-
-
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -211,7 +195,22 @@ const styles = StyleSheet.create({
 
 });
 
+
+
+function mapDispatchToProps(dispatch) {
+      return {
+      onSettingEventName: function (eventName) {
+      dispatch({ type: 'setting', eventName: eventName })
+      }
+      }
+}
+
+
+function mapStateToProps(state) {
+      return { hostId: state.hostId }
+}
+
 export default connect(
-      null,
+      mapStateToProps,
       mapDispatchToProps
-)(EventCreation)
+)(EventCreation);

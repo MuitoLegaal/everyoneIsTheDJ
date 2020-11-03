@@ -6,10 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Badge, Button, Header, Icon, Input} from 'react-native-elements'
 import { text } from '@fortawesome/fontawesome-svg-core';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
-
+import {connect} from 'react-redux';
 
  
 function SignUp(props) {
@@ -37,14 +36,16 @@ function SignUp(props) {
         console.log(response);
 
 
-    // _______________________________________LOCAL STORAGE NOT FINISHED (pour les parametres)_________________________________
-        AsyncStorage.setItem("user", JSON.stringify(response))
-    // ________________________________________________________________________________________________________________________
-
-
         if (response.result === false){
+            console.log('SignUp Failed')
             setSignUp(true)
         } else {
+                var hostId = response.hote._id
+                console.log('hostID', hostId)
+                await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
+                console.log('SignUp Success')
+                props.addId(hostId);
+               
             props.navigation.navigate('HomeHost')
         }
         
@@ -225,4 +226,12 @@ var styles = StyleSheet.create({
 })
 
 
-export default SignUp;
+function mapDispatchToProps(dispatch) {
+    return {
+      addId: function (hostId) { 
+        dispatch( {type: 'addId', hostId: hostId} )
+      }
+    }
+  }
+  
+export default connect (null, mapDispatchToProps)(SignUp);

@@ -16,44 +16,40 @@ function enregistrement({ navigation, addId, addToken }) {
   const [eventId, setEventId] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
 
-
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')} />;
-
-
 
   var handleEnregistrement = async () => {
 
-    // --------------------------------- VOS IP ICI -----------------------------------------
-    // Flo IP : 192.168.0.17
-    // Vlad : 192.168.0.40
-    var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
-    })
+// --------------------------------- VOS IP ICI -----------------------------------------
+// Flo IP : 192.168.0.17
+// Vlad : 192.168.0.40
+var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
+})
 
-    var response = await rawResponse.json();
+var response = await rawResponse.json();
 
-    console.log("response", response)
+console.log("response", response)
 
-    if (response.result === true) {
+if (response.result === true) {
 
-      var token = uuid();
-      console.log('token', token)
-      var hostId = response.eventExist.user
-      console.log('hostID', hostId)
-      // var userDATA = { token: token, hostID: hostID }
-      // await AsyncStorage.setItem("user", JSON.stringify(userDATA));
-      console.log('Login Success');
-      addId(hostId);
-      addToken(token);
-      navigation.navigate('Nouveauvote');
+  var token = uuid();
+  console.log('token', token)
+  var hostId = response.eventExist.user
+  console.log('hostID', hostId)
+  // var userDATA = { token: token, hostID: hostID }
+  // await AsyncStorage.setItem("user", JSON.stringify(userDATA));
+  console.log('Login Success');
+  addId(hostId);
+  addToken(token);
+  navigation.navigate('Nouveauvote');
 
-    } else {
-      setErrorMessage(true)
-      console.log('Login Failed')
-    }
-
+} else {
+  setErrorMessage(true)
+  console.log('Login Failed')
+}
   }
 
   var logInDenied
@@ -64,125 +60,122 @@ function enregistrement({ navigation, addId, addToken }) {
 
   // If Champs Vide error frontend
 
-
   return (
-    <View style={styles.container}>
+<View style={styles.container}>
 
-      <View style={styles.wrap}>
-        <Header
-          containerStyle={{ backgroundColor: '#131313', borderBottomWidth: 0 }}
-          leftComponent={headerLeft}
+  <View style={styles.wrap}>
+    <Header
+      containerStyle={{ backgroundColor: '#131313', borderBottomWidth: 0 }}
+      leftComponent={headerLeft}
 
-        />
+    />
 
-        <Image
-          source={require('../../assets/logoMini.png')}
-          style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}
-        />
+    <Image
+      source={require('../../assets/logoMini.png')}
+      style={{ width: 90, height: 92, marginBottom: 20, marginTop: 30, alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}
+    />
 
-        <Text style={styles.title}>DJ invité</Text>
-
-
-        <KeyboardAwareScrollView style={styles.main}>
-          <Input
-            label='Pseudo'
-            placeholder='Gégé'
-            type='text'
-            containerStyle={{
-              color: '#fff',
-              width: '100%',
-              marginTop: '3%'
-            }}
-            inputStyle={{
-              fontFamily: 'Roboto-Bold',
-              fontSize: 18,
-              color: '#fff',
-
-              borderBottomColor: '#000981'
-            }}
-            labelStyle={{
-              fontFamily: 'Roboto-Bold',
-              fontSize: 20,
-              color: '#584DAD',
-
-            }}
-            onChangeText={text => setPseudo(text)}
-            value={pseudo}
-          />
-          <Input
-            label="ID de l'évènement"
-            placeholder='#144667'
-            type='text'
-            containerStyle={{
-              color: '#fff',
-              width: '100%',
-              marginTop: '3%'
-            }}
-            inputStyle={{
-              fontFamily: 'Roboto-Bold',
-              fontSize: 18,
-              color: '#fff',
-
-              borderBottomColor: '#000981'
-            }}
-            labelStyle={{
-              fontFamily: 'Roboto-Bold',
-              fontSize: 20,
-              color: '#584DAD',
-
-            }}
-            onChangeText={text => setEventId(text)}
-            value={eventId}
-          />
-          <Input
-            label="Mot de passe de l'évènement"
-            placeholder="Gerard La teuuuuffff de l'espace"
-            type='text'
-            containerStyle={{
-              color: '#fff',
-              width: '100%',
-              marginTop: '3%'
-            }}
-            inputStyle={{
-              fontFamily: 'Roboto-Bold',
-              fontSize: 18,
-              color: '#fff',
-
-              borderBottomColor: '#000981'
-            }}
-            labelStyle={{
-              fontFamily: 'Roboto-Bold',
-              fontSize: 20,
-              color: '#584DAD',
-
-            }}
-            onChangeText={text => setEventPassword(text)}
-            value={eventPassword}
-          />
-          <Text>{logInDenied}</Text>
-
-          <Button title="Rejoindre la soirée"
-            // onPress={() => navigation.navigate('Nouveauvote')}
-            onPress={() => handleEnregistrement()}
-            buttonStyle={{
-              backgroundColor: '#584DAD',
-              // paddingLeft: 120,
-              // paddingRight: 120,
-              // paddingTop: 10,
-              // paddingBottom: 10,
-              marginBottom: 20,
-            }}></Button>
+    <Text style={styles.title}>DJ invité</Text>
 
 
-        </KeyboardAwareScrollView>
+    <KeyboardAwareScrollView style={styles.main}>
+      <Input
+        label='Pseudo'
+        placeholder='Gégé'
+        type='text'
+        containerStyle={{
+          color: '#fff',
+          width: '100%',
+          marginTop: '3%'
+        }}
+        inputStyle={{
+          fontFamily: 'Roboto-Bold',
+          fontSize: 18,
+          color: '#fff',
+
+          borderBottomColor: '#000981'
+        }}
+        labelStyle={{
+          fontFamily: 'Roboto-Bold',
+          fontSize: 20,
+          color: '#584DAD',
+
+        }}
+        onChangeText={text => setPseudo(text)}
+        value={pseudo}
+      />
+      <Input
+        label="ID de l'évènement"
+        placeholder='#144667'
+        type='text'
+        containerStyle={{
+          color: '#fff',
+          width: '100%',
+          marginTop: '3%'
+        }}
+        inputStyle={{
+          fontFamily: 'Roboto-Bold',
+          fontSize: 18,
+          color: '#fff',
+
+          borderBottomColor: '#000981'
+        }}
+        labelStyle={{
+          fontFamily: 'Roboto-Bold',
+          fontSize: 20,
+          color: '#584DAD',
+
+        }}
+        onChangeText={text => setEventId(text)}
+        value={eventId}
+      />
+      <Input
+        label="Mot de passe de l'évènement"
+        placeholder="Gerard La teuuuuffff de l'espace"
+        type='text'
+        containerStyle={{
+          color: '#fff',
+          width: '100%',
+          marginTop: '3%'
+        }}
+        inputStyle={{
+          fontFamily: 'Roboto-Bold',
+          fontSize: 18,
+          color: '#fff',
+
+          borderBottomColor: '#000981'
+        }}
+        labelStyle={{
+          fontFamily: 'Roboto-Bold',
+          fontSize: 20,
+          color: '#584DAD',
+
+        }}
+        onChangeText={text => setEventPassword(text)}
+        value={eventPassword}
+      />
+      <Text>{logInDenied}</Text>
+
+      <Button title="Rejoindre la soirée"
+        // onPress={() => navigation.navigate('Nouveauvote')}
+        onPress={() => handleEnregistrement()}
+        buttonStyle={{
+          backgroundColor: '#584DAD',
+          // paddingLeft: 120,
+          // paddingRight: 120,
+          // paddingTop: 10,
+          // paddingBottom: 10,
+          marginBottom: 20,
+        }}></Button>
 
 
-      </View>
-    </View>
+    </KeyboardAwareScrollView>
 
+
+  </View>
+</View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -227,6 +220,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-
-
+<<<<<<< HEAD
 export default connect (null, mapDispatchToProps)(enregistrement);
+=======
+export default connect (null, mapDispatchToProps)(enregistrement);
+>>>>>>> ba258be73ce54178a50cb6a0d2c21fd89eff6e17
