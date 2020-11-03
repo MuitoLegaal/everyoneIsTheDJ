@@ -7,6 +7,8 @@ import Carousel from './carousel'
 // var socket = socketIOClient("http://192.168.0.40:3000");
 
 
+
+
 export default function Onboarding({navigation}) {
   
   return (

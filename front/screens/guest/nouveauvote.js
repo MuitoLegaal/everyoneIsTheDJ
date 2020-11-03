@@ -6,60 +6,27 @@ import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
 import { MaterialIcons } from '@expo/vector-icons';
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import RadioGroup,{Radio} from "react-native-radio-input";
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {connect} from 'react-redux';
 
 
-// function TitresProposes (props) {
+function nouveauvote({navigation}, props) {
 
-//   const [vote, setVote] = useState(false);
+// liste example titres
+const list = ['Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman']
 
-//   var chosenSong;
-
-//   if(vote === true){
-//     chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
-//   }else{
-//     chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
-//   }
-
-
-//   return (
-
-//     <View style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
-
-
-//       <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
-//         <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
-//       </View>
-
-//       <View style={{justifyContent: 'flex-start'}} >
-//         <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
-//         <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
-//       </View>
-
-//       <View style={{flex: 1, alignItems: 'flex-end'}}>
-//         {chosenSong}
-//       </View>
-                    
-
-//     </View>
-//   )
-// }
-
-
-function nouveauvote(props) {
-
+// function que recupere le valeur du titre selectioné
   getChecked = (value) => {
-    // value = our checked value
     console.log(value)
   }
 
 
-  const list = ['Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman']
-
+ 
+// HEADER
   var logo = <Image source={require('../../assets/logoMini.png')} style={{height: 50, width: 50}} />
   var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{color: "white"}} />
   var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{color: "white"}} onPress={() => navigation.navigate('Homeinvite')} />
@@ -67,14 +34,26 @@ function nouveauvote(props) {
 
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
+  var tourdevoteId = "5f9fe5ec403798a3f0938879"
 
+  
+  
   useEffect(() => {
+
     const findTIMER = async() => {
+
+
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `tourdevoteIdFromFront=${tourdevoteId}`
       })
+
+
       var timer = await TIMERdata.json();
-      setTIMER(timer.rebours) 
+      setTIMER(timer.reboursFinal) 
+      console.log("rebours", timer)
     }
   
     findTIMER()   
@@ -83,17 +62,19 @@ function nouveauvote(props) {
   
   },[TIMER])
 
-  // var voteList = list.map((i, song) => {
-  //   return (
-  //     <Radio iconName={"lens"} label={song} value={i}/>
-  //   )
-  // })
+
+
+// BOUCLE QUE AFFICHE LES TITRES A VOTER
 
 var voteList = []
 
   for(let i = 0; i<list.length; i++){
     voteList.push(<Radio iconName={"lens"} label={list[i]} value={i}/>)
   }
+
+
+
+
 
 
   return (
@@ -114,7 +95,7 @@ var voteList = []
           </View>
 
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.title}>Anniv' de Bob</Text>
+            <Text style={styles.title}> %Anniv' de Bob% </Text>
             <Image source={require('../../assets/picto-fete2.png')} style={{height: 80, width: 80, margin: 25}} />
           </View>
 
@@ -124,12 +105,14 @@ var voteList = []
           
           <View style={{flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10}} >
 
-            <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
+          {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
+          <Text style={{ color: '#FF0060', marginBottom: 10}}>Vote en cours, il te reste :</Text>
+          
 
-            <CountDown
+            {TIMER>0 && (<CountDown
               size={30}
               until={TIMER}
-              onFinish={() => props.navigation.navigate('Winnerguest')}
+              onFinish={() => navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
               timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -137,7 +120,7 @@ var voteList = []
               timeToShow={['M', 'S']}
               timeLabels={{ m: null, s: null }}
               showSeparator
-            />
+            />)}
 
           </View>
 
@@ -178,17 +161,16 @@ var voteList = []
               
               
             />
-          
-
+               
 
       </ScrollView>
     </View>
 
-// onPress={() => navigation.navigate('Validationvote')}
-
-
   );
 }
+
+// STYLE ------------------------------------------------------------------------
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -245,4 +227,20 @@ const styles = StyleSheet.create({
   
 });
 
-export default nouveauvote;
+// STYLE ------------------------------------------------------------------------
+
+
+
+// REDUX
+
+function mapStateToProps(state){
+  return {token:state.token, hostId: state.hostId}
+}
+
+
+
+
+export default connect(
+  mapStateToProps,
+  null
+  )(nouveauvote)

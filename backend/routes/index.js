@@ -20,12 +20,10 @@ router.get('/', function (req, res, next) {
 });
 
 
-// -------------------- route du TOP --------------------------------------------------------
-router.get('/findTOP', async function(req,res,next){
+// -------------------------------------- route appelant le TOP -------------------------------------
+router.post('/findTOP', async function(req,res,next){
 
   var TOP = await topModel.find();
-
-  var TitresAleatoires = []
 
   var randomNumber = Math.floor(Math.random() * 117);
   var title1 = TOP[randomNumber].chanson
@@ -36,19 +34,45 @@ router.get('/findTOP', async function(req,res,next){
 
   randomTitles = {title1, title2, title3, title4, title5}
 
-  res.json({randomTitles})
+  // ---------------------- 5 titres suggérés en BDD playlist sans passer par le front ---------------
+  var title1FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title1,
+    votes: [],
+  })
+  var title1SAVED = await title1FORMATTING.save();
 
-  console.log(randomTitles)
+  var title2FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title2,
+    votes: [],
+  })
+  var title2SAVED = await title2FORMATTING.save();
+
+  var title3FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title3,
+    votes: [],
+  })
+  var title3SAVED = await title3FORMATTING.save();
+
+  var title4FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title4,
+    votes: [],
+  })
+  var title4SAVED = await title4FORMATTING.save();
+
+  var title5FORMATTING = new playlistModel ({
+    user: req.body.userIdFromFront,
+    titre: title5,
+    votes: [],
+  })
+  var title5SAVED = await title5FORMATTING.save();
   
+  res.json({randomTitles, testID})
 })
 
-// router.post('/findTOP', async function(req,res,next){
-// var newTITRE = new topModel ({
-//   chanson: 'test de chanson 3'
-// })
-//   var TOP = await newTITRE.save();
-//   res.json({TOP})
-// })
 
 
 router.post('/sign-up', async function (req, res, next) {
@@ -102,15 +126,17 @@ router.post('/enregistrement', async function (req, res, next) {
     error.push('champs vides')
   }
 
+  console.log("1", req.body)
+
   if (error.length == 0) {
-    const eventExist = await eventModel.findOne({
+    var eventExist = await eventModel.findOne({
       eventId: req.body.eventIdFromFront,
       isOpen: true
     })
 
-    if (eventExist) {
+    console.log("2", eventExist)
 
-      // const passwordEncrypt = SHA256(req.body.passwordFromFront + user.salt).toString(encBase64)
+    if (eventExist) {
 
       if (req.body.eventPasswordFromFront == eventExist.password) {
         result = true
@@ -127,7 +153,7 @@ router.post('/enregistrement', async function (req, res, next) {
   res.json({ result, eventExist, error })
 })
 
-
+//---------------------Création d'évent--------------------------
 
 router.post('/eventcreation', async function (req, res, next) {
 
@@ -193,7 +219,7 @@ router.post('/eventcreation', async function (req, res, next) {
 })
 
 
-
+//--------------------Route création tour de vote-------------------------------------
 
 
 router.post('/tourdevotecreation', async function (req, res, next) {
@@ -217,6 +243,7 @@ router.post('/tourdevotecreation', async function (req, res, next) {
   })
 
   var saveTourdevote = await newTourdevote.save();
+
 
 
   if (saveTourdevote) {
@@ -328,8 +355,6 @@ router.post('/afficheTimer', async function (req, res, next) {
     res.json({result: false})
   }
 
-
-  
   // console.log ('Comptes à rebours BACK ici ->', rebours)
   }
   );
@@ -430,4 +455,3 @@ router.post('/votehost', async function (req, res, next) {
 )
 
 module.exports = router;
-
