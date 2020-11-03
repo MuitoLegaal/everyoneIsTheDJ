@@ -220,4 +220,8 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+<<<<<<< HEAD
 export default connect (null, mapDispatchToProps)(enregistrement);
+=======
+export default connect (null, mapDispatchToProps)(enregistrement);
+>>>>>>> ba258be73ce54178a50cb6a0d2c21fd89eff6e17

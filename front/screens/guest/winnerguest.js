@@ -24,7 +24,7 @@ export default function winnerguest ({navigation}) {
         <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
         
 
-        <Button title="Suivant"  onPress={() => navigation.navigate('Homeinvite')} buttonStyle={{backgroundColor: '#FF0060'}}></Button>
+        <Button title="Suivant"  onPress={() => navigation.navigate('Nouveauvote')} buttonStyle={{backgroundColor: '#FF0060'}}></Button>
     </View>
   );
 }
