@@ -102,15 +102,17 @@ router.post('/enregistrement', async function (req, res, next) {
     error.push('champs vides')
   }
 
+  console.log("1", req.body)
+
   if (error.length == 0) {
-    const eventExist = await eventModel.findOne({
+    var eventExist = await eventModel.findOne({
       eventId: req.body.eventIdFromFront,
       isOpen: true
     })
 
-    if (eventExist) {
+    console.log("2", eventExist)
 
-      // const passwordEncrypt = SHA256(req.body.passwordFromFront + user.salt).toString(encBase64)
+    if (eventExist) {
 
       if (req.body.eventPasswordFromFront == eventExist.password) {
         result = true
@@ -217,6 +219,7 @@ router.post('/tourdevotecreation', async function (req, res, next) {
   })
 
   var saveTourdevote = await newTourdevote.save();
+
 
 
   if (saveTourdevote) {

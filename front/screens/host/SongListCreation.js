@@ -21,23 +21,25 @@ function SongListCreation(props) {
   const [TOPlist, setTOPlist] = useState([]);
   const [errorArtist, setErrorArtist] = useState();
 
+  var listHote
+
+
   let artistUndefined;
 
-
   useEffect(() => {
-    const findTOP = async() => {
+    const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       const TOPdata = await fetch('http://172.17.1.32:3000/findTOP', {
       })
       var TOP = await TOPdata.json();
-      setTOPlist(TOP) 
+      setTOPlist(TOP)
     }
 
-    findTOP()   
-     
+    findTOP()
+
     console.log('TOPlist passé par un set ici ->', TOPlist)
-  },[])
-  
+  }, [])
+
 
   var handleAjouterTitre = async () => {
 
@@ -52,29 +54,9 @@ function SongListCreation(props) {
 
     console.log(response);
 
-    //FRONT//
-    console.log('titreProposeHote++++++++++++++++', titreProposeHote)
-    
-    // setTitreListHote([...titreListHote, titreProposeHote])
-    // if (titreProposeHote != undefined) {
-    //   console.log("titreProposeHoteTTTTTTTTTTTT", titreProposeHote)
-      
-    //   listHote = titreListHote.map((titre, i) => {
-    //     return (
-    //       <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginRight: '2%', }}>
-    //         key={i}
-    //         <Text style={styles.songtextAjout}>{titre}</Text>
-    //         <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{ color: "#fff" }} />
-    //       </View>
-    //     )
-    //   }
-    //   );
-    //   setTitreProposeHote('')
-    // }
-    // else {
+
       console.log("titre proposé ========= ", titreProposeHote)
-      // artistUndefined = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>
-    // }
+      
     if(titreProposeHote === undefined){
         setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
     } else {
@@ -85,7 +67,7 @@ function SongListCreation(props) {
   }
 
 
- var handleSupprimerTitre = async () => {
+  var handleSupprimerTitre = async () => {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
@@ -101,11 +83,12 @@ function SongListCreation(props) {
   };
 
 
+ 
 
   var listHote = titreListHote.map((titre, i) => {
         return (
           <View style={styles.titre}>
-          <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
+          <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} key={} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
           <Text style={styles.songtext}>{titre}</Text>
           </View>
         )
@@ -114,21 +97,22 @@ function SongListCreation(props) {
 
 
 
+      return (
+        <View style={styles.container}>
+          <View>
+            <Header
+              leftComponent={headerLeft}
+              centerComponent={headerCenter}
+              rightComponent={headerRight}
+              containerStyle={{
+                backgroundColor: "#131313",
+                alignItems: 'flex-start',
+                borderBottomWidth: 0,
+                marginBottom: '5%'
+              }}
+            />
+          </View>
 
-  return (
-      <View style={styles.container}>
-            <View>
-                        <Header
-                        leftComponent={headerLeft}
-                        centerComponent={headerCenter}
-                        rightComponent={headerRight}
-                        containerStyle={{backgroundColor: "#131313", 
-                        alignItems: 'flex-start', 
-                        borderBottomWidth:0,  
-                        marginBottom:'5%'
-                        }}
-                        />
-            </View>
 
             <KeyboardAwareScrollView style={styles.wrap}>
                   <View style={{ borderBottomWidth:1,borderBottomColor:"#fff"}}>
@@ -175,7 +159,7 @@ function SongListCreation(props) {
                     
                   </View>
                   
-                  <View>
+            <View>
                         <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', marginTop:'5%'}}>
                             <Input
                                 label='Artiste - Titre :'
@@ -222,7 +206,9 @@ function SongListCreation(props) {
                         </View>
 
 
-                        {/* <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'5%'}}>
+                        {/* CHAMPS INPUT OPTIONNEL NE PAS SUPRRIMER
+
+                        <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'5%'}}>
                               <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1, marginTop:'5%'}}>
                                 <Text style={{fontFamily:'Roboto-Bold', fontSize: 18, color: '#584DAD', marginLeft:'3%', marginBottom:'5%'}}>Artiste - Titre aléatoire : </Text>
                                 <Text style={{fontFamily:'Roboto-Bold',fontSize: 16, color: '#fff', marginBottom:'2%'}}> %TitresBdd% </Text>
@@ -284,19 +270,13 @@ function SongListCreation(props) {
                           
                   /> 
       </View>
+      );}
 
-    );
-  }
-
-function mapStateToProps(state){
-  return{
-    nameToDisplay: state.EventName
-  }
-}
-
-
-
-
+      function mapStateToProps(state){
+        return{
+          nameToDisplay: state.EventName
+        }
+      }
 
 
   const styles = StyleSheet.create({
@@ -378,11 +358,10 @@ function mapStateToProps(state){
           marginRight: '2%'
         }
 
-        
-      
     });
+
 
   export default connect(
     mapStateToProps,
     null
-  )(SongListCreation)
+  )(SongListCreation);
