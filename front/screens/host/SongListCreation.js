@@ -139,12 +139,13 @@ function SongListCreation(props) {
 
           {errorArtist}
 
-          {TOPlist != 0 && (
+          
 
             <View style={{ flex: 1, flexDirection: 'column' }}>
+            
               {listHote}
             </View>
-          )}
+          
 
           {/* <View style={{flexDirection:'column'}}>
                                   {listHote}
