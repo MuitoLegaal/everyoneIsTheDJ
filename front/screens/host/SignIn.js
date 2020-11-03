@@ -113,7 +113,7 @@ var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatl
                         title="Continuer" 
                         onPress={()=> 
                             props.navigation.navigate('HomeHost')
-                            // handleSignIn()
+                            //handleSignIn()
                         }
                         buttonStyle={{
                             backgroundColor: '#584DAD',
