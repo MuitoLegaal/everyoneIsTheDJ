@@ -19,6 +19,7 @@ function SongListCreation(props) {
   const [titreProposeHote, setTitreProposeHote] = useState();
   const [titreListHote, setTitreListHote] = useState([]);
   const [TOPlist, setTOPlist] = useState([]);
+  const [userId, setuserId] = useState('userId_TEST_00000')
   const [errorArtist, setErrorArtist] = useState();
 
   var listHote
@@ -30,6 +31,9 @@ function SongListCreation(props) {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       const TOPdata = await fetch('http://192.168.0.17:3000/findTOP', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `userIdFromFront=${userId}`
       })
       var TOP = await TOPdata.json();
       setTOPlist(TOP)
@@ -38,8 +42,9 @@ function SongListCreation(props) {
     findTOP()
 
     console.log('TOPlist passé par un set ici ->', TOPlist)
-  }, [])
 
+  },[])
+  
 
   var handleAjouterTitre = async () => {
 
