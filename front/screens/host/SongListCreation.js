@@ -22,15 +22,17 @@ function SongListCreation(props) {
   const [userId, setuserId] = useState('userId_TEST_00000')
   const [errorArtist, setErrorArtist] = useState();
 
-  var listHote
+  var listHote;
 
-
-  let artistUndefined;
 
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+<<<<<<< HEAD
       const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
+=======
+      const TOPdata = await fetch('http://192.168.0.17:3000/findTOP', {
+>>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${userId}`
@@ -49,7 +51,11 @@ function SongListCreation(props) {
   var handleAjouterTitre = async () => {
 
     //APPEL AU BACKEND//
+<<<<<<< HEAD
     var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
+=======
+    var rawResponse = await fetch('http://192.168.0.17:3000/ajoutertitre', {
+>>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -76,7 +82,11 @@ function SongListCreation(props) {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
+<<<<<<< HEAD
     var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
+=======
+    var rawResponse = await fetch('http://192.168.0.17:3000/supprimertitre', {
+>>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreIdFromFront=${idTest}`
@@ -93,12 +103,21 @@ function SongListCreation(props) {
   var listHote = titreListHote.map((titre, i) => {
         return (
           <View style={styles.titre}>
+<<<<<<< HEAD
           <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
+=======
+          <FontAwesomeIcon 
+          onPress={()=> handleSupprimerTitre()} 
+          key={i} icon={faTrash} 
+          size={20} 
+          style={{color: "#fff", marginLeft: '2%'}}
+          />
+>>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
           <Text style={styles.songtext}>{titre}</Text>
           </View>
         )
       }
-      );
+  );
 
 
 
@@ -124,7 +143,7 @@ function SongListCreation(props) {
            
                 {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
                       <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-                      <Text style={styles.subtitle} >NOM DE LEVENT {props.nameToDisplay}</Text>
+                      <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
                       <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
                       
                       {errorArtist}
@@ -277,11 +296,6 @@ function SongListCreation(props) {
       </View>
       );}
 
-      function mapStateToProps(state){
-        return{
-          nameToDisplay: state.EventName
-        }
-      }
 
 
   const styles = StyleSheet.create({
@@ -366,7 +380,12 @@ function SongListCreation(props) {
     });
 
 
-  export default connect(
+    function mapStateToProps(state){
+      return{
+        nameToDisplay: state.EventName
+      }
+    }
+    export default connect(
     mapStateToProps,
     null
   )(SongListCreation);

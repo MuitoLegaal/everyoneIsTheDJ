@@ -9,7 +9,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import uuid from 'react-uuid';
 import {connect} from 'react-redux';
 
-function enregistrement({ navigation }) {
+function enregistrement({ navigation, addId, addToken }) {
 
   const [pseudo, setPseudo] = useState('');
   const [eventPassword, setEventPassword] = useState('');
@@ -21,7 +21,7 @@ function enregistrement({ navigation }) {
 
 
 
-  var handleEnregistrement = async (props) => {
+  var handleEnregistrement = async () => {
 
     // --------------------------------- VOS IP ICI -----------------------------------------
     // Flo IP : 192.168.0.17
@@ -39,13 +39,15 @@ function enregistrement({ navigation }) {
     if (response.result === true) {
 
       var token = uuid();
-      var hostID = response.eventExist.user
-      var userDATA = { token: token, hostID: hostID }
-      await AsyncStorage.setItem("user", JSON.stringify(userDATA));
-      navigation.navigate('Nouveauvote');
+      console.log('token', token)
+      var hostId = response.eventExist.user
+      console.log('hostID', hostId)
+      // var userDATA = { token: token, hostID: hostID }
+      // await AsyncStorage.setItem("user", JSON.stringify(userDATA));
       console.log('Login Success');
-      props.addHostId(hostID);
-      props.addToken(token);
+      addId(hostId);
+      addToken(token);
+      navigation.navigate('Nouveauvote');
 
     } else {
       setErrorMessage(true)
@@ -221,7 +223,7 @@ function mapDispatchToProps(dispatch) {
     },
     addId: function (hostId) { 
       dispatch( {type: 'addId', hostId: hostId} )
-    },
+    }
   }
 }
 
