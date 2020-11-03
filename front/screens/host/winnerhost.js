@@ -1,18 +1,35 @@
-import React, { Component } from 'react'
-import { Image, View, Text, StyleSheet, Link, ScrollView } from 'react-native'
+import React, { Component, useCallback } from 'react'
+import { Image, View, Text, StyleSheet, Linking, Alert, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { faBaby, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, simplybuilt } from '@fortawesome/free-solid-svg-icons'
 import { Header } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-//import Icon from 'react-native-ionicons'
+import { color } from 'react-native-reanimated';
 
 
 export default function Winner(props) {
 
   //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
+
+
+
+  const supportedURL = `https://www.youtube.com/results?search_query=avicii`
+  
+  const OpenURLButton = ({ url, children }) => {
+    const handlePress = useCallback(async () => {
+      // Checking if the link is supported for links with custom URL scheme.
+      const supported = await Linking.canOpenURL(url);
+      await Linking.openURL(url);
+  }, [url]);
+  
+    return <Button title={children} onPress={handlePress} titleStyle={{color:'#584DAD', fontFamily: 'Roboto-Bold'}} buttonStyle={{backgroundColor:'#E69620',borderRadius: 10}} containerStyle={{marginTop:'5%', marginBottom:'5%'}}/>;
+  };
+
+
 
   return (
 <View style={styles.container}>
@@ -44,39 +61,37 @@ export default function Winner(props) {
 
       
       <View style={styles.winner} >
-        <Text style={{ color: '#fff' }}>1.</Text>
-        <Text style={{ color: '#fff' }}>Artiste - Titre: %Lorem Ipsum%</Text>
-        <Button 
-              title="Lancer le titre" 
-              //onPress={() => props.navigation.navigate('Moderation')}
-              //onPress={()=>handleSignUp()}
-              buttonStyle={{
-                    backgroundColor: '#584DAD',
-                    borderColor: '#584DAD',
-                    borderWidth: 3,
-                    borderRadius: 10,
-                    marginTop:'5%'
-                    }}
-              titleStyle={{
-                color: '#fff',
-                fontFamily: 'Roboto-Bold'
-              }}
-              icon={ <FontAwesomeIcon icon={faBaby} size={20} style={{color:'#fff'}} /> }
-              //icon={<Ionicons icon={ios-logo-youtube} size={35} style={{color: "white"}} />}
-        />
+        <Text style={styles.winnertext}>1.</Text>
+        <Text style={styles.winnertext}>Artiste - Titre: %Lorem Ipsum%</Text>
+        <Text style={styles.winnertext}>Votes: %Nombre%</Text>
+        <OpenURLButton url={supportedURL}> 
+          <IconFontAwesome
+                name="youtube-play"
+                size={25}
+                color="#584DAD" 
+            /> Lancer le titre</OpenURLButton>
 
-      {/* <Text style={{ color: '#584DAD' }}>Lancer le titre <Icon name='youtube' size={20} color="#584DAD"/></Text> */}
       </View>
 
-      {/* </Link> */}
-      <Text style={{ color: '#fff' }}>2.</Text>
-      <Text style={{ color: '#fff' }}>Artiste: Lorem Ipsum</Text>
-      <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
-      <Text style={{ color: '#fff' }}>3.</Text>
-      <Text style={{ color: '#fff' }}>Artiste: Lorem Ipsum</Text>
-      <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
+      <View style={styles.second} >
+        <Text style={styles.text}>2.</Text>
+        <Text style={styles.text}>Artiste - Titre: %Lorem Ipsum%</Text>
+        <Text style={styles.text}>Votes: %Nombre%</Text>
+      </View>
+      <View style={styles.second} >
+        <Text style={styles.text}>3.</Text>
+        <Text style={styles.text}>Artiste - Titre: %Lorem Ipsum%</Text>
+        <Text style={styles.text}>Votes: %Nombre%</Text>
+      </View>
 
-      <Button title="Retour à l'accueil" buttonStyle={{ backgroundColor: '#FF0060' }} onPress={() => props.navigation.navigate('HomeHost')}></Button>
+      <Button 
+          title="Retour à l'accueil" 
+          buttonStyle={{
+            backgroundColor: '#584DAD',
+            borderRadius: 10,
+            marginTop:'2%'
+                        }} 
+          onPress={() => props.navigation.navigate('HomeHost')}></Button>
 
     </ScrollView>
 </View>
@@ -131,9 +146,34 @@ const styles = StyleSheet.create({
       fontFamily:'Roboto-Regular',
       textAlign: 'center',
       marginTop: '5%',
+      marginBottom:'2%'
     
       
     },
+    winnertext: {
+      color: '#584DAD',
+      fontSize: 20,
+      fontFamily:'Roboto-Bold',
+      textAlign: 'center',
+      marginTop: '5%',
+      marginBottom:'2%'
+    
+      
+    },
+    winner: {
+      textAlign:'center',
+      alignItems:'center',
+      justifyContent:'center',
+      marginBottom:'5%'
+    },
+
+    second: {
+      textAlign:'center',
+      alignItems:'center',
+      justifyContent:'center',
+      marginBottom:'5%'
+    },
+    
 
 
 });
