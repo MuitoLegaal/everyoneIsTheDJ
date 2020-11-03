@@ -6,10 +6,11 @@ import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
 import { MaterialIcons } from '@expo/vector-icons';
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {connect} from 'react-redux';
 
 
 function TitresProposes (props) {
@@ -49,7 +50,7 @@ function TitresProposes (props) {
 }
 
 
-function nouveauvote({navigation}) {
+function nouveauvote({navigation}, props) {
 
 
   const list = [
@@ -204,8 +205,7 @@ function nouveauvote({navigation}) {
               
               
             />
-          
-
+               
 
       </ScrollView>
     </View>
@@ -271,4 +271,13 @@ const styles = StyleSheet.create({
   
 });
 
-export default nouveauvote;
+
+function mapStateToProps(state){
+  return {token:state.token, hostId: state.hostId}
+}
+
+
+export default connect(
+  mapStateToProps,
+  null
+  )(nouveauvote);

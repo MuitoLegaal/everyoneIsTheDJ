@@ -8,9 +8,12 @@ import {createAppContainer } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import EventName from './reducers/EventNameReducer'
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
+
+import EventName from './reducers/EventNameReducer'
+import token from './reducers/token';
+import hostId from './reducers/hostId';
 
 
 
@@ -25,7 +28,9 @@ const getFonts = () => Font.loadAsync({
   import AppDrawer from './screens/Drawer';
 
 
-const store = createStore(combineReducers({EventName}))
+const store = createStore(combineReducers({EventName, token, hostId}))
+
+
 
 function App() {
 
@@ -67,12 +72,3 @@ function App() {
   };
 
 export default App;
-
-  // pour la navigation via StackNavigator, coller ce genre de lien dans les screens
-// function ExempleScreenA(props){
-//   return (
-//     <View> <Button title="Go to page B"
-//      onPress={() => props.navigation.navigate('ScreenB')} />
-//     </View>
-//   );
-// }
