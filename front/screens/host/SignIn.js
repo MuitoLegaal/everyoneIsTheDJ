@@ -111,9 +111,8 @@ var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatl
             <Text style={{ textDecorationLine: 'underline', color: '#584DAD', fontFamily:'Roboto-Bold', marginBottom:'10%', textAlign:'center'}}>Mot de passe oublié?</Text>
             <Button 
                         title="Continuer" 
-                        onPress={()=> 
-                            props.navigation.navigate('HomeHost')
-                            //handleSignIn()
+                        onPress={()=>
+                            handleSignIn()
                         }
                         buttonStyle={{
                             backgroundColor: '#584DAD',
