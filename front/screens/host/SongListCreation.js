@@ -28,11 +28,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-<<<<<<< HEAD
-      const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
-=======
       const TOPdata = await fetch('http://192.168.0.17:3000/findTOP', {
->>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${userId}`
@@ -51,11 +47,7 @@ function SongListCreation(props) {
   var handleAjouterTitre = async () => {
 
     //APPEL AU BACKEND//
-<<<<<<< HEAD
-    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
-=======
     var rawResponse = await fetch('http://192.168.0.17:3000/ajoutertitre', {
->>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -82,11 +74,7 @@ function SongListCreation(props) {
 
     var idTest = "5f9d9e1aa3eb5025a0a807ed"
 
-<<<<<<< HEAD
-    var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
-=======
     var rawResponse = await fetch('http://192.168.0.17:3000/supprimertitre', {
->>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreIdFromFront=${idTest}`
@@ -103,16 +91,12 @@ function SongListCreation(props) {
   var listHote = titreListHote.map((titre, i) => {
         return (
           <View style={styles.titre}>
-<<<<<<< HEAD
-          <FontAwesomeIcon onPress={()=> handleSupprimerTitre()} icon={faTrash} size={20} style={{color: "#fff", marginLeft: '2%'}} />
-=======
           <FontAwesomeIcon 
           onPress={()=> handleSupprimerTitre()} 
           key={i} icon={faTrash} 
           size={20} 
           style={{color: "#fff", marginLeft: '2%'}}
           />
->>>>>>> 4a21571e783556634d76b3ec6c86670e4352d699
           <Text style={styles.songtext}>{titre}</Text>
           </View>
         )

@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 function nouveauvote(props) {
 
   // liste example titres
-  const list = ['Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman']
+  const list = ['Metronomy - A thing for me', 'Black Eyed Pipi - Pump pipi', 'ZZ Top - Gimme all your lovin', 'Oasis - Wonderwall', 'Niagara - L amour à la plage', '50 cent - BANG BANG jaime largent']
 
   // function que recupere le valeur du titre selectioné
   var getChecked = (value) => {
@@ -46,8 +46,8 @@ function nouveauvote(props) {
     const findTIMER = async () => {
 
 
-      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+// ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -70,7 +70,8 @@ function nouveauvote(props) {
 
   var handleRefreshTIMER = async () => {
 
-    var rawResponse = await fetch('http://192.168.0.40:3000/afficheTimer', {
+// ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+    var rawResponse = await fetch('http://192.168.1.20:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
@@ -92,6 +93,7 @@ function nouveauvote(props) {
   //   // --------------------------------- VOS IP ICI -----------------------------------------
   //   // Flo IP : 192.168.0.17
   //   // Vlad : 192.168.0.40
+       // Max : 192.168.1.20
   //   var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
   //     method: 'POST',
   //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
