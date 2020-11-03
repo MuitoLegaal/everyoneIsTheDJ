@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, ScrollView } from 'react-native';
 import { Button, ListItem, CheckBox } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,96 +10,90 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import RadioGroup,{Radio} from "react-native-radio-input";
 
 
-function TitresProposes (props) {
+// function TitresProposes (props) {
+
+//   const [vote, setVote] = useState(false);
+
+//   var chosenSong;
+
+//   if(vote === true){
+//     chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
+//   }else{
+//     chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
+//   }
 
 
-  const [vote, setVote] = useState(false);
+//   return (
 
-  var chosenSong;
-
-  if(vote === true){
-    chosenSong = <MaterialIcons name="radio-button-checked" size={24} color="#FF0060" onPress={() => setVote(false)} />
-  }else{
-    chosenSong = <MaterialIcons name="radio-button-unchecked" size={24} color="#FF0060" onPress={() => setVote(true)} />
-  }
+//     <View style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
 
 
-  return (
+//       <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
+//         <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
+//       </View>
 
-    <View style={{color: 'white', flex: 1, flexDirection: 'row', width: 300, margin: 20}}>
+//       <View style={{justifyContent: 'flex-start'}} >
+//         <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
+//         <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
+//       </View>
 
-
-      <View style={{marginRight: 10, justifyContent: 'flex-start'}} >
-        <Text style={{ textAlign: 'center', color: 'white' }}> - </Text>
-      </View>
-
-      <View style={{justifyContent: 'flex-start'}} >
-        <Text style={{color: 'white'}}>Artiste: {props.artiste}</Text>
-        <Text style={{color: 'white'}}>Titre: {props.titre}</Text>
-      </View>
-
-      <View style={{flex: 1, alignItems: 'flex-end'}}>
-        {chosenSong}
-      </View>
+//       <View style={{flex: 1, alignItems: 'flex-end'}}>
+//         {chosenSong}
+//       </View>
                     
 
-    </View>
-  )
-}
+//     </View>
+//   )
+// }
 
 
+function nouveauvote(props) {
 
-
-
-
-
-
-
-function nouveauvote() {
-
-
-  const list = [
-    {
-      artist: 'Amy Farhfa',
-      title: 'Vice President'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    {
-      artist: 'Chris Jackson',
-      title: 'Vice Chairman'
-    },
-    
-  ]
-
-
-  var titresList = [];
-
-  for(let i=0; i<list.length; i++){
-    titresList.push(<TitresProposes artist={list[i].artist} titre={list[i].title} />)
+  getChecked = (value) => {
+    // value = our checked value
+    console.log(value)
   }
 
 
+  const list = ['Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman', 'Chris Jackson - Vice Chairman']
 
   var logo = <Image source={require('../../assets/logoMini.png')} style={{height: 50, width: 50}} />
   var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{color: "white"}} />
   var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{color: "white"}} onPress={() => navigation.navigate('Homeinvite')} />
+
+
+  //COUNTDOWN 
+  const [TIMER, setTIMER] = useState(0)
+
+  useEffect(() => {
+    const findTIMER = async() => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      })
+      var timer = await TIMERdata.json();
+      setTIMER(timer.rebours) 
+    }
+  
+    findTIMER()   
+     
+    console.log('Comptes à rebours FRONT ici ->', TIMER)
+  
+  },[TIMER])
+
+  // var voteList = list.map((i, song) => {
+  //   return (
+  //     <Radio iconName={"lens"} label={song} value={i}/>
+  //   )
+  // })
+
+var voteList = []
+
+  for(let i = 0; i<list.length; i++){
+    voteList.push(<Radio iconName={"lens"} label={list[i]} value={i}/>)
+  }
 
 
   return (
@@ -134,7 +128,7 @@ function nouveauvote() {
 
             <CountDown
               size={30}
-              until={60}
+              until={TIMER}
               onFinish={() => props.navigation.navigate('Winnerguest')}
               digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
               digitTxtStyle={{ color: '#FF0060' }}
@@ -157,7 +151,10 @@ function nouveauvote() {
             </View>
 
             
-            {titresList}
+            
+            <RadioGroup getChecked={this.getChecked} RadioGroupStyle={{flex: 1, flexDirection: 'column' , width: 300, margin: 20}} IconStyle={{backgroundColor: '#FF0060'}} coreStyle={{backgroundColor: '#FF0060'}} labelStyle={{color: 'white'}} >
+              {voteList}
+            </RadioGroup>
             
 
           </View>
