@@ -25,7 +25,8 @@ function EventCreation(props) {
 
             var response = await rawResponse.json();
 
-            console.log(response);
+            console.log("id event", response.eventIsOpen.eventId);
+            props.onSettingIdEvent(response.eventIsOpen.eventId)
 
             if (response.result === true) {
                   
@@ -206,6 +207,9 @@ function mapDispatchToProps(dispatch) {
       },
       onSettingPassword: function (pass) {
             dispatch({ type: "set", eventsPass: pass})
+      },
+      onSettingIdEvent: function (id) {
+            dispatch({ type: 'setID', eventsID: id})
       }
       }
 }

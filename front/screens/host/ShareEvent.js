@@ -23,6 +23,10 @@ function ShareEvent(props){
   var headerCenter = <Text style={styles.title} >Partage de l'évènement</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
+
+
+  useEffect
+
     return (
 
 
@@ -54,8 +58,8 @@ function ShareEvent(props){
                   <Text style={styles.subtitle}>Ce soir, avec Everyone is the DJ.</Text>
                   <Text style={styles.subtext}>Télècharge l’application pour voter :</Text> 
                   <Text style={styles.text}>https://apps.apple.com/app/apple-store/id982107779</Text>
-                  <Text style={styles.subtext}>Nom de l'évènement : </Text>
-                  <Text style={styles.text}>{props.nameToDisplay} </Text>
+                  <Text style={styles.subtext}>ID de l'évènement : </Text>
+                  <Text style={styles.text}>{props.idToDisplay} </Text>
                   <Text style={styles.subtext}>Mot de passe de l'évènement : </Text>
                   <Text style={styles.text}> {props.passToDisplay} </Text>
                 </View>
@@ -71,7 +75,7 @@ function ShareEvent(props){
                             
                             }}
                             onPress={() => Clipboard.setString(`Ce soir, avec Everyone is the DJ.  \n Télècharge l’application pour voter : \n
-                             https://apps.apple.com/app/apple-store/id982107779 \n Nom de l'évènement : \n $.... \n Mot de passe de l'évènement : \n $....` )}
+                             https://apps.apple.com/app/apple-store/id982107779 \n ID de l'évènement : \n ${props.idToDisplay} \n Mot de passe de l'évènement : \n ${props.passToDisplay}` )}
                 >
                 </Button>
 
@@ -165,7 +169,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     nameToDisplay: state.EventName,
-    passToDisplay: state.EventPass
+    passToDisplay: state.EventPass,
+    idToDisplay: state.EventID
   }
 }
 
