@@ -13,9 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 
 
-
-
-
 function nouveauvote(props) {
 
   // liste example titres à supprimer à la fin quand les titres de la playlist remonteront depuis la BDD
@@ -97,7 +94,9 @@ function nouveauvote(props) {
     setTIMER(timer.reboursFinal)
     // console.log("rebours", timer)
 
-    findTIMER()
+    if (timer) {
+      navigation.navigate("nouveauvote")
+    }
   }
 
 
@@ -155,7 +154,7 @@ function nouveauvote(props) {
 
   return (
     <View style={styles.container}>
-      <View style={{height:150}}>
+      <View style={{ height: 150 }}>
         <Header
           leftComponent={retour}
           centerComponent={logo}
@@ -184,9 +183,8 @@ function nouveauvote(props) {
 
         <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
 
-          {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
-          <Text style={{ color: '#FF0060', marginBottom: 10, fontSize:18, fontFamily:'Roboto-Bold' }}>Vote en cours, il te reste :</Text>
-
+          {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Pas de vote en cours</Text>)}
+          {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>)}
 
           {TIMER > 0 && (<CountDown
             size={30}
@@ -204,71 +202,67 @@ function nouveauvote(props) {
         </View>
 
 
-
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'stretch' }} >
-            <View>
-                
-                <Text style={{ color: 'white', fontSize: 20, marginTop:'10%', marginBottom: '10%', marginLeft:'5%'}} >Votez pour le prochain titre:</Text>
-     
 
-
-
-                <RadioGroup getChecked={getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft:'5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize:18}} >
-                  {voteList}
-                </RadioGroup>
-
-
-              
-
-
-
-              <Button
-                title='  Valider mon vote'
-                buttonStyle={{
-                  backgroundColor: '#FF0060',
-                  borderRadius: 10,
-                  color: 'white',
-                  marginTop: '5%',
-                  marginBottom: '5%',
-                  fontSize: 18
-                }}
-                titleStyle={{
-                  fontSize: 20,
-                  fontFamily:'Roboto-Bold'
-                }}
-
-                icon={
-                  <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
-                }
-                onPress={() => props.navigation.navigate('Validationvote')}
-              />
-            </View>
-
-        <Button
-          title='  REFRESH TIMER'
-          buttonStyle={{
-            backgroundColor: '#E59622',
-            borderRadius: 10,
-            marginTop: '5%',
-            marginBottom: '5%',
-   
-          }}
-          titleStyle={{
-            fontFamily:'Staatliches',
-            fontSize: 25
-          }}
+          {TIMER > 0 && (
           
+          <View>
 
-          icon={
-            <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
-          }
+            <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Votez pour le prochain titre:</Text>
 
-          onPress={() => handleRefreshTIMER()}
+            <RadioGroup getChecked={getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft: '5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize: 18 }} >
+              {voteList}
+            </RadioGroup>
 
+            <Button
+              title='  Valider mon vote'
+              buttonStyle={{
+                backgroundColor: '#FF0060',
+                borderRadius: 10,
+                color: 'white',
+                marginTop: '5%',
+                marginBottom: '5%',
+                fontSize: 18
+              }}
+              titleStyle={{
+                fontSize: 20,
+                fontFamily: 'Roboto-Bold'
+              }}
 
-        />
+              icon={
+                <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+              }
 
+            />
           </View>
+          
+          )}
+
+          {TIMER <= 0 && (<Button
+            title='REFRESH'
+            buttonStyle={{
+              backgroundColor: '#E59622',
+              borderRadius: 10,
+              marginTop: '5%',
+              marginBottom: '5%',
+
+            }}
+            titleStyle={{
+              fontFamily: 'Staatliches',
+              fontSize: 25
+            }}
+
+
+            icon={
+              <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
+            }
+
+            onPress={() => handleRefreshTIMER()}
+
+
+          />)}
+
+        </View>
       </ScrollView>
     </View>
   );
@@ -284,15 +278,15 @@ const styles = StyleSheet.create({
   },
 
   wrap: {
-      flexDirection: 'column',
-      //alignItems: 'center',
-      //justifyContent: 'center',
-      textAlign: 'center',
-      height: hp('100%'), // 70% of height device screen
-      width: wp('100%'),  // 80% of width device screen 
-      backgroundColor: '#131313',
-      borderTopColor: '#fff',
-      borderTopWidth:1
+    flexDirection: 'column',
+    //alignItems: 'center',
+    //justifyContent: 'center',
+    textAlign: 'center',
+    height: hp('100%'), // 70% of height device screen
+    width: wp('100%'),  // 80% of width device screen 
+    backgroundColor: '#131313',
+    borderTopColor: '#fff',
+    borderTopWidth: 1
   },
 
   header: {
@@ -310,31 +304,31 @@ const styles = StyleSheet.create({
   subtitle: {
     color: '#fff',
     fontSize: 30,
-    fontFamily:'Staatliches',
+    fontFamily: 'Staatliches',
     textAlign: 'left',
     marginTop: '2%',
-    marginLeft:'2%'
-    
+    marginLeft: '2%'
+
   },
   subtext: {
     color: '#fff',
     fontSize: 30,
-    fontFamily:'Staatliches',
+    fontFamily: 'Staatliches',
     textAlign: 'center',
     marginTop: '5%',
-    marginLeft:'2%'
-    
+    marginLeft: '2%'
+
   },
 
   text: {
     color: '#fff',
     fontSize: 20,
-    fontFamily:'Roboto-Regular',
+    fontFamily: 'Roboto-Regular',
     textAlign: 'left',
     marginTop: '5%',
-    marginLeft:'4%'
-  
-    
+    marginLeft: '4%'
+
+
   },
 
   ListItem: {

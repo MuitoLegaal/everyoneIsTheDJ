@@ -69,10 +69,12 @@ router.post('/findTOP', async function(req,res,next){
     votes: [],
   })
   var title5SAVED = await title5FORMATTING.save();
+
+  console.log(randomTitles)
   
   res.json({randomTitles})
 
-  console.log(randomTitles)
+ 
 })
 
 // ---------------------- route d'acces à la playlist d'un évènement -------------------------------
@@ -89,7 +91,7 @@ router.post('/playlist', async function(req,res,next){
 
 router.post('/sign-up', async function (req, res, next) {
 
-  var hotes = await hoteModel.findOne({ email: req.body.email });
+  var hotes = await HoteModel.findOne({ email: req.body.email });
 
   if (hotes === null) {
 
@@ -227,6 +229,17 @@ router.post('/eventcreation', async function (req, res, next) {
       await playlistModel.updateMany({ $set: {votes: [] }});
       result = true
     }
+
+    var newTourdevote = new tourdevoteModel({
+      event: saveEvent._id,
+      date: new Date(),
+      isOpen: true,
+      echeance: Date.now()+99999999999999, //ECHEANCE A L'INITIALISATION AVANT LE LANCEMENT DU VOTE
+      participants: [],
+    })
+  
+    var saveTourdevote = await newTourdevote.save();
+
   }
   res.json({ result, eventIsOpen, eventIsClosed, error })
 })
@@ -278,10 +291,18 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
 router.post('/initTimer5', async function (req, res, next) {
 
+  console.log('body',req.body)
+
   mongoose.set('useFindAndModify', false);
 
+  var userEvent = await eventModel.findOne(
+    {user: req.body.userIdFromFront, isOpen: true}
+  )
+
+  console.log('userevent', userEvent);
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: req.body.tourdevoteIdFromFront},
+    { event: userEvent._id},
     { echeance: Date.now()+300000 }
   )
 
@@ -378,20 +399,27 @@ router.post('/afficheTimer', async function (req, res, next) {
 
 router.post('/ajoutertitre', async function (req, res, next) {
 
-  var newPlaylist = new playlistModel({
-    titre: req.body.titreFromFront,
-    vote: [],
-  })
+ var newTitre = new playlistModel({
+   titre: req.body.titreFromFront,
+   vote: [],
+   user: req.body.userIdFromFront
+ })
 
-  var playlistSaved = await newPlaylist.save();
-
-
-  res.json({ playlist: playlistSaved })
+ var titreSaved = await newTitre.save();
+ 
+  
+  res.json({ titreSaved })
 });
+
+
 
 router.post('/supprimertitre', async function (req, res, next) {
 
-  var playlistSaved = await playlistModel.findByIdAndDelete(req.body.titreIdFromFront)
+  console.log(req.body);
+
+  var playlistSaved = await playlistModel.deleteOne(
+    {user: req.body.userIdFromFront, titre: req.body.titreFromFront}
+    )
 
   res.json({ playlist: playlistSaved })
 
@@ -405,7 +433,11 @@ router.post('/voteguest', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
+<<<<<<< HEAD
     { votes: {'$in':req.body.tokenFromFront} }
+=======
+    { votes: { $in: req.body.tokenFromFront }}
+>>>>>>> 43f33ac433087fa2649ad146964d78b76fb3d176
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
@@ -440,7 +472,7 @@ router.post('/votehost', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: req.body.userIdFromFront }
+    { votes: { $in: req.body.userIdFromFront} }
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);

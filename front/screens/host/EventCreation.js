@@ -29,6 +29,8 @@ function EventCreation(props) {
 
             if (response.result === true) {
 
+                  props.onSettingEventName(eventName), 
+
                   props.navigation.navigate('SongListCreation')
 
             } else {
@@ -125,8 +127,8 @@ function EventCreation(props) {
                               />
 
                               <Button title="Créer l'évènement"
-                                    onPress={() => { props.onSettingEventName(eventName), props.navigation.navigate('SongListCreation') }}
-                                    // onPress={() => handleEventCreation()} NE PAS RETIRER
+                                    onPress={() => { handleEventCreation() }}
+                  
                                     buttonStyle={{
                                           backgroundColor: '#584DAD',
                                           borderRadius: 10,
