@@ -15,13 +15,14 @@ function SignIn(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(false)
+    const [logInDenied, setLogInDenied] = useState()
     
     
 var handleSignIn = async() => {
 // --------------------------------- VOS IP ICI ----------------------------------------- 
 // Flo IP 192.168.0.17   
 //LA capsule 172.17.1.32
-    var rawResponse = await fetch('http://172.17.1.32:3000/sign-in', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/sign-in', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `email=${email}&password=${password}`
@@ -31,6 +32,7 @@ var handleSignIn = async() => {
     
     if(response.result === false){
         setErrorMessage(true)
+        setLogInDenied(<Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>)
     } else {
         var hostId = response.hote._id
         console.log('hostID', hostId)
@@ -38,15 +40,13 @@ var handleSignIn = async() => {
         console.log('SignUp Success')
         props.addId(hostId);
         props.navigation.navigate('HomeHost')
+        setErrorMessage(false)
+        setLogInDenied()
     }
 
     
 }
 
-var logInDenied;
-if(errorMessage === true){
-    logInDenied = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>
-}
 
 var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('DJhoteFirstScreen')} />;
 var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatliches', textAlign: 'center', alignItems: 'baseline'}}>Connexion</Text>;
@@ -70,7 +70,7 @@ var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatl
                                 containerStyle={{
                                         color:'#fff', 
                                         width: '100%', 
-                                        marginTop:'3%'
+                                        marginTop:'10%'
                                     }}
                                 inputStyle={{
                                         fontFamily:'Roboto-Bold',
@@ -96,7 +96,7 @@ var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatl
                                 containerStyle={{
                                         color:'#fff', 
                                         width: '100%', 
-                                        marginTop:'3%'
+                                        marginTop:'5%'
                                     }}
                                 inputStyle={{
                                         fontFamily:'Roboto-Bold',
@@ -119,8 +119,7 @@ var headerCenter = <Text style={{color: '#fff', fontSize: 40, fontFamily:'Staatl
             <Button 
                         title="Continuer" 
                         onPress={()=>
-                            props.navigation.navigate('HomeHost') 
-                            //handleSignIn()
+                            handleSignIn()
                         }
                         buttonStyle={{
                             backgroundColor: '#584DAD',
@@ -147,7 +146,7 @@ var styles = StyleSheet.create({
         textAlign: 'center',
         height: '100%',
         width: '100%',
-        marginTop:'10%'
+        marginTop:'10%',
         
       },
     
