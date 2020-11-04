@@ -16,6 +16,8 @@ function SecondeHomeHost(props) {
 
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{ width: 80, height: 82 }} />
 
+    //COUNTDOWN 
+  const [TIMER, setTIMER] = useState(0)
 
   useEffect(() => {
 

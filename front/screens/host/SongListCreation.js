@@ -20,6 +20,8 @@ function SongListCreation(props) {
   const [TOPlist, setTOPlist] = useState([]);
   const [errorArtist, setErrorArtist] = useState();
 
+  const [error, setError] = useState()
+
   var listHote;
 
 
@@ -29,17 +31,16 @@ function SongListCreation(props) {
       const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `userIdFromFront=${userId}`
+        body: `userIdFromFront=${props.hostId}`
       })
       var TOP = await TOPdata.json();
       
-
+     
       setTOPlist(TOP.randomTitles)
     }
-
+    setError()
+    setTitreProposeHote();
     findTOP()
-
-    
 
   },[])
 
@@ -48,28 +49,26 @@ function SongListCreation(props) {
 
   var handleAjouterTitre = async () => {
 
-
     if (titreProposeHote === undefined) {
       setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
+      
     } else {
+      
        setErrorArtist()
        setTOPlist([...TOPlist, titreProposeHote])
-       
+       setTitreProposeHote();
     }
 
     var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreFromFront=${titreProposeHote}`
+      body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
-
-    console.log(response);
-
+    setError()
 
     console.log("titre proposé ========= ", titreProposeHote)
-
     
   }
 
@@ -81,27 +80,43 @@ function SongListCreation(props) {
 
 
 
-    var rawResponse = await fetch('http://192.168.0.40.4:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreFromFront=${element}&userIdFromFront=${hostId}`
+      body: `titreFromFront=${element}&userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
+    setError()
 
     console.log(response);
+  }
 
 
+
+  var handleValidationList = async () => {
+
+    console.log('>3', TOPlist)
+    if (TOPlist.length > 2) {
+      setError()
+      console.log('>3', TOPlist)
+      props.navigation.navigate("TimerConfigFIRST")
+    }
+
+    else {
+      console.log('else')
+      setError(<Badge status="error" badgeStyle={{color:'#fff', backgroundColor:'#FF0060'}} value='Merci de choisir au moins 3 titres'></Badge>)
+    }
   }
 
 
 
   var listHote = TOPlist.map((titre, i) => {
     return (
-      <View style={styles.titre}>
+      <View style={styles.titre} key={i}>
         <FontAwesomeIcon 
           onPress={()=> handleSupprimerTitre(titre)} 
-          key={i} icon={faTrash} 
+          icon={faTrash} 
           size={20} 
           style={{color: "#fff", marginLeft: '2%'}}
         />
@@ -134,8 +149,8 @@ function SongListCreation(props) {
         <View style={{ borderBottomWidth: 1, borderBottomColor: "#fff" }}>
 
           {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
-          <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-          <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
+          <Text style={styles.text}>Bienvenu dans la soirée</Text>
+          <Text style={styles.subtitle} >{props.nameToDisplay}</Text>
           <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
 
           {errorArtist}
@@ -184,6 +199,7 @@ function SongListCreation(props) {
               value={titreProposeHote}
             />
 
+             
 
             <Button
               title='+'
@@ -198,6 +214,7 @@ function SongListCreation(props) {
               }}
               onPress={() => handleAjouterTitre()}
             />
+            
 
           </View>
 
@@ -254,10 +271,11 @@ function SongListCreation(props) {
 
       </KeyboardAwareScrollView>
 
+      {error}
+
       <Button
         title="Valider la liste"
-        //onPress={() => props.navigation.navigate('EventCreation')}
-        onPress={() => props.navigation.navigate('TimerConfigFIRST')}
+        onPress={() => handleValidationList()}
         buttonStyle={{
           backgroundColor: '#584DAD',
           marginTop: '3%',
@@ -355,7 +373,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    nameToDisplay: state.EventName
+    nameToDisplay: state.EventName, hostId: state.hostId
   }
 }
 

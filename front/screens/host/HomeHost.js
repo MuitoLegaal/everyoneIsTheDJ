@@ -12,6 +12,7 @@ import Countdown from '../countdown';
 import { connect } from 'react-redux';
 
 
+
 function HomeHost(props){
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
 
@@ -42,7 +43,6 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
     console.log('Comptes à rebours FRONT ici ->', TIMER)
     console.log('hostIdState', props.hostId)
-    console.log('TokenState', props.token)
 
   }, [])
 
@@ -77,7 +77,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
       
           <Text style={styles.title}>Évènement :</Text>
 
-          <Text style={styles.subtextSoiree}>%anniv de bob%</Text>
+           <Text style={styles.subtextSoiree}>{props.nameToDisplay}</Text>
 
           {TIMER <= 0 && (<Text style={styles.subtext}>Vote terminé : </Text>)}
 
@@ -100,7 +100,6 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
           )}
 
           {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
-
 
           {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Pas de vote en cours</Text>)}
 
@@ -280,7 +279,8 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return { hostId: state.hostId }
+  return { hostId: state.hostId,
+           nameToDisplay: state.EventName}
 }
 
 export default connect(
