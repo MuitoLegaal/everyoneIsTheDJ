@@ -433,11 +433,7 @@ router.post('/voteguest', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-<<<<<<< HEAD
     { votes: {'$in':req.body.tokenFromFront} }
-=======
-    { votes: { $in: req.body.tokenFromFront }}
->>>>>>> 43f33ac433087fa2649ad146964d78b76fb3d176
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);

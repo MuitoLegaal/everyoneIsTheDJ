@@ -197,6 +197,7 @@ function nouveauvote(props) {
             timeToShow={['M', 'S']}
             timeLabels={{ m: null, s: null }}
             showSeparator
+            
           />)}
 
         </View>

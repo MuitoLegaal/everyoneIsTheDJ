@@ -50,13 +50,9 @@ export default function Onboarding({navigation}) {
         // ---------------------------------------------------------------------------------------------------------------------------------
         // ------ mettez le screen sur lequel vous voulez travailler rapidement ci-dessous. Exemple navigation.navigate('HomeHost')} -------
         // ---------------------------------------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
         onPress={() => navigation.navigate('Nouveauvote') }
+        
         // onPress={()=> socket.emit("sendMessage", "Hello John !") }
-=======
-        onPress={() => navigation.navigate('ShareEvent') }
-
->>>>>>> 43f33ac433087fa2649ad146964d78b76fb3d176
       ></Button>
 
 
