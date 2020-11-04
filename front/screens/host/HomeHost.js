@@ -72,30 +72,27 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
       <ScrollView style={styles.wrap}>
 
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: 350, borderTopWidth: 1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth: 1 }} >
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: 400, borderTopWidth: 1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth: 1 }} >
 
 
-          <Text style={styles.text} >Aucun évènement en cours maintenant!</Text>
-
-
-
+      
           <Text style={styles.title}>Évènement :</Text>
 
-          <Text style={styles.subtext}>%anniv de bob%</Text>
+          <Text style={styles.subtextSoiree}>%anniv de bob%</Text>
 
           {TIMER <= 0 && (<Text style={styles.subtext}>Vote terminé : </Text>)}
 
           {TIMER <= 0 && (
             <Button
               title="Découvrir le titre gagnant"
-              onPress={() => props.navigation.navigate('EventCreation')}
+              onPress={() => props.navigation.navigate('winnerHost')}
               buttonStyle={{
                 backgroundColor: '#FF0060',
                 borderRadius: 10,
-                marginTop: '25%'
+                marginTop: '10%',
+                marginBottom:'10%'
               }}
               titleStyle={{
-
                 fontFamily: 'Roboto-Bold',
                 fontSize: 20
               }}
@@ -104,7 +101,6 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
           )}
 
           {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
-
 
           {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Pas de vote en cours</Text>)}
 
@@ -235,6 +231,14 @@ const styles = StyleSheet.create({
     marginLeft: '2%'
 
   },
+  subtextSoiree:{
+    color: '#584DAD',
+    fontSize: 30,
+    fontFamily: 'Staatliches',
+    textAlign: 'center',
+    marginTop: '5%',
+    marginLeft: '2%'
+  },
   subtext: {
     color: '#fff',
     fontSize: 30,
@@ -259,8 +263,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     textAlign: 'center',
     marginTop: '5%',
-
-
   },
   box: {
     flexDirection: 'column',

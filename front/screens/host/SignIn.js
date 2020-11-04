@@ -44,8 +44,6 @@ var handleSignIn = async() => {
         props.navigation.navigate('HomeHost')
         
     }
-
-    
 }
 
 

@@ -398,7 +398,7 @@ router.post('/voteguest', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: req.body.tokenFromFront }
+    { votes: { $in: req.body.tokenFromFront }}
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
@@ -433,7 +433,7 @@ router.post('/votehost', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: req.body.userIdFromFront }
+    { votes: { $in: req.body.userIdFromFront} }
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
