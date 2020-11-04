@@ -20,6 +20,8 @@ function SongListCreation(props) {
   const [TOPlist, setTOPlist] = useState([]);
   const [errorArtist, setErrorArtist] = useState();
 
+  const [error, setError] = useState()
+
   var listHote;
 
 
@@ -33,10 +35,11 @@ function SongListCreation(props) {
       })
       var TOP = await TOPdata.json();
       
-
+     
       setTOPlist(TOP.randomTitles)
     }
-
+    setError()
+    setTitreProposeHote();
     findTOP()
 
   },[])
@@ -46,13 +49,14 @@ function SongListCreation(props) {
 
   var handleAjouterTitre = async () => {
 
-
     if (titreProposeHote === undefined) {
       setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
+      
     } else {
+      
        setErrorArtist()
        setTOPlist([...TOPlist, titreProposeHote])
-       
+       setTitreProposeHote();
     }
 
     var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
@@ -62,12 +66,9 @@ function SongListCreation(props) {
     })
 
     var response = await rawResponse.json();
-
-    console.log(response);
-
+    setError()
 
     console.log("titre proposé ========= ", titreProposeHote)
-
     
   }
 
@@ -77,8 +78,6 @@ function SongListCreation(props) {
 
     setTOPlist(TOPlist.filter((e)=>(e !== element)))
 
-
-
     var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -86,10 +85,26 @@ function SongListCreation(props) {
     })
 
     var response = await rawResponse.json();
+    setError()
 
     console.log(response);
+  }
 
 
+
+  var handleValidationList = async () => {
+
+    console.log('>3', TOPlist)
+    if (TOPlist.length > 2) {
+      setError()
+      console.log('>3', TOPlist)
+      props.navigation.navigate("TimerConfigFIRST")
+    }
+
+    else {
+      console.log('else')
+      setError(<Badge status="error" badgeStyle={{color:'#fff', backgroundColor:'#FF0060'}} value='Merci de choisir au moins 3 titres'></Badge>)
+    }
   }
 
 
@@ -182,6 +197,7 @@ function SongListCreation(props) {
               value={titreProposeHote}
             />
 
+             
 
             <Button
               title='+'
@@ -196,6 +212,7 @@ function SongListCreation(props) {
               }}
               onPress={() => handleAjouterTitre()}
             />
+            
 
           </View>
 
@@ -252,10 +269,11 @@ function SongListCreation(props) {
 
       </KeyboardAwareScrollView>
 
+      {error}
+
       <Button
         title="Valider la liste"
-        //onPress={() => props.navigation.navigate('EventCreation')}
-        onPress={() => props.navigation.navigate('TimerConfigFIRST')}
+        onPress={() => handleValidationList()}
         buttonStyle={{
           backgroundColor: '#584DAD',
           marginTop: '3%',
