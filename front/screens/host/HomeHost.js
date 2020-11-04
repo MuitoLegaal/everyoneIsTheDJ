@@ -15,7 +15,7 @@ import Countdown from '../countdown';
 
 function HomeHost(props){
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
-// var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}}  onPress={() => props.navigation.openDrawer()}/>
+
 
 
 
@@ -24,7 +24,6 @@ return (
     <View style={{height:150}}>
             <Header
               centerComponent={headerCenter}
-              // rightComponent={headerRight}
               containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
             />
 
@@ -99,7 +98,6 @@ return (
               {/* <Button 
               title=" + Nouveau vote" 
               onPress={() => props.navigation.navigate('Moderation')}
-              //onPress={()=>handleSignUp()}
               buttonStyle={{
                     backgroundColor: '#fff',
                     color: '#584DAD',
@@ -136,8 +134,6 @@ return (
         <Button 
               title=" Nouvelle soirée" 
               onPress={() => props.navigation.navigate('EventCreation')}
-              //onPress={() => props.navigation.navigate('Countdown')}
-              //onPress={()=>handleSignUp()}
               buttonStyle={{
                     backgroundColor: '#584DAD',
                     borderRadius: 10,

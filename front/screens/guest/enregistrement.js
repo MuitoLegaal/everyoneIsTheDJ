@@ -23,7 +23,7 @@ function enregistrement({ navigation, addId, addToken }) {
 // --------------------------------- VOS IP ICI -----------------------------------------
 // Flo IP : 192.168.0.17
 // Vlad : 192.168.0.40
-var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+var rawResponse = await fetch('http://192.168.0.17:3000/enregistrement', {
   method: 'POST',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
@@ -55,7 +55,7 @@ if (response.result === true) {
   var logInDenied
 
   if (errorMessage === true) {
-    logInDenied = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="ID et/ou Mot de Passe Incorrect(es)"></Badge>
+    logInDenied = <Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Nom et/ou Mot de Passe Incorrect(es)"></Badge>
   }
 
   // If Champs Vide error frontend
@@ -79,6 +79,7 @@ if (response.result === true) {
 
 
     <KeyboardAwareScrollView style={styles.main}>
+    {logInDenied}
       <Input
         label='Pseudo'
         placeholder='Gégé'
@@ -105,7 +106,7 @@ if (response.result === true) {
         value={pseudo}
       />
       <Input
-        label="ID de l'évènement"
+        label="Nom de la soirée"
         placeholder='#144667'
         type='text'
         containerStyle={{
@@ -130,7 +131,7 @@ if (response.result === true) {
         value={eventId}
       />
       <Input
-        label="Mot de passe de l'évènement"
+        label="Mot de passe de la soirée"
         placeholder="Gerard La teuuuuffff de l'espace"
         type='text'
         containerStyle={{
@@ -154,7 +155,7 @@ if (response.result === true) {
         onChangeText={text => setEventPassword(text)}
         value={eventPassword}
       />
-      <Text>{logInDenied}</Text>
+      
 
       <Button title="Rejoindre la soirée"
         // onPress={() => navigation.navigate('Nouveauvote')}
