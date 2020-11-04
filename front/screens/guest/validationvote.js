@@ -10,24 +10,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 
 
-function validationvote(props) {
 
+function validationvote(props) {
 
  //HEADER
  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
  var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
  var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Homeinvite')} />
 
-
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
 
-  
-  
   useEffect(() => {
 
     const findTIMER = async () => {
-
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
@@ -36,11 +32,9 @@ function validationvote(props) {
         body: `idUserFromFront=${props.hostId}`
       })
 
-
       var timer = await TIMERdata.json();
       setTIMER(timer.reboursFinal)
       console.log("rebours", timer)
-
     }
 
     findTIMER()
@@ -69,10 +63,7 @@ function validationvote(props) {
     }
   }
 
-
-
 // BOUCLE QUE AFFICHE LES TITRES A VOTER
-
 
   return (
     <View style={styles.container}>
@@ -83,9 +74,7 @@ function validationvote(props) {
         containerStyle={{ backgroundColor: '#131313', padding: 20, flex: 0.1 }}
       />
 
-
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
-
 
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
           <Text style={styles.text}>Bienvenue dans l'évènement:</Text>
@@ -95,16 +84,12 @@ function validationvote(props) {
           <Text style={styles.title}> %Anniv' de Bob% </Text>
           <Image source={require('../../assets/picto-fete2.png')} style={{ height: 80, width: 80, margin: 25 }} />
         </View>
-
-
        
         <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
-
 
         <Text style={{ color: '#FF0060', marginBottom: 10}}>Ton vote a bien été pris en compte</Text>
           {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)}
           {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>)}
-
 
           {TIMER > 0 && (<CountDown
             size={30}
@@ -128,30 +113,21 @@ function validationvote(props) {
               borderRadius: 10,
               marginTop: '5%',
               marginBottom: '5%',
-
             }}
             titleStyle={{
               fontFamily: 'Staatliches',
               fontSize: 25
             }}
-
-
             icon={
               <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
             }
-
             onPress={() => handleRefreshTIMER()}
-
-
           />)}
-
 
       </ScrollView>
     </View>
 
-
-  );
-}
+  )}
 
 // STYLE ------------------------------------------------------------------------
 
@@ -208,10 +184,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
 
   }
-
-});
-
-
+})
 
 // REDUX
 

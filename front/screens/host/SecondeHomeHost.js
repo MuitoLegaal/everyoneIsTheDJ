@@ -12,13 +12,9 @@ import Countdown from '../countdown';
 import { connect } from 'react-redux';
 
 
-
-function HomeHost(props) {
+function SecondeHomeHost(props) {
 
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{ width: 80, height: 82 }} />
-
-  //COUNTDOWN 
-  const [TIMER, setTIMER] = useState(0)
 
 
   useEffect(() => {
@@ -74,107 +70,17 @@ function HomeHost(props) {
 
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: 350, borderTopWidth: 1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth: 1 }} >
 
-
-          <Text style={styles.text} >Aucun évènement en cours maintenant!</Text>
-
-
-
-          <Text style={styles.title}>Évènement :</Text>
-
-          <Text style={styles.subtext}>%anniv de bob%</Text>
-
-          {TIMER <= 0 && (<Text style={styles.subtext}>Vote terminé : </Text>)}
-
-          {TIMER <= 0 && (
-            <Button
-              title="Découvrir le titre gagnant"
-              onPress={() => props.navigation.navigate('EventCreation')}
-              buttonStyle={{
-                backgroundColor: '#FF0060',
-                borderRadius: 10,
-                marginTop: '25%'
-              }}
-              titleStyle={{
-
-                fontFamily: 'Roboto-Bold',
-                fontSize: 20
-              }}
-
-            />
-          )}
-
-          {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
-
-
-          {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Pas de vote en cours</Text>)}
-
-          {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>)}
-
-          {TIMER > 0 && (<CountDown
-            size={30}
-            until={TIMER}
-            onFinish={() => navigation.navigate('Winnerguest')}
-            digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
-            digitTxtStyle={{ color: '#FF0060' }}
-            timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-            separatorStyle={{ color: '#FF0060' }}
-            timeToShow={['M', 'S']}
-            timeLabels={{ m: null, s: null }}
-            showSeparator
-          />)}
-
+          <Text style={styles.text} >Aucune soirée en cours maintenant!</Text>
 
         </View>
         <View>
 
-          <Text style={styles.subtitle} >Mes évènements</Text>
-
-
-          <View style={styles.box} >
-
-            <View style={{ textAlign: 'center', alignItems: 'center' }}>
-              <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170 }} />
-            </View>
-
-            <View>
-              <Text style={styles.subtext}>%Anniv Claude % </Text>
-              <Text style={styles.text}>Date: %11/10/2020%</Text>
-              <Text style={styles.text}>Statut: %en cours%</Text>
-            </View>
-
-
-            <Button
-              title=" + Nouveau vote"
-              onPress={() => props.navigation.navigate('Moderation')}
-              //onPress={()=>handleSignUp()}
-              buttonStyle={{
-                backgroundColor: '#fff',
-                color: '#584DAD',
-                borderColor: '#584DAD',
-                borderWidth: 3,
-                borderRadius: 10,
-                marginTop: '5%'
-              }}
-              titleStyle={{
-                color: '#584DAD',
-                fontFamily: 'Roboto-Bold'
-              }}
-            />
-
-
-          </View>
-
+          <Text style={styles.subtitle} >Mes soirées</Text>
 
           <View style={styles.box} >
 
-            <View style={{ textAlign: 'center', alignItems: 'center' }}>
-              <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170 }} />
-            </View>
-
             <View>
-              <Text style={styles.subtext}>%Anniv Claude % </Text>
-              <Text style={styles.text}>Date: %11/10/2020%</Text>
-              <Text style={styles.text}>Statut: %en cours%</Text>
+              <Text style={styles.subtext}>Ajoute une soirée pour lancer un vote</Text>
             </View>
 
           </View>
@@ -196,11 +102,7 @@ function HomeHost(props) {
           }
         />
       </ScrollView>
-
-
     </View>
-
-
 
   )
 }
@@ -279,6 +181,7 @@ const styles = StyleSheet.create({
 
 });
 
+
 function mapStateToProps(state) {
   return { hostId: state.hostId }
 }
@@ -286,4 +189,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(HomeHost);
+)(SecondeHomeHost);
