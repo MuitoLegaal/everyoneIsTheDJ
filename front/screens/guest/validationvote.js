@@ -121,25 +121,29 @@ function validationvote(props) {
 
         </View>
 
-        <Button
-          title='  REFRESH'
-          buttonStyle={{
-            backgroundColor: '#FF0060',
-            borderRadius: 10,
-            color: 'white',
-            marginTop: '5%',
-            marginBottom: '5%',
-            fontSize: 18
-          }}
+        {TIMER <= 0 && (<Button
+            title='REFRESH'
+            buttonStyle={{
+              backgroundColor: '#E59622',
+              borderRadius: 10,
+              marginTop: '5%',
+              marginBottom: '5%',
 
-          icon={
-            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
-          }
-
-          onPress={() => handleRefreshTIMER()}
+            }}
+            titleStyle={{
+              fontFamily: 'Staatliches',
+              fontSize: 25
+            }}
 
 
-        />
+            icon={
+              <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
+            }
+
+            onPress={() => handleRefreshTIMER()}
+
+
+          />)}
 
 
       </ScrollView>
