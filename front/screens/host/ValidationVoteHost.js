@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 
 
-function validationvote(props) {
+function ValidationVoteHost(props) {
 
  //HEADER
  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
@@ -59,7 +59,7 @@ function validationvote(props) {
     console.log("rebours", timer)
 
     if(timer) {
-      navigation.navigate("nouveauvote")
+      navigation.navigate("VoteHost")
     }
   }
 
@@ -195,4 +195,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(validationvote);
+)(ValidationVoteHost);
