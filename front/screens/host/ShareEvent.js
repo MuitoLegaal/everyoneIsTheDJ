@@ -10,6 +10,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Header, Button, Badge } from 'react-native-elements'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { connect } from 'react-redux'
 
 
 function ShareEvent(props){
@@ -57,7 +58,7 @@ function ShareEvent(props){
                   <Text style={styles.subtext}>Télècharge l’application pour voter :</Text> 
                   <Text style={styles.text}>https://apps.apple.com/app/apple-store/id982107779</Text>
                   <Text style={styles.subtext}>Nom de l'évènement : </Text>
-                  <Text style={styles.text}>%anniv maurice </Text>
+                  <Text style={styles.text}>{props.nameToDisplay} </Text>
                   <Text style={styles.subtext}>Mot de passe de l'évènement : </Text>
                   <Text style={styles.text}> %momolefeu </Text>
                 </View>
@@ -179,4 +180,14 @@ const styles = StyleSheet.create({
     }
   
 });
-  export default ShareEvent;
+
+function mapStateToProps(state) {
+  return {
+    nameToDisplay: state.EventName
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(ShareEvent);

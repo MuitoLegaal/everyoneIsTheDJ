@@ -42,10 +42,7 @@ var handleSignIn = async() => {
         setErrorMessage(false)
         setLogInDenied()
         props.navigation.navigate('HomeHost')
-<<<<<<< HEAD
         
-=======
->>>>>>> afd42aa97ab1174daf572dcd98775f1cf45e51fd
     }
 }
 
