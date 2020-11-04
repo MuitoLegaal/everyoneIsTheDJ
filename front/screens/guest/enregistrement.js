@@ -9,7 +9,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import uuid from 'react-uuid';
 import {connect} from 'react-redux';
 
-function enregistrement({ navigation, addId, addToken }) {
+function enregistrement({ navigation, addId, addToken, props }) {
 
   const [pseudo, setPseudo] = useState('');
   const [eventPassword, setEventPassword] = useState('');
@@ -106,8 +106,8 @@ if (response.result === true) {
         value={pseudo}
       />
       <Input
-        label="Nom de la soirée"
-        placeholder='#144667'
+        label="Id de la soirée"
+        placeholder='0402'
         type='text'
         containerStyle={{
           color: '#fff',
@@ -132,7 +132,7 @@ if (response.result === true) {
       />
       <Input
         label="Mot de passe de la soirée"
-        placeholder="Gerard La teuuuuffff de l'espace"
+        placeholder="Boby  La teuuuuffff de l'espace"
         type='text'
         containerStyle={{
           color: '#fff',
