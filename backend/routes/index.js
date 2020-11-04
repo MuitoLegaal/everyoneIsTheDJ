@@ -368,16 +368,16 @@ router.post('/afficheTimer', async function (req, res, next) {
 
 router.post('/ajoutertitre', async function (req, res, next) {
 
-  var newPlaylist = new playlistModel({
-    titre: req.body.titreFromFront,
-    user: req.body.idUserFromFront,
-    vote: [],
-  })
+ var newTitre = new playlistModel({
+   titre: req.body.titreFromFront,
+   vote: [],
+   user: 'test'
+ })
 
-  var playlistSaved = await newPlaylist.save();
-
-
-  res.json({ playlist: playlistSaved })
+ var titreSaved = await newTitre.save();
+ 
+  
+  res.json({ titreSaved })
 });
 
 
