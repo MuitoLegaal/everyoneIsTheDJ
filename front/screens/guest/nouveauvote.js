@@ -94,7 +94,8 @@ function nouveauvote(props) {
   //   // Flo IP : 192.168.0.17
   //   // Vlad : 192.168.0.40
        // Max : 192.168.1.20
-  //   var rawResponse = await fetch('http://192.168.0.40:3000/enregistrement', {
+
+  //   var rawResponse = await fetch('http://192.168.1.20:3000/voteguest', {
   //     method: 'POST',
   //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   //     body: `titleFromFront=${title}&idUserFront=${props.hostId}`
@@ -109,8 +110,6 @@ function nouveauvote(props) {
   //   }
 
   // }
-
-
 
   // BOUCLE QUE AFFICHE LES TITRES A VOTER
 

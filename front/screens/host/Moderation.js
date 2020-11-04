@@ -22,7 +22,16 @@ function Moderation(props) {
   const [error, setError] = useState()
 
 
+  handleTourdevotecreation = async () => {
 
+    var rawResponse = await fetch('http://192.168.0.40:3000/eventcreation', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: `idUserFromFront=${props.hostId}`
+            })
+
+
+  }
 
   
   var handleSupprimerTitre = async (element) => {
@@ -237,4 +246,11 @@ function Moderation(props) {
     });
 
 
-  export default Moderation;
+function mapStateToProps(state) {
+      return { hostId: state.hostId }
+}
+
+export default connect(
+      mapStateToProps,
+      null
+)(Moderation);
