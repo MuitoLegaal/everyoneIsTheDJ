@@ -15,7 +15,6 @@ import { connect } from 'react-redux'
 
 function TimerConfigFIRST(props) {
 
-/*TEST*/  var tourdevoteId = '5f9fe5ec403798a3f0938879'
 
   var handleInitTimer5 = async () => {
 
@@ -23,10 +22,12 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.144.4:3000/initTimer5', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `tourdevoteIdFromFront=${tourdevoteId}`
+      body: `userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
+
+    props.navigation.navigate("ShareEvent")
 
     console.log(response);
     props.navigation.navigate('ShareEvent')
@@ -38,7 +39,7 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.144.4:3000/initTimer10', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `tourdevoteIdFromFront=${tourdevoteId}`
+      body: `tourdevoteIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
@@ -53,7 +54,7 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.144.4:3000/initTimer20', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `tourdevoteIdFromFront=${tourdevoteId}`
+      body: `tourdevoteIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    nameToDisplay: state.EventName
+    nameToDisplay: state.EventName, hostId: state.hostId
   }
 }
 

@@ -128,7 +128,7 @@ function EventCreation(props) {
 
                               <Button title="Créer l'évènement"
                                     onPress={() => { handleEventCreation() }}
-                                    // onPress={() => handleEventCreation()} NE PAS RETIRER
+                  
                                     buttonStyle={{
                                           backgroundColor: '#584DAD',
                                           borderRadius: 10,

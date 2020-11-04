@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
 import EventName from './reducers/EventNameReducer'
+import EventPass from './reducers/EventPasswordReducer'
 import token from './reducers/token';
 import hostId from './reducers/hostId';
 
@@ -28,7 +29,7 @@ const getFonts = () => Font.loadAsync({
   import AppDrawer from './screens/Drawer';
 
 
-const store = createStore(combineReducers({EventName, token, hostId}))
+const store = createStore(combineReducers({EventName, token, hostId, EventPass}))
 
 
 

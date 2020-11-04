@@ -219,6 +219,17 @@ router.post('/eventcreation', async function (req, res, next) {
       await playlistModel.updateMany({ $set: {votes: [] }});
       result = true
     }
+
+    var newTourdevote = new tourdevoteModel({
+      event: saveEvent._id,
+      date: new Date(),
+      isOpen: true,
+      echeance: Date.now()+99999999999999, //ECHEANCE A L'INITIALISATION AVANT LE LANCEMENT DU VOTE
+      participants: [],
+    })
+  
+    var saveTourdevote = await newTourdevote.save();
+
   }
   res.json({ result, eventIsOpen, eventIsClosed, error })
 })
@@ -270,10 +281,18 @@ router.post('/tourdevotecreation', async function (req, res, next) {
 
 router.post('/initTimer5', async function (req, res, next) {
 
+  console.log('body',req.body)
+
   mongoose.set('useFindAndModify', false);
 
+  var userEvent = await eventModel.findOne(
+    {user: req.body.userIdFromFront, isOpen: true}
+  )
+
+  console.log('userevent', userEvent);
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: req.body.tourdevoteIdFromFront},
+    { event: userEvent._id},
     { echeance: Date.now()+300000 }
   )
 
@@ -391,7 +410,6 @@ router.post('/supprimertitre', async function (req, res, next) {
   var playlistSaved = await playlistModel.deleteOne(
     {user: req.body.userIdFromFront, titre: req.body.titreFromFront}
     )
-
 
   res.json({ playlist: playlistSaved })
 
