@@ -47,10 +47,11 @@ function SignUp(props) {
                 props.addId(hostId);
                
             props.navigation.navigate('HomeHost')
+
         }
         
     };
-    
+
     var passwordError;
     if (password != confirmationPassword) {
         passwordError = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Le mot de passe n'est pas identique"></Badge>
@@ -225,7 +226,6 @@ var styles = StyleSheet.create({
         
       },
 })
-
 
 function mapDispatchToProps(dispatch) {
     return {
