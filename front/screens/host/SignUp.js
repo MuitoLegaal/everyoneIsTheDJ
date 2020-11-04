@@ -23,11 +23,11 @@ function SignUp(props) {
 
     var handleSignUp = async() => {
         
-    
+        
 // --------------------------------- VOS IP ICI -----------------------------------------
 // IP la Capsule  : 172.17.1.32
 // Flo IP : 192.168.0.17
-        var rawResponse = await fetch('http://192.168.0.40:3000/sign-up', {
+        var rawResponse = await fetch('http://192.168.0.17:3000/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `username=${username}&email=${email}&password=${password}`
@@ -36,20 +36,23 @@ function SignUp(props) {
         var response = await rawResponse.json();
         console.log(response);
 
+        props.navigation.navigate('SecondeHomeHost')
+
 
         if (response.result === false){
             console.log('SignUp Failed')
             setSignUp(true)
-        } 
-        else {
+        } else {
+
+            
+
                 var hostId = response.hote._id
                 console.log('hostID', hostId)
                 await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
                 console.log('SignUp Success')
                 props.addId(hostId);
                
-            props.navigation.navigate('SecondeHomeHost')
-
+               
         }
         
     };

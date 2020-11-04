@@ -77,12 +77,24 @@ router.post('/findTOP', async function(req,res,next){
  
 })
 
+// ---------------------- route d'acces à la playlist d'un évènement -------------------------------
+router.post('/playlist', async function(req,res,next){
+
+  var playlistDB = await playlistModel.find({user: req.body.idUserFromFront});
+
+  res.json({playlistDB})
+
+  // console.log('playlist logguée ici ->', playlistDB)
+})
+
 
 
 router.post('/sign-up', async function (req, res, next) {
 
-  var hotes = await HoteModel.findOne({ email: req.body.email });
+  console.log(req.body.email)
 
+  var hotes = await HoteModel.findOne({ email: req.body.email });
+  console.log(hotes)
   if (hotes === null) {
 
     var newHote = new HoteModel({
@@ -90,17 +102,15 @@ router.post('/sign-up', async function (req, res, next) {
       email: req.body.email,
       password: req.body.password
     })
-
     var hoteSaved = await newHote.save();
-  
-    if (hoteSaved === null) {
-      console.log('no')
-      res.json({ result: false })
-    } else {
-      console.log('yes')
-      res.json({ result: true, hote: hoteSaved })
-    }
+    res.json({ result: true, hote: hoteSaved })
+
+  }else{
+    console.log('no')
+    res.json({ result: false })
+
   }
+ 
 })
 
 
@@ -435,7 +445,7 @@ router.post('/voteguest', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: { $in: req.body.tokenFromFront }}
+    { votes: {'$in':req.body.tokenFromFront} }
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
@@ -444,10 +454,10 @@ router.post('/voteguest', async function (req, res, next) {
 
     var vote = await playlistModel.findOneAndUpdate(
       { titre: req.body.titreFromFront, user: req.body.idUserFromFront },
-      { $push: { votes: req.body.tokenFromFront } }
+      { '$push': { 'votes': req.body.tokenFromFront } }
     )
 
-    console.log('vote', vote)
+    console.log('vote du guest ici -> ', vote)
   }
 
 

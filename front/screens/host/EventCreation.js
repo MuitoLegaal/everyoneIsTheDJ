@@ -17,7 +17,7 @@ function EventCreation(props) {
 
       var handleEventCreation = async () => {
 
-            var rawResponse = await fetch('http://192.168.0.40:3000/eventcreation', {
+            var rawResponse = await fetch('http://192.168.144.4:3000/eventcreation', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${props.hostId}`
@@ -25,11 +25,12 @@ function EventCreation(props) {
 
             var response = await rawResponse.json();
 
-            console.log(response);
+            console.log("id event", response.eventIsOpen.eventId);
+            props.onSettingIdEvent(response.eventIsOpen.eventId)
 
             if (response.result === true) {
-
-                  props.onSettingEventName(eventName), 
+                  
+                  props.onSettingEventName(eventName), props.onSettingPassword(eventPassword)
 
                   props.navigation.navigate('SongListCreation')
 
@@ -202,7 +203,13 @@ const styles = StyleSheet.create({
 function mapDispatchToProps(dispatch) {
       return {
       onSettingEventName: function (eventName) {
-      dispatch({ type: 'setting', eventName: eventName })
+            dispatch({ type: 'setting', eventName: eventName })
+      },
+      onSettingPassword: function (pass) {
+            dispatch({ type: "set", eventsPass: pass})
+      },
+      onSettingIdEvent: function (id) {
+            dispatch({ type: 'setID', eventsID: id})
       }
       }
 }

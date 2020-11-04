@@ -28,7 +28,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.0.40:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${props.hostId}`
@@ -59,7 +59,7 @@ function SongListCreation(props) {
        setTitreProposeHote();
     }
 
-    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
@@ -78,7 +78,9 @@ function SongListCreation(props) {
 
     setTOPlist(TOPlist.filter((e)=>(e !== element)))
 
-    var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
+
+
+    var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${element}&userIdFromFront=${props.hostId}`
@@ -147,8 +149,8 @@ function SongListCreation(props) {
         <View style={{ borderBottomWidth: 1, borderBottomColor: "#fff" }}>
 
           {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
-          <Text style={styles.text}>Bienvenu dans la soirée de </Text>
-          <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
+          <Text style={styles.text}>Bienvenu dans la soirée</Text>
+          <Text style={styles.subtitle} >{props.nameToDisplay}</Text>
           <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
 
           {errorArtist}

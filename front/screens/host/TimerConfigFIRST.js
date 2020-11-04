@@ -19,7 +19,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer5 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer5', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/initTimer5', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userIdFromFront=${props.hostId}`
@@ -30,12 +30,13 @@ function TimerConfigFIRST(props) {
     props.navigation.navigate("ShareEvent")
 
     console.log(response);
+    props.navigation.navigate('ShareEvent')
   }
 
   var handleInitTimer10 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer10', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/initTimer10', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userIdFromFront=${props.hostId}`
@@ -46,12 +47,13 @@ function TimerConfigFIRST(props) {
     props.navigation.navigate("ShareEvent")
 
     console.log(response);
+    props.navigation.navigate('HomeHost')
   }
 
   var handleInitTimer20 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer20', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/initTimer20', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userIdFromFront=${props.hostId}`
@@ -62,6 +64,7 @@ function TimerConfigFIRST(props) {
     props.navigation.navigate("ShareEvent")
 
     console.log(response);
+    props.navigation.navigate('HomeHost')
   }
 
 
@@ -95,8 +98,8 @@ function TimerConfigFIRST(props) {
 
 
         <View>
-        <Text style={styles.text}>Bienvenue dans la soirée de </Text>
-          <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
+        <Text style={styles.text}>Bienvenu dans la soirée </Text>
+          <Text style={styles.subtitle} >{props.nameToDisplay}</Text>
 
           <Button 
             title="5 min"
