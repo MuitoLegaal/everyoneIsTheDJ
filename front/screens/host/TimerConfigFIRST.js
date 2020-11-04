@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, AsyncStorage, ScrollView, Image, Button } from 'react-native';
+import { View, Text, AsyncStorage, ScrollView, Image, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +8,9 @@ import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { Header } from 'react-native-elements'
+import { Header, Button } from 'react-native-elements'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { connect } from 'react-redux'
 
 
 function TimerConfigFIRST(props) {
@@ -18,7 +20,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer5 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer5', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/initTimer5', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `tourdevoteIdFromFront=${tourdevoteId}`
@@ -32,7 +34,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer10 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer10', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/initTimer10', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `tourdevoteIdFromFront=${tourdevoteId}`
@@ -46,7 +48,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer20 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer20', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/initTimer20', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `tourdevoteIdFromFront=${tourdevoteId}`
@@ -60,37 +62,74 @@ function TimerConfigFIRST(props) {
 
 
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{ color: "white" }} onPress={() => props.navigation.navigate('SongListCreation')} />;
-  var headerCenter = <Text style={{ color: 'white' }} >Compte à rebours (1er tour de vote)</Text>;
-  var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{ color: "white" }} onPress={() => props.navigation.goBack()} />;
+  var headerCenter = <Text style={styles.title} >Timer</Text>;
+  var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
   return (
 
 
-    <ScrollView style={{ flex: 1, backgroundColor: '#131313' }} contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}>
+    <View style={styles.container}>
+        <View>
+              <Header
+                containerStyle={{
+                  backgroundColor: "#131313", 
+                //height: '20%', 
+                alignItems: 'flex-start', 
+                borderBottomWidth:0,  
+                marginBottom:'5%'
+              
+                }}
+                leftComponent={headerLeft}
+                centerComponent={headerCenter}
+                rightComponent={headerRight}
+              />
+        </View>
 
-      <Header
-        containerStyle={{ backgroundColor: '#131313' }}
-        leftComponent={headerLeft}
-        centerComponent={headerCenter}
-        rightComponent={headerRight}
-      />
 
-
-
-      <View style={{ flex: 0.2, justifyContent: 'space-around', padding: 20, borderRadius: 10, margin: 15, alignItems: 'center' }} >
+      <View style={styles.wrap} >
 
 
         <View>
+        <Text style={styles.text}>Bienvenu dans la soirée de </Text>
+          <Text style={styles.subtitle} >NOM DE L'EVENT {props.nameToDisplay}</Text>
 
-          <Button title="5 min"
+          <Button 
+            title="5 min"
             onPress={() => handleInitTimer5()}
+            buttonStyle={{
+              backgroundColor: '#FF0060',
+              borderRadius: 10,
+              color: 'white',
+              marginRight:'2%',
+              marginTop:'5%'
+          
+          }}
           ></Button>
 
-          <Button title="10 min"
+          <Button 
+            title="10 min"
             onPress={() => handleInitTimer10()}
+            buttonStyle={{
+              backgroundColor: '#FF0060',
+              borderRadius: 10,
+              color: 'white',
+              marginRight:'2%',
+              marginTop:'5%'
+          
+          }}
           ></Button>
-          <Button title="20 min"
+
+          <Button 
+            title="20 min"
             onPress={() => handleInitTimer20()}
+            buttonStyle={{
+              backgroundColor: '#FF0060',
+              borderRadius: 10,
+              color: 'white',
+              marginRight:'2%',
+              marginTop:'5%'
+          
+          }}
           ></Button>
 
         </View>
@@ -99,9 +138,64 @@ function TimerConfigFIRST(props) {
 
 
 
-    </ScrollView>
-
+    
+</View>
   );
 }
 
-export default TimerConfigFIRST;
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor: '#131313',
+    
+  },
+  wrap: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      //justifyContent: 'center',
+      textAlign: 'center',
+      height: hp('100%'), // 70% of height device screen
+      width: wp('100%'),  // 80% of width device screen 
+      backgroundColor: '#131313',
+      borderTopColor: '#fff', 
+      borderTopWidth:1
+
+    },
+    title: {
+      color: '#fff',
+      fontSize: 40,
+      fontFamily:'Staatliches'
+    },
+
+    subtitle: {
+      color: '#584DAD',
+      fontSize: 40,
+      fontFamily: 'Staatliches',
+      textAlign: 'center',
+      marginTop: '6%',
+      marginBottom:'5%'
+  
+    },
+  
+    text: {
+      color: '#fff',
+      fontSize: 20,
+      fontFamily: 'Roboto-Regular',
+      paddingRight: '10%',
+      paddingLeft: '5%',
+      textAlign: 'center',
+      marginTop: '6%',
+  
+    },
+});
+
+function mapStateToProps(state) {
+  return {
+    nameToDisplay: state.EventName
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(TimerConfigFIRST);
