@@ -79,7 +79,7 @@ router.post('/findTOP', async function(req,res,next){
 
 router.post('/sign-up', async function (req, res, next) {
 
-  var hotes = await hoteModel.findOne({ email: req.body.email });
+  var hotes = await HoteModel.findOne({ email: req.body.email });
 
   if (hotes === null) {
 

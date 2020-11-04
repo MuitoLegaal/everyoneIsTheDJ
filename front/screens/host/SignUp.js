@@ -46,7 +46,7 @@ function SignUp(props) {
                 console.log('SignUp Success')
                 props.addId(hostId);
                
-            props.navigation.navigate('HomeHost')
+            props.navigation.navigate('SecondeHomeHost')
 
         }
         

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import { Header } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
