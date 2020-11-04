@@ -380,6 +380,8 @@ router.post('/ajoutertitre', async function (req, res, next) {
   res.json({ titreSaved })
 });
 
+
+
 router.post('/supprimertitre', async function (req, res, next) {
 
   var playlistSaved = await playlistModel.findByIdAndDelete(req.body.titreIdFromFront)

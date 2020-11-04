@@ -27,7 +27,7 @@ function SignUp(props) {
 // --------------------------------- VOS IP ICI -----------------------------------------
 // IP la Capsule  : 172.17.1.32
 // Flo IP : 192.168.0.17
-        var rawResponse = await fetch('http://172.17.1.32:3000/sign-up', {
+        var rawResponse = await fetch('http://192.168.0.17:3000/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `username=${username}&email=${email}&password=${password}`
@@ -50,6 +50,7 @@ function SignUp(props) {
         }
         
     };
+    
     var passwordError;
     if (password != confirmationPassword) {
         passwordError = <Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Le mot de passe n'est pas identique"></Badge>

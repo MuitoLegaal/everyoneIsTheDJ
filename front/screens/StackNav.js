@@ -10,7 +10,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // import Onboarding
 import Onboarding from './onboarding';
-
 import AppDrawer from './Drawer';
 
 
