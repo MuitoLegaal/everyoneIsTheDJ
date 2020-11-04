@@ -79,8 +79,10 @@ router.post('/findTOP', async function(req,res,next){
 
 router.post('/sign-up', async function (req, res, next) {
 
-  var hotes = await hoteModel.findOne({ email: req.body.email });
+  console.log(req.body.email)
 
+  var hotes = await HoteModel.findOne({ email: req.body.email });
+  console.log(hotes)
   if (hotes === null) {
 
     var newHote = new HoteModel({
@@ -88,17 +90,15 @@ router.post('/sign-up', async function (req, res, next) {
       email: req.body.email,
       password: req.body.password
     })
-
     var hoteSaved = await newHote.save();
-  
-    if (hoteSaved === null) {
-      console.log('no')
-      res.json({ result: false })
-    } else {
-      console.log('yes')
-      res.json({ result: true, hote: hoteSaved })
-    }
+    res.json({ result: true, hote: hoteSaved })
+
+  }else{
+    console.log('no')
+    res.json({ result: false })
+
   }
+ 
 })
 
 
