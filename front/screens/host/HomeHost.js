@@ -12,32 +12,15 @@ import Countdown from '../countdown';
 import { connect } from 'react-redux';
 
 
-
-function HomeHost(props) {
-
-<<<<<<< HEAD
-  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{ width: 80, height: 82 }} />
-=======
 function HomeHost(props){
 var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
 
->>>>>>> b36b0d0d9e289d88bfd818ddf64861557e8982c1
 
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
 
 
-<<<<<<< HEAD
   useEffect(() => {
-=======
-return (
-  <View style={styles.container}>
-    <View style={{height:150}}>
-            <Header
-              centerComponent={headerCenter}
-              containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
-            />
->>>>>>> b36b0d0d9e289d88bfd818ddf64861557e8982c1
 
     const findTIMER = async () => {
 
@@ -193,25 +176,6 @@ return (
             </View>
 
           </View>
-<<<<<<< HEAD
-=======
-        <Button 
-              title=" Nouvelle soirée" 
-              onPress={() => props.navigation.navigate('EventCreation')}
-              buttonStyle={{
-                    backgroundColor: '#584DAD',
-                    borderRadius: 10,
-                    marginTop:'2%'
-                    }}
-                    icon={<FontAwesomeIcon
-                        icon={faPlus}
-                        size={15}
-                        color="white"
-                      />
-                        }
-          /> 
-        </ScrollView>
->>>>>>> b36b0d0d9e289d88bfd818ddf64861557e8982c1
 
         </View>
         <Button
@@ -233,7 +197,6 @@ return (
 
 
     </View>
-
 
 
   )
