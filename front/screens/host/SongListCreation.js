@@ -26,10 +26,10 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.0.40:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `userIdFromFront=${userId}`
+        body: `userIdFromFront=${props.hostId}`
       })
       var TOP = await TOPdata.json();
       
@@ -38,8 +38,6 @@ function SongListCreation(props) {
     }
 
     findTOP()
-
-    
 
   },[])
 
@@ -57,10 +55,10 @@ function SongListCreation(props) {
        
     }
 
-    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreFromFront=${titreProposeHote}`
+      body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
@@ -81,10 +79,10 @@ function SongListCreation(props) {
 
 
 
-    var rawResponse = await fetch('http://192.168.0.40.4:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreFromFront=${element}&userIdFromFront=${hostId}`
+      body: `titreFromFront=${element}&userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
@@ -98,10 +96,10 @@ function SongListCreation(props) {
 
   var listHote = TOPlist.map((titre, i) => {
     return (
-      <View style={styles.titre}>
+      <View style={styles.titre} key={i}>
         <FontAwesomeIcon 
           onPress={()=> handleSupprimerTitre(titre)} 
-          key={i} icon={faTrash} 
+          icon={faTrash} 
           size={20} 
           style={{color: "#fff", marginLeft: '2%'}}
         />
@@ -355,7 +353,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    nameToDisplay: state.EventName
+    nameToDisplay: state.EventName, hostId: state.hostId
   }
 }
 
