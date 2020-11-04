@@ -75,6 +75,16 @@ router.post('/findTOP', async function(req,res,next){
   console.log(randomTitles)
 })
 
+// ---------------------- route d'acces à la playlist d'un évènement -------------------------------
+router.post('/playlist', async function(req,res,next){
+
+  var playlistDB = await playlistModel.find({user: req.body.idUserFromFront});
+
+  res.json({playlistDB})
+
+  // console.log('playlist logguée ici ->', playlistDB)
+})
+
 
 
 router.post('/sign-up', async function (req, res, next) {
@@ -395,7 +405,7 @@ router.post('/voteguest', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: req.body.tokenFromFront }
+    { votes: {'$in':req.body.tokenFromFront} }
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
@@ -404,10 +414,10 @@ router.post('/voteguest', async function (req, res, next) {
 
     var vote = await playlistModel.findOneAndUpdate(
       { titre: req.body.titreFromFront, user: req.body.idUserFromFront },
-      { $push: { votes: req.body.tokenFromFront } }
+      { '$push': { 'votes': req.body.tokenFromFront } }
     )
 
-    console.log('vote', vote)
+    console.log('vote du guest ici -> ', vote)
   }
 
 

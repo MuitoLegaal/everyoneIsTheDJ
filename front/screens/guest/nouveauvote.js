@@ -7,9 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
 import { MaterialIcons } from '@expo/vector-icons';
 import RadioGroup, { Radio } from "react-native-radio-input";
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faRedo, faPowerOff, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 
@@ -19,26 +18,43 @@ import { connect } from 'react-redux';
 
 function nouveauvote(props) {
 
-  // liste example titres
-  const list = ['Metronomy - A thing for me', 'Black Eyed Pipi - Pump pipi', 'ZZ Top - Gimme all your lovin', 'Oasis - Wonderwall', 'Niagara - L amour à la plage', '50 cent - BANG BANG jaime largent']
-
-  // function que recupere le valeur du titre selectioné
-  var getChecked = (value) => {
-    console.log(value)
-  }
-
+  // liste example titres à supprimer à la fin quand les titres de la playlist remonteront depuis la BDD
+  const listTITRES = [
+      'Maroon 5 - This Love',
+      'No Doubt - Dont Speak',
+      'Oasis - Wonderwall',
+      'Pink Floyd - Another Brick In The Wall'
+  ]
+  const [SONGchosen, setSONGchosen] =  useState('')
+  const [TIMER, setTIMER] = useState(0)
+  const [playlist, setPlaylist] = useState([])
+  const [hostIdTEST, sethostIdTEST]  = useState('5fa2dc6e2692621b10f387a6')
 
   //HEADER
-  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
-  var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
-  var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Homeinvite')} />
+  var logo = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
+  var logout = <FontAwesomeIcon icon={faPowerOff} size={35} style={{ color: "white" }} />
+  var retour = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Homeinvite')} />;
 
 
 
 
-  //COUNTDOWN 
-  const [TIMER, setTIMER] = useState(0)
+// ---------------------------------------- chargement de la playlist --------------------------------------------
+  useEffect(() => {
+    const findPLAYLIST = async () => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idUserFromFront=${props.hostId}`
+      })
+      var data = await rawDATA.json();
+      var arrayPL = data.playlistDB
+      setPlaylist(arrayPL)
 
+    }
+
+    findPLAYLIST()
+  },[])
 
 
   useEffect(() => {
@@ -46,7 +62,7 @@ function nouveauvote(props) {
     const findTIMER = async () => {
 
 
-// ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -56,21 +72,20 @@ function nouveauvote(props) {
 
       var timer = await TIMERdata.json();
       setTIMER(timer.reboursFinal)
-      console.log("rebours", timer)
+      // console.log("rebours", timer)
     }
 
     findTIMER()
 
-    console.log('Comptes à rebours FRONT ici ->', TIMER)
-    console.log('hostIdState', props.hostId)
-    console.log('TokenState', props.token)
+    // console.log('Comptes à rebours FRONT ici ->', TIMER)
+    // console.log('hostIdState', props.hostId)
+    // console.log('TokenState', props.token)
 
   }, [])
 
 
   var handleRefreshTIMER = async () => {
 
-// ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
     var rawResponse = await fetch('http://192.168.1.20:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -80,7 +95,7 @@ function nouveauvote(props) {
     var timer = await rawResponse.json();
 
     setTIMER(timer.reboursFinal)
-    console.log("rebours", timer)
+    // console.log("rebours", timer)
 
     findTIMER()
   }
@@ -88,14 +103,14 @@ function nouveauvote(props) {
 
 
 
-  // var handleVoteGuest = async () => {
 
-  //   // --------------------------------- VOS IP ICI -----------------------------------------
-  //   // Flo IP : 192.168.0.17
-  //   // Vlad : 192.168.0.40
-       // Max : 192.168.1.20
 
-  //   var rawResponse = await fetch('http://192.168.1.20:3000/voteguest', {
+    // --------------------------------- VOS IP ICI -----------------------------------------
+    // Flo IP : 192.168.0.17
+    // Vlad : 192.168.0.40
+    
+  //   var handleVoteGuest = async () => {
+  //   var rawResponse = await fetch('http://192.168.1.20:3000/enregistrement', {
   //     method: 'POST',
   //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   //     body: `titleFromFront=${title}&idUserFront=${props.hostId}`
@@ -106,39 +121,61 @@ function nouveauvote(props) {
   //   console.log("response", response)
 
   //   if (response === true) {
-  //     props.navigation.navigate('validation vote')
+  //     props.navigation.navigate('Validationvote')
   //   }
 
   // }
 
-  // BOUCLE QUE AFFICHE LES TITRES A VOTER
 
+
+  // function que recupere le valeur du titre selectioné
+  var getChecked = async (value) => {
+    setSONGchosen(value)
+    // console.log('console log value ->', value)
+    // console.log('console log SONGchosen 1 ->', SONGchosen)
+
+// ---------------------------------------- envoi du vote en BACK ------------------------------------------------
+    const SONGdata = await fetch('http://192.168.1.20:3000/voteguest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`
+      // body: `titreFromFront=${'Cookie Dingler - Femme libérée'}&idUserFromFront=${'userId_TEST_000000'}&tokenFromFront=${'nnnnnnnnnnnnnnnn'}`
+      // body: `titreFromFront=${SONGchosen}`
+    })
+    var SONG = await SONGdata.json();
+  }
+
+  
+ // BOUCLE QUE AFFICHE LES TITRES DU VOTER
   var voteList = []
-
-  for (let i = 0; i < list.length; i++) {
-    voteList.push(<Radio iconName={"lens"} label={list[i]} value={i} />)
+  for (let i = 0; i < playlist.length; i++) {
+    voteList.push(<Radio key={i} iconName={"lens"} label={playlist[i].titre} value={playlist[i].titre} />)
   }
 
 
   return (
     <View style={styles.container}>
-      <Header
-        leftComponent={retour}
-        centerComponent={logo}
-        rightComponent={logout}
-        containerStyle={{ backgroundColor: '#131313', padding: 20, flex: 0.1 }}
-      />
+      <View style={{height:150}}>
+        <Header
+          leftComponent={retour}
+          centerComponent={logo}
+          rightComponent={logout}
+          containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
+        />
+      </View>
 
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+
+      <ScrollView style={styles.wrap}>
 
 
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
-          <Text style={styles.text}>Bienvenue dans l'évènement:</Text>
+          <Text style={styles.text}>Bienvenu dans la soirée de </Text>
+          
         </View>
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={styles.title}> %Anniv' de Bob% </Text>
-          <Image source={require('../../assets/picto-fete2.png')} style={{ height: 80, width: 80, margin: 25 }} />
+          <Text style={styles.subtext}> %Anniv' de Bob% </Text>
+          <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170, marginTop: '5%' }} />
         </View>
 
 
@@ -148,7 +185,7 @@ function nouveauvote(props) {
         <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
 
           {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
-          <Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>
+          <Text style={{ color: '#FF0060', marginBottom: 10, fontSize:18, fontFamily:'Roboto-Bold' }}>Vote en cours, il te reste :</Text>
 
 
           {TIMER > 0 && (<CountDown
@@ -168,55 +205,62 @@ function nouveauvote(props) {
 
 
 
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'stretch' }} >
+            <View>
+                
+                <Text style={{ color: 'white', fontSize: 20, marginTop:'10%', marginBottom: '10%', marginLeft:'5%'}} >Votez pour le prochain titre:</Text>
+     
 
 
-          <View style={{ flex: 1, margin: 30 }} >
-            <Text style={{ color: 'white', fontSize: 20 }} >Votez pour le prochain titre:</Text>
-          </View>
+
+                <RadioGroup getChecked={getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft:'5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize:18}} >
+                  {voteList}
+                </RadioGroup>
+
+
+              
 
 
 
-          <RadioGroup getChecked={this.getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', width: 300, margin: 20 }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white' }} >
-            {voteList}
-          </RadioGroup>
+              <Button
+                title='  Valider mon vote'
+                buttonStyle={{
+                  backgroundColor: '#FF0060',
+                  borderRadius: 10,
+                  color: 'white',
+                  marginTop: '5%',
+                  marginBottom: '5%',
+                  fontSize: 18
+                }}
+                titleStyle={{
+                  fontSize: 20,
+                  fontFamily:'Roboto-Bold'
+                }}
 
-
-        </View>
-
-
+                icon={
+                  <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+                }
+                onPress={() => props.navigation.navigate('Validationvote')}
+              />
+            </View>
 
         <Button
-          title='  Valider mon vote'
+          title='  REFRESH TIMER'
           buttonStyle={{
-            backgroundColor: '#FF0060',
+            backgroundColor: '#E59622',
             borderRadius: 10,
-            color: 'white',
             marginTop: '5%',
             marginBottom: '5%',
-            fontSize: 18
+   
           }}
+          titleStyle={{
+            fontFamily:'Staatliches',
+            fontSize: 25
+          }}
+          
 
           icon={
-            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
-          }
-
-
-        />
-
-        <Button
-          title='  REFRESH'
-          buttonStyle={{
-            backgroundColor: '#FF0060',
-            borderRadius: 10,
-            color: 'white',
-            marginTop: '5%',
-            marginBottom: '5%',
-            fontSize: 18
-          }}
-
-          icon={
-            <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
+            <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
           }
 
           onPress={() => handleRefreshTIMER()}
@@ -224,7 +268,7 @@ function nouveauvote(props) {
 
         />
 
-
+          </View>
       </ScrollView>
     </View>
   );
@@ -240,12 +284,15 @@ const styles = StyleSheet.create({
   },
 
   wrap: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#131313',
-    alignItems: 'center',
-    height: hp('110%'), // 70% of height device screen
-    width: wp('100%')   // 80% of width device screen 
+      flexDirection: 'column',
+      //alignItems: 'center',
+      //justifyContent: 'center',
+      textAlign: 'center',
+      height: hp('100%'), // 70% of height device screen
+      width: wp('100%'),  // 80% of width device screen 
+      backgroundColor: '#131313',
+      borderTopColor: '#fff',
+      borderTopWidth:1
   },
 
   header: {
@@ -263,20 +310,31 @@ const styles = StyleSheet.create({
   subtitle: {
     color: '#fff',
     fontSize: 30,
-    fontFamily: 'Staatliches',
+    fontFamily:'Staatliches',
+    textAlign: 'left',
+    marginTop: '2%',
+    marginLeft:'2%'
+    
+  },
+  subtext: {
+    color: '#fff',
+    fontSize: 30,
+    fontFamily:'Staatliches',
     textAlign: 'center',
-    paddingRight: 30,
-    paddingLeft: 30,
-    paddingBottom: 40
+    marginTop: '5%',
+    marginLeft:'2%'
+    
   },
 
   text: {
-    flex: 1,
-    color: 'white',
-    fontSize: 15,
-    fontFamily: 'Roboto-Regular',
-    paddingRight: 30,
-    paddingLeft: 30,
+    color: '#fff',
+    fontSize: 20,
+    fontFamily:'Roboto-Regular',
+    textAlign: 'left',
+    marginTop: '5%',
+    marginLeft:'4%'
+  
+    
   },
 
   ListItem: {
