@@ -23,7 +23,11 @@ function SignUp(props) {
 
     var handleSignUp = async() => {
         
+<<<<<<< HEAD
         
+=======
+    
+>>>>>>> afd42aa97ab1174daf572dcd98775f1cf45e51fd
 // --------------------------------- VOS IP ICI -----------------------------------------
 // IP la Capsule  : 172.17.1.32
 // Flo IP : 192.168.0.17
@@ -42,10 +46,15 @@ function SignUp(props) {
         if (response.result === false){
             console.log('SignUp Failed')
             setSignUp(true)
+<<<<<<< HEAD
         } else {
 
             
 
+=======
+        } 
+        else {
+>>>>>>> afd42aa97ab1174daf572dcd98775f1cf45e51fd
                 var hostId = response.hote._id
                 console.log('hostID', hostId)
                 await AsyncStorage.setItem("hostId", JSON.stringify(hostId));

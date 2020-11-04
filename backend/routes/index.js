@@ -69,10 +69,12 @@ router.post('/findTOP', async function(req,res,next){
     votes: [],
   })
   var title5SAVED = await title5FORMATTING.save();
+
+  console.log(randomTitles)
   
   res.json({randomTitles})
 
-  console.log(randomTitles)
+ 
 })
 
 
@@ -371,7 +373,7 @@ router.post('/ajoutertitre', async function (req, res, next) {
  var newTitre = new playlistModel({
    titre: req.body.titreFromFront,
    vote: [],
-   user: 'test'
+   user: req.body.userIdFromFront
  })
 
  var titreSaved = await newTitre.save();
@@ -384,7 +386,12 @@ router.post('/ajoutertitre', async function (req, res, next) {
 
 router.post('/supprimertitre', async function (req, res, next) {
 
-  var playlistSaved = await playlistModel.findByIdAndDelete(req.body.titreIdFromFront)
+  console.log(req.body);
+
+  var playlistSaved = await playlistModel.deleteOne(
+    {user: req.body.userIdFromFront, titre: req.body.titreFromFront}
+    )
+
 
   res.json({ playlist: playlistSaved })
 
