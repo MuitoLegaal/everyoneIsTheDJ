@@ -79,7 +79,8 @@ router.post('/findTOP', async function(req,res,next){
 
 router.post('/sign-up', async function (req, res, next) {
 
-  var hotes = await hoteModel.findOne({ email: req.body.email });
+  var hotes = await HoteModel.findOne({ email: req.body.email });
+
 
   if (hotes === null) {
 
@@ -398,7 +399,7 @@ router.post('/voteguest', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: req.body.tokenFromFront }
+    { votes: { $in: req.body.tokenFromFront }}
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
@@ -433,7 +434,7 @@ router.post('/votehost', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: req.body.userIdFromFront }
+    { votes: { $in: req.body.userIdFromFront} }
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);

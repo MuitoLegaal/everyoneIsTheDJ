@@ -43,8 +43,6 @@ var handleSignIn = async() => {
         setErrorMessage(false)
         setLogInDenied()
     }
-
-    
 }
 
 

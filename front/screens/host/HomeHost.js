@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import { Header } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -73,11 +73,6 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: 350, borderTopWidth: 1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth: 1 }} >
 
-
-          <Text style={styles.text} >Aucun évènement en cours maintenant!</Text>
-
-
-
           <Text style={styles.title}>Évènement :</Text>
 
           <Text style={styles.subtext}>%anniv de bob%</Text>
@@ -103,7 +98,6 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
           )}
 
           {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
-
 
           {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Pas de vote en cours</Text>)}
 

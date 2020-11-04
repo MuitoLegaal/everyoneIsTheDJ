@@ -27,11 +27,12 @@ function SignUp(props) {
 // --------------------------------- VOS IP ICI -----------------------------------------
 // IP la Capsule  : 172.17.1.32
 // Flo IP : 192.168.0.17
-        var rawResponse = await fetch('http://192.168.0.17:3000/sign-up', {
+        var rawResponse = await fetch('http://192.168.0.40:3000/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `username=${username}&email=${email}&password=${password}`
         })
+
         var response = await rawResponse.json();
         console.log(response);
 
@@ -46,7 +47,7 @@ function SignUp(props) {
                 console.log('SignUp Success')
                 props.addId(hostId);
                
-            props.navigation.navigate('HomeHost')
+                props.navigation.navigate('HomeHost')
         }
         
     };
