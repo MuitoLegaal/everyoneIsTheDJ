@@ -370,6 +370,7 @@ router.post('/ajoutertitre', async function (req, res, next) {
 
   var newPlaylist = new playlistModel({
     titre: req.body.titreFromFront,
+    user: req.body.idUserFromFront,
     vote: [],
   })
 
@@ -378,6 +379,8 @@ router.post('/ajoutertitre', async function (req, res, next) {
 
   res.json({ playlist: playlistSaved })
 });
+
+
 
 router.post('/supprimertitre', async function (req, res, next) {
 

@@ -81,7 +81,9 @@ function nouveauvote(props) {
     setTIMER(timer.reboursFinal)
     console.log("rebours", timer)
 
-    findTIMER()
+    if(timer) {
+      navigation.navigate("nouveauvote")
+    }
   }
 
 
@@ -146,8 +148,8 @@ function nouveauvote(props) {
 
         <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
 
-          {/* {TIMER>0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)} */}
-          <Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>
+          {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)}
+          {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>)}
 
 
           {TIMER > 0 && (<CountDown
@@ -199,6 +201,8 @@ function nouveauvote(props) {
           icon={
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
+
+          onPress={() => props.navigation.navigate("Validationvote")}
 
 
         />
