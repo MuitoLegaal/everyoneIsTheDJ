@@ -27,7 +27,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.0.40:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${userId}`
@@ -49,8 +49,16 @@ function SongListCreation(props) {
 
   var handleAjouterTitre = async () => {
 
-    //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.40:3000/ajoutertitre', {
+
+    if (titreProposeHote === undefined) {
+      setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
+    } else {
+       setErrorArtist()
+       setTOPlist([...TOPlist, titreProposeHote])
+       
+    }
+
+    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}`
@@ -63,13 +71,7 @@ function SongListCreation(props) {
 
     console.log("titre proposé ========= ", titreProposeHote)
 
-    if (titreProposeHote === undefined) {
-      setErrorArtist(<Badge status="error" badgeStyle={{ color: 'white', backgroundColor: '#FF0060' }} value="Le champ est vide"></Badge>)
-    } else {
-       setErrorArtist()
-       setTOPlist([...TOPlist, titreProposeHote])
-       
-    }
+    
   }
 
   
@@ -83,7 +85,7 @@ function SongListCreation(props) {
     var rawResponse = await fetch('http://192.168.0.40.4:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titreFromFront=${titre}&userIdFromFront=${hostId}`
+      body: `titreFromFront=${element}&userIdFromFront=${hostId}`
     })
 
     var response = await rawResponse.json();
