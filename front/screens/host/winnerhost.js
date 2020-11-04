@@ -13,7 +13,7 @@ import { color } from 'react-native-reanimated';
 export default function Winner(props) {
 
   //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
+  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
 
 
 
