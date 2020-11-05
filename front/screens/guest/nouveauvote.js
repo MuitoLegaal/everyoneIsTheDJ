@@ -75,7 +75,6 @@ function nouveauvote(props) {
 
 
 
-
   var handleRefreshTIMER = async () => {
 
     var rawResponse = await fetch('http://192.168.0.40:3000/afficheTimer', {

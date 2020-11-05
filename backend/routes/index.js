@@ -17,6 +17,25 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/findEvent', async function(req,res,next){
+
+  var eventIsOpen= await eventModel.findOne({ user: hotes._id, isOpen: true })
+
+  var eventIsClosed= await eventModel.findOne ({ user: hotes._id, isOpen: false })
+
+if (eventIsOpen && eventIsClosed) {
+  res.json({eventIsOpen, eventIsClosed})
+}
+
+else if (eventIsOpen) {
+  res.json({eventIsOpen})
+} 
+
+else {
+  res.json({result: false})
+} 
+
+})
 
 // -------------------------------------- route appelant le TOP -------------------------------------
 router.post('/findTOP', async function(req,res,next){
@@ -93,6 +112,10 @@ router.post('/sign-up', async function (req, res, next) {
 
   var hotes = await HoteModel.findOne({ email: req.body.email });
   console.log(hotes)
+
+
+
+
   if (hotes === null) {
 
     var newHote = new HoteModel({
@@ -115,11 +138,13 @@ router.post('/sign-up', async function (req, res, next) {
 router.post('/sign-in', async function (req, res, next) {
   var hotes = await HoteModel.findOne({ email: req.body.email, password: req.body.password });
 
+
   if (hotes === null) {
     console.log('no')
     res.json({ result: false})
-  } else {
-    console.log('yes')
+  } 
+
+  else {
     res.json({ result: true, hote: hotes })
   }
 

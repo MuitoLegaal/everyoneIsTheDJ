@@ -108,6 +108,7 @@ function ShareEvent(props){
               {TIMER > 0 && (<CountDown
                 size={10}
                 until={TIMER}
+                onFinish={() => props.navigation.navigate('Winnerguest')}
                 digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
                 digitTxtStyle={{ color: '#FF0060' }}
                 timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}

@@ -38,16 +38,26 @@ function HomeHost(props) {
       console.log("rebours", timer)
     }
 
-    findTIMER()
+    const findEvent = async () => {
 
-    console.log('Comptes à rebours FRONT ici ->', TIMER)
-    console.log('hostIdState', props.hostId)
+      var rawResponse = await fetch('http://192.168.0.40:3000/sign-in', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `email=${email}&password=${password}`
+    })
+
+      var response = await rawResponse.json();
+      console.log(response)
+
+  }
+
+    findTIMER()
+    findEvent()
+
 
   }, [])
 
   console.log('TIMER', TIMER)
-
-
 
   return (
     <View style={styles.container}>
@@ -131,9 +141,9 @@ function HomeHost(props) {
             </View>
 
             <View>
-              <Text style={styles.subtext}>%Anniv Claude % </Text>
-              <Text style={styles.text}>Date: %11/10/2020%</Text>
-              <Text style={styles.text}>Statut: %en cours%</Text>
+              <Text style={styles.subtext}>event</Text>
+              <Text style={styles.text}>Date: </Text>
+          <Text style={styles.text}>Statut: </Text>
             </View>
 
             {TIMER > 0 && (
@@ -303,7 +313,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     hostId: state.hostId,
-    nameToDisplay: state.EventName
+    nameToDisplay: state.EventName,
   }
 }
 
