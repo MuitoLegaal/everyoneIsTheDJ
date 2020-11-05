@@ -8,7 +8,7 @@ import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CountDown from '../countdown';
+import CountDown from 'react-native-countdown-component';
 import { connect } from 'react-redux';
 
 
@@ -44,6 +44,8 @@ function HomeHost(props) {
     console.log('hostIdState', props.hostId)
 
   }, [])
+
+  console.log('TIMER', TIMER)
 
 
 
