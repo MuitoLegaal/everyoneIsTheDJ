@@ -19,7 +19,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer5 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.1.20:3000/initTimer5', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer5', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userIdFromFront=${props.hostId}`
@@ -36,7 +36,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer10 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.17:3000/initTimer10', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer10', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userIdFromFront=${props.hostId}`
@@ -53,7 +53,7 @@ function TimerConfigFIRST(props) {
   var handleInitTimer20 = async () => {
 
     //APPEL AU BACKEND//
-    var rawResponse = await fetch('http://192.168.0.17:3000/initTimer20', {
+    var rawResponse = await fetch('http://192.168.0.40:3000/initTimer20', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `userIdFromFront=${props.hostId}`

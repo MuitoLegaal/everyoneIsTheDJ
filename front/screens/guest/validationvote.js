@@ -3,11 +3,10 @@ import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image
 import { Button, ListItem, CheckBox } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Header } from 'react-native-elements';
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
+import { faRedo, faPowerOff, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -63,6 +62,12 @@ function validationvote(props) {
     }
   }
 
+  var handleWinner = async () => {
+
+    props.navigation.navigate('WinnerHost')
+
+  }
+
 // BOUCLE QUE AFFICHE LES TITRES A VOTER
 
   return (
@@ -85,13 +90,12 @@ function validationvote(props) {
           <Image source={require('../../assets/picto-fete2.png')} style={{ height: 80, width: 80, margin: 25 }} />
         </View>
        
+        {TIMER > 0 && (  
         <View style={{ flex: 1, borderColor: 'white', borderWidth: 2, margin: 50, padding: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }} >
 
-        <Text style={{ color: '#FF0060', marginBottom: 10}}>Ton vote a bien été pris en compte</Text>
-          {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10}}>Pas de vote en cours</Text>)}
-          {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, résultat dans :</Text>)}
+          <Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, résultat dans :</Text>
 
-          {TIMER > 0 && (<CountDown
+          <CountDown
             size={30}
             until={TIMER}
             onFinish={() => navigation.navigate('Winnerguest')}
@@ -102,27 +106,37 @@ function validationvote(props) {
             timeToShow={['M', 'S']}
             timeLabels={{ m: null, s: null }}
             showSeparator
-          />)}
+          />
 
         </View>
+        )}
+
+        <Text style={styles.text}>Ton vote a bien été pris en compte !</Text>
 
         {TIMER <= 0 && (<Button
-            title='REFRESH'
+            title=' Découvrir le gagnant'
             buttonStyle={{
               backgroundColor: '#E59622',
               borderRadius: 10,
               marginTop: '5%',
               marginBottom: '5%',
+
             }}
             titleStyle={{
               fontFamily: 'Staatliches',
               fontSize: 25
             }}
+
+
             icon={
               <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
             }
-            onPress={() => handleRefreshTIMER()}
+
+            onPress={() => handleWinner()}
+
+
           />)}
+
 
       </ScrollView>
     </View>

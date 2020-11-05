@@ -11,8 +11,6 @@ var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 var server = require('../bin/www')
 
 
-
-
 // -------------------- route initiale --------------------------------------------------------
 router.get('/', function (req, res, next) {
 
@@ -226,7 +224,9 @@ router.post('/eventcreation', async function (req, res, next) {
     })
 
     if (saveEvent) {
-      await playlistModel.updateMany({ $set: {votes: [] }});
+      await playlistModel.deleteMany(
+        {user: req.body.idUserFromFront}
+        );
       result = true
     }
 
@@ -275,7 +275,9 @@ router.post('/tourdevotecreation', async function (req, res, next) {
   if (saveTourdevote) {
 
     console.log('result', saveTourdevote)
-    await playlistModel.updateMany({ $set: {votes: [] }});
+    await playlistModel.deleteMany(
+      {user: req.body.idUserFromFront}
+      );
 
     res.json({ result: true, idTourdeVote: saveTourdevote._id })
   }
@@ -358,12 +360,9 @@ router.post('/initTimer20', async function (req, res, next) {
   console.log('user event', userEvent)
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    { event: userEvent._id},
+    {event: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
-
-  console.log('tour de vote:', tourdevoteMAJ)
-
    
   if (tourdevoteMAJ) {
     res.json({result: true}) 
@@ -422,7 +421,6 @@ router.post('/ajoutertitre', async function (req, res, next) {
  })
 
  var titreSaved = await newTitre.save();
- 
   
   res.json({ titreSaved })
 });
@@ -473,7 +471,6 @@ router.post('/voteguest', async function (req, res, next) {
 
   mongoose.set('useFindAndModify', false);
 
-
   var hasAlreadyVote = await playlistModel.findOne(
     { votes: {'$in':req.body.tokenFromFront} }
   )
@@ -489,7 +486,6 @@ router.post('/voteguest', async function (req, res, next) {
 
     console.log('vote du guest ici -> ', vote)
   }
-
 
 
   if (hasAlreadyVote) {
@@ -526,7 +522,6 @@ router.post('/votehost', async function (req, res, next) {
   }
 
 
-
   if (hasAlreadyVote) {
     console.log('result')
     res.json({ result: false, hasAlreadyVote })
@@ -535,7 +530,6 @@ router.post('/votehost', async function (req, res, next) {
   else {
     res.json({ result: true })
   }
-
 }
 )
 
