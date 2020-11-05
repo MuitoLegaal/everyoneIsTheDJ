@@ -32,11 +32,11 @@ function Winner(props) {
     console.log('classement BRUT ------------>', classement)
     }
   
-    // findCLASSEMENT()
+    findCLASSEMENT()
   
   }, [])
 
-  console.log('classement useSTATE ------------>', CLASSEMENTb.tri[0].titre)
+  console.log('classement useSTATE ------------>', CLASSEMENTb)
 
   //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
@@ -55,7 +55,11 @@ function Winner(props) {
   };
 
 
-
+if (CLASSEMENTb.length==0) {
+  return (
+    <View></View>
+  )
+} else {
   return (
 <View style={styles.container}>
     <View style={{height:150}}>
@@ -87,6 +91,7 @@ function Winner(props) {
       
       <View style={styles.winner} >
         <Text style={styles.winnertext}>1.</Text>
+
         <Text style={styles.winnertext}>{CLASSEMENTb.tri[0].titre}</Text>
         <Text style={styles.winnertext}>Votes: {CLASSEMENTb.tri[0].votes}</Text>
         <OpenURLButton url={supportedURL}> 
@@ -98,16 +103,16 @@ function Winner(props) {
 
       </View>
 
-      {/* <View style={styles.second} >
+      <View style={styles.second} >
         <Text style={styles.text}>2.</Text>
-        <Text style={styles.text}>{CLASSEMENT[0].tri[1].titre}</Text>
-        <Text style={styles.text}>{CLASSEMENT[0].tri[1].votes}</Text>
+        <Text style={styles.text}>{CLASSEMENTb.tri[1].titre}</Text>
+        <Text style={styles.text}>Votes: {CLASSEMENTb.tri[1].votes}</Text>
       </View>
       <View style={styles.second} >
         <Text style={styles.text}>3.</Text>
-        <Text style={styles.text}>{CLASSEMENT[0].tri[2].titre}</Text>
-        <Text style={styles.text}>{CLASSEMENT[0].tri[2].votes}</Text>
-      </View> */}
+        <Text style={styles.text}>{CLASSEMENTb.tri[2].titre}</Text>
+        <Text style={styles.text}>Votes: {CLASSEMENTb.tri[2].votes}</Text>
+      </View>
 
       <Button 
           title="Retour à l'accueil" 
@@ -123,7 +128,7 @@ function Winner(props) {
 
 ); 
 }
-
+}
 
 const styles = StyleSheet.create({
   container: {
