@@ -5,10 +5,10 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Header } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
-import { MaterialIcons } from '@expo/vector-icons';
 import RadioGroup, { Radio } from "react-native-radio-input";
 import { faRedo, faPowerOff, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 
@@ -60,7 +60,7 @@ function nouveauvote(props) {
 
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -83,7 +83,7 @@ function nouveauvote(props) {
 
   var handleRefreshTIMER = async () => {
 
-    var rawResponse = await fetch('http://192.168.1.20:3000/afficheTimer', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
@@ -189,7 +189,7 @@ function nouveauvote(props) {
           {TIMER > 0 && (<CountDown
             size={30}
             until={TIMER}
-            onFinish={() => navigation.navigate('Winnerguest')}
+            onFinish={() => props.navigation.navigate('Winnerguest')}
             digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
             digitTxtStyle={{ color: '#FF0060' }}
             timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -240,7 +240,7 @@ function nouveauvote(props) {
           )}
 
           {TIMER <= 0 && (<Button
-            title='REFRESH'
+            title=' REFRESH'
             buttonStyle={{
               backgroundColor: '#E59622',
               borderRadius: 10,

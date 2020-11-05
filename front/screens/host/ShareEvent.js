@@ -74,8 +74,7 @@ function ShareEvent(props){
                                 paddingHorizontal:'30%'
                             
                             }}
-                            onPress={() => Clipboard.setString(`Ce soir, avec Everyone is the DJ.  \n Télècharge l’application pour voter : \n
-                             https://apps.apple.com/app/apple-store/id982107779 \n ID de l'évènement : \n ${props.idToDisplay} \n Mot de passe de l'évènement : \n ${props.passToDisplay}` )}
+                            onPress={() => Clipboard.setString(`Ce soir, avec Everyone is the DJ.  \n Télècharge l’application pour voter : \n https://apps.apple.com/app/apple-store/id982107779 \n ID de l'évènement : \n ${props.idToDisplay} \n Mot de passe de l'évènement : \n ${props.passToDisplay}` )}
                 >
                 </Button>
 

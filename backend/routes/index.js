@@ -321,10 +321,16 @@ router.post('/initTimer5', async function (req, res, next) {
 
 router.post('/initTimer10', async function (req, res, next) {
 
+  console.log('body',req.body)
+
   mongoose.set('useFindAndModify', false);
 
+  var userEvent = await eventModel.findOne(
+    {user: req.body.userIdFromFront, isOpen: true}
+  )
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: req.body.tourdevoteIdFromFront},
+    {_id: userEvent._id},
     { echeance: Date.now()+600000 }
   )
 
@@ -341,10 +347,16 @@ router.post('/initTimer10', async function (req, res, next) {
 
 router.post('/initTimer20', async function (req, res, next) {
 
+  console.log('body',req.body)
+
   mongoose.set('useFindAndModify', false);
 
+  var userEvent = await eventModel.findOne(
+    {user: req.body.userIdFromFront, isOpen: true}
+  )
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: req.body.tourdevoteIdFromFront},
+    {_id: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
 
@@ -371,7 +383,7 @@ router.post('/afficheTimer', async function (req, res, next) {
     { isOpen: true, event: isEventOpen._id }
   )
  
-  var echeanceMS = tourdevote.echeance
+  var echeanceMS = isTourdevoteOpen.echeance
 
   var maintenantMS = Date.now()
   
