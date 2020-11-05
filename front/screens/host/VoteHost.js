@@ -45,7 +45,7 @@ function VoteHost(props){
       console.log("rebours", timer)
     }
 
-    findTIMER()
+    
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
@@ -60,6 +60,7 @@ function VoteHost(props){
       setPlaylist(arrayPL)
     }
 
+    findTIMER()
     findPLAYLIST()
 
     console.log('Comptes à rebours FRONT ici ->', TIMER)

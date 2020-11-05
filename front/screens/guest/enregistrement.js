@@ -160,7 +160,6 @@ if (response.result === true) {
       
 
       <Button title="Rejoindre la soirée"
-        // onPress={() => navigation.navigate('Nouveauvote')}
         onPress={() => handleEnregistrement()}
         buttonStyle={{
           backgroundColor: '#584DAD',

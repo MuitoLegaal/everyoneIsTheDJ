@@ -26,6 +26,29 @@ function ShareEvent(props){
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
 
+ useEffect(() => {
+
+   const findTIMER = async () => {
+
+     // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+     var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+       body: `idUserFromFront=${props.hostId}`
+     })
+
+
+     var timer = await TIMERdata.json();
+     setTIMER(timer.reboursFinal)
+     console.log("rebours", timer)
+   }
+
+   findTIMER()
+
+   console.log('Comptes à rebours FRONT ici ->', TIMER)
+   console.log('hostIdState', props.hostId)
+
+ }, [])
 
   useEffect
 
@@ -80,7 +103,7 @@ function ShareEvent(props){
                 >
                 </Button>
 
-            {/* <View style={{marginTop:'10%', marginBottom:'10%'}}>
+            <View style={{marginTop:'10%', marginBottom:'10%'}}>
               <Text style={{fontFamily:'Roboto-Bold', fontSize:18, color:'#FF0060'}}>Vote en cours, temps restant :</Text>
               {TIMER > 0 && (<CountDown
                 size={10}
@@ -93,7 +116,7 @@ function ShareEvent(props){
                 timeLabels={{ m: null, s: null }}
                 showSeparator
               />)}
-            </View> */}
+            </View>
             </View>
           
             <Button
