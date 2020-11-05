@@ -44,7 +44,7 @@ function nouveauvote(props) {
 
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -86,7 +86,7 @@ function nouveauvote(props) {
 
   var handleRefreshTIMER = async () => {
 
-    var rawResponse = await fetch('http://192.168.0.17:3000/afficheTimer', {
+    var rawResponse = await fetch('http://192.168.1.20:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
