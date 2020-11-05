@@ -33,11 +33,7 @@ function VoteHost(props){
     const findTIMER = async () => {
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-<<<<<<< HEAD
-      var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
-=======
       var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -167,11 +163,7 @@ function VoteHost(props){
 
         <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Votez pour le prochain titre:</Text>
 
-<<<<<<< HEAD
-        <RadioGroup getChecked={getChecked} RadioGroupStyle={{flexDirection: 'column', marginLeft: '5%', paddingRight:'15%', marginBottom:'5%'}} IconStyle={{ backgroundColor: '#FF0060', marginTop: '10%', marginRight:'3%' }} coreStyle={{ backgroundColor: '#FF0060', marginTop: '10%' }} labelStyle={{ color: 'white', fontSize: 18, marginTop: '5%'}}>
-=======
         <RadioGroup getChecked={getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft: '5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize: 18 }} >
->>>>>>> 430904a27b3c12ee8b3af32b4a638180136549fa
           {voteList}
         </RadioGroup>
 
@@ -193,13 +185,9 @@ function VoteHost(props){
           icon={
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
-<<<<<<< HEAD
-          onPress={() => handleVoteHost()}
-=======
 
           onPress={() => handleVoteHost()}
 
->>>>>>> 430904a27b3c12ee8b3af32b4a638180136549fa
         />
       </View>
     

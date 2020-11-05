@@ -19,9 +19,9 @@ router.get('/', function (req, res, next) {
 
 router.post('/findEvent', async function(req,res,next){
 
-  var eventIsOpen= await eventModel.findOne({ user: hotes._id, isOpen: true })
+  var eventIsOpen= await eventModel.findOne({ user: req.body.idUserFromFront, isOpen: true })
 
-  var eventIsClosed= await eventModel.findOne ({ user: hotes._id, isOpen: false })
+  var eventIsClosed= await eventModel.findOne ({ user: req.body.idUserFromFront, isOpen: false })
 
 if (eventIsOpen && eventIsClosed) {
   res.json({eventIsOpen, eventIsClosed})

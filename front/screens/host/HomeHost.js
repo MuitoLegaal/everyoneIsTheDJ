@@ -20,13 +20,23 @@ function HomeHost(props) {
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
 
+  //EVENT OUVERT
+  const [eventOuvert, setEventOuvert] = useState("")
+  const [dateOuvert, setDateOuvert] = useState("")
+  const [ouvert, setOuvert] = useState ("")
+
+
+  //EVENT CLOTURE
+  const [eventCloture, setEventCloture] = useState("")
+  const [dateCloture, setDateCloture] = useState("")
+  const [cloture, setCloture] = useState ("")
 
   useEffect(() => {
 
     const findTIMER = async () => {
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -40,14 +50,28 @@ function HomeHost(props) {
 
     const findEvent = async () => {
 
-      var rawResponse = await fetch('http://192.168.0.40:3000/sign-in', {
+      var rawResponse = await fetch('http://192.168.0.40:3000/findEvent', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `email=${email}&password=${password}`
+        body: `idUserFromFront=${props.hostId}`
     })
 
       var response = await rawResponse.json();
       console.log(response)
+
+      if (response.eventIsOpen)
+      {
+        setOuvert("Ouvert")
+        setEventOuvert(response.eventIsOpen.nameEvent)
+        setDateOuvert(response.eventIsOpen.date)
+      }
+
+      if (response.eventIsClosed)
+      {
+        setCloture("Clôturée")
+        setEventCloture(response.eventIsClosed.nameEvent)
+        setDateCloture(response.eventIsClosed.date)
+      }
 
   }
 
@@ -141,9 +165,9 @@ function HomeHost(props) {
             </View>
 
             <View>
-              <Text style={styles.subtext}>event</Text>
-              <Text style={styles.text}>Date: </Text>
-          <Text style={styles.text}>Statut: </Text>
+              <Text style={styles.subtext}>Soirée: {eventOuvert}</Text>
+              <Text style={styles.text}>Date: {dateOuvert}</Text>
+          <Text style={styles.text}>Statut: {ouvert} </Text>
             </View>
 
             {TIMER > 0 && (
@@ -196,9 +220,9 @@ function HomeHost(props) {
             </View>
 
             <View>
-              <Text style={styles.subtext}>%Anniv Claude % </Text>
-              <Text style={styles.text}>Date: %11/10/2020%</Text>
-              <Text style={styles.text}>Statut: %en cours%</Text>
+              <Text style={styles.subtext}>Soirée: {eventCloture}</Text>
+              <Text style={styles.text}>Date: {dateCloture}</Text>
+              <Text style={styles.text}>Statut: {cloture}</Text>
             </View>
 
           </View>
