@@ -18,17 +18,18 @@ import CountDown from 'react-native-countdown-component';
 
 function SecondeShareEvent(props){
 
+<<<<<<< HEAD
  
   
+=======
+  const [copiedText, setCopiedText] = useState('')
+  const [TIMER, setTIMER] = useState(0)
+>>>>>>> 32aac2de844540c0540bffb63f5f714a93c183e9
 
   // utilisation de clipboard pour copier un bloc de text 
-    
   
   var headerCenter = <Text style={styles.title} >Partage de l'évènement</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-
- //COUNTDOWN 
- const [TIMER, setTIMER] = useState(0)
 
 
  useEffect(() => {
@@ -36,7 +37,7 @@ function SecondeShareEvent(props){
    const findTIMER = async () => {
 
      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-     var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+     var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
        method: 'POST',
        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
        body: `idUserFromFront=${props.hostId}`

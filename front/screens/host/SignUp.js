@@ -25,9 +25,7 @@ function SignUp(props) {
         
         
 // --------------------------------- VOS IP ICI -----------------------------------------
-// IP la Capsule  : 172.17.1.32
-// Flo IP : 192.168.0.17
-// erica: 192.168.144.4
+
         var rawResponse = await fetch('http://192.168.144.4:3000/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -45,7 +43,6 @@ function SignUp(props) {
             setSignUp(true)
         } else {
 
-            
 
                 var hostId = response.hote._id
                 console.log('hostID', hostId)

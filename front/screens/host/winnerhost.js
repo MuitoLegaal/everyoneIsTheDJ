@@ -14,17 +14,23 @@ import {connect} from 'react-redux';
 function Winner(props) {
 
   const [CLASSEMENTb, setCLASSEMENTb] = useState ([])
-  const [idTEST, setidTEST] = useState ('userId_TEST_000000')
   
     useEffect(() => {
   
       const findCLASSEMENT = async () => {
   
+<<<<<<< HEAD
+    const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
+=======
+<<<<<<< HEAD
+    const TRIdata = await fetch('http://192.168.0.17:3000/winner', {
+=======
     const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
+>>>>>>> 430904a27b3c12ee8b3af32b4a638180136549fa
+>>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      // body: `idUserFromFront=${props.hostId}`
-      body: `idUserFromFront=${idTEST}`
+      body: `idUserFromFront=${props.hostId}`
     })
     var classement = await TRIdata.json();
   
@@ -39,8 +45,7 @@ function Winner(props) {
 
   console.log('classement useSTATE ------------>', CLASSEMENTb)
 
-  //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
+  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}  onPress={() => props.navigation.openDrawer()}/>
 
 
   const supportedURL = `https://www.youtube.com/results?search_query=avicii`

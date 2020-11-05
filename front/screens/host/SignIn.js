@@ -35,13 +35,13 @@ var handleSignIn = async() => {
         setLogInDenied(<Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>)
     } else {
         var hostId = response.hote._id
-        console.log('hostID', hostId)
         await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
         console.log('SignIn Success')
         props.addId(hostId);
-        setErrorMessage(false)
         setLogInDenied()
+        if (response.isEvent)
         props.navigation.navigate('HomeHost')
+        else {props.navigation.navigate('SecondeHomeHost')}
         
     }
 }

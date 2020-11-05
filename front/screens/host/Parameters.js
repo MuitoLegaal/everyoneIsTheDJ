@@ -21,12 +21,12 @@ function Parameters(props){
 
   // _______________________________________LOCAL STORAGE NOT FINISHED_________________________________
 
-  useEffect(() => {
-    AsyncStorage.getItem("user", 
-    function(err, data){
-      userData = JSON.parse(data);
-    })
-  })
+  // useEffect(() => {
+  //   AsyncStorage.getItem("user", 
+  //   function(err, data){
+  //     userData = JSON.parse(data);
+  //   })
+  // })
   // ___________________________________________________________________________________________________
 
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('HomeHost')} />;
