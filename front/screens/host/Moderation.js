@@ -37,6 +37,18 @@ function Moderation(props) {
   var handleSupprimerTitre = async (element) => {
 
     setTitreInputList(TitreInputList.filter((e)=>(e !== element)))
+
+     var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `titreFromFront=${element}&idUserFromFront=${props.hostId}`
+    })
+
+    var response = await rawResponse.json();
+    setError()
+
+    console.log(response);
+
   };
 
 

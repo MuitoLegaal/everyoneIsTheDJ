@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { color } from 'react-native-reanimated';
+import {connect} from 'react-redux';
 
 
 function Winner(props) {
@@ -19,7 +20,7 @@ function Winner(props) {
   
       const findCLASSEMENT = async () => {
   
-    const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
+    const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       // body: `idUserFromFront=${props.hostId}`
@@ -208,4 +209,11 @@ const styles = StyleSheet.create({
 
 });
 
-export default Winner;
+function mapStateToProps(state) {
+  return { hostId: state.hostId }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Winner);

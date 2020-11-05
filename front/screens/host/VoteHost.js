@@ -32,7 +32,6 @@ function VoteHost(props){
 
     const findTIMER = async () => {
 
-
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
         method: 'POST',
@@ -48,53 +47,48 @@ function VoteHost(props){
 
     findTIMER()
 
+    const findPLAYLIST = async () => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const rawDATA = await fetch('http://192.168.0.40:3000/playlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idUserFromFront=${props.hostId}`
+      })
+      var data = await rawDATA.json();
+      console.log('data en front-----------------', data.playlistDB) 
+      var arrayPL = data.playlistDB
+      setPlaylist(arrayPL)
+    }
+
+    findPLAYLIST()
+
     console.log('Comptes à rebours FRONT ici ->', TIMER)
     console.log('hostIdState', props.hostId)
 
   }, [])
 
 
-  var handleRefreshTIMER = async () => {
-
-    var rawResponse = await fetch('http://192.168.144.4:3000/afficheTimer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `idUserFromFront=${props.hostId}`
-    })
-
-    var timer = await rawResponse.json();
-
-    setTIMER(timer.reboursFinal)
-    console.log("rebours", timer)
-
-    if (timer) {
-      navigation.navigate("VoteHost")
-    }
-  }
+  
 
 
 
 
-  var handleVoteHost = async () => {
+ // function que recupere le valeur du titre selectioné
+ var getChecked = async (value) => {
+  setSONGchosen(value)
 
-    // --------------------------------- VOS IP ICI -----------------------------------------
-    // Flo IP : 192.168.0.17
-    // Vlad : 192.168.0.40
-    var rawResponse = await fetch('http://192.168.144.4:3000/enregistrement', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `titleFromFront=${title}&idUserFront=${props.hostId}`
-    })
+}
 
-    var response = await rawResponse.json();
 
-    console.log("response", response)
-
-    if (response === true) {
-      props.navigation.navigate('Validationvote')
-    }
-
-  }
+  var handleVoteHost = async () => {   
+    const SONGdata = await fetch('http://192.168.0.40:3000/votehost', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}`
+  })
+  var SONG = await SONGdata.json();
+  props.navigation.navigate("WinnerHost")
+}
 
 
 
@@ -112,12 +106,6 @@ function VoteHost(props){
  var getChecked = (value) => {
   console.log(value)
 }
-
-
-
-
-
-
 
 
   return (
@@ -197,34 +185,12 @@ function VoteHost(props){
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
 
+          onPress={() => handleVoteHost()}
+
         />
       </View>
     
       )}
-
-      {TIMER <= 0 && (<Button
-        title='REFRESH'
-        buttonStyle={{
-          backgroundColor: '#E59622',
-          borderRadius: 10,
-          marginTop: '5%',
-          marginBottom: '5%',
-
-        }}
-        titleStyle={{
-          fontFamily: 'Staatliches',
-          fontSize: 25
-        }}
-
-
-        icon={
-          <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
-        }
-
-        onPress={() => handleRefreshTIMER()}
-
-
-      />)}
 
       </View>
   </ScrollView>
