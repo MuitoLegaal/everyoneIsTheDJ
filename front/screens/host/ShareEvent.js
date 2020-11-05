@@ -17,7 +17,7 @@ import CountDown from 'react-native-countdown-component';
 function ShareEvent(props){
 
   const [copiedText, setCopiedText] = useState('')
-  const [TIMER, setTIMER] = useState(props.timerToDisplay)
+  const [TIMER, setTIMER] = useState(0)
 
   // utilisation de clipboard pour copier un bloc de text 
     
@@ -31,7 +31,7 @@ function ShareEvent(props){
    const findTIMER = async () => {
 
      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-     var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+     var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
        method: 'POST',
        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
        body: `idUserFromFront=${props.hostId}`
@@ -49,8 +49,6 @@ function ShareEvent(props){
    console.log('hostIdState', props.hostId)
 
  }, [])
-
-  useEffect
 
     return (
 
@@ -209,7 +207,6 @@ function mapStateToProps(state) {
     nameToDisplay: state.EventName,
     passToDisplay: state.EventPass,
     idToDisplay: state.EventID,
-    timerToDisplay: state.VoteTimer
   }
 }
 

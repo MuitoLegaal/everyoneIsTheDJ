@@ -138,15 +138,23 @@ router.post('/sign-up', async function (req, res, next) {
 router.post('/sign-in', async function (req, res, next) {
   var hotes = await HoteModel.findOne({ email: req.body.email, password: req.body.password });
 
+  var isEvent = await eventModel.findOne({user: hotes._id})
+
 
   if (hotes === null) {
     console.log('no')
     res.json({ result: false})
-  } 
-
-  else {
-    res.json({ result: true, hote: hotes })
   }
+  else if (isEvent) {
+    console.log('yes Seconde Home Host')
+    res.json({ result: true, hote: hotes, isEvent })
+  }
+  else {
+    console.log('yes Home Host')
+
+    res.json({result: true, hote: hotes})
+  }
+
 
 })
 

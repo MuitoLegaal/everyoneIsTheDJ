@@ -22,7 +22,7 @@ var handleSignIn = async() => {
 // --------------------------------- VOS IP ICI ----------------------------------------- 
 // Flo IP 192.168.0.17   
 //LA capsule 172.17.1.32
-    var rawResponse = await fetch('http://192.168.0.40:3000/sign-in', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/sign-in', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `email=${email}&password=${password}`
@@ -39,7 +39,9 @@ var handleSignIn = async() => {
         console.log('SignIn Success')
         props.addId(hostId);
         setLogInDenied()
+        if (response.isEvent)
         props.navigation.navigate('HomeHost')
+        else {props.navigation.navigate('SecondeHomeHost')}
         
     }
 }

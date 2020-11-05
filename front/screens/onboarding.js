@@ -46,7 +46,7 @@ export default function Onboarding({navigation}) {
         // ------ mettez le screen sur lequel vous voulez travailler rapidement ci-dessous. Exemple navigation.navigate('HomeHost')} -------
         // ---------------------------------------------------------------------------------------------------------------------------------
 
-        onPress={() => navigation.navigate('ShareEvent') }
+        onPress={() => navigation.navigate('Moderation') }
 
       
       ></Button>
