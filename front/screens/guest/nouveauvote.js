@@ -42,7 +42,7 @@ function nouveauvote(props) {
     const findTIMER = async () => {
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -58,7 +58,7 @@ function nouveauvote(props) {
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const rawDATA = await fetch('http://192.168.144.4:3000/playlist', {
+      const rawDATA = await fetch('http://192.168.0.17:3000/playlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -78,7 +78,7 @@ function nouveauvote(props) {
 
   var handleRefreshTIMER = async () => {
 
-    var rawResponse = await fetch('http://192.168.144.4:3000/afficheTimer', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
@@ -98,7 +98,7 @@ function nouveauvote(props) {
 
 // ---------------------------------------- envoi du vote en BACK ------------------------------------------------
    var handleVoteGuest = async () => {   
-      const SONGdata = await fetch('http://192.168.144.4:3000/voteguest', {
+      const SONGdata = await fetch('http://192.168.0.17:3000/voteguest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`

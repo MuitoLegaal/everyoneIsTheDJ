@@ -20,11 +20,7 @@ function Winner(props) {
   
       const findCLASSEMENT = async () => {
   
-<<<<<<< HEAD
     const TRIdata = await fetch('http://192.168.0.17:3000/winner', {
-=======
-    const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
->>>>>>> 430904a27b3c12ee8b3af32b4a638180136549fa
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       // body: `idUserFromFront=${props.hostId}`

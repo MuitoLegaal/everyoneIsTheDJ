@@ -24,7 +24,7 @@ function Moderation(props) {
 
   handleTourdevotecreation = async () => {
 
-    var rawResponse = await fetch('http://192.168.0.40:3000/eventcreation', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/eventcreation', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: `idUserFromFront=${props.hostId}`
@@ -38,7 +38,7 @@ function Moderation(props) {
 
     setTitreInputList(TitreInputList.filter((e)=>(e !== element)))
 
-     var rawResponse = await fetch('http://192.168.0.40:3000/supprimertitre', {
+     var rawResponse = await fetch('http://192.168.0.17:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${element}&idUserFromFront=${props.hostId}`

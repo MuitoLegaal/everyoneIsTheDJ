@@ -28,7 +28,7 @@ function SecondeShareEvent(props){
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
  //COUNTDOWN 
- const [TIMER, setTIMER] = useState(0)
+//  const [TIMER, setTIMER] = useState(0)
 
 
  useEffect(() => {
@@ -36,7 +36,7 @@ function SecondeShareEvent(props){
    const findTIMER = async () => {
 
      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-     var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+     var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
        method: 'POST',
        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
        body: `idUserFromFront=${props.hostId}`
