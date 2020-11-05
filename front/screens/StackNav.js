@@ -30,7 +30,7 @@ import Winner from './host/winnerhost';
 import SongListCreation from './host/SongListCreation';
 import Countdown from './countdown';
 import SecondeHomeHost from './host/SecondeHomeHost';
-import ValidationVoteHost from './host/ValidationVoteHost';
+import SecondeShareEvent from './host/SecondeShareEvent';
 
 
 //import screens Guest
@@ -72,8 +72,7 @@ function MyStack() {
       <Stack.Screen name="Countdown" component={Countdown} />
       <Stack.Screen name="SongListCreation" component={SongListCreation} />
       <Stack.Screen name="SecondeHomeHost" component={SecondeHomeHost} />
-      <Stack.Screen name="ValidationVoteHost" component={ValidationVoteHost} />
-
+      <Stack.Screen name="SecondeShareEvent" component={SecondeShareEvent} />
 
 
     </Stack.Navigator>

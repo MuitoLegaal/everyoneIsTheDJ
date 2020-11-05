@@ -27,8 +27,12 @@ function SignUp(props) {
 // --------------------------------- VOS IP ICI -----------------------------------------
 // IP la Capsule  : 172.17.1.32
 // Flo IP : 192.168.0.17
+<<<<<<< HEAD
 // erica: 192.168.144.4
         var rawResponse = await fetch('http://192.168.144.4:3000/sign-up', {
+=======
+        var rawResponse = await fetch('http://192.168.0.40:3000/sign-up', {
+>>>>>>> 735bc95520ac962b936d624fa6ea6830b16443c0
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `username=${username}&email=${email}&password=${password}`

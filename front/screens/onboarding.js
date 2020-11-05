@@ -53,11 +53,7 @@ export default function Onboarding({navigation}) {
 
         onPress={() => navigation.navigate('WinnerHost') }
 
-        // onPress={() => navigation.navigate('SongListCreation') }
-        // onPress={() => navigation.navigate('Nouveauvote') }
-        
-
-        // onPress={()=> socket.emit("sendMessage", "Hello John !") }
+      
       ></Button>
 
 

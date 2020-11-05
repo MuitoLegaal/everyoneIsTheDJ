@@ -34,7 +34,11 @@ function VoteHost(props){
 
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+<<<<<<< HEAD
       var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
+=======
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+>>>>>>> 735bc95520ac962b936d624fa6ea6830b16443c0
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`

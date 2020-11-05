@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 
+
 function AjoutTitres () {
 
 
@@ -14,13 +15,10 @@ function AjoutTitres () {
     const [titreList, setTitreList] = useState([]);
     
     var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{height: 60, width: 60}} />
-    
-    
+
 
 var handleValider = () => {
-    console.log(titreList)
-
-    
+    console.log(titreList)    
 }
 
 var handleAjouter = async() => {
