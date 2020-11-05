@@ -82,7 +82,7 @@ router.post('/playlist', async function(req,res,next){
 
   res.json({playlistDB})
 
-  // console.log('playlist logguée ici ->', playlistDB)
+  console.log('playlist logguée ici ->', playlistDB)
 })
 
 
