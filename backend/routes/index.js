@@ -241,7 +241,7 @@ router.post('/eventcreation', async function (req, res, next) {
     var saveTourdevote = await newTourdevote.save();
 
   }
-  res.json({ result, eventIsOpen, eventIsClosed, error })
+  res.json({ result, eventIsOpen, eventIsClosed, error, saveEvent })
 })
 
 
@@ -332,7 +332,11 @@ router.post('/initTimer10', async function (req, res, next) {
   )
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+<<<<<<< HEAD
     {event: userEvent._id},
+=======
+    { event: userEvent._id},
+>>>>>>> 7b6dee64b607fd946931c8d085ff8614067c2020
     { echeance: Date.now()+600000 }
   )
 
@@ -357,10 +361,21 @@ router.post('/initTimer20', async function (req, res, next) {
     {user: req.body.userIdFromFront, isOpen: true}
   )
 
+  console.log('user event', userEvent)
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
+<<<<<<< HEAD
     {event: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
+=======
+    { event: userEvent._id},
+    { echeance: Date.now()+1200000 }
+  )
+
+  console.log('tour de vote:', tourdevoteMAJ)
+
+>>>>>>> 7b6dee64b607fd946931c8d085ff8614067c2020
    
   if (tourdevoteMAJ) {
     res.json({result: true}) 
@@ -436,6 +451,32 @@ router.post('/supprimertitre', async function (req, res, next) {
   res.json({ playlist: playlistSaved })
 
 })
+
+// ---------------------------------------------------------------------- winner -----------------------------
+router.post('/winner', async function (req, res, next) {
+
+  var winnerSEARCH = await playlistModel.find({user: req.body.idUserFromFront});
+
+  // console.log('win ----------- >', winnerSEARCH)
+
+var arrayBRUT = []
+
+  for (i=0; i < winnerSEARCH.length; i++) {
+    arrayBRUT.push(
+      {votes: winnerSEARCH[i].votes.length,
+      titre : winnerSEARCH[i].titre}
+    )
+  }
+
+var tri =  arrayBRUT.sort(function(a, b) {
+  return b.votes - a.votes;
+});
+
+console.log('tri ----------- >', tri)
+
+res.json({tri})
+}
+)
 
 
 

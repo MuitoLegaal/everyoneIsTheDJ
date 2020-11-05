@@ -94,13 +94,21 @@ function Parameters(props){
                   <FontAwesomeIcon icon={faInfoCircle} size={15} style={{marginLeft: 10, color: '#000981'}} />
                   <Text style={styles.subtitle}>  Aide</Text>
                 </View>
-                <Text style={styles.text} > % moi@eitd.com</Text>
+                <Text style={styles.text} > maxime@eitd.com</Text>
               </View>
 
+<<<<<<< HEAD
+              <View style={styles.card}>
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={styles.subtitle} onPress={() => props.navigation.navigate('MentionsLegales')}>Politique d'utilisation</Text>
+=======
               <View style={styles.card} 
-                  onPress={() => props.navigation.navigate('MentionsLegales')}>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
+                  >
+                <View 
+                onPress={() => props.navigation.navigate('MentionsLegales')}
+                style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
                   <Text style={styles.subtitle}>Politique d'utilisation</Text>
+>>>>>>> f825d867cf421c985cd849efcc285d88cf2c98ee
                 </View>
               </View>
 

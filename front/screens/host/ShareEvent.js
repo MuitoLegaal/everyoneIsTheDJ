@@ -11,11 +11,13 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Header, Button, Badge } from 'react-native-elements'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { connect } from 'react-redux'
+import CountDown from 'react-native-countdown-component';
 
 
 function ShareEvent(props){
 
   const [copiedText, setCopiedText] = useState('')
+  const [TIMER, setTIMER] = useState(props.timerToDisplay)
 
   // utilisation de clipboard pour copier un bloc de text 
     
@@ -78,10 +80,20 @@ function ShareEvent(props){
                 >
                 </Button>
 
-            <View style={{marginTop:'10%', marginBottom:'10%'}}>
+            {/* <View style={{marginTop:'10%', marginBottom:'10%'}}>
               <Text style={{fontFamily:'Roboto-Bold', fontSize:18, color:'#FF0060'}}>Vote en cours, temps restant :</Text>
-              <Badge status="error" badgeStyle={{fontFamily:'Roboto-Bold', fontSize:18, backgroundColor:'#FF0060', color:'#fff', marginTop:'3%'}} value="00:04:10"></Badge>
-            </View>
+              {TIMER > 0 && (<CountDown
+                size={10}
+                until={TIMER}
+                digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
+                digitTxtStyle={{ color: '#FF0060' }}
+                timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+                separatorStyle={{ color: '#FF0060' }}
+                timeToShow={['M', 'S']}
+                timeLabels={{ m: null, s: null }}
+                showSeparator
+              />)}
+            </View> */}
             </View>
           
             <Button
@@ -169,9 +181,13 @@ function mapStateToProps(state) {
   return {
     nameToDisplay: state.EventName,
     passToDisplay: state.EventPass,
-    idToDisplay: state.EventID
+    idToDisplay: state.EventID,
+    timerToDisplay: state.VoteTimer
   }
 }
+
+
+
 
 export default connect(
   mapStateToProps,

@@ -84,7 +84,7 @@ function HomeHost(props) {
           {TIMER <= 0 && (
             <Button
               title="Découvrir le titre gagnant"
-              onPress={() => props.navigation.navigate('winnerHost')}
+              onPress={() => props.navigation.navigate('WinnerHost')}
               buttonStyle={{
                 backgroundColor: '#FF0060',
                 borderRadius: 10,
