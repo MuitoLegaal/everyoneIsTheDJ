@@ -53,13 +53,13 @@ export default function AppDrawer() {
                         )
                       }}
         />
-        <Drawer.Screen name="HISTORIQUE" component={Historic} 
+        {/* <Drawer.Screen name="HISTORIQUE" component={Historic} 
                       options={{
                         drawerIcon: ({focused, size}) => (
                           <Icon name="history" size={25} color="#fff" />
                         )
                       }}
-        />
+        /> */}
         <Drawer.Screen name="PARAMETRES" component={Parameters} 
                       options={{
                         drawerIcon: ({focused, size}) => (

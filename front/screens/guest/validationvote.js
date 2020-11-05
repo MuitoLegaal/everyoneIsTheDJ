@@ -14,8 +14,8 @@ function validationvote(props) {
 
  //HEADER
  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
- var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
- var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Homeinvite')} />
+ var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')}/>
+ var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Nouveauvote')} />
 
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)

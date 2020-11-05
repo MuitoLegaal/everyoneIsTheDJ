@@ -20,7 +20,7 @@ function Winnerguest(props) {
   
       const findCLASSEMENT = async () => {
   
-    const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
+    const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       // body: `idUserFromFront=${props.hostId}`
@@ -64,9 +64,6 @@ if (CLASSEMENTb.length==0) {
                 justifyContent: 'flex-end', 
                 alignItems: 'flex-start',
               }}
-                icon={
-                  <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}}  onPress={() => props.navigation.openDrawer()}/>
-                }
             /> 
 
     </View>
@@ -103,7 +100,7 @@ if (CLASSEMENTb.length==0) {
             borderRadius: 10,
             marginTop:'2%'
                         }} 
-          onPress={() => props.navigation.navigate('HomeHost')}></Button>
+          onPress={() => props.navigation.navigate('Nouveauvote')}></Button>
 
     </ScrollView>
 </View>
