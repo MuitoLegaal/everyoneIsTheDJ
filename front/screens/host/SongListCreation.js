@@ -28,7 +28,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.0.17:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${props.hostId}`
@@ -59,7 +59,7 @@ function SongListCreation(props) {
        setTitreProposeHote();
     }
 
-    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
@@ -80,7 +80,7 @@ function SongListCreation(props) {
 
 
 
-    var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.0.17:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${element}&userIdFromFront=${props.hostId}`
@@ -100,6 +100,7 @@ function SongListCreation(props) {
     if (TOPlist.length > 2) {
       setError()
       console.log('>3', TOPlist)
+      props.onSettingPlaylist(TOPlist)
       props.navigation.navigate("TimerConfigFIRST")
     }
 
@@ -373,12 +374,21 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    nameToDisplay: state.EventName, hostId: state.hostId
+    nameToDisplay: state.EventName, hostId: state.hostId,
+    
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSettingPlaylist: function(playlist) {
+      dispatch({type: 'setPlaylist', reduxPlaylist: playlist})
+    }
   }
 }
 
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(SongListCreation);

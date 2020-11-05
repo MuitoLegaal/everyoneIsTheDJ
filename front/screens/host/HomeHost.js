@@ -8,7 +8,7 @@ import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Countdown from '../countdown';
+import CountDown from '../countdown';
 import { connect } from 'react-redux';
 
 
@@ -27,7 +27,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -84,7 +84,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
           {TIMER <= 0 && (
             <Button
               title="Découvrir le titre gagnant"
-              onPress={() => props.navigation.navigate('winnerHost')}
+              onPress={() => props.navigation.navigate('WinnerHost')}
               buttonStyle={{
                 backgroundColor: '#FF0060',
                 borderRadius: 10,
