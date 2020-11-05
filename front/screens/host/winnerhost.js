@@ -19,7 +19,7 @@ function Winner(props) {
   
       const findCLASSEMENT = async () => {
   
-    const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
+    const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       // body: `idUserFromFront=${props.hostId}`
@@ -208,4 +208,11 @@ const styles = StyleSheet.create({
 
 });
 
-export default Winner;
+function mapStateToProps(state) {
+  return { hostId: state.hostId }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Winner);

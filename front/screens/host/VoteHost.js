@@ -114,12 +114,6 @@ function VoteHost(props){
 }
 
 
-
-
-
-
-
-
   return (
 
 
@@ -197,34 +191,12 @@ function VoteHost(props){
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
 
+          onPress={() => props.navigation.navigate('HomeHost')}
+
         />
       </View>
     
       )}
-
-      {TIMER <= 0 && (<Button
-        title='REFRESH'
-        buttonStyle={{
-          backgroundColor: '#E59622',
-          borderRadius: 10,
-          marginTop: '5%',
-          marginBottom: '5%',
-
-        }}
-        titleStyle={{
-          fontFamily: 'Staatliches',
-          fontSize: 25
-        }}
-
-
-        icon={
-          <FontAwesomeIcon icon={faRedo} size={25} style={{ color: "white" }} />
-        }
-
-        onPress={() => handleRefreshTIMER()}
-
-
-      />)}
 
       </View>
   </ScrollView>

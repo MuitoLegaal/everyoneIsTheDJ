@@ -173,7 +173,8 @@ router.post('/eventcreation', async function (req, res, next) {
   var error = []
   var result = false
   var saveEvent = null
-  var date = new Date() // a verifier le format
+
+  
 
   if (req.body.eventNameFromFront == ''
     || req.body.eventPasswordFromFront == '') {
@@ -185,7 +186,7 @@ router.post('/eventcreation', async function (req, res, next) {
   }
 
   if (error.length == 0) {
-
+    console.log(req.body)
 
     var userId = await eventModel.findOne(
       { user: req.body.idUserFromFront, isOpen: true }
@@ -207,7 +208,7 @@ router.post('/eventcreation', async function (req, res, next) {
 
       user: req.body.idUserFromFront,
       nameEvent: req.body.eventNameFromFront,
-      date: date,
+      date: new Date(),
       isOpen: true,
       eventId: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
       password: req.body.eventPasswordFromFront,
