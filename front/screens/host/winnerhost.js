@@ -10,11 +10,10 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { color } from 'react-native-reanimated';
 
 
-export default function Winner(props) {
+function Winner(props) {
 
   //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
-
 
 
   const supportedURL = `https://www.youtube.com/results?search_query=avicii`
@@ -177,3 +176,5 @@ const styles = StyleSheet.create({
 
 
 });
+
+export default Winner;
