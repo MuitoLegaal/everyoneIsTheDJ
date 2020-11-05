@@ -104,6 +104,9 @@ function ShareEvent(props){
                                 color: 'white',
                             
                             }}
+                            containerStyle={{
+                              marginTop:'5%'
+                            }}
                             onPress={() => props.navigation.navigate('VoteHost')}
                 >
                 </Button>
