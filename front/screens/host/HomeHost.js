@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import { Header } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -8,13 +8,13 @@ import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CountDown from '../countdown';
+import CountDown from 'react-native-countdown-component';
 import { connect } from 'react-redux';
 
 
 
-function HomeHost(props){
-var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
+function HomeHost(props) {
+  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{ width: 80, height: 82 }} />
 
 
   //COUNTDOWN 
@@ -25,9 +25,8 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
 
     const findTIMER = async () => {
 
-
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -45,6 +44,8 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
     console.log('hostIdState', props.hostId)
 
   }, [])
+
+  console.log('TIMER', TIMER)
 
 
 
@@ -74,10 +75,10 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', height: 400, borderTopWidth: 1, borderTopColor: "#fff", borderBottomColor: '#fff', borderBottomWidth: 1 }} >
 
 
-      
+
           <Text style={styles.title}>Évènement :</Text>
 
-           <Text style={styles.subtextSoiree}>{props.nameToDisplay}</Text>
+          <Text style={styles.subtextSoiree}>{props.nameToDisplay}</Text>
 
           {TIMER <= 0 && (<Text style={styles.subtext}>Vote terminé : </Text>)}
 
@@ -89,7 +90,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
                 backgroundColor: '#FF0060',
                 borderRadius: 10,
                 marginTop: '10%',
-                marginBottom:'10%'
+                marginBottom: '10%'
               }}
               titleStyle={{
                 fontFamily: 'Roboto-Bold',
@@ -99,16 +100,12 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
             />
           )}
 
-          {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
-
-          {TIMER <= 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Pas de vote en cours</Text>)}
-
-          {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>)}
+          {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, résultat dans : </Text>)}
 
           {TIMER > 0 && (<CountDown
             size={30}
             until={TIMER}
-            onFinish={() => navigation.navigate('Winnerguest')}
+            onFinish={() => props.navigation.navigate('Winnerguest')}
             digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
             digitTxtStyle={{ color: '#FF0060' }}
             timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -117,6 +114,8 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
             timeLabels={{ m: null, s: null }}
             showSeparator
           />)}
+
+          {TIMER > 0 && (<Text style={styles.text}>Ton vote a bien été pris en compte !</Text>)}
 
 
         </View>
@@ -137,23 +136,44 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
               <Text style={styles.text}>Statut: %en cours%</Text>
             </View>
 
+            {TIMER > 0 && (
+              <Button
+                title="Partage du lien"
+                onPress={() => props.navigation.navigate('SecondeShareEvent')}
+                buttonStyle={{
+                  backgroundColor: '#fff',
+                  color: '#584DAD',
+                  borderColor: '#584DAD',
+                  borderWidth: 3,
+                  borderRadius: 10,
+                  marginTop: '5%'
+                }}
+                titleStyle={{
+                  color: '#584DAD',
+                  fontFamily: 'Roboto-Bold'
+                }}
+              />
+            )}
 
-            <Button
-              title=" + Nouveau vote"
-              onPress={() => props.navigation.navigate('Moderation')}
-              buttonStyle={{
-                backgroundColor: '#fff',
-                color: '#584DAD',
-                borderColor: '#584DAD',
-                borderWidth: 3,
-                borderRadius: 10,
-                marginTop: '5%'
-              }}
-              titleStyle={{
-                color: '#584DAD',
-                fontFamily: 'Roboto-Bold'
-              }}
-            />
+
+            {TIMER <= 0 && (
+              <Button
+                title=" + Nouveau vote"
+                onPress={() => props.navigation.navigate('Moderation')}
+                buttonStyle={{
+                  backgroundColor: '#fff',
+                  color: '#584DAD',
+                  borderColor: '#584DAD',
+                  borderWidth: 3,
+                  borderRadius: 10,
+                  marginTop: '5%'
+                }}
+                titleStyle={{
+                  color: '#584DAD',
+                  fontFamily: 'Roboto-Bold'
+                }}
+              />
+            )}
 
 
           </View>
@@ -174,6 +194,8 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
           </View>
 
         </View>
+
+        {TIMER <= 0 && (
         <Button
           title=" Nouvelle soirée"
           onPress={() => props.navigation.navigate('EventCreation')}
@@ -188,7 +210,7 @@ var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{
             color="white"
           />
           }
-        />
+        />)}
       </ScrollView>
 
 
@@ -230,7 +252,7 @@ const styles = StyleSheet.create({
     marginLeft: '2%'
 
   },
-  subtextSoiree:{
+  subtextSoiree: {
     color: '#584DAD',
     fontSize: 30,
     fontFamily: 'Staatliches',
@@ -279,8 +301,10 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return { hostId: state.hostId,
-           nameToDisplay: state.EventName}
+  return {
+    hostId: state.hostId,
+    nameToDisplay: state.EventName
+  }
 }
 
 export default connect(

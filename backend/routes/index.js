@@ -11,8 +11,6 @@ var playlistModel = require('../bdd/SchemaPlaylistTitresProposes');
 var server = require('../bin/www')
 
 
-
-
 // -------------------- route initiale --------------------------------------------------------
 router.get('/', function (req, res, next) {
 
@@ -84,7 +82,7 @@ router.post('/playlist', async function(req,res,next){
 
   res.json({playlistDB})
 
-  // console.log('playlist logguée ici ->', playlistDB)
+  console.log('playlist logguée ici ->', playlistDB)
 })
 
 
@@ -175,7 +173,8 @@ router.post('/eventcreation', async function (req, res, next) {
   var error = []
   var result = false
   var saveEvent = null
-  var date = new Date() // a verifier le format
+
+  
 
   if (req.body.eventNameFromFront == ''
     || req.body.eventPasswordFromFront == '') {
@@ -187,7 +186,7 @@ router.post('/eventcreation', async function (req, res, next) {
   }
 
   if (error.length == 0) {
-
+    console.log(req.body)
 
     var userId = await eventModel.findOne(
       { user: req.body.idUserFromFront, isOpen: true }
@@ -209,7 +208,7 @@ router.post('/eventcreation', async function (req, res, next) {
 
       user: req.body.idUserFromFront,
       nameEvent: req.body.eventNameFromFront,
-      date: date,
+      date: new Date(),
       isOpen: true,
       eventId: (Math.floor(Math.random() * 10000) + 10000).toString().substring(1),
       password: req.body.eventPasswordFromFront,
@@ -226,7 +225,9 @@ router.post('/eventcreation', async function (req, res, next) {
     })
 
     if (saveEvent) {
-      await playlistModel.updateMany({ $set: {votes: [] }});
+      await playlistModel.deleteMany(
+        {user: req.body.idUserFromFront}
+        );
       result = true
     }
 
@@ -275,7 +276,9 @@ router.post('/tourdevotecreation', async function (req, res, next) {
   if (saveTourdevote) {
 
     console.log('result', saveTourdevote)
-    await playlistModel.updateMany({ $set: {votes: [] }});
+    await playlistModel.deleteMany(
+      {user: req.body.idUserFromFront}
+      );
 
     res.json({ result: true, idTourdeVote: saveTourdevote._id })
   }
@@ -296,7 +299,7 @@ router.post('/initTimer5', async function (req, res, next) {
   mongoose.set('useFindAndModify', false);
 
   var userEvent = await eventModel.findOne(
-    {user: req.body.userIdFromFront, isOpen: true}
+    {user: req.body.idUserFromFront, isOpen: true}
   )
 
   console.log('userevent', userEvent);
@@ -326,7 +329,7 @@ router.post('/initTimer10', async function (req, res, next) {
   mongoose.set('useFindAndModify', false);
 
   var userEvent = await eventModel.findOne(
-    {user: req.body.userIdFromFront, isOpen: true}
+    {user: req.body.idUserFromFront, isOpen: true}
   )
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
@@ -352,18 +355,15 @@ router.post('/initTimer20', async function (req, res, next) {
   mongoose.set('useFindAndModify', false);
 
   var userEvent = await eventModel.findOne(
-    {user: req.body.userIdFromFront, isOpen: true}
+    {user: req.body.idUserFromFront, isOpen: true}
   )
 
   console.log('user event', userEvent)
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    { event: userEvent._id},
+    {event: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
-
-  console.log('tour de vote:', tourdevoteMAJ)
-
    
   if (tourdevoteMAJ) {
     res.json({result: true}) 
@@ -422,7 +422,6 @@ router.post('/ajoutertitre', async function (req, res, next) {
  })
 
  var titreSaved = await newTitre.save();
- 
   
   res.json({ titreSaved })
 });
@@ -434,7 +433,7 @@ router.post('/supprimertitre', async function (req, res, next) {
   console.log(req.body);
 
   var playlistSaved = await playlistModel.deleteOne(
-    {user: req.body.userIdFromFront, titre: req.body.titreFromFront}
+    {user: req.body.idUserFromFront, titre: req.body.titreFromFront}
     )
 
   res.json({ playlist: playlistSaved })
@@ -473,7 +472,6 @@ router.post('/voteguest', async function (req, res, next) {
 
   mongoose.set('useFindAndModify', false);
 
-
   var hasAlreadyVote = await playlistModel.findOne(
     { votes: {'$in':req.body.tokenFromFront} }
   )
@@ -489,7 +487,6 @@ router.post('/voteguest', async function (req, res, next) {
 
     console.log('vote du guest ici -> ', vote)
   }
-
 
 
   if (hasAlreadyVote) {
@@ -510,7 +507,7 @@ router.post('/votehost', async function (req, res, next) {
 
 
   var hasAlreadyVote = await playlistModel.findOne(
-    { votes: { $in: req.body.userIdFromFront} }
+    { votes: { $in: req.body.idUserFromFront} }
   )
 
   console.log('hasAlreadyVote', hasAlreadyVote);
@@ -519,12 +516,11 @@ router.post('/votehost', async function (req, res, next) {
 
     var vote = await playlistModel.findOneAndUpdate(
       { titre: req.body.titreFromFront },
-      { $push: { votes: req.body.userIdFromFront } }
+      { $push: { votes: req.body.idUserFromFront } }
     )
 
     console.log('vote', vote)
   }
-
 
 
   if (hasAlreadyVote) {
@@ -535,7 +531,6 @@ router.post('/votehost', async function (req, res, next) {
   else {
     res.json({ result: true })
   }
-
 }
 )
 

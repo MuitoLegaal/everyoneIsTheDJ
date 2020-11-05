@@ -14,7 +14,9 @@ import { connect } from 'react-redux'
 import CountDown from 'react-native-countdown-component';
 
 
-function ShareEvent(props){
+
+
+function SecondeShareEvent(props){
 
   const [copiedText, setCopiedText] = useState('')
   const [TIMER, setTIMER] = useState(props.timerToDisplay)
@@ -24,6 +26,9 @@ function ShareEvent(props){
   
   var headerCenter = <Text style={styles.title} >Partage de l'évènement</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
+
+ //COUNTDOWN 
+ const [TIMER, setTIMER] = useState(0)
 
 
  useEffect(() => {
@@ -49,8 +54,6 @@ function ShareEvent(props){
    console.log('hostIdState', props.hostId)
 
  }, [])
-
-  useEffect
 
     return (
 
@@ -218,4 +221,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(ShareEvent);
+)(SecondeShareEvent);

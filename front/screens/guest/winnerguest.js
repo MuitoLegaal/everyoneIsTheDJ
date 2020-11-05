@@ -1,79 +1,201 @@
-import React, { Component, useEffect, useState } from 'react'
-import { Image, View, Text, StyleSheet } from 'react-native'
+import React, { Component, useCallback, useEffect, useState } from 'react'
+import { Image, View, Text, StyleSheet, Linking, Alert, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { faBars, simplybuilt } from '@fortawesome/free-solid-svg-icons'
+import { Header } from 'react-native-elements'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { color } from 'react-native-reanimated';
+import {connect} from 'react-redux';
 
 
-export default function winnerguest (props) {
+function Winnerguest(props) {
 
-const [CLASSEMENT, setCLASSEMENT] = useState ([])
-const [idTEST, setidTEST] = useState ('userId_TEST_000000')
+  const [CLASSEMENTb, setCLASSEMENTb] = useState ([])
+  const [idTEST, setidTEST] = useState ('userId_TEST_000000')
+  
+    useEffect(() => {
+  
+      const findCLASSEMENT = async () => {
+  
+    const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      // body: `idUserFromFront=${props.hostId}`
+      body: `idUserFromFront=${idTEST}`
+    })
+    var classement = await TRIdata.json();
+  
+    setCLASSEMENTb(classement)
+  
+    console.log('classement BRUT ------------>', classement)
+    }
+  
+    findCLASSEMENT()
+  
+  }, [])
 
-  useEffect(() => {
+  console.log('classement useSTATE ------------>', CLASSEMENTb)
 
-    const findCLASSEMENT = async () => {
-
-  const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    // body: `idUserFromFront=${props.hostId}`
-    body: `idUserFromFront=${idTEST}`
-  })
-  var classement = await TRIdata.json();
-
-  setCLASSEMENT(classement)
-
-  // console.log('classement BRUT ------------>', classement)
-  }
-
-  findCLASSEMENT()
-
-}, [])
+  //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
+  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
 
 
-console.log('classement ------------>', CLASSEMENT)
-console.log('classement useSTATE ------------>', CLASSEMENT.tri[0].titre)
-
+if (CLASSEMENTb.length==0) {
   return (
-    <View style={styles.container}>
-       <Image source={require('../../assets/logoMini.png')} />
-       <Text style={{ color: '#fff' }}>Et le gagnant est ...</Text>
-       <Icon name="trophy" size={200} color="#E59622"/>
-        
-        <Text style={{ color: '#fff' }}>1.</Text>
-        <View style={styles.winner}>
-  <Text style={{ color: '#fff' }}>{CLASSEMENT.tri[0].titre}</Text>
-        <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
-        </View>
-        <Text style={{ color: '#fff' }}>2.</Text>
-        <Text style={{ color: '#fff' }}>Artiste: Lorem Ipsum</Text>
-        <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
-        <Text style={{ color: '#fff' }}>3.</Text>
-        <Text style={{ color: '#fff' }}>Artiste: Lorem Ipsum</Text>
-        <Text style={{ color: '#fff' }}>Titre: Lorem Ipsum</Text>
-        
+    <View></View>
+  )
+} else {
+  return (
+<View style={styles.container}>
+    <View style={{height:150}}>
+            <Header
+              centerComponent={headerCenter}
+              // rightComponent={headerRight}
+              containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
+            />
 
-        <Button title="Suivant"  onPress={() => navigation.navigate('Nouveauvote')} buttonStyle={{backgroundColor: '#FF0060'}}></Button>
+{/* burger menu un peu non académique fait par maxime. je n'arrive pas à mettre le onPress différemment. il y a un conflit quand je le mets autrement. onPress du burger marchait bien avec la mise en formede HomeHost qui existait jeudi, j'ai fait des tests encore samedi. Sur screen Historic et Parameters il continue de bien fonctionner */}
+            <Button 
+              buttonStyle={{
+                backgroundColor: 'transparent',
+                justifyContent: 'flex-end', 
+                alignItems: 'flex-start',
+              }}
+                icon={
+                  <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}}  onPress={() => props.navigation.openDrawer()}/>
+                }
+            /> 
+
     </View>
-  );
+    <ScrollView style={styles.wrap}>
+        <View style={{alignItems: 'center', justifyContent: 'center', borderTopWidth:1, borderTopColor: "#fff"}} >  
+          <Text style={styles.subtitle}>Et le gagnant est ...</Text>
+          <Icon name="trophy" size={100} color="#E59622" style={{marginTop:'5%', marginBottom:'5%'}}/>
+        </View>
+
+      
+      <View style={styles.winner} >
+        <Text style={styles.winnertext}>1.</Text>
+
+        <Text style={styles.winnertext}>{CLASSEMENTb.tri[0].titre}</Text>
+        <Text style={styles.winnertext}>Votes: {CLASSEMENTb.tri[0].votes}</Text>
+
+      </View>
+
+      <View style={styles.second} >
+        <Text style={styles.text}>2.</Text>
+        <Text style={styles.text}>{CLASSEMENTb.tri[1].titre}</Text>
+        <Text style={styles.text}>Votes: {CLASSEMENTb.tri[1].votes}</Text>
+      </View>
+      <View style={styles.second} >
+        <Text style={styles.text}>3.</Text>
+        <Text style={styles.text}>{CLASSEMENTb.tri[2].titre}</Text>
+        <Text style={styles.text}>Votes: {CLASSEMENTb.tri[2].votes}</Text>
+      </View>
+
+      <Button 
+          title="Retour à l'accueil" 
+          buttonStyle={{
+            backgroundColor: '#584DAD',
+            borderRadius: 10,
+            marginTop:'2%'
+                        }} 
+          onPress={() => props.navigation.navigate('HomeHost')}></Button>
+
+    </ScrollView>
+</View>
+
+); 
+}
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     backgroundColor: '#131313',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    color: '#ffffff'
+    
   },
-  winner: {
-    flex: 1,
-    backgroundColor: '#E59622',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center'
-  },
+  wrap: {
+      flexDirection: 'column',
+      textAlign: 'center',
+      height: hp('100%'), // 70% of height device screen
+      width: wp('100%'),  // 80% of width device screen 
+      backgroundColor: '#131313',
+     
+
+    },
+    title: {
+      color: '#fff',
+      fontSize: 40,
+      fontFamily:'Staatliches',
+      marginTop: '2%'
+    },
+
+    subtitle: {
+      color: '#fff',
+      fontSize: 30,
+      fontFamily:'Staatliches',
+      textAlign: 'center',
+      marginTop: '5%',
+      marginLeft:'2%'
+      
+    },
+    subtext: {
+      color: '#fff',
+      fontSize: 30,
+      fontFamily:'Staatliches',
+      textAlign: 'center',
+      marginTop: '5%',
+      marginLeft:'2%'
+      
+    },
+    text: {
+      color: '#fff',
+      fontSize: 20,
+      fontFamily:'Roboto-Regular',
+      textAlign: 'center',
+      marginTop: '5%',
+      marginBottom:'2%'
+    
+      
+    },
+    winnertext: {
+      color: '#584DAD',
+      fontSize: 20,
+      fontFamily:'Roboto-Bold',
+      textAlign: 'center',
+      marginTop: '5%',
+      marginBottom:'2%'
+    
+      
+    },
+    winner: {
+      textAlign:'center',
+      alignItems:'center',
+      justifyContent:'center',
+      marginBottom:'5%'
+    },
+
+    second: {
+      textAlign:'center',
+      alignItems:'center',
+      justifyContent:'center',
+      marginBottom:'5%'
+    },
+    
 
 
 });
+
+
+function mapStateToProps(state) {
+  return { hostId: state.hostId }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Winnerguest);
