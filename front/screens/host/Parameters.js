@@ -97,18 +97,12 @@ function Parameters(props){
                 <Text style={styles.text} > maxime@eitd.com</Text>
               </View>
 
-<<<<<<< HEAD
-              <View style={styles.card}>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                  <Text style={styles.subtitle} onPress={() => props.navigation.navigate('MentionsLegales')}>Politique d'utilisation</Text>
-=======
               <View style={styles.card} 
                   >
                 <View 
                 onPress={() => props.navigation.navigate('MentionsLegales')}
                 style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
                   <Text style={styles.subtitle}>Politique d'utilisation</Text>
->>>>>>> f825d867cf421c985cd849efcc285d88cf2c98ee
                 </View>
               </View>
 
