@@ -1,4 +1,4 @@
-import React, { Component, useCallback } from 'react'
+import React, { Component, useCallback, useEffect, useState } from 'react'
 import { Image, View, Text, StyleSheet, Linking, Alert, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -11,6 +11,32 @@ import { color } from 'react-native-reanimated';
 
 
 export default function Winner(props) {
+
+  const [CLASSEMENTb, setCLASSEMENTb] = useState ([])
+  const [idTEST, setidTEST] = useState ('userId_TEST_000000')
+  
+    useEffect(() => {
+  
+      const findCLASSEMENT = async () => {
+  
+    const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      // body: `idUserFromFront=${props.hostId}`
+      body: `idUserFromFront=${idTEST}`
+    })
+    var classement = await TRIdata.json();
+  
+    setCLASSEMENTb(classement)
+  
+    console.log('classement BRUT ------------>', classement)
+    }
+  
+    // findCLASSEMENT()
+  
+  }, [])
+
+  console.log('classement useSTATE ------------>', CLASSEMENTb.tri[0].titre)
 
   //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
@@ -62,8 +88,8 @@ export default function Winner(props) {
       
       <View style={styles.winner} >
         <Text style={styles.winnertext}>1.</Text>
-        <Text style={styles.winnertext}>Artiste - Titre: %Lorem Ipsum%</Text>
-        <Text style={styles.winnertext}>Votes: %Nombre%</Text>
+        <Text style={styles.winnertext}>{CLASSEMENTb.tri[0].titre}</Text>
+        <Text style={styles.winnertext}>Votes: {CLASSEMENTb.tri[0].votes}</Text>
         <OpenURLButton url={supportedURL}> 
           <IconFontAwesome
                 name="youtube-play"
@@ -73,16 +99,16 @@ export default function Winner(props) {
 
       </View>
 
-      <View style={styles.second} >
+      {/* <View style={styles.second} >
         <Text style={styles.text}>2.</Text>
-        <Text style={styles.text}>Artiste - Titre: %Lorem Ipsum%</Text>
-        <Text style={styles.text}>Votes: %Nombre%</Text>
+        <Text style={styles.text}>{CLASSEMENT[0].tri[1].titre}</Text>
+        <Text style={styles.text}>{CLASSEMENT[0].tri[1].votes}</Text>
       </View>
       <View style={styles.second} >
         <Text style={styles.text}>3.</Text>
-        <Text style={styles.text}>Artiste - Titre: %Lorem Ipsum%</Text>
-        <Text style={styles.text}>Votes: %Nombre%</Text>
-      </View>
+        <Text style={styles.text}>{CLASSEMENT[0].tri[2].titre}</Text>
+        <Text style={styles.text}>{CLASSEMENT[0].tri[2].votes}</Text>
+      </View> */}
 
       <Button 
           title="Retour à l'accueil" 

@@ -98,8 +98,10 @@ function Parameters(props){
               </View>
 
               <View style={styles.card} 
-                  onPress={() => props.navigation.navigate('MentionsLegales')}>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
+                  >
+                <View 
+                onPress={() => props.navigation.navigate('MentionsLegales')}
+                style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} >
                   <Text style={styles.subtitle}>Politique d'utilisation</Text>
                 </View>
               </View>

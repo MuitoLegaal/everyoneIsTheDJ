@@ -437,6 +437,32 @@ router.post('/supprimertitre', async function (req, res, next) {
 
 })
 
+// ---------------------------------------------------------------------- winner -----------------------------
+router.post('/winner', async function (req, res, next) {
+
+  var winnerSEARCH = await playlistModel.find({user: req.body.idUserFromFront});
+
+  // console.log('win ----------- >', winnerSEARCH)
+
+var arrayBRUT = []
+
+  for (i=0; i < winnerSEARCH.length; i++) {
+    arrayBRUT.push(
+      {votes: winnerSEARCH[i].votes.length,
+      titre : winnerSEARCH[i].titre}
+    )
+  }
+
+var tri =  arrayBRUT.sort(function(a, b) {
+  return b.votes - a.votes;
+});
+
+console.log('tri ----------- >', tri)
+
+res.json({tri})
+}
+)
+
 
 
 router.post('/voteguest', async function (req, res, next) {
