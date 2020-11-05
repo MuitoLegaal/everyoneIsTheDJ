@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { color } from 'react-native-reanimated';
+import { connect } from 'react-redux';
 
 
 function Winnerguest(props) {
@@ -26,8 +27,7 @@ function Winnerguest(props) {
       const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        // body: `idUserFromFront=${props.hostId}`
-        body: `idUserFromFront=${idTEST}`
+        body: `idUserFromFront=${props.hostId}`
       })
       var classement = await TRIdata.json();
 
@@ -77,13 +77,6 @@ function Winnerguest(props) {
           <Text style={styles.winnertext}>1.</Text>
           <Text style={styles.winnertext}>{CLASSEMENTb.tri[0].titre}</Text>
           <Text style={styles.winnertext}>Votes: {CLASSEMENTb.tri[0].votes}</Text>
-          <OpenURLButton url={supportedURL}>
-            <IconFontAwesome
-              name="youtube-play"
-              size={25}
-              color="#584DAD"
-            /> Lancer le titre</OpenURLButton>
-
         </View>
 
         <View style={styles.second} >
@@ -104,7 +97,7 @@ function Winnerguest(props) {
             borderRadius: 10,
             marginTop: '2%'
           }}
-          onPress={() => props.navigation.navigate('HomeHost')}></Button>
+          onPress={() => props.navigation.navigate('Nouveauvote')}></Button>
 
       </ScrollView>
     </View>
@@ -186,9 +179,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: '5%'
   },
-
-
-
 });
 
 function mapStateToProps(state) {
@@ -198,4 +188,7 @@ function mapStateToProps(state) {
   }
 }
 
-export default Winnerguest;
+export default connect(
+  mapStateToProps,
+  null
+)(Winnerguest);
