@@ -39,10 +39,12 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.0.17:3000/initTimer10', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `tourdevoteIdFromFront=${props.hostId}`
+      body: `userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
+
+    props.navigation.navigate("ShareEvent")
 
     console.log(response);
     props.navigation.navigate('HomeHost')
@@ -54,10 +56,12 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.0.17:3000/initTimer20', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `tourdevoteIdFromFront=${props.hostId}`
+      body: `userIdFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
+
+    props.navigation.navigate("ShareEvent")
 
     console.log(response);
     props.navigation.navigate('HomeHost')

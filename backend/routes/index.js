@@ -321,10 +321,16 @@ router.post('/initTimer5', async function (req, res, next) {
 
 router.post('/initTimer10', async function (req, res, next) {
 
+  console.log('body',req.body)
+
   mongoose.set('useFindAndModify', false);
 
+  var userEvent = await eventModel.findOne(
+    {user: req.body.userIdFromFront, isOpen: true}
+  )
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: req.body.tourdevoteIdFromFront},
+    {_id: userEvent._id},
     { echeance: Date.now()+600000 }
   )
 
@@ -341,10 +347,16 @@ router.post('/initTimer10', async function (req, res, next) {
 
 router.post('/initTimer20', async function (req, res, next) {
 
+  console.log('body',req.body)
+
   mongoose.set('useFindAndModify', false);
 
+  var userEvent = await eventModel.findOne(
+    {user: req.body.userIdFromFront, isOpen: true}
+  )
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: req.body.tourdevoteIdFromFront},
+    {_id: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
 
@@ -371,7 +383,7 @@ router.post('/afficheTimer', async function (req, res, next) {
     { isOpen: true, event: isEventOpen._id }
   )
  
-  var echeanceMS = tourdevote.echeance
+  var echeanceMS = isTourdevoteOpen.echeance
 
   var maintenantMS = Date.now()
   
@@ -424,6 +436,32 @@ router.post('/supprimertitre', async function (req, res, next) {
   res.json({ playlist: playlistSaved })
 
 })
+
+// ---------------------------------------------------------------------- winner -----------------------------
+router.post('/winner', async function (req, res, next) {
+
+  var winnerSEARCH = await playlistModel.find({user: req.body.idUserFromFront});
+
+  // console.log('win ----------- >', winnerSEARCH)
+
+var arrayBRUT = []
+
+  for (i=0; i < winnerSEARCH.length; i++) {
+    arrayBRUT.push(
+      {votes: winnerSEARCH[i].votes.length,
+      titre : winnerSEARCH[i].titre}
+    )
+  }
+
+var tri =  arrayBRUT.sort(function(a, b) {
+  return b.votes - a.votes;
+});
+
+console.log('tri ----------- >', tri)
+
+res.json({tri})
+}
+)
 
 
 
