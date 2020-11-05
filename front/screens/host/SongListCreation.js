@@ -28,11 +28,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-<<<<<<< HEAD
-      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
-=======
       const TOPdata = await fetch('http://192.168.144.4:3000/findTOP', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${props.hostId}`
@@ -63,11 +59,7 @@ function SongListCreation(props) {
        setTitreProposeHote();
     }
 
-<<<<<<< HEAD
-    var rawResponse = await fetch('http://192.168.1.20:3000/ajoutertitre', {
-=======
     var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
@@ -88,11 +80,7 @@ function SongListCreation(props) {
 
 
 
-<<<<<<< HEAD
-    var rawResponse = await fetch('http://192.168.1.20:3000/supprimertitre', {
-=======
     var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${element}&idUserFromFront=${props.hostId}`
@@ -233,7 +221,6 @@ function SongListCreation(props) {
 
 
           {/* CHAMPS INPUT OPTIONNEL NE PAS SUPRRIMER
-
                         <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'5%'}}>
                               <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1, marginTop:'5%'}}>
                                 <Text style={{fontFamily:'Roboto-Bold', fontSize: 18, color: '#584DAD', marginLeft:'3%', marginBottom:'5%'}}>Artiste - Titre aléatoire : </Text>
@@ -241,7 +228,6 @@ function SongListCreation(props) {
                               </View>
                             <Button 
                             title= ''
-
                             buttonStyle={{
                                 backgroundColor: '#E59622',
                                 borderRadius: 10,

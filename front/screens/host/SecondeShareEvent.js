@@ -18,13 +18,8 @@ import CountDown from 'react-native-countdown-component';
 
 function SecondeShareEvent(props){
 
-<<<<<<< HEAD
- 
-  
-=======
   const [copiedText, setCopiedText] = useState('')
   const [TIMER, setTIMER] = useState(0)
->>>>>>> 32aac2de844540c0540bffb63f5f714a93c183e9
 
   // utilisation de clipboard pour copier un bloc de text 
   
@@ -37,7 +32,7 @@ function SecondeShareEvent(props){
    const findTIMER = async () => {
 
      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-     var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
+     var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
        method: 'POST',
        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
        body: `idUserFromFront=${props.hostId}`

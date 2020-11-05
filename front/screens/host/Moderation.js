@@ -29,7 +29,7 @@ function Moderation(props) {
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
+      const rawDATA = await fetch('http://192.168.144.4:3000/playlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -61,7 +61,7 @@ function Moderation(props) {
        setTitreProposeHote();
     }
 
-    var rawResponse = await fetch('http://192.168.1.20:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
@@ -82,7 +82,7 @@ function Moderation(props) {
 
 
 
-    var rawResponse = await fetch('http://192.168.1.20:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${element}&idUserFromFront=${props.hostId}`

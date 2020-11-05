@@ -19,7 +19,7 @@ function enregistrement({ navigation, addId, addToken, props }) {
 
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')} />;
 
-  var handleEnregistrement =  () => {
+  var handleEnregistrement =  async () => {
 
 // --------------------------------- VOS IP ICI -----------------------------------------
 // Flo IP : 192.168.0.17
