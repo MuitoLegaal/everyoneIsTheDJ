@@ -17,11 +17,7 @@ function EventCreation(props) {
 
       var handleEventCreation = async () => {
 
-<<<<<<< HEAD
-            var rawResponse = await fetch('http://192.168.1.20:3000/eventcreation', {
-=======
             var rawResponse = await fetch('http://192.168.144.4:3000/eventcreation', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${props.hostId}`

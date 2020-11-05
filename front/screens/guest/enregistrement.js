@@ -24,11 +24,7 @@ function enregistrement({ navigation, addId, addToken, props }) {
 // --------------------------------- VOS IP ICI -----------------------------------------
 // Flo IP : 192.168.0.17
 // Vlad : 192.168.0.40
-<<<<<<< HEAD
-var rawResponse = await fetch('http://192.168.1.20:3000/enregistrement', {
-=======
 var rawResponse = await fetch('http://192.168.144.4:3000/enregistrement', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
   method: 'POST',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
