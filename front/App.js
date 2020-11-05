@@ -17,7 +17,8 @@ import token from './reducers/token';
 import hostId from './reducers/hostId';
 import EventID from './reducers/EventIDReducer'
 import EventPlaylist from './reducers/PlaylistReducer'
-import VoteTimer from './reducers/timerReducer'
+import GuestPassword from './reducers/guestPasswordReducer'
+import GuestID from './reducers/GuestIDReducer'
 
 
 
@@ -32,7 +33,7 @@ const getFonts = () => Font.loadAsync({
   import AppDrawer from './screens/Drawer';
 
 
-const store = createStore(combineReducers({EventName, token, hostId, EventPass, EventID, EventPlaylist, VoteTimer}))
+const store = createStore(combineReducers({EventName, token, hostId, EventPass, EventID, EventPlaylist, GuestPassword, GuestID}))
 
 
 

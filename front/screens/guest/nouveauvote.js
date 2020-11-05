@@ -15,6 +15,21 @@ import { connect } from 'react-redux';
 
 function nouveauvote(props) {
 
+  const [EventNameFromBack, setEventNameFromBack] = useState()
+
+  useEffect(async() => {
+    
+    // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+    const EventNameRaw = await fetch('http://192.168.144.4:3000/getEventName', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `eventIdFromFront=${props.IDToDisplay}&eventPasswordFromFront=${props.passwordToDisplay}`
+    })
+    var eventNameJson = await EventNameRaw.json();
+  
+
+},[])
+
   // liste example titres à supprimer à la fin quand les titres de la playlist remonteront depuis la BDD
   const listTITRES = [
       'Maroon 5 - This Love',
@@ -314,7 +329,7 @@ const styles = StyleSheet.create({
 // REDUX
 
 function mapStateToProps(state) {
-  return { token: state.token, hostId: state.hostId }
+  return { token: state.token, hostId: state.hostId, passwordToDisplay: state.GuestPassword, IDToDisplay: state.GuestID }
 }
 
 export default connect(
