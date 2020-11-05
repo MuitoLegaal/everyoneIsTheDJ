@@ -17,7 +17,7 @@ import CountDown from 'react-native-countdown-component';
 function ShareEvent(props){
 
   const [copiedText, setCopiedText] = useState('')
-  const [TIMER, setTIMER] = useState(props.timerToDisplay)
+  const [TIMER, setTIMER] = useState(0)
 
   // utilisation de clipboard pour copier un bloc de text 
     
@@ -26,8 +26,29 @@ function ShareEvent(props){
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
 
+ useEffect(() => {
 
-  useEffect
+   const findTIMER = async () => {
+
+     // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+     var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+       body: `idUserFromFront=${props.hostId}`
+     })
+
+
+     var timer = await TIMERdata.json();
+     setTIMER(timer.reboursFinal)
+     console.log("rebours", timer)
+   }
+
+   findTIMER()
+
+   console.log('Comptes à rebours FRONT ici ->', TIMER)
+   console.log('hostIdState', props.hostId)
+
+ }, [])
 
     return (
 
@@ -80,7 +101,7 @@ function ShareEvent(props){
                 >
                 </Button>
 
-            {/* <View style={{marginTop:'10%', marginBottom:'10%'}}>
+            <View style={{marginTop:'10%', marginBottom:'10%'}}>
               <Text style={{fontFamily:'Roboto-Bold', fontSize:18, color:'#FF0060'}}>Vote en cours, temps restant :</Text>
               {TIMER > 0 && (<CountDown
                 size={10}
@@ -93,7 +114,7 @@ function ShareEvent(props){
                 timeLabels={{ m: null, s: null }}
                 showSeparator
               />)}
-            </View> */}
+            </View>
             </View>
           
             <Button
@@ -185,7 +206,6 @@ function mapStateToProps(state) {
     nameToDisplay: state.EventName,
     passToDisplay: state.EventPass,
     idToDisplay: state.EventID,
-    timerToDisplay: state.VoteTimer
   }
 }
 

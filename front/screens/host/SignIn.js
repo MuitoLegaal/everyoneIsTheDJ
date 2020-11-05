@@ -37,11 +37,13 @@ var handleSignIn = async() => {
         var hostId = response.hote._id
         console.log('hostID', hostId)
         await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
-        console.log('SignUp Success')
+        console.log('SignIn Success')
         props.addId(hostId);
         setErrorMessage(false)
         setLogInDenied()
+        if (response.isEvent)
         props.navigation.navigate('HomeHost')
+        else {props.navigation.navigate('SecondeHomeHost')}
         
     }
 }

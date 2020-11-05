@@ -8,12 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { color } from 'react-native-reanimated';
+import {connect} from 'react-redux';
 
 
 function Winner(props) {
 
   const [CLASSEMENTb, setCLASSEMENTb] = useState ([])
-  const [idTEST, setidTEST] = useState ('userId_TEST_000000')
   
     useEffect(() => {
   
@@ -22,8 +22,7 @@ function Winner(props) {
     const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      // body: `idUserFromFront=${props.hostId}`
-      body: `idUserFromFront=${idTEST}`
+      body: `idUserFromFront=${props.hostId}`
     })
     var classement = await TRIdata.json();
   
@@ -38,8 +37,7 @@ function Winner(props) {
 
   console.log('classement useSTATE ------------>', CLASSEMENTb)
 
-  //var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}/>
+  var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}  onPress={() => props.navigation.openDrawer()}/>
 
 
   const supportedURL = `https://www.youtube.com/results?search_query=avicii`
@@ -208,4 +206,11 @@ const styles = StyleSheet.create({
 
 });
 
-export default Winner;
+function mapStateToProps(state) {
+  return { hostId: state.hostId }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(Winner);

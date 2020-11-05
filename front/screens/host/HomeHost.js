@@ -8,7 +8,7 @@ import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CountDown from '../countdown';
+import CountDown from 'react-native-countdown-component';
 import { connect } from 'react-redux';
 
 
@@ -24,7 +24,6 @@ function HomeHost(props) {
   useEffect(() => {
 
     const findTIMER = async () => {
-
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
@@ -45,6 +44,8 @@ function HomeHost(props) {
     console.log('hostIdState', props.hostId)
 
   }, [])
+
+  console.log('TIMER', TIMER)
 
 
 
@@ -99,12 +100,12 @@ function HomeHost(props) {
             />
           )}
 
-          {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
+          {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, résultat dans : </Text>)}
 
           {TIMER > 0 && (<CountDown
             size={30}
             until={TIMER}
-            onFinish={() => navigation.navigate('Winnerguest')}
+            onFinish={() => props.navigation.navigate('Winnerguest')}
             digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
             digitTxtStyle={{ color: '#FF0060' }}
             timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -114,7 +115,7 @@ function HomeHost(props) {
             showSeparator
           />)}
 
-          {TIMER > 0 && (<Text style={styles.text}>Ton vote a bien été pris en compte :)</Text>)}
+          {TIMER > 0 && (<Text style={styles.text}>Ton vote a bien été pris en compte !</Text>)}
 
 
         </View>
@@ -135,7 +136,7 @@ function HomeHost(props) {
               <Text style={styles.text}>Statut: %en cours%</Text>
             </View>
 
-            {TIMER <= 0 && (
+            {TIMER > 0 && (
               <Button
                 title="Partage du lien"
                 onPress={() => props.navigation.navigate('SecondeShareEvent')}
@@ -155,7 +156,7 @@ function HomeHost(props) {
             )}
 
 
-            {TIMER > 0 && (
+            {TIMER <= 0 && (
               <Button
                 title=" + Nouveau vote"
                 onPress={() => props.navigation.navigate('Moderation')}
