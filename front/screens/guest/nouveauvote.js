@@ -36,22 +36,6 @@ function nouveauvote(props) {
 
 
 // ---------------------------------------- chargement de la playlist --------------------------------------------
-  useEffect(() => {
-    const findPLAYLIST = async () => {
-      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `idUserFromFront=${props.hostId}`
-      })
-      var data = await rawDATA.json();
-      var arrayPL = data.playlistDB
-      setPlaylist(arrayPL)
-
-    }
-
-    findPLAYLIST()
-  },[])
 
 
   useEffect(() => {
@@ -78,7 +62,26 @@ function nouveauvote(props) {
     // console.log('hostIdState', props.hostId)
     // console.log('TokenState', props.token)
 
+    const findPLAYLIST = async () => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idUserFromFront=userId_TEST_000000`
+      })
+      var data = await rawDATA.json();
+      console.log('data en front-----------------', data.playlistDB) 
+      var arrayPL = data.playlistDB
+      setPlaylist(arrayPL)
+
+    }
+
+
+    findPLAYLIST()
+
   }, [])
+
+
 
 
   var handleRefreshTIMER = async () => {
@@ -134,7 +137,7 @@ function nouveauvote(props) {
     // console.log('console log SONGchosen 1 ->', SONGchosen)
 
 // ---------------------------------------- envoi du vote en BACK ------------------------------------------------
-    const SONGdata = await fetch('http://192.168.0.17:3000/voteguest', {
+    const SONGdata = await fetch('http://192.168.1.20:3000/voteguest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`

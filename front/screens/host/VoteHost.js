@@ -153,7 +153,7 @@ function VoteHost(props){
       {TIMER > 0 && (<CountDown
         size={30}
         until={TIMER}
-        onFinish={() => props.navigation.navigate('Winnerguest')}
+        onFinish={() => props.navigation.navigate('WinnerHost')}
         digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
         digitTxtStyle={{ color: '#FF0060' }}
         timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
