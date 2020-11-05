@@ -42,7 +42,11 @@ function nouveauvote(props) {
     const findTIMER = async () => {
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+<<<<<<< HEAD
       var TIMERdata = await fetch('http://192.168.1.20:3000/afficheTimer', {
+=======
+      var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
+>>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -58,7 +62,11 @@ function nouveauvote(props) {
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+<<<<<<< HEAD
       const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
+=======
+      const rawDATA = await fetch('http://192.168.144.4:3000/playlist', {
+>>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -78,7 +86,11 @@ function nouveauvote(props) {
 
   var handleRefreshTIMER = async () => {
 
+<<<<<<< HEAD
     var rawResponse = await fetch('http://192.168.1.20:3000/afficheTimer', {
+=======
+    var rawResponse = await fetch('http://192.168.144.4:3000/afficheTimer', {
+>>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
@@ -98,7 +110,11 @@ function nouveauvote(props) {
 
 // ---------------------------------------- envoi du vote en BACK ------------------------------------------------
    var handleVoteGuest = async () => {   
+<<<<<<< HEAD
       const SONGdata = await fetch('http://192.168.1.20:3000/voteguest', {
+=======
+      const SONGdata = await fetch('http://192.168.144.4:3000/voteguest', {
+>>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`
@@ -174,7 +190,7 @@ function nouveauvote(props) {
           
           <View>
 
-            <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Votez pour le prochain titre:</Text>
+            <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Vote pour le prochain titre : </Text>
 
             <RadioGroup getChecked={getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft: '5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize: 18 }} >
               {voteList}
