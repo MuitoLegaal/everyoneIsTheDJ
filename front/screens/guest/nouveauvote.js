@@ -97,7 +97,8 @@ function nouveauvote(props) {
   }
 
 // ---------------------------------------- envoi du vote en BACK ------------------------------------------------
-    const SONGdata = await fetch('http://192.168.144.4:3000/voteguest', {
+   var handleVoteGuest = async () => {   
+      const SONGdata = await fetch('http://192.168.144.4:3000/voteguest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`
@@ -132,12 +133,12 @@ function nouveauvote(props) {
 
 
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
-          <Text style={styles.text}>Bienvenu dans la soirée de </Text>
+          <Text style={styles.text}>Bienvenue dans la soirée de </Text>
           
         </View>
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={styles.subtext}> {props.nameToDisplay} </Text>
+          <Text style={styles.subtext}> %Anniv' de Bob% </Text>
           <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170, marginTop: '5%' }} />
         </View>
 
@@ -232,7 +233,7 @@ function nouveauvote(props) {
       </ScrollView>
     </View>
   );
-
+}
 
 // STYLE ------------------------------------------------------------------------
 
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
 // REDUX
 
 function mapStateToProps(state) {
-  return { token: state.token, hostId: state.hostId, nameToDisplay: state.EventName }
+  return { token: state.token, hostId: state.hostId }
 }
 
 export default connect(

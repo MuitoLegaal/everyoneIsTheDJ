@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, TextInput } from 'react-native';
+import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, TextInput,  } from 'react-native';
 import { Button, Header, Input, Badge } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import uuid from 'react-uuid';
 import {connect} from 'react-redux';
+
 
 function enregistrement({ navigation, addId, addToken, props }) {
 
@@ -80,7 +81,7 @@ if (response.result === true) {
 
 
     <KeyboardAwareScrollView style={styles.main}>
-    {logInDenied}
+      {logInDenied}
       <Input
         label='Pseudo'
         placeholder='Gégé'
