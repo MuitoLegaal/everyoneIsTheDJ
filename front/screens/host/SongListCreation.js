@@ -28,7 +28,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const TOPdata = await fetch('http://192.168.0.17:3000/findTOP', {
+      const TOPdata = await fetch('http://192.168.1.20:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `userIdFromFront=${props.hostId}`
@@ -59,7 +59,7 @@ function SongListCreation(props) {
        setTitreProposeHote();
     }
 
-    var rawResponse = await fetch('http://192.168.0.17:3000/ajoutertitre', {
+    var rawResponse = await fetch('http://192.168.1.20:3000/ajoutertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${titreProposeHote}&userIdFromFront=${props.hostId}`
@@ -80,7 +80,7 @@ function SongListCreation(props) {
 
 
 
-    var rawResponse = await fetch('http://192.168.0.17:3000/supprimertitre', {
+    var rawResponse = await fetch('http://192.168.1.20:3000/supprimertitre', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${element}&userIdFromFront=${props.hostId}`
