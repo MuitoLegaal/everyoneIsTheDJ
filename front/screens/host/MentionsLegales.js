@@ -17,7 +17,7 @@ function MentionsLegales(props){
 
   console.log(props);
 
-  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('HomeHost')} />;
+  var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Parameters')} />;
   var headerCenter = <Text style={styles.title} >Mentions légales</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
@@ -161,6 +161,9 @@ function MentionsLegales(props){
       backgroundColor: '#131313',
       borderTopWidth:1,
       borderTopColor:"#fff",
+      marginLeft:'2%',
+      paddingRight:'3%',
+      
      
     },
     
