@@ -44,7 +44,7 @@ function nouveauvote(props) {
 
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -64,7 +64,7 @@ function nouveauvote(props) {
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
+      const rawDATA = await fetch('http://192.168.144.4:3000/playlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=userId_TEST_000000`
@@ -86,7 +86,7 @@ function nouveauvote(props) {
 
   var handleRefreshTIMER = async () => {
 
-    var rawResponse = await fetch('http://192.168.0.17:3000/afficheTimer', {
+    var rawResponse = await fetch('http://192.168.144.4:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
@@ -137,7 +137,7 @@ function nouveauvote(props) {
     // console.log('console log SONGchosen 1 ->', SONGchosen)
 
 // ---------------------------------------- envoi du vote en BACK ------------------------------------------------
-    const SONGdata = await fetch('http://192.168.1.20:3000/voteguest', {
+    const SONGdata = await fetch('http://192.168.144.4:3000/voteguest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`
@@ -176,7 +176,7 @@ function nouveauvote(props) {
         </View>
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={styles.subtext}> %Anniv' de Bob% </Text>
+          <Text style={styles.subtext}> {props.nameToDisplay} </Text>
           <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170, marginTop: '5%' }} />
         </View>
 
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
 // REDUX
 
 function mapStateToProps(state) {
-  return { token: state.token, hostId: state.hostId }
+  return { token: state.token, hostId: state.hostId, nameToDisplay: state.EventName }
 }
 
 export default connect(

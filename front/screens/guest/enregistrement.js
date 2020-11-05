@@ -23,13 +23,14 @@ function enregistrement({ navigation, addId, addToken, props }) {
 // --------------------------------- VOS IP ICI -----------------------------------------
 // Flo IP : 192.168.0.17
 // Vlad : 192.168.0.40
-var rawResponse = await fetch('http://192.168.1.20:3000/enregistrement', {
+var rawResponse = await fetch('http://192.168.144.4:3000/enregistrement', {
   method: 'POST',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   body: `eventIdFromFront=${eventId}&eventPasswordFromFront=${eventPassword}&pseudoFromFront=${pseudo}`
 })
 
 var response = await rawResponse.json();
+props.addGuestEventName()
 
 console.log("response", response)
 
@@ -217,6 +218,9 @@ function mapDispatchToProps(dispatch) {
     },
     addId: function (hostId) { 
       dispatch( {type: 'addId', hostId: hostId} )
+    },
+    addGuestEventName: function(nom) {
+      dispatch({type:'addName', eventName: nom})
     }
   }
 }
