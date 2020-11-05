@@ -168,7 +168,7 @@ function nouveauvote(props) {
 
 
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
-          <Text style={styles.text}>Bienvenu dans la soirée de </Text>
+          <Text style={styles.text}>Bienvenue dans la soirée de </Text>
           
         </View>
 
@@ -209,7 +209,7 @@ function nouveauvote(props) {
           
           <View>
 
-            <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Votez pour le prochain titre:</Text>
+            <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Vote pour le prochain titre : </Text>
 
             <RadioGroup getChecked={getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft: '5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize: 18 }} >
               {voteList}

@@ -21,7 +21,7 @@ function VoteHost(props){
       
 
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('TimerConfigFIRST')} />;
-  var headerCenter = <Text style={{color: 'white'}} >Vote de l'hôte</Text>;
+  var headerCenter = <Text style={styles.title} >Ton vote</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
 
   //COUNTDOWN 
@@ -174,7 +174,7 @@ function VoteHost(props){
 
         <Text style={{ color: 'white', fontSize: 20, marginTop: '10%', marginBottom: '10%', marginLeft: '5%' }} >Votez pour le prochain titre:</Text>
 
-        <RadioGroup getChecked={this.getChecked} RadioGroupStyle={{ flex: 1, flexDirection: 'column', marginBottom: '10%', marginLeft: '5%' }} IconStyle={{ backgroundColor: '#FF0060' }} coreStyle={{ backgroundColor: '#FF0060' }} labelStyle={{ color: 'white', fontSize: 18 }} >
+        <RadioGroup getChecked={getChecked} RadioGroupStyle={{flexDirection: 'column', marginLeft: '5%', paddingRight:'15%', marginBottom:'5%'}} IconStyle={{ backgroundColor: '#FF0060', marginTop: '10%', marginRight:'3%' }} coreStyle={{ backgroundColor: '#FF0060', marginTop: '10%' }} labelStyle={{ color: 'white', fontSize: 18, marginTop: '5%'}}>
           {voteList}
         </RadioGroup>
 
@@ -196,7 +196,7 @@ function VoteHost(props){
           icon={
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
-
+          onPress={() => handleVoteHost()}
         />
       </View>
     
