@@ -22,7 +22,7 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.0.40:3000/initTimer5', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `userIdFromFront=${props.hostId}`
+      body: `idUserFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
@@ -39,7 +39,7 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.0.40:3000/initTimer10', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `userIdFromFront=${props.hostId}`
+      body: `idUserFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();
@@ -56,7 +56,7 @@ function TimerConfigFIRST(props) {
     var rawResponse = await fetch('http://192.168.0.40:3000/initTimer20', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `userIdFromFront=${props.hostId}`
+      body: `idUserFromFront=${props.hostId}`
     })
 
     var response = await rawResponse.json();

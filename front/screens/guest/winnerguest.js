@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { color } from 'react-native-reanimated';
+import {connect} from 'react-redux';
 
 
 function Winnerguest(props) {

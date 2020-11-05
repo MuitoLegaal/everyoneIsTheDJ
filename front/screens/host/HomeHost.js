@@ -193,7 +193,7 @@ function HomeHost(props) {
 
         </View>
 
-        {TIMER < 0 && (
+        {TIMER <= 0 && (
         <Button
           title=" Nouvelle soirée"
           onPress={() => props.navigation.navigate('EventCreation')}

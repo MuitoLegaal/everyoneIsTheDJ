@@ -25,7 +25,6 @@ function nouveauvote(props) {
   const [SONGchosen, setSONGchosen] =  useState('')
   const [TIMER, setTIMER] = useState(0)
   const [playlist, setPlaylist] = useState([])
-  const [hostIdTEST, sethostIdTEST]  = useState('5fa2dc6e2692621b10f387a6')
 
   //HEADER
   var logo = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
@@ -36,28 +35,11 @@ function nouveauvote(props) {
 
 
 // ---------------------------------------- chargement de la playlist --------------------------------------------
-  useEffect(() => {
-    const findPLAYLIST = async () => {
-      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const rawDATA = await fetch('http://192.168.1.20:3000/playlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `idUserFromFront=${props.hostId}`
-      })
-      var data = await rawDATA.json();
-      var arrayPL = data.playlistDB
-      setPlaylist(arrayPL)
-
-    }
-
-    findPLAYLIST()
-  },[])
 
 
   useEffect(() => {
 
     const findTIMER = async () => {
-
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
       var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
@@ -66,7 +48,6 @@ function nouveauvote(props) {
         body: `idUserFromFront=${props.hostId}`
       })
 
-
       var timer = await TIMERdata.json();
       setTIMER(timer.reboursFinal)
       // console.log("rebours", timer)
@@ -74,11 +55,25 @@ function nouveauvote(props) {
 
     findTIMER()
 
-    // console.log('Comptes à rebours FRONT ici ->', TIMER)
-    // console.log('hostIdState', props.hostId)
-    // console.log('TokenState', props.token)
+
+    const findPLAYLIST = async () => {
+      // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+      const rawDATA = await fetch('http://192.168.0.40:3000/playlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idUserFromFront=${props.hostId}`
+      })
+      var data = await rawDATA.json();
+      console.log('data en front-----------------', data.playlistDB) 
+      var arrayPL = data.playlistDB
+      setPlaylist(arrayPL)
+    }
+
+    findPLAYLIST()
 
   }, [])
+
+
 
 
   var handleRefreshTIMER = async () => {
@@ -92,44 +87,18 @@ function nouveauvote(props) {
     var timer = await rawResponse.json();
 
     setTIMER(timer.reboursFinal)
-    // console.log("rebours", timer)
-
-    if (timer) {
-      navigation.navigate("nouveauvote")
-    }
   }
-
-    // --------------------------------- VOS IP ICI -----------------------------------------
-    // Flo IP : 192.168.0.17
-    // Vlad : 192.168.0.40
-    
-  //   var handleVoteGuest = async () => {
-  //   var rawResponse = await fetch('http://192.168.1.20:3000/enregistrement', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: `titleFromFront=${title}&idUserFront=${props.hostId}`
-  //   })
-
-  //   var response = await rawResponse.json();
-
-  //   console.log("response", response)
-
-  //   if (response === true) {
-  //     props.navigation.navigate('Validationvote')
-  //   }
-
-  // }
-
-
 
   // function que recupere le valeur du titre selectioné
   var getChecked = async (value) => {
     setSONGchosen(value)
     // console.log('console log value ->', value)
     // console.log('console log SONGchosen 1 ->', SONGchosen)
+  }
 
 // ---------------------------------------- envoi du vote en BACK ------------------------------------------------
-    const SONGdata = await fetch('http://192.168.0.17:3000/voteguest', {
+   var handleVoteGuest = async () => {   
+      const SONGdata = await fetch('http://192.168.0.40:3000/voteguest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}&tokenFromFront=${props.token}`
@@ -137,6 +106,7 @@ function nouveauvote(props) {
       // body: `titreFromFront=${SONGchosen}`
     })
     var SONG = await SONGdata.json();
+    props.navigation.navigate("Validationvote")
   }
 
   
@@ -228,6 +198,7 @@ function nouveauvote(props) {
               icon={
                 <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
               }
+              onPress={() => handleVoteGuest()}
 
             />
           </View>
