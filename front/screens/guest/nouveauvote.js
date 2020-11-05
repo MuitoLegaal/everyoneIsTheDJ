@@ -133,7 +133,7 @@ function nouveauvote(props) {
 
 
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
-          <Text style={styles.text}>Bienvenu dans la soirée de </Text>
+          <Text style={styles.text}>Bienvenue dans la soirée de </Text>
           
         </View>
 
