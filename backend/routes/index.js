@@ -17,6 +17,8 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+
 router.post('/findEvent', async function(req,res,next){
 
   var eventIsOpen= await eventModel.findOne({ user: req.body.idUserFromFront, isOpen: true })
@@ -36,6 +38,7 @@ else {
 } 
 
 })
+
 
 // -------------------------------------- route appelant le TOP -------------------------------------
 router.post('/findTOP', async function(req,res,next){
