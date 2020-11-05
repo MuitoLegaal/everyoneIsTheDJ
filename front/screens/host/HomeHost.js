@@ -8,7 +8,7 @@ import { Button } from 'react-native-elements';
 import Divider from 'react-native-divider';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Countdown from '../countdown';
+import CountDown from '../countdown';
 import { connect } from 'react-redux';
 
 
@@ -100,8 +100,6 @@ function HomeHost(props) {
           )}
 
           {TIMER > 0 && (<Text style={styles.libelle}>Vote en cours, il te reste avant résultat : </Text>)}
-
-          {TIMER > 0 && (<Text style={{ color: '#FF0060', marginBottom: 10 }}>Vote en cours, il te reste :</Text>)}
 
           {TIMER > 0 && (<CountDown
             size={30}

@@ -332,11 +332,7 @@ router.post('/initTimer10', async function (req, res, next) {
   )
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-<<<<<<< HEAD
-    {event: userEvent._id},
-=======
     { event: userEvent._id},
->>>>>>> 7b6dee64b607fd946931c8d085ff8614067c2020
     { echeance: Date.now()+600000 }
   )
 
@@ -364,18 +360,9 @@ router.post('/initTimer20', async function (req, res, next) {
   console.log('user event', userEvent)
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-<<<<<<< HEAD
     {event: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
-=======
-    { event: userEvent._id},
-    { echeance: Date.now()+1200000 }
-  )
-
-  console.log('tour de vote:', tourdevoteMAJ)
-
->>>>>>> 7b6dee64b607fd946931c8d085ff8614067c2020
    
   if (tourdevoteMAJ) {
     res.json({result: true}) 

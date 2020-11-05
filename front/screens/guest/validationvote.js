@@ -25,7 +25,7 @@ function validationvote(props) {
     const findTIMER = async () => {
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      var TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+      var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -45,22 +45,22 @@ function validationvote(props) {
   }, [])
 
 
-  // var handleRefreshTIMER = async () => {
+  var handleRefreshTIMER = async () => {
 
-  //   var rawResponse = await fetch('http://192.168.0.40:3000/afficheTimer', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: `idUserFromFront=${props.hostId}`
-  //   })
+    var rawResponse = await fetch('http://192.168.0.17:3000/afficheTimer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `idUserFromFront=${props.hostId}`
+    })
 
-  //   var timer = await rawResponse.json();
-  //   setTIMER(timer.reboursFinal)
-  //   console.log("rebours", timer)
+    var timer = await rawResponse.json();
+    setTIMER(timer.reboursFinal)
+    console.log("rebours", timer)
 
-  //   if(timer) {
-  //     navigation.navigate("nouveauvote")
-  //   }
-  // }
+    if(timer) {
+      navigation.navigate("nouveauvote")
+    }
+  }
 
   var handleWinner = async () => {
 
@@ -111,7 +111,7 @@ function validationvote(props) {
         </View>
         )}
 
-        <Text style={styles.text}>Ton vote a bien été pris en compte :)</Text>
+        <Text style={styles.text}>Ton vote a bien été pris en compte !</Text>
 
         {TIMER <= 0 && (<Button
             title=' Découvrir le gagnant'
