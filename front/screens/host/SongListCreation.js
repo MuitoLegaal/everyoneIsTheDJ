@@ -28,6 +28,7 @@ function SongListCreation(props) {
   useEffect(() => {
     const findTOP = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+
       const TOPdata = await fetch('http://192.168.0.17:3000/findTOP', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -58,6 +59,7 @@ function SongListCreation(props) {
        setTOPlist([...TOPlist, titreProposeHote])
        setTitreProposeHote();
     }
+
 
     var rawResponse = await fetch('http://192.168.0.17:3000/ajoutertitre', {
       method: 'POST',
@@ -150,7 +152,7 @@ function SongListCreation(props) {
         <View style={{ borderBottomWidth: 1, borderBottomColor: "#fff" }}>
 
           {/* <View style={{ flex: 1, backgroundColor:'#2ecc71', justifyContent: 'center', alignItems: 'center'}}>   */}
-          <Text style={styles.text}>Bienvenu dans la soirée</Text>
+          <Text style={styles.text}>Bienvenue dans la soirée</Text>
           <Text style={styles.subtitle} >{props.nameToDisplay}</Text>
           <Text style={styles.bodytext}>Compose ta liste de titres candidats aux votes (3 titres minimum).</Text>
 

@@ -42,6 +42,7 @@ function nouveauvote(props) {
     const findTIMER = async () => {
 
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+
       var TIMERdata = await fetch('http://192.168.0.17:3000/afficheTimer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -58,6 +59,7 @@ function nouveauvote(props) {
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
+
       const rawDATA = await fetch('http://192.168.0.17:3000/playlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -72,7 +74,6 @@ function nouveauvote(props) {
     findPLAYLIST()
 
   }, [])
-
 
 
 

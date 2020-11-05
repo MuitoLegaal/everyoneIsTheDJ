@@ -19,16 +19,12 @@ import CountDown from 'react-native-countdown-component';
 function SecondeShareEvent(props){
 
   const [copiedText, setCopiedText] = useState('')
-  const [TIMER, setTIMER] = useState(props.timerToDisplay)
+  const [TIMER, setTIMER] = useState(0)
 
   // utilisation de clipboard pour copier un bloc de text 
-    
   
   var headerCenter = <Text style={styles.title} >Partage de l'évènement</Text>;
   var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{color: "white"}} onPress={() => props.navigation.openDrawer()}/>;
-
- //COUNTDOWN 
-//  const [TIMER, setTIMER] = useState(0)
 
 
  useEffect(() => {
