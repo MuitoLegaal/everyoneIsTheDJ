@@ -570,4 +570,12 @@ router.post('/votehost', async function (req, res, next) {
 }
 )
 
+
+router.post('/getEventName', async function (req, res, next) {
+
+  var findEventName = await eventModel.findOne({isOpen: true, password: req.body.eventPasswordFromFront, eventId: req.body.eventIdFromFront})
+  console.log("findEventNameFromBack: ", findEventName)
+  res.json({})
+})
+
 module.exports = router;

@@ -49,7 +49,7 @@ function VoteHost(props){
 
     const findPLAYLIST = async () => {
       // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-      const rawDATA = await fetch('http://192.168.0.40:3000/playlist', {
+      const rawDATA = await fetch('http://192.168.144.4:3000/playlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `idUserFromFront=${props.hostId}`
@@ -82,7 +82,7 @@ function VoteHost(props){
 
 
   var handleVoteHost = async () => {   
-    const SONGdata = await fetch('http://192.168.0.40:3000/votehost', {
+    const SONGdata = await fetch('http://192.168.144.4:3000/votehost', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}`
