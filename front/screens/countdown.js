@@ -10,7 +10,7 @@ const [TIMER, setTIMER] = useState(0);
 useEffect(() => {
   const findTIMER = async() => {
     // ----------------------------------------- METTRE A JOUR l'IP --------------------------------------------
-    const TIMERdata = await fetch('http://192.168.0.40:3000/afficheTimer', {
+    const TIMERdata = await fetch('http://192.168.144.4:3000/afficheTimer', {
     })
     var TIMER = await TIMERdata.json();
     setTIMER(TIMER.rebours) 

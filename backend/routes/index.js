@@ -241,7 +241,7 @@ router.post('/eventcreation', async function (req, res, next) {
     var saveTourdevote = await newTourdevote.save();
 
   }
-  res.json({ result, eventIsOpen, eventIsClosed, error })
+  res.json({ result, eventIsOpen, eventIsClosed, error, saveEvent })
 })
 
 
@@ -330,7 +330,7 @@ router.post('/initTimer10', async function (req, res, next) {
   )
 
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: userEvent._id},
+    { event: userEvent._id},
     { echeance: Date.now()+600000 }
   )
 
@@ -355,10 +355,14 @@ router.post('/initTimer20', async function (req, res, next) {
     {user: req.body.userIdFromFront, isOpen: true}
   )
 
+  console.log('user event', userEvent)
+
   var tourdevoteMAJ = await tourdevoteModel.findOneAndUpdate(
-    {_id: userEvent._id},
+    { event: userEvent._id},
     { echeance: Date.now()+1200000 }
   )
+
+  console.log('tour de vote:', tourdevoteMAJ)
 
    
   if (tourdevoteMAJ) {

@@ -25,8 +25,8 @@ function EventCreation(props) {
 
             var response = await rawResponse.json();
 
-            console.log("id event", response.eventIsOpen.eventId);
-            props.onSettingIdEvent(response.eventIsOpen.eventId)
+            console.log("id event", response.saveEvent.eventId);
+            props.onSettingIdEvent(response.saveEvent.eventId)
 
             if (response.result === true) {
                   

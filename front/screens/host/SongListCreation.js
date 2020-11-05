@@ -100,6 +100,7 @@ function SongListCreation(props) {
     if (TOPlist.length > 2) {
       setError()
       console.log('>3', TOPlist)
+      props.onSettingPlaylist(TOPlist)
       props.navigation.navigate("TimerConfigFIRST")
     }
 
@@ -373,12 +374,21 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    nameToDisplay: state.EventName, hostId: state.hostId
+    nameToDisplay: state.EventName, hostId: state.hostId,
+    
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSettingPlaylist: function(playlist) {
+      dispatch({type: 'setPlaylist', reduxPlaylist: playlist})
+    }
   }
 }
 
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(SongListCreation);

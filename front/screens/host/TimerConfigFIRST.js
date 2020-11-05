@@ -27,7 +27,7 @@ function TimerConfigFIRST(props) {
 
     var response = await rawResponse.json();
 
-    props.navigation.navigate("ShareEvent")
+    
 
     console.log(response);
     props.navigation.navigate('ShareEvent')
@@ -44,10 +44,10 @@ function TimerConfigFIRST(props) {
 
     var response = await rawResponse.json();
 
-    props.navigation.navigate("ShareEvent")
+    
 
     console.log(response);
-    props.navigation.navigate('HomeHost')
+    props.navigation.navigate("ShareEvent")
   }
 
   var handleInitTimer20 = async () => {
@@ -61,10 +61,10 @@ function TimerConfigFIRST(props) {
 
     var response = await rawResponse.json();
 
-    props.navigation.navigate("ShareEvent")
+    
 
     console.log(response);
-    props.navigation.navigate('HomeHost')
+    props.navigation.navigate("ShareEvent")
   }
 
 
@@ -202,6 +202,14 @@ function mapStateToProps(state) {
     nameToDisplay: state.EventName, hostId: state.hostId
   }
 }
+
+// function mapDispatchToProps(dispatch){
+//   return{
+//     onSettingTimer: function(time){
+//       dispatch({type: 'setTime', timer: time})
+//     }
+//   }
+// }
 
 export default connect(
   mapStateToProps,
