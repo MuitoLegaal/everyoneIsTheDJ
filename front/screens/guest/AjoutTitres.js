@@ -26,7 +26,7 @@ var handleAjouter = async() => {
 
     setTitreList([...titreList, titrePropose])
 
-    var rawResponse = await fetch('http://192.168.43.229:3000/proposition-des-titres', {
+    var rawResponse = await fetch('http://192.168.1.20:3000/proposition-des-titres', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `titreFromFront=${titrePropose}`

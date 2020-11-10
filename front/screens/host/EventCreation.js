@@ -11,32 +11,34 @@ import { connect } from 'react-redux';
 
 function EventCreation(props) {
 
-      const [errorMessage, setErrorMessage] = useState(false);
+      // const [errorMessage, setErrorMessage] = useState(false);
       const [eventName, setEventName] = useState('');
       const [eventPassword, setEventPassword] = useState('');
+      const [eventID, setEventID] = useState('')
 
       var handleEventCreation = async () => {
 
-<<<<<<< HEAD
             var rawResponse = await fetch('http://192.168.1.20:3000/eventcreation', {
-=======
-            var rawResponse = await fetch('http://192.168.144.4:3000/eventcreation', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: `eventNameFromFront=${eventName}&eventPasswordFromFront=${eventPassword}&idUserFromFront=${props.hostId}`
             })
 
             var response = await rawResponse.json();
-
+            console.log('response', response)
             console.log("id event", response.saveEvent.eventId);
-            props.onSettingIdEvent(response.saveEvent.eventId)
+            
 
             if (response.result === true) {
+                  console.log('true')
+                  var ID = response.saveEvent.eventId
+                  // console.log('ID', ID)
+                  // setEventID(ID)
                   
-                  props.onSettingEventName(eventName), props.onSettingPassword(eventPassword)
-
+                  props.onSettingEventName(eventName), props.onSettingPassword(eventPassword), //props.onSettingIdEvent(eventID)//
+                 
                   props.navigation.navigate('SongListCreation')
+                  
 
             } else {
                   setErrorMessage(true)
@@ -54,6 +56,8 @@ function EventCreation(props) {
       var headerCenter = <Text style={styles.title}>DJ Hôte</Text>
       var headerRight = <FontAwesomeIcon icon={faBars} size={35} style={{ color: "white" }} onPress={() => props.navigation.openDrawer()} />
       var headerLeft = <FontAwesomeIcon style={{ color: 'white' }} icon={faArrowLeft} size={30} onPress={() => props.navigation.navigate('HomeHost')} />
+
+      
 
 
       return (

@@ -20,13 +20,9 @@ function SignIn(props) {
     
 var handleSignIn = async() => {
 // --------------------------------- VOS IP ICI ----------------------------------------- 
-// Flo IP 192.168.0.17   
+// Flo IP 192.168.1.20   
 //LA capsule 172.17.1.32
-<<<<<<< HEAD
     var rawResponse = await fetch('http://192.168.1.20:3000/sign-in', {
-=======
-    var rawResponse = await fetch('http://192.168.144.4:3000/sign-in', {
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `email=${email}&password=${password}`
@@ -39,11 +35,9 @@ var handleSignIn = async() => {
         setLogInDenied(<Badge status="error" badgeStyle={{color: 'white', backgroundColor:'#FF0060'}} value="Email et/ou Mot de Passe Incorrect(es)"></Badge>)
     } else {
         var hostId = response.hote._id
-        console.log('hostID', hostId)
         await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
         console.log('SignIn Success')
         props.addId(hostId);
-        setErrorMessage(false)
         setLogInDenied()
         if (response.isEvent)
         props.navigation.navigate('HomeHost')

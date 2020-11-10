@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppRegistry, View, Dimensions, StyleSheet, ImageBackground, Text, Image, TextInput,  } from 'react-native';
 import { Button, Header, Input, Badge } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -19,11 +19,11 @@ function enregistrement({ navigation, addId, addToken, props }) {
 
   var headerLeft = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')} />;
 
-  var handleEnregistrement = async () => {
+  var handleEnregistrement =  async () => {
 
 // --------------------------------- VOS IP ICI -----------------------------------------
-// Flo IP : 192.168.0.17
-// Vlad : 192.168.0.40
+// Flo IP : 192.168.1.20
+// Vlad : 192.168.1.20
 var rawResponse = await fetch('http://192.168.1.20:3000/enregistrement', {
   method: 'POST',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -31,9 +31,12 @@ var rawResponse = await fetch('http://192.168.1.20:3000/enregistrement', {
 })
 
 var response = await rawResponse.json();
-props.addGuestEventName()
+
 
 console.log("response", response)
+
+// props.addGuestEventPassword(eventPassword)
+// props.addGuestEventID(eventId)
 
 if (response.result === true) {
 
@@ -218,9 +221,6 @@ function mapDispatchToProps(dispatch) {
     },
     addId: function (hostId) { 
       dispatch( {type: 'addId', hostId: hostId} )
-    },
-    addGuestEventName: function(nom) {
-      dispatch({type:'addName', eventName: nom})
     }
   }
 }

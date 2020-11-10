@@ -15,40 +15,32 @@ function Winner(props) {
 
   const [CLASSEMENTb, setCLASSEMENTb] = useState ([])
   
-    useEffect(() => {
+  //   useEffect(() => {
   
-      const findCLASSEMENT = async () => {
+  //     const findCLASSEMENT = async () => {
   
-<<<<<<< HEAD
-    const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
-=======
-<<<<<<< HEAD
-    const TRIdata = await fetch('http://192.168.0.17:3000/winner', {
-=======
-    const TRIdata = await fetch('http://192.168.0.40:3000/winner', {
->>>>>>> 430904a27b3c12ee8b3af32b4a638180136549fa
->>>>>>> e352070dfa0ac56b037443393aa5673bf952aae6
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `idUserFromFront=${props.hostId}`
-    })
-    var classement = await TRIdata.json();
+  //   const TRIdata = await fetch('http://192.168.1.20:3000/winner', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: `idUserFromFront=${props.hostId}`
+  //   })
+  //   var classement = await TRIdata.json();
   
-    setCLASSEMENTb(classement)
+  //   setCLASSEMENTb(classement)
   
-    console.log('classement BRUT ------------>', classement)
-    }
+  //   console.log('classement BRUT ------------>', classement)
+  //   }
   
-    findCLASSEMENT()
+  //   findCLASSEMENT()
   
-  }, [])
+  // }, [])
 
   console.log('classement useSTATE ------------>', CLASSEMENTb)
 
   var headerCenter = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}}  onPress={() => props.navigation.openDrawer()}/>
 
 
-  const supportedURL = `https://www.youtube.com/results?search_query=avicii`
+  const supportedURL = `https://www.youtube.com/results?search_query=stromae-ta-fete`
   
   const OpenURLButton = ({ url, children }) => {
     const handlePress = useCallback(async () => {
@@ -61,11 +53,11 @@ function Winner(props) {
   };
 
 
-if (CLASSEMENTb.length==0) {
-  return (
-    <View></View>
-  )
-} else {
+// if (CLASSEMENTb.length==0) {
+//   return (
+//     <View></View>
+//   )
+// } else {
   return (
 <View style={styles.container}>
     <View style={{height:150}}>
@@ -96,11 +88,11 @@ if (CLASSEMENTb.length==0) {
 
       
       <View style={styles.winner} >
-        <Text style={styles.winnertext}>1.</Text>
+        
 
-        <Text style={styles.winnertext}>{CLASSEMENTb.tri[0].titre}</Text>
-        <Text style={styles.winnertext}>Votes: {CLASSEMENTb.tri[0].votes}</Text>
-        <OpenURLButton url={supportedURL}> 
+        <Text style={styles.winnertext}>Stromae - Ta fête</Text>
+        <Text style={styles.winnertext}>Votes: 2</Text>
+        <OpenURLButton url={supportedURL} > 
           <IconFontAwesome
                 name="youtube-play"
                 size={25}
@@ -109,23 +101,24 @@ if (CLASSEMENTb.length==0) {
 
       </View>
 
-      <View style={styles.second} >
+      {/* <View style={styles.second} >
         <Text style={styles.text}>2.</Text>
-        <Text style={styles.text}>{CLASSEMENTb.tri[1].titre}</Text>
-        <Text style={styles.text}>Votes: {CLASSEMENTb.tri[1].votes}</Text>
+        <Text style={styles.text}>Test2</Text>
+        <Text style={styles.text}>Votes: 1</Text>
       </View>
       <View style={styles.second} >
         <Text style={styles.text}>3.</Text>
-        <Text style={styles.text}>{CLASSEMENTb.tri[2].titre}</Text>
-        <Text style={styles.text}>Votes: {CLASSEMENTb.tri[2].votes}</Text>
-      </View>
+        <Text style={styles.text}>Test3</Text>
+        <Text style={styles.text}>Votes: 1</Text>
+      </View> */}
 
       <Button 
           title="Retour à l'accueil" 
           buttonStyle={{
             backgroundColor: '#584DAD',
             borderRadius: 10,
-            marginTop:'2%'
+            marginTop:'2%',
+            
                         }} 
           onPress={() => props.navigation.navigate('HomeHost')}></Button>
 
@@ -134,7 +127,7 @@ if (CLASSEMENTb.length==0) {
 
 ); 
 }
-}
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -153,7 +146,7 @@ const styles = StyleSheet.create({
     },
     title: {
       color: '#fff',
-      fontSize: 40,
+      fontSize: 35,
       fontFamily:'Staatliches',
       marginTop: '2%'
     },
@@ -188,7 +181,7 @@ const styles = StyleSheet.create({
     },
     winnertext: {
       color: '#584DAD',
-      fontSize: 20,
+      fontSize: 40,
       fontFamily:'Roboto-Bold',
       textAlign: 'center',
       marginTop: '5%',

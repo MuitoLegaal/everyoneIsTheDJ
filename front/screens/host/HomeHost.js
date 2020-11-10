@@ -20,6 +20,16 @@ function HomeHost(props) {
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
 
+  //EVENT OUVERT
+  const [eventOuvert, setEventOuvert] = useState("")
+  const [dateOuvert, setDateOuvert] = useState("")
+  const [ouvert, setOuvert] = useState ("")
+
+
+  //EVENT CLOTURE
+  const [eventCloture, setEventCloture] = useState("")
+  const [dateCloture, setDateCloture] = useState("")
+  const [cloture, setCloture] = useState ("")
 
   useEffect(() => {
 
@@ -38,16 +48,40 @@ function HomeHost(props) {
       console.log("rebours", timer)
     }
 
-    findTIMER()
+    const findEvent = async () => {
 
-    console.log('Comptes à rebours FRONT ici ->', TIMER)
-    console.log('hostIdState', props.hostId)
+      var rawResponse = await fetch('http://192.168.1.20:3000/findEvent', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `idUserFromFront=${props.hostId}`
+    })
+
+      var response = await rawResponse.json();
+      console.log(response)
+
+      if (response.eventIsOpen)
+      {
+        setOuvert("Ouvert")
+        setEventOuvert(response.eventIsOpen.nameEvent)
+        setDateOuvert(response.eventIsOpen.date)
+      }
+
+      if (response.eventIsClosed)
+      {
+        setCloture("Clôturée")
+        setEventCloture(response.eventIsClosed.nameEvent)
+        setDateCloture(response.eventIsClosed.date)
+      }
+
+  }
+
+    findTIMER()
+    findEvent()
+
 
   }, [])
 
   console.log('TIMER', TIMER)
-
-
 
   return (
     <View style={styles.container}>
@@ -76,7 +110,7 @@ function HomeHost(props) {
 
 
 
-          <Text style={styles.title}>Évènement :</Text>
+          <Text style={styles.title}>Soirée :</Text>
 
           <Text style={styles.subtextSoiree}>{props.nameToDisplay}</Text>
 
@@ -105,7 +139,7 @@ function HomeHost(props) {
           {TIMER > 0 && (<CountDown
             size={30}
             until={TIMER}
-            onFinish={() => props.navigation.navigate('Winnerguest')}
+            onFinish={() => props.navigation.navigate('WinnerHost')}
             digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF0060' }}
             digitTxtStyle={{ color: '#FF0060' }}
             timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
@@ -121,7 +155,7 @@ function HomeHost(props) {
         </View>
         <View>
 
-          <Text style={styles.subtitle} >Mes évènements</Text>
+          <Text style={styles.subtitle} >Mes soirées</Text>
 
 
           <View style={styles.box} >
@@ -131,9 +165,13 @@ function HomeHost(props) {
             </View>
 
             <View>
-              <Text style={styles.subtext}>%Anniv Claude % </Text>
-              <Text style={styles.text}>Date: %11/10/2020%</Text>
-              <Text style={styles.text}>Statut: %en cours%</Text>
+              {/* <Text style={styles.subtext}>Soirée: {eventOuvert}</Text>
+              <Text style={styles.text}>Date: {dateOuvert}</Text>
+          <Text style={styles.text}>Statut: {ouvert} </Text> */}
+
+          <Text style={styles.subtext}>Soirée: Fièvre du vendredi soir</Text>
+              <Text style={styles.text}>Date: 06 / 11 / 2020</Text>
+          <Text style={styles.text}>Statut: Ouvert</Text>
             </View>
 
             {TIMER > 0 && (
@@ -179,19 +217,23 @@ function HomeHost(props) {
           </View>
 
 
-          <View style={styles.box} >
+          {/* <View style={styles.box} >
 
             <View style={{ textAlign: 'center', alignItems: 'center' }}>
               <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170 }} />
             </View>
 
             <View>
-              <Text style={styles.subtext}>%Anniv Claude % </Text>
-              <Text style={styles.text}>Date: %11/10/2020%</Text>
-              <Text style={styles.text}>Statut: %en cours%</Text>
+              <Text style={styles.subtext}>Soirée: {eventCloture}</Text>
+              <Text style={styles.text}>Date: {dateCloture}</Text>
+              <Text style={styles.text}>Statut: {cloture}</Text>
+
+<Text style={styles.subtext}>Soirée: Anniversaire d'Erica</Text>
+              <Text style={styles.text}>Date: 08 / 06 / 2020</Text>
+          <Text style={styles.text}>Statut: Fermé</Text>
             </View>
 
-          </View>
+          </View> */}
 
         </View>
 
@@ -303,7 +345,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     hostId: state.hostId,
-    nameToDisplay: state.EventName
+    nameToDisplay: state.EventName,
   }
 }
 
