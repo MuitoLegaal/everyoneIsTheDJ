@@ -82,7 +82,7 @@ function ShareEvent(props){
                   <Text style={styles.subtext}>Télècharge l’application pour voter :</Text> 
                   <Text style={styles.text}>https://apps.apple.com/app/apple-store/id982107779</Text>
                   <Text style={styles.subtext}>ID de l'évènement : </Text>
-                  <Text style={styles.text}>{props.idToDisplay} </Text>
+                  <Text style={styles.text}> 4518 </Text>
                   <Text style={styles.subtext}>Mot de passe de l'évènement : </Text>
                   <Text style={styles.text}> {props.passToDisplay} </Text>
                 </View>
@@ -97,12 +97,15 @@ function ShareEvent(props){
                                 paddingHorizontal:'30%'
                             
                             }}
-                            onPress={() => Clipboard.setString(`Ce soir, avec Everyone is the DJ.  \n Télècharge l’application pour voter : \n https://apps.apple.com/app/apple-store/id982107779 \n ID de l'évènement : \n ${props.idToDisplay} \n Mot de passe de l'évènement : \n ${props.passToDisplay}` )}
+                            onPress={() => Clipboard.setString(`Ce soir, avec Everyone is the DJ.  \n Télècharge l’application pour voter : \n https://apps.apple.com/app/apple-store/id982107779 \n ID de l'évènement : \n 4518 \n Mot de passe de l'évènement : \n ${props.passToDisplay}` )}
                 >
                 </Button>
 
             <View style={{marginTop:'10%', marginBottom:'10%'}}>
-              <Text style={{fontFamily:'Roboto-Bold', fontSize:18, color:'#FF0060'}}>Vote en cours, temps restant :</Text>
+              {/* {TIMER > 0 &&
+(<Text style={{fontFamily:'Roboto-Bold', fontSize:18, color:'#FF0060'}}>Vote en cours, temps restant :</Text>)
+              }
+          
               {TIMER > 0 && (<CountDown
                 size={10}
                 until={TIMER}
@@ -114,7 +117,7 @@ function ShareEvent(props){
                 timeToShow={['M', 'S']}
                 timeLabels={{ m: null, s: null }}
                 showSeparator
-              />)}
+              />)} */}
             </View>
             </View>
           

@@ -101,7 +101,7 @@ function TimerConfigFIRST(props) {
 
 
         <View>
-        <Text style={styles.text}>Bienvenu dans la soirée </Text>
+        <Text style={styles.text}>Bienvenue dans la soirée </Text>
           <Text style={styles.subtitle} >{props.nameToDisplay}</Text>
 
           <Button 

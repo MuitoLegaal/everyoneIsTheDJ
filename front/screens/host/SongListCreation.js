@@ -223,7 +223,6 @@ function SongListCreation(props) {
 
 
           {/* CHAMPS INPUT OPTIONNEL NE PAS SUPRRIMER
-
                         <View style={{alignItems: 'center', flexDirection: 'row', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'5%'}}>
                               <View style={{alignItems: 'center', flexDirection: 'column', borderBottomColor:"grey", borderBottomWidth:1, marginTop:'5%'}}>
                                 <Text style={{fontFamily:'Roboto-Bold', fontSize: 18, color: '#584DAD', marginLeft:'3%', marginBottom:'5%'}}>Artiste - Titre aléatoire : </Text>
@@ -231,7 +230,6 @@ function SongListCreation(props) {
                               </View>
                             <Button 
                             title= ''
-
                             buttonStyle={{
                                 backgroundColor: '#E59622',
                                 borderRadius: 10,

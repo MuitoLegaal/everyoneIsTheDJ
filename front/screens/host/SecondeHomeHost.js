@@ -41,7 +41,6 @@ function SecondeHomeHost(props) {
 
     console.log('Comptes à rebours FRONT ici ->', TIMER)
     console.log('hostIdState', props.hostId)
-    console.log('TokenState', props.token)
 
   }, [])
 

@@ -15,6 +15,9 @@ import { connect } from 'react-redux';
 
 function nouveauvote(props) {
 
+  const [EventNameFromBack, setEventNameFromBack] = useState()
+
+
   // liste example titres à supprimer à la fin quand les titres de la playlist remonteront depuis la BDD
   const listTITRES = [
       'Maroon 5 - This Love',
@@ -28,10 +31,8 @@ function nouveauvote(props) {
 
   //HEADER
   var logo = <Image source={require('../../assets/logoMini.png')} style={{width: 80, height: 82}} />
-  var logout = <FontAwesomeIcon icon={faPowerOff} size={35} style={{ color: "white" }} />
-  var retour = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Homeinvite')} />;
-
-
+  var logout = <FontAwesomeIcon icon={faPowerOff} size={35} style={{ color: "white" }}  onPress={() => props.navigation.navigate('Onboarding')} />
+  // var retour = <FontAwesomeIcon icon={faArrowLeft} size={35} style={{color: "white"}} onPress={() => props.navigation.navigate('Homeinvite')} />;
 
 
 // ---------------------------------------- chargement de la playlist --------------------------------------------
@@ -122,7 +123,7 @@ function nouveauvote(props) {
     <View style={styles.container}>
       <View style={{ height: 150 }}>
         <Header
-          leftComponent={retour}
+          // leftComponent={retour}
           centerComponent={logo}
           rightComponent={logout}
           containerStyle={{backgroundColor: "#131313", height: '20%', alignItems: 'flex-start', borderBottomWidth:0,  justifyContent: 'flex-start'}}
@@ -134,12 +135,12 @@ function nouveauvote(props) {
 
 
         <View style={{ flex: 1, justifyContent: 'flex-start', marginTop: 10 }}>
-          <Text style={styles.text}>Bienvenue dans la soirée de </Text>
+          <Text style={styles.text}>Bienvenue dans la soirée de :</Text>
           
         </View>
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={styles.subtext}> %Anniv' de Bob% </Text>
+          <Text style={styles.subtext}> Fièvre du vendredi soir </Text>
           <Image source={require('../../assets/picto-fete2.png')} style={{ height: 150, width: 170, marginTop: '5%' }} />
         </View>
 

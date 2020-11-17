@@ -81,15 +81,15 @@ function VoteHost(props){
 }
 
 
-  var handleVoteHost = async () => {   
-    const SONGdata = await fetch('http://192.168.0.17:3000/votehost', {
+  /*var handleVoteHost = async () => {   
+    const SONGdata = await fetch('http://192.168.1.20:3000/votehost', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `titreFromFront=${SONGchosen}&idUserFromFront=${props.hostId}`
   })
   var SONG = await SONGdata.json();
-  props.navigation.navigate("WinnerHost")
-}
+ 
+}*/
 
 
 
@@ -186,7 +186,7 @@ function VoteHost(props){
             <FontAwesomeIcon icon={faCheck} size={15} style={{ color: "white" }} />
           }
 
-          onPress={() => handleVoteHost()}
+          onPress={() => {props.navigation.navigate("HomeHost")}}
 
         />
       </View>

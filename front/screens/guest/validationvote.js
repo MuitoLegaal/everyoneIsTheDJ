@@ -7,15 +7,15 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 import { faRedo, faPowerOff, faCheck } from '@fortawesome/free-solid-svg-icons';
-
+import CountDown from 'react-native-countdown-component';
 
 
 function validationvote(props) {
 
  //HEADER
  var logo = <Image source={require('../../assets/logoMini.png')} style={{ height: 50, width: 50 }} />
- var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} />
- var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Homeinvite')} />
+ var logout = <FontAwesomeIcon icon={faPowerOff} size={20} style={{ color: "white" }} onPress={() => props.navigation.navigate('Onboarding')}/>
+ var retour = <FontAwesomeIcon icon={faArrowLeft} size={20} style={{ color: "white" }} onPress={() => navigation.navigate('Nouveauvote')} />
 
   //COUNTDOWN 
   const [TIMER, setTIMER] = useState(0)
@@ -47,7 +47,7 @@ function validationvote(props) {
 
   var handleRefreshTIMER = async () => {
 
-    var rawResponse = await fetch('http://192.168.0.17:3000/afficheTimer', {
+    var rawResponse = await fetch('http://192.168.1.20:3000/afficheTimer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `idUserFromFront=${props.hostId}`
@@ -86,7 +86,7 @@ function validationvote(props) {
         </View>
 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={styles.title}> %Anniv' de Bob% </Text>
+          <Text style={styles.title}> Fièvre du vendredi soir </Text>
           <Image source={require('../../assets/picto-fete2.png')} style={{ height: 80, width: 80, margin: 25 }} />
         </View>
        

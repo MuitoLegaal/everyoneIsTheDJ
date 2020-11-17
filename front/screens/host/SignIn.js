@@ -20,7 +20,7 @@ function SignIn(props) {
     
 var handleSignIn = async() => {
 // --------------------------------- VOS IP ICI ----------------------------------------- 
-// Flo IP 192.168.0.17   
+// Flo IP 192.168.1.20   
 //LA capsule 172.17.1.32
     var rawResponse = await fetch('http://192.168.0.17:3000/sign-in', {
             method: 'POST',

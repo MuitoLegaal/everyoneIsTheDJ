@@ -17,11 +17,13 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+
 router.post('/findEvent', async function(req,res,next){
 
-  var eventIsOpen= await eventModel.findOne({ user: hotes._id, isOpen: true })
+  var eventIsOpen= await eventModel.findOne({ user: req.body.idUserFromFront, isOpen: true })
 
-  var eventIsClosed= await eventModel.findOne ({ user: hotes._id, isOpen: false })
+  var eventIsClosed= await eventModel.findOne ({ user: req.body.idUserFromFront, isOpen: false })
 
 if (eventIsOpen && eventIsClosed) {
   res.json({eventIsOpen, eventIsClosed})
@@ -36,6 +38,7 @@ else {
 } 
 
 })
+
 
 // -------------------------------------- route appelant le TOP -------------------------------------
 router.post('/findTOP', async function(req,res,next){
@@ -112,7 +115,6 @@ router.post('/sign-up', async function (req, res, next) {
 
   var hotes = await HoteModel.findOne({ email: req.body.email });
   console.log(hotes)
-
 
 
 
@@ -207,7 +209,6 @@ router.post('/eventcreation', async function (req, res, next) {
   var result = false
   var saveEvent = null
 
-  
 
   if (req.body.eventNameFromFront == ''
     || req.body.eventPasswordFromFront == '') {
@@ -219,7 +220,7 @@ router.post('/eventcreation', async function (req, res, next) {
   }
 
   if (error.length == 0) {
-    console.log(req.body)
+    console.log('body', req.body)
 
     var userId = await eventModel.findOne(
       { user: req.body.idUserFromFront, isOpen: true }
@@ -249,20 +250,14 @@ router.post('/eventcreation', async function (req, res, next) {
 
     var saveEvent = await newEvent.save()
 
-    var eventIsOpen = await eventModel.findOne({
-      isOpen: true,
-    })
-
-    var eventIsClosed = await eventModel.findOne({
-      isOpen: false,
-    })
+    console.log('saveevent', saveEvent)
 
     if (saveEvent) {
       await playlistModel.deleteMany(
         {user: req.body.idUserFromFront}
         );
       result = true
-    }
+    
 
     var newTourdevote = new tourdevoteModel({
       event: saveEvent._id,
@@ -271,11 +266,10 @@ router.post('/eventcreation', async function (req, res, next) {
       echeance: Date.now()+99999999999999, //ECHEANCE A L'INITIALISATION AVANT LE LANCEMENT DU VOTE
       participants: [],
     })
-  
-    var saveTourdevote = await newTourdevote.save();
-
+      await newTourdevote.save();
+    }
   }
-  res.json({ result, eventIsOpen, eventIsClosed, error, saveEvent })
+  res.json({ result, error, saveEvent })
 })
 
 
@@ -566,5 +560,13 @@ router.post('/votehost', async function (req, res, next) {
   }
 }
 )
+
+
+router.post('/getEventName', async function (req, res, next) {
+
+  var findEventName = await eventModel.findOne({isOpen: true, password: req.body.eventPasswordFromFront, eventId: req.body.eventIdFromFront})
+  console.log("findEventNameFromBack: ", findEventName)
+  res.json({})
+})
 
 module.exports = router;

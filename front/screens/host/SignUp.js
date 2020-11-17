@@ -35,7 +35,7 @@ function SignUp(props) {
         var response = await rawResponse.json();
         console.log(response);
 
-        props.navigation.navigate('SecondeHomeHost')
+   
 
 
         if (response.result === false){
@@ -43,13 +43,13 @@ function SignUp(props) {
             setSignUp(true)
         } else {
 
-
+                console.log('laaa')
                 var hostId = response.hote._id
                 console.log('hostID', hostId)
-                await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
-                console.log('SignUp Success')
-                props.addId(hostId);
-               
+                // await AsyncStorage.setItem("hostId", JSON.stringify(hostId));
+                console.log('SignUp Success2')
+                props.addId(hostId)
+                props.navigation.navigate('SecondeHomeHost')
                
         }
         
